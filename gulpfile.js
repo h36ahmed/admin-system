@@ -11,6 +11,7 @@ var gulp     = require('gulp');
 var rimraf   = require('rimraf');
 var router   = require('front-router');
 var sequence = require('run-sequence');
+var open = require('open');
 
 // Check for --production flag
 var isProduction = !!(argv.production);
@@ -144,17 +145,15 @@ gulp.task('uglify:app', function() {
   ;
 });
 
-// Starts a test server, which you can view at http://localhost:8079
-gulp.task('server', ['build'], function() {
-  gulp.src('./build')
-    .pipe($.webserver({
-      port: 8079,
-      host: 'localhost',
-      fallback: 'index.html',
-      livereload: true,
-      open: true
-    }))
-  ;
+gulp.task('server', ['build'], function () {
+    $.connect.server({
+        root: ['./build'],
+        port: process.env.PORT || 5000,
+        livereload: process.env.NODE_ENV === 'development' || process.env.NODE_ENV === undefined ? true : false
+    });
+    if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === undefined ? true : false) {
+        open('http://localhost:5000');
+    }
 });
 
 // Builds your entire app once, without starting a server
