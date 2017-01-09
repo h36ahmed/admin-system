@@ -2,7 +2,7 @@
   "name": "ls-frontend",
   "version": "1.2.0",
   "authors": [
-    "ZURB"
+    "Hassan Ahmed"
   ],
   "description": "Lunch Society Front End Project",
   "main": "gulpfile.js",
