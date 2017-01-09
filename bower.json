@@ -1,10 +1,10 @@
 {
-  "name": "foundation-apps-template",
+  "name": "ls-frontend",
   "version": "1.2.0",
   "authors": [
     "ZURB"
   ],
-  "description": "Template project for Foundation for Apps by ZURB.",
+  "description": "Lunch Society Front End Project",
   "main": "gulpfile.js",
   "keywords": [
     "framework",
