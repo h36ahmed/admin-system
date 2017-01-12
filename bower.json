@@ -12,8 +12,8 @@
     "web",
     "apps"
   ],
-  "license": "MIT",
-  "homepage": "http://foundation.zurb.com",
+  "license": "Lunch Society",
+  "homepage": "http://lunchsociety.ca",
   "private": true,
   "ignore": [
     "**/.*",
@@ -23,6 +23,7 @@
     "tests"
   ],
   "dependencies": {
-    "foundation-apps": "~1.2.0"
+    "foundation-apps": "~1.2.0",
+    "font-awesome": "^4.7.0"
   }
 }

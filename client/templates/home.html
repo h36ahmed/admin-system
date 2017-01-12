@@ -3,7 +3,34 @@ name: home
 url: /
 ---
 
-<div class="grid-container">
-  <h1>Welcome to Lunch Society!</h1>
-  <p class="lead">This is version <strong>1.2 Eiger</strong>.</p>
-</div>
+<section class="ls-login-page">
+    <div class="ls-bg ls-login-bg"></div>
+    <article class="ls-common-body">
+        <header class="ls-home-header">
+            <div ng-include="'/templates/partials/home_bar.html'"></div>
+        </header>
+        <div class="ls-form-container">
+            <h3>Welcome to Lunch Society!</h3>
+            <p>Awesome Food!</p>
+            <form>
+                <label>
+                    Username
+                    <input type="text" placeholder="Username" class="ls-login-type-fields">
+                </label>
+                <label>
+                    Password
+                    <input type="text" placeholder="Password" class="ls-login-type-fields">
+                </label>
+                <input type="submit" class="button" value="Log In">
+
+            </form>
+            <div class="ls-sign-up-text">
+                <p class="">Don't Have Lunch Society Account?</p>
+                <a href="#" class="ls-text-links">Request For Invite</a>
+            </div>
+        </div>
+        <footer class="ls-home-footer">
+             <div ng-include="'/templates/partials/home_footer.html'"></div>
+        </footer>
+    </article>
+</section>
