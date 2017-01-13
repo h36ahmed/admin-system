@@ -4,7 +4,7 @@
   }
   &:hover,
   &:active {
-    color: $secondary-color;
+    color: $primary-color;
   }
 }
 
@@ -101,6 +101,18 @@
   width: 100%;
   display: block;
   background-image: url(../img/greyzz.png);
+}
+
+.ls-app-body {
+    position: absolute;
+    top:40px;
+    background-color: #fff;
+    left: 250px;
+    right: 0;
+    width: auto;
+    bottom: 0;
+    height: auto;
+    padding-top:30px;
 }
 
 .ls-card {

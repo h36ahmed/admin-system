@@ -1,0 +1,12 @@
+.menu-bar.dark {
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-align: center;
+    padding: 10px 0;
+
+    li:first-child {
+        padding-left:20px;
+    }
+}

@@ -1,0 +1,48 @@
+.sidebar {
+    background-color: $dark-color;
+    position: absolute;
+    top:40px;
+    padding-top: 20px;
+    bottom: 0;
+    height: auto;
+    left:0;
+    width: 250px;
+    header {
+        font-size: 200%;
+        font-weight: bold;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        padding: 10px 10px 30px;
+    }
+    .block-list {
+        padding: 0 0px;
+        margin-bottom: 30px;
+        ul {
+            padding: 0 30px;
+            li {
+                border:0;
+                a {
+                    color:#fff;
+                    transition: all 0.3s ease-in;
+                    text-transform: uppercase;
+                    font-size: 90%;
+                    letter-spacing: 1px;
+                    padding: 0.6rem 0rem 0.6rem 0.7rem;
+                }
+                a:hover,
+                a:active {
+                    color:$secondary-color;
+                    background-color: inherit;
+                }
+            }
+        }
+        i {
+            color: $primary-color;
+            &.fa-li {
+                top:0.5em;
+                left:-1.5em;
+                font-size:120%;
+            }
+        }
+    }
+}
