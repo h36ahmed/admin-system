@@ -1,0 +1,29 @@
+.ls-register-page {
+  .ls-register-bg {
+    background-color: #111;
+  }
+  .ls-content {
+    margin: 60px 0 0 20px;
+    background-color: #fff;
+    color: #111;
+    width: 600px;
+    height: 400px;
+    padding: 25px;
+    @include border-radius-all(0, 0, 2px, 2px);
+    opacity: 0.9;
+    .grid-block {
+      p {
+        margin-bottom: 0;
+        font-size: 0.8rem;
+      }
+    }
+    .button {
+      width: 300px;
+      margin: 0 auto;
+      display: block;
+    }
+    &.active {
+      display: block;
+    }
+  }
+}

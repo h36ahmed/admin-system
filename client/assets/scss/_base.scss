@@ -46,6 +46,17 @@ body {
 .emphasis {
   font-size: 1.2rem;
 }
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+figure {
+    margin: 0;
+}
+
 @import 'common';
 @import 'components/module';
 @import 'pages/module';

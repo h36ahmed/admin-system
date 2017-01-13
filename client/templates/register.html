@@ -1,0 +1,53 @@
+---
+name: register
+url: /register-admin
+---
+<section class="ls-register-page">
+    <div class="ls-bg ls-register-bg"></div>
+    <article class="ls-common-body ls-register-body">
+        <header class="ls-home-header">
+            <div ng-include="'/templates/partials/home_bar.html'"></div>
+        </header>
+        <div class="ls-content">
+            <h2>Admin Account Creation</h2>
+            <hr>
+            <form action="" class="admin-create-form">
+                <input type="hidden" id="type" value="Admin">
+                <div class="grid-block">
+                    <div class="small-4 grid-block">
+                      <label for="sEmail" class="text-right ls-inline-label">Email Address</label>
+                    </div>
+                    <div class="small-8 grid-block">
+                      <input type="text" id="sEmail" placeholder="Email Address" class="ls-input-fields">
+                    </div>
+                </div>
+                <div class="grid-block">
+                    <div class="small-4 grid-block">
+                      <label for="sPassword" class="text-right ls-inline-label">Password</label>
+                    </div>
+                    <div class="small-8 grid-block">
+                      <input type="password" id="sPassword" placeholder="Password"class="ls-input-fields">
+                    </div>
+                </div>
+                <div class="grid-block">
+                    <div class="small-4 grid-block">
+                      <label for="sCPassword" class="text-right ls-inline-label">Confirm Password</label>
+                    </div>
+                    <div class="small-8 grid-block">
+                      <input type="password" id="sCPassword" placeholder="Confirm Password" class="ls-input-fields">
+                    </div>
+                </div>
+                <hr>
+                <div class="grid-block">
+                    <div class="grid-block small-12">
+                        <input type="submit" class="button" value="Create Account">
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <footer class="ls-home-footer">
+             <div ng-include="'/templates/partials/home_footer.html'"></div>
+        </footer>
+    </article>
+</section>
