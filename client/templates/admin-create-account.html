@@ -1,0 +1,49 @@
+---
+name: create-account
+url: /create-account
+---
+<div class="vertical grid-frame">
+    <div class="grid-content shrink" style="padding: 0;">
+        <div ng-include="'/templates/partials/menu_bar.html'"></div>
+    </div>
+    <div ng-include="'/templates/partials/side_bar.html'"></div>
+    <div class="ls-app-body">
+        <div class="grid-container ls-create-account">
+            <div class="grid-block">
+               <div class="grid-block small-12 vertical">
+                   <div class="grid-content">
+                        <h2>Create User Account</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus, facilis, voluptate. Nam omnis voluptatum sunt totam incidunt excepturi quas ad, magnam accusantium tenetur fuga voluptatibus perspiciatis delectus hic. At, dolorem.</p>
+                        <form>
+                            <div class="grid-block">
+                                <div class="small-12 medium-6 grid-content">
+                                    <label>
+                                        Email Address
+                                        <input type="text" placeholder="Username" class="ls-input-fields">
+                                    </label>
+                                    <label>
+                                        Password
+                                        <input type="text" placeholder="Password" class="ls-input-fields">
+                                    </label>
+                                </div>
+                                <div class="small-12 medium-6 grid-content">
+                                    <label>Type</label>
+                                    <select name="" id="">
+                                        <option value="">Customer</option>
+                                        <option value="">Restaurant</option>
+                                    </select>
+                                    <label>
+                                        Referral Code
+                                        <input type="text" placeholder="Password" class="ls-input-fields">
+                                    </label>
+                                </div>
+                            </div>
+                            <a ui-sref="restaurant-info" class="button">Create Account</a>
+                            <!--<input type="submit" class="button" value="Create Account">-->
+                        </form>
+                    </div>
+                </div>
+           </div>
+        </div>
+    </div>
+</div>

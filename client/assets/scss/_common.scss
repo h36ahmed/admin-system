@@ -92,15 +92,16 @@
 }
 
 .ls-app-body {
-    position: absolute;
-    top:40px;
-    background-color: #fff;
-    left: 250px;
-    right: 0;
-    width: auto;
-    bottom: 0;
-    height: auto;
-    padding-top:30px;
+  position: absolute;
+  top: 40px;
+  background-color: #fff;
+  left: 250px;
+  right: 0;
+  width: auto;
+  bottom: 0;
+  height: auto;
+  padding-top: 30px;
+  overflow: auto;
 }
 
 .ls-card {
@@ -134,6 +135,15 @@
     box-shadow: -2px 0 2px 0 rgba(0, 0, 0, 0.16), 2px 0 2px 0 rgba(0, 0, 0, 0.16), 0 2px 2px 0 rgba(0, 0, 0, 0.23);
     -webkit-transform: translate3d(0, -3px, 0);
     transform: translate3d(0, -3px, 0);
+  }
+  .ls-card-link {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 3;
   }
 }
 
