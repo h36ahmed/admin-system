@@ -1,6 +1,6 @@
 ---
-name: create-meal
-url: /create-meal
+name: edit-meal
+url: /edit-meal
 ---
 <div class="vertical grid-frame">
     <div class="grid-content shrink" style="padding: 0;">
@@ -9,17 +9,24 @@ url: /create-meal
     <div ng-include="'/templates/partials/side_bar.html'"></div>
     <div class="ls-app-body">
         <div class="grid-container ls-meal-info">
-           <div class="grid-block ls-title-bar">
-                <div class="grid-block small-12 vertical">
+            <div class="grid-block ls-title-bar">
+                <div class="grid-block small-8 vertical">
                     <div class="grid-content">
-                        <h2>Create Meal</h2>
+                        <h2>Edit Meal Information</h2>
+                    </div>
+                </div>
+                <div class="grid-block small-4 vertical">
+                    <div class="grid-content text-right">
+                        <form class="ls-form ls-delete-form">
+                            <input type="submit" class="alert button" name="deleteMeal" value="Delete Meal">
+                        </form>
                     </div>
                 </div>
             </div>
             <div class="grid-block">
                 <div class="grid-block small-12 vertical">
                     <div class="grid-content">
-                        <form class="ls-form ls-create-form">
+                        <form class="ls-form ls-edit-form">
                             <div class="grid-block">
                                 <div class="small-12 medium-6 grid-content">
                                     <label for="resName">Restaurant Name</label>
@@ -45,6 +52,7 @@ url: /create-meal
                                         Meal Image <br>
                                         <input type="file" name="mealImage" id="mealImage">
                                     </label>
+
                                 </div>
                                 <div class="small-12 medium-6 grid-content">
                                     <label for="mealDesc">
@@ -66,10 +74,16 @@ url: /create-meal
                             </div>
                             <div class="grid-block">
                                 <div class="small-6 grid-content text-right">
-
+                                    <div class="ls-switch-container">
+                                        <div class="large switch">
+                                            <input type="checkbox" id="mealAvail" name="mealAvail">
+                                            <label for="mealAvail"></label>
+                                        </div>
+                                        <p>Meal Availability</p>
+                                    </div>
                                 </div>
                                 <div class="small-6 grid-content text-right">
-                                    <input type="submit" class="button" value="Add Meal to Restaurant">
+                                    <input type="submit" class="button" name="update" value="Update Meal Information">
                                 </div>
                             </div>
                         </form>

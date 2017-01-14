@@ -1,6 +1,6 @@
 ---
-name: restaurant-info
-url: /restaurant-info
+name: edit-restaurant
+url: /edit-restaurant
 ---
 <div class="vertical grid-frame">
     <div class="grid-content shrink" style="padding: 0;">
@@ -10,16 +10,23 @@ url: /restaurant-info
     <div class="ls-app-body">
         <div class="grid-container ls-res-info">
             <div class="grid-block ls-title-bar">
-                <div class="grid-block small-12 vertical">
+                <div class="grid-block small-8 vertical">
                     <div class="grid-content">
-                         <h2>Restaurant Profile</h2>
+                        <h2>Edit Restaurant Information</h2>
+                    </div>
+                </div>
+                <div class="grid-block small-4 vertical">
+                    <div class="grid-content text-right">
+                        <form class="ls-form ls-delete-form">
+                            <input type="submit" class="alert button" name="deleteRes" value="Delete Restaurant">
+                        </form>
                     </div>
                 </div>
             </div>
             <div class="grid-block">
-               <div class="grid-block small-12 vertical">
-                   <div class="grid-content">
-                        <form class="ls-form ls-create-form">
+                <div class="grid-block small-12 vertical">
+                    <div class="grid-content">
+                        <form class="ls-form ls-edit-form">
                             <div class="grid-block">
                                 <div class="small-12 medium-6 grid-content">
                                     <label for="resName">
@@ -67,13 +74,18 @@ url: /restaurant-info
                             </div>
                             <div class="grid-block">
                                 <div class="small-6 grid-content text-right">
-
+                                    <div class="ls-switch-container">
+                                        <div class="large switch">
+                                            <input type="checkbox" id="resStatus" name="resStatus">
+                                            <label for="resStatus"></label>
+                                        </div>
+                                        <p>Restaurant Status</p>
+                                    </div>
                                 </div>
                                 <div class="small-6 grid-content text-right">
-                                    <input type="submit" class="button" value="Add Restaurant Info">
+                                    <input type="submit" class="button" name="update" value="Update Restaurant Information">
                                 </div>
                             </div>
-
                         </form>
                     </div>
                 </div>

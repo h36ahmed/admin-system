@@ -9,12 +9,17 @@ url: /create-account
     <div ng-include="'/templates/partials/side_bar.html'"></div>
     <div class="ls-app-body">
         <div class="grid-container ls-create-account">
+            <div class="grid-block ls-title-bar">
+                <div class="grid-block small-12 vertical">
+                    <div class="grid-content">
+                        <h2>Create User Account</h2>
+                    </div>
+                </div>
+            </div>
             <div class="grid-block">
                <div class="grid-block small-12 vertical">
                    <div class="grid-content">
-                        <h2>Create User Account</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus, facilis, voluptate. Nam omnis voluptatum sunt totam incidunt excepturi quas ad, magnam accusantium tenetur fuga voluptatibus perspiciatis delectus hic. At, dolorem.</p>
-                        <form>
+                        <form class="ls-form ls-create-form">
                             <div class="grid-block">
                                 <div class="small-12 medium-6 grid-content">
                                     <label>
@@ -38,8 +43,15 @@ url: /create-account
                                     </label>
                                 </div>
                             </div>
-                            <a ui-sref="restaurant-info" class="button">Create Account</a>
-                            <!--<input type="submit" class="button" value="Create Account">-->
+                            <div class="grid-block">
+                                <div class="small-6 grid-content text-right">
+
+                                </div>
+                                <div class="small-6 grid-content text-right">
+                                    <a ui-sref="restaurant-info" class="button">Create Account</a>
+                                    <!--<input type="submit" class="button" value="Create Account">-->
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
