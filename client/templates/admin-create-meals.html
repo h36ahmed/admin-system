@@ -1,0 +1,69 @@
+---
+name: create-meal
+url: /create-meal
+---
+<div class="vertical grid-frame">
+    <div class="grid-content shrink" style="padding: 0;">
+        <div ng-include="'/templates/partials/menu_bar.html'"></div>
+    </div>
+    <div ng-include="'/templates/partials/side_bar.html'"></div>
+    <div class="ls-app-body">
+        <div class="grid-container ls-admin-dashboard">
+            <div class="grid-block">
+                <div class="grid-block small-12 vertical">
+                    <div class="grid-content">
+                        <h2>Create Meal</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae eum neque atque repellendus ullam molestiae odit aut consectetur veniam deleniti sit non tempora voluptatibus, ab libero laudantium unde. Minus, cum.</p>
+                        <form>
+                            <div class="grid-block">
+                                <div class="small-12 medium-6 grid-content">
+                                    <label for="resName">Restaurant Name</label>
+                                    <select name="resName" id="resName" class="ls-input-fields">
+                                        <option value="">---</option>
+                                        <option value="">Chipotle</option>
+                                        <option value="">Nando's</option>
+                                        <option value="">Mac n Cheese</option>
+                                    </select>
+                                    <label for="mealName">
+                                        Meal Name
+                                        <input type="text" placeholder="e.g. Soft Glazed Duck" class="ls-input-fields" name="mealName" id="mealName">
+                                    </label>
+                                    <label for="mealTag">
+                                        Meal Tagline
+                                        <input type="text" placeholder="e.g. Finger Lickin' Good" class="ls-input-fields" name="mealTag" id="mealTag">
+                                    </label>
+                                    <label for="mealPrice">
+                                        Meal Price
+                                        <input type="number" placeholder="e.g. 9.99" class="ls-input-fields" name="mealPrice" id="mealPrice">
+                                    </label>
+                                    <label for="mealImage">
+                                        Meal Image <br>
+                                        <input type="file" name="mealImage" id="mealImage">
+                                    </label>
+                                </div>
+                                <div class="small-12 medium-6 grid-content">
+                                    <label for="mealDesc">
+                                        Meal Description
+                                        <textarea name="mealDesc" id="mealDesc" cols="30" rows="6" placeholder="e.g. Soft glazed duck served on sizzling plate." class="ls-input-fields"></textarea>
+                                    </label>
+                                    <label for="mealIngredients">
+                                        Meal Ingredients
+                                        <textarea name="mealIngredients" id="mealIngredients" cols="30" rows="6" placeholder="e.g. Cucumber, Avocado, Banana" class="ls-input-fields"></textarea>
+                                    </label>
+                                    <label for="mealCat">
+                                        Meal Category
+                                    </label>
+                                     <select name="mealCat" id="mealCat" class="ls-input-fields">
+                                        <option value="">---</option>
+                                        <option value="">Asian</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <input type="submit" class="button" value="Add Meal to Restaurant">
+                        </form>
+                    </div>
+                </div>
+           </div>
+        </div>
+    </div>
+</div>

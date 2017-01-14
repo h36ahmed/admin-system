@@ -1,0 +1,72 @@
+.ls-manage-customers {
+  ul {
+    width: 100%;
+    margin-top: 20px;
+    display: block;
+    @include clearfix;
+  }
+  .ls-card {
+    margin-right: 2%;
+    width: 49%;
+    float: left;
+    height: 100px;
+    &:nth-child(2n) {
+      margin-right: 0;
+    }
+    &.ls-customers-card {
+      padding: 0;
+      .ls-customer-card-info {
+        height: 100px;
+        @include clearfix;
+      }
+      img {
+        width: 30%;
+        height: 100%;
+        float: left;
+        position: relative;
+      }
+      .ls-customer-card-caption {
+        height: 100%;
+        width: 60%;
+        float: left;
+        overflow: hidden;
+        .ls-customer-card-title {
+          padding: 5px 10px;
+        }
+        h4 {
+          margin-bottom: 5px;
+          font-size: 1rem;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+        }
+        p {
+          font-size: 0.8rem;
+          margin-bottom: 0;
+        }
+        .button {
+          width: auto;
+          margin-top: 10px;
+          left: 30%;
+          right: 0;
+          position: absolute;
+          bottom: 0;
+          height: 35px;
+          text-transform: uppercase;
+          font-weight: 700;
+          margin-bottom: 0;
+          margin-right: 0;
+          font-size: 0.8rem;
+        }
+      }
+    }
+    .ls-status {
+        font-weight: 700;
+      &.ls-active {
+        color: $success-color;
+      }
+      &.ls-inactive {
+        color: $alert-color;
+      }
+    }
+  }
+}
