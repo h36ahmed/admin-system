@@ -36,7 +36,7 @@ app.service(
                     'Content-Type': 'application/json',
                 }
             });
-            return( request.then( handleSuccess, handleError ) );
+            return request;
         }
 
 
@@ -49,27 +49,8 @@ app.service(
                     'Auth': getAuthToken()
                 }
             });
-            return( request.then( handleSuccess, handleError ) );
+            return request;
         }
 
-        // ---
-        // PRIVATE METHODS.
-        // ---
-
-        function handleError( response ) {
-            if (
-                ! angular.isObject( response.data ) ||
-                ! response.data.message
-                ) {
-                return( $q.reject( "An unknown error occurred." ) );
-            }
-            // Otherwise, use expected error message.
-            return( $q.reject( response.data.message ) );
-        }
-
-        function handleSuccess( response ) {
-            console.log(response);
-            return( response.data );
-        }
     }
 );
