@@ -5,11 +5,11 @@
 // 1. LIBRARIES
 // - - - - - - - - - - - - - - -
 
-var $        = require('gulp-load-plugins')();
-var argv     = require('yargs').argv;
-var gulp     = require('gulp');
-var rimraf   = require('rimraf');
-var router   = require('front-router');
+var $ = require('gulp-load-plugins')();
+var argv = require('yargs').argv;
+var gulp = require('gulp');
+var rimraf = require('rimraf');
+var router = require('front-router');
 var sequence = require('run-sequence');
 var open = require('open');
 
@@ -47,6 +47,15 @@ var paths = {
   // These files are for your app's JavaScript
   appJS: [
     'client/assets/js/app.js'
+  ],
+  controllersJS: [
+    'client/assets/js/controllers/**/*.js'
+  ],
+  directivesJS: [
+    'client/assets/js/directives/**/*.js'
+  ],
+  servicesJS: [
+    'client/assets/js/services/**/*.js'
   ]
 }
 
@@ -61,10 +70,9 @@ gulp.task('clean', function(cb) {
 // Copies everything in the client folder except templates, Sass, and JS
 gulp.task('copy', function() {
   return gulp.src(paths.assets, {
-    base: './client/'
-  })
-    .pipe(gulp.dest('./build'))
-  ;
+      base: './client/'
+    })
+    .pipe(gulp.dest('./build'));
 });
 
 // Copies your app's page templates and generates URLs for them
@@ -74,8 +82,7 @@ gulp.task('copy:templates', function() {
       path: 'build/assets/js/routes.js',
       root: 'client'
     }))
-    .pipe(gulp.dest('./build/templates'))
-  ;
+    .pipe(gulp.dest('./build/templates'));
 });
 
 // Compiles the Foundation for Apps directive partials into a single JavaScript file
@@ -88,19 +95,17 @@ gulp.task('copy:foundation', function(cb) {
     }))
     .pipe($.uglify())
     .pipe($.concat('templates.js'))
-    .pipe(gulp.dest('./build/assets/js'))
-  ;
+    .pipe(gulp.dest('./build/assets/js'));
 
   // Iconic SVG icons
   gulp.src('./bower_components/foundation-apps/iconic/**/*')
-    .pipe(gulp.dest('./build/assets/img/iconic/'))
-  ;
+    .pipe(gulp.dest('./build/assets/img/iconic/'));
 
   cb();
 });
 
 // Compiles Sass
-gulp.task('sass', function () {
+gulp.task('sass', function() {
   var minifyCss = $.if(isProduction, $.minifyCss());
 
   return gulp.src('client/assets/scss/app.scss')
@@ -113,48 +118,81 @@ gulp.task('sass', function () {
       browsers: ['last 2 versions', 'ie 10']
     }))
     .pipe(minifyCss)
-    .pipe(gulp.dest('./build/assets/css/'))
-  ;
+    .pipe(gulp.dest('./build/assets/css/'));
 });
 
 // Compiles and copies the Foundation for Apps JavaScript, as well as your app's custom JS
-gulp.task('uglify', ['uglify:foundation', 'uglify:app'])
+gulp.task('uglify', ['uglify:foundation', 'uglify:app', 'uglify:controllers', 'uglify:directives', 'uglify:services'])
 
 gulp.task('uglify:foundation', function(cb) {
   var uglify = $.if(isProduction, $.uglify()
-    .on('error', function (e) {
+    .on('error', function(e) {
       console.log(e);
     }));
 
   return gulp.src(paths.foundationJS)
     .pipe(uglify)
     .pipe($.concat('foundation.js'))
-    .pipe(gulp.dest('./build/assets/js/'))
-  ;
+    .pipe(gulp.dest('./build/assets/js/'));
 });
 
 gulp.task('uglify:app', function() {
   var uglify = $.if(isProduction, $.uglify()
-    .on('error', function (e) {
+    .on('error', function(e) {
       console.log(e);
     }));
 
   return gulp.src(paths.appJS)
     .pipe(uglify)
     .pipe($.concat('app.js'))
-    .pipe(gulp.dest('./build/assets/js/'))
-  ;
+    .pipe(gulp.dest('./build/assets/js/'));
 });
 
-gulp.task('server', ['build'], function () {
-    $.connect.server({
-        root: ['./build'],
-        port: process.env.PORT || 5000,
-        livereload: process.env.NODE_ENV === 'development' || process.env.NODE_ENV === undefined ? true : false
-    });
-    if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === undefined ? true : false) {
-        open('http://localhost:5000');
-    }
+gulp.task('uglify:controllers', function () {
+    var uglify = $.if(isProduction, $.uglify()
+        .on('error', function (e) {
+            console.log(e);
+        }));
+
+    return gulp.src(paths.controllersJS)
+        .pipe(uglify)
+        .pipe($.concat('controllers.js'))
+        .pipe(gulp.dest('./build/assets/js/'));
+});
+
+gulp.task('uglify:directives', function () {
+    var uglify = $.if(isProduction, $.uglify()
+        .on('error', function (e) {
+            console.log(e);
+        }));
+
+    return gulp.src(paths.directivesJS)
+        .pipe(uglify)
+        .pipe($.concat('directives.js'))
+        .pipe(gulp.dest('./build/assets/js/'));
+});
+
+gulp.task('uglify:services', function () {
+    var uglify = $.if(isProduction, $.uglify()
+        .on('error', function (e) {
+            console.log(e);
+        }));
+
+    return gulp.src(paths.servicesJS)
+        .pipe(uglify)
+        .pipe($.concat('services.js'))
+        .pipe(gulp.dest('./build/assets/js/'));
+});
+
+gulp.task('server', ['build'], function() {
+  $.connect.server({
+    root: ['./build'],
+    port: process.env.PORT || 5000,
+    livereload: process.env.NODE_ENV === 'development' || process.env.NODE_ENV === undefined ? true : false
+  });
+  if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === undefined ? true : false) {
+    open('http://localhost:5000');
+  }
 });
 
 // Builds your entire app once, without starting a server
@@ -163,12 +201,12 @@ gulp.task('build', function(cb) {
 });
 
 // Default task: builds your app, starts a server, and recompiles assets when they change
-gulp.task('default', ['server'], function () {
+gulp.task('default', ['server'], function() {
   // Watch Sass
   gulp.watch(['./client/assets/scss/**/*', './scss/**/*'], ['sass']);
 
   // Watch JavaScript
-  gulp.watch(['./client/assets/js/**/*', './js/**/*'], ['uglify:app']);
+  gulp.watch(['./client/assets/js/**/*', './js/**/*'], ['uglify:app', 'uglify:controllers', 'uglify:directives', 'uglify:services']);
 
   // Watch static files
   gulp.watch(['./client/**/*.*', '!./client/templates/**/*.*', '!./client/assets/{scss,js}/**/*.*'], ['copy']);

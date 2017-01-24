@@ -9,20 +9,19 @@ url: /
         <header class="ls-home-header">
             <div ng-include="'/templates/partials/home_bar.html'"></div>
         </header>
-        <div class="ls-form-container">
+        <div class="ls-form-container" ng-controller="homeCtrl as home">
             <h3>Welcome to Lunch Society!</h3>
             <p>Awesome Food!</p>
-            <form>
+            <form name="userForm" ng-submit="submitForm(userForm.$valid)">
                 <label>
-                    Username
-                    <input type="text" placeholder="Username" class="ls-input-fields">
+                    Email Address
+                    <input type="text" placeholder="Email Address" ng-model="userFormData.email" class="ls-input-fields">
                 </label>
                 <label>
                     Password
-                    <input type="text" placeholder="Password" class="ls-input-fields">
+                    <input type="text" placeholder="Password" ng-model="userFormData.password" class="ls-input-fields">
                 </label>
-                <!--<input type="submit" class="button" value="Log In">-->
-                <a ui-sref="admin-dashboard" class="button">Log In</a>
+                <input type="submit" class="button" value="Log In" ng-disabled="!userFormData.email.length || !userFormData.password.length">
             </form>
             <div class="ls-sign-up-text">
                 <p class="">Don't Have Lunch Society Account?</p>
