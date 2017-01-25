@@ -14,8 +14,6 @@ app.service(
             deleteUser: deleteUser
         });
 
-        var authToken;
-
         // ---
         // PUBLIC METHODS.
         // ---
@@ -28,24 +26,28 @@ app.service(
                     email: data.email,
                     password: data.password,
                     type: data.type
+                },
+                headers : {
+                    'Content-Type': 'application/json',
                 }
             });
-            return( request.then( handleSuccess, handleError ) );
+            return request;
         }
 
-        function getUsers() {
+        function getUsers(data) {
             var request = $http({
                 method: "get",
                 url: baseUrl + baseApi + "users",
-                params: {
-                    action: "get"
+                params: data,
+                headers : {
+                    'Content-Type': 'application/json',
                 }
             });
-            return( request.then( handleSuccess, handleError ) );
+            return request;
         }
 
 
-        function removeUser( id ) {
+        function deleteUser( id ) {
             var request = $http({
                 method: "delete",
                 url: baseUrl + baseApi + "user",
@@ -54,28 +56,12 @@ app.service(
                 },
                 data: {
                     id: id
+                },
+                headers : {
+                    'Content-Type': 'application/json',
                 }
             });
-            return( request.then( handleSuccess, handleError ) );
-        }
-
-        // ---
-        // PRIVATE METHODS.
-        // ---
-
-        function handleError( response ) {
-            if (
-                ! angular.isObject( response.data ) ||
-                ! response.data.message
-                ) {
-                return( $q.reject( "An unknown error occurred." ) );
-            }
-            // Otherwise, use expected error message.
-            return( $q.reject( response.data.message ) );
-        }
-
-        function handleSuccess( response ) {
-            return( response.data );
+            return request;
         }
     }
 );

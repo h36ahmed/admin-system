@@ -150,7 +150,8 @@
 
 input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+select {
   &.ls-input-fields {
     @include border-radius(2px);
     font-size: 0.9rem;
@@ -170,6 +171,11 @@ input[type="password"] {
 .ls-form {
   .button {
     margin: 0;
+    &.secondary {
+      margin-top: 21px;
+      width: 100%;
+      text-align: center;
+    }
   }
   &.ls-delete-form {
     text-align: right;

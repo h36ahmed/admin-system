@@ -18,26 +18,26 @@ url: /create-account
             </div>
             <div class="grid-block">
                <div class="grid-block small-12 vertical">
-                   <div class="grid-content">
-                        <form class="ls-form ls-create-form">
+                   <div class="grid-content" ng-controller="createAccountCtrl as register">
+                        <form class="ls-form ls-create-form" name="registerForm" ng-submit="submitForm(registerForm.$valid)">
                             <div class="grid-block">
                                 <div class="small-12 medium-6 grid-content">
                                     <label>
                                         Email Address
-                                        <input type="text" placeholder="Username" class="ls-input-fields">
+                                        <input type="text" placeholder="Email Address" class="ls-input-fields" ng-model="registerFormData.email" >
                                     </label>
                                     <label>Type</label>
-                                    <select name="" id="">
-                                        <option value="">Customer</option>
-                                        <option value="">Restaurant Owner</option>
+                                    <select class="ls-input-fields" ng-model="registerFormData.type">
+                                        <option value="customer">Customer</option>
+                                        <option value="owner">Restaurant Owner</option>
                                     </select>
                                 </div>
                                 <div class="small-12 medium-6 grid-content">
                                     <label>
                                         Password
-                                        <input type="text" placeholder="Password" class="ls-input-fields">
+                                        <input type="text" placeholder="Password" class="ls-input-fields" ng-model="registerFormData.password">
                                     </label>
-                                    <button type="button" class="button">Generate Password</button>
+                                    <button type="button" class="button secondary">Generate Password</button>
                                 </div>
                             </div>
                             <div class="grid-block">
@@ -45,8 +45,7 @@ url: /create-account
 
                                 </div>
                                 <div class="small-6 grid-content text-right">
-                                    <a ui-sref="restaurant-info" class="button">Create Account</a>
-                                    <!--<input type="submit" class="button" value="Create Account">-->
+                                    <input type="submit" class="button" value="Create Account">
                                 </div>
                             </div>
                         </form>
