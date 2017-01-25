@@ -1,0 +1,71 @@
+---
+name: create-owner
+url: /create-owner
+---
+<div class="vertical grid-frame">
+    <div class="grid-content shrink" style="padding: 0;">
+        <div ng-include="'/templates/partials/menu_bar.html'"></div>
+    </div>
+    <div ng-include="'/templates/partials/side_bar.html'"></div>
+    <div class="ls-app-body">
+        <div class="grid-container ls-create-account">
+            <div class="grid-block ls-title-bar">
+                <div class="grid-block small-12 vertical">
+                    <div class="grid-content">
+                        <h2>Add Owner Information</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-block">
+               <div class="grid-block small-12 vertical">
+                   <div class="grid-content" ng-controller="createOwnerCtrl as createOwner">
+                        <form class="ls-form ls-create-form" name="createOwnerForm" ng-submit="submitForm(createOwnerForm.$valid)">
+                            <div class="grid-block ls-top-form-header">
+                                <div class="small-3 grid-content text-center">
+
+                                </div>
+                                <div class="small-6 grid-content text-center">
+                                    <select class="ls-input-fields" ng-options="owner as owner.email for owner in owners track by owner.id" ng-model="createOwnerFormData.user">
+                                    </select>
+                                </div>
+                                <div class="small-3 grid-content text-center">
+
+                                </div>
+                            </div>
+                            <div class="grid-block">
+                                <div class="small-12 medium-6 grid-content">
+                                    <label for="ownerFN">
+                                        First Name
+                                        <input type="text" placeholder="First Name" class="ls-input-fields" name="ownerFN" id="ownerFN" ng-model="createOwnerFormData.first_name">
+                                    </label>
+                                    <label for="proImage">
+                                        Profile Image <br>
+                                        <input type="file" class="ls-input-fields" name="proImage" id="proImage" ng-model="createOwnerFormData.profile_image">
+                                    </label>
+                                </div>
+                                <div class="small-12 medium-6 grid-content">
+                                    <label for="ownerLN">
+                                        Last Name
+                                        <input type="text" placeholder="Last Name" class="ls-input-fields" name="ownerLN" id="ownerLN" ng-model="createOwnerFormData.last_name"/>
+                                    </label>
+                                    <label for="ownerPN">
+                                        Phone Number
+                                        <input type="tel" placeholder="Phone Number" class="ls-input-fields" name="ownerPN" id="ownerPN" ng-model="createOwnerFormData.phone_number">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="grid-block">
+                                <div class="small-6 grid-content text-right">
+
+                                </div>
+                                <div class="small-6 grid-content text-right">
+                                    <input type="submit" class="button" value="Add Owner Info">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+           </div>
+        </div>
+    </div>
+</div>

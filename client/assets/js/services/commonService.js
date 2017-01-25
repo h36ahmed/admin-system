@@ -33,7 +33,7 @@ app.service(
                     password: data.password
                 },
                 headers : {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json'
                 }
             });
             return request;
@@ -45,8 +45,7 @@ app.service(
                 method: "delete",
                 url: baseUrl + baseApi + "users/login",
                 headers : {
-                    'Content-Type': 'application/json',
-                    'Auth': getAuthToken()
+                    'Content-Type': 'application/json'
                 }
             });
             return request;

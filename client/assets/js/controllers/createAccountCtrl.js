@@ -11,7 +11,7 @@ var createAccountCtrl = function($scope, $window, $location, userService) {
         .createUser($scope.registerFormData)
         .success(function(data, status, headers, config) {
           if( data.type == 'owner') {
-              $location.path('owner-info').search({id: data.id});
+              $location.path('create-owner').search({id: data.id});
           } else {
               // Show Modal saying customer Added
           }
