@@ -1,4 +1,4 @@
-.ls-manage-customers {
+.ls-manage-accounts {
   ul {
     width: 100%;
     margin-top: 20px;
@@ -13,9 +13,9 @@
     &:nth-child(2n) {
       margin-right: 0;
     }
-    &.ls-customers-card {
+    &.ls-users-card {
       padding: 0;
-      .ls-customer-card-info {
+      .ls-user-card-info {
         height: 100px;
         @include clearfix;
       }
@@ -25,12 +25,12 @@
         float: left;
         position: relative;
       }
-      .ls-customer-card-caption {
+      .ls-user-card-caption {
         height: 100%;
         width: 60%;
         float: left;
         overflow: hidden;
-        .ls-customer-card-title {
+        .ls-user-card-title {
           padding: 5px 10px;
         }
         h4 {

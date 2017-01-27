@@ -1,6 +1,6 @@
 ---
-name: manage-customers
-url: /manage-customers
+name: manage-owners
+url: /manage-owners
 ---
 <div class="vertical grid-frame">
     <div class="grid-content shrink" style="padding: 0;">
@@ -8,20 +8,20 @@ url: /manage-customers
     </div>
     <div ng-include="'/templates/partials/side_bar.html'"></div>
     <div class="ls-app-body">
-        <div class="grid-container ls-manage-accounts">
+        <div class="grid-container ls-manage-accounts" ng-controller="manageOwnerCtrl as manageOwner">
             <div class="grid-block">
                <div class="grid-block small-12 vertical">
                    <div class="grid-content">
-                        <h2>Manage Customers</h2>
+                        <h2>Manage Owners</h2>
                         <ul>
-                            <li class="ls-card ls-users-card">
+                            <li class="ls-card ls-users-card" ng-repeat="owner in owners">
                                 <a href="" class="ls-card-link"></a>
                                 <figure class="ls-user-card-info">
                                     <img src="http://lorempixel.com/400/400/"/>
                                     <figcaption class="ls-user-card-caption">
                                         <div class="ls-user-card-title">
-                                            <h4>Daniel Janetos</h4>
-                                            <p>STATUS: <span class="ls-status ls-inactive">Inactive</span></p>
+                                            <h4>{{owner.email}}</h4>
+
                                         </div>
                                         <a href="" class="button">
                                             More Info</a>

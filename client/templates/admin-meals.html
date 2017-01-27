@@ -8,33 +8,20 @@ url: /manage-meals
     </div>
     <div ng-include="'/templates/partials/side_bar.html'"></div>
     <div class="ls-app-body">
-        <div class="grid-container ls-manage-meals">
+        <div class="grid-container ls-manage-meals"  ng-controller="manageMealCtrl as manageMeal">
             <div class="grid-block">
                <div class="grid-block small-12 vertical">
                    <div class="grid-content">
                         <h2>Manage Meals</h2>
                         <ul>
-                            <li class="ls-card ls-meal-card">
+                            <li class="ls-card ls-meal-card" ng-repeat="meal in meals">
                                 <a ui-sref="edit-meal" class="ls-card-link">x</a>
                                 <figure class="ls-meal-card-info">
                                     <img src="http://lorempixel.com/400/400/food"/>
                                     <figcaption class="ls-meal-card-caption">
                                         <div class="ls-meal-card-title">
-                                            <h4>Chicken Burrito Naan</h4>
-                                            <p>Chipotle</p>
-                                        </div>
-                                        <a href="" class="button">Edit </a>
-                                    </figcaption>
-                                </figure>
-                            </li>
-                            <li class="ls-card ls-meal-card">
-                                <a ui-sref="edit-meal" class="ls-card-link">x</a>
-                                <figure class="ls-meal-card-info">
-                                    <img src="http://lorempixel.com/400/400/food"/>
-                                    <figcaption class="ls-meal-card-caption">
-                                        <div class="ls-meal-card-title">
-                                            <h4>Chicken Burrito Naan</h4>
-                                            <p>Chipotle</p>
+                                            <h4>{{meal.name}}</h4>
+                                            <p>{{meal.restaurant_id}}</p>
                                         </div>
                                         <a href="" class="button">Edit </a>
                                     </figcaption>

@@ -8,20 +8,20 @@ url: /manage-restaurants
     </div>
     <div ng-include="'/templates/partials/side_bar.html'"></div>
     <div class="ls-app-body">
-        <div class="grid-container ls-manage-restaurants">
+        <div class="grid-container ls-manage-restaurants" ng-controller="manageRestaurantCtrl as manageRestaurant">
             <div class="grid-block">
                <div class="grid-block small-12 vertical">
                    <div class="grid-content">
                         <h2>Manage Restaurants</h2>
                         <ul>
-                            <li class="ls-card ls-restaurant-card">
+                            <li class="ls-card ls-restaurant-card" ng-repeat="restaurant in restaurants">
                                 <a ui-sref="restaurant-details" class="ls-card-link">x</a>
                                 <figure class="ls-restaurant-card-info">
                                     <img src="http://lorempixel.com/400/400/"/>
                                     <figcaption class="ls-restaurant-card-caption">
                                         <div class="ls-left-card-info">
-                                            <h4>Lorem Ipsum</h4>
-                                            <p>75 Queens Wharf</p>
+                                            <h4>{{restaurant.name}}</h4>
+                                            <p>{{restaurant.street_address}}</p>
                                         </div>
                                         <div class="ls-right-card-info">
                                             <a class="button">Edit</a>
