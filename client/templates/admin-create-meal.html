@@ -19,49 +19,39 @@ url: /create-meal
             <div class="grid-block">
                 <div class="grid-block small-12 vertical">
                     <div class="grid-content">
-                        <form class="ls-form ls-create-form">
+                        <form class="ls-form ls-create-form" ng-controller="createMealCtrl as createMeal"
+                           name="createMealForm" ng-submit="submitForm(createMealForm.$valid)">
                             <div class="grid-block">
                                 <div class="small-12 medium-6 grid-content">
                                     <label for="resName">Restaurant Name</label>
-                                    <select name="resName" id="resName" class="ls-input-fields">
-                                        <option value="">---</option>
-                                        <option value="">Chipotle</option>
-                                        <option value="">Nando's</option>
-                                        <option value="">Mac n Cheese</option>
+                                    <select name="resName" id="resName" class="ls-input-fields" ng-model="createMealFormData.restaurant" ng-options="restaurant as restaurant.name for restaurant in restaurants track by restaurant.id">
                                     </select>
                                     <label for="mealName">
                                         Meal Name
-                                        <input type="text" placeholder="e.g. Soft Glazed Duck" class="ls-input-fields" name="mealName" id="mealName">
+                                        <input type="text" placeholder="e.g. Soft Glazed Duck" class="ls-input-fields" name="mealName" id="mealName" ng-model="createMealFormData.name">
                                     </label>
                                     <label for="mealTag">
                                         Meal Tagline
-                                        <input type="text" placeholder="e.g. Finger Lickin' Good" class="ls-input-fields" name="mealTag" id="mealTag">
+                                        <input type="text" placeholder="e.g. Finger Lickin' Good" class="ls-input-fields" name="mealTag" id="mealTag" ng-model="createMealFormData.tagline">
                                     </label>
                                     <label for="mealPrice">
                                         Meal Price
-                                        <input type="number" placeholder="e.g. 9.99" class="ls-input-fields" name="mealPrice" id="mealPrice">
+                                        <input type="number" placeholder="e.g. 9.99" class="ls-input-fields" name="mealPrice" id="mealPrice" ng-model="createMealFormData.price">
                                     </label>
                                     <label for="mealImage">
                                         Meal Image <br>
-                                        <input type="file" name="mealImage" id="mealImage">
+                                        <input type="file" name="mealImage" id="mealImage" ng-model="createMealFormData.meal_image">
                                     </label>
                                 </div>
                                 <div class="small-12 medium-6 grid-content">
                                     <label for="mealDesc">
                                         Meal Description
-                                        <textarea name="mealDesc" id="mealDesc" cols="30" rows="6" placeholder="e.g. Soft glazed duck served on sizzling plate." class="ls-input-fields"></textarea>
+                                        <textarea name="mealDesc" id="mealDesc" cols="30" rows="8" placeholder="e.g. Soft glazed duck served on sizzling plate." class="ls-input-fields" ng-model="createMealFormData.description"></textarea>
                                     </label>
                                     <label for="mealIngredients">
                                         Meal Ingredients
-                                        <textarea name="mealIngredients" id="mealIngredients" cols="30" rows="6" placeholder="e.g. Cucumber, Avocado, Banana" class="ls-input-fields"></textarea>
+                                        <textarea name="mealIngredients" id="mealIngredients" cols="30" rows="8" placeholder="e.g. Cucumber, Avocado, Banana" class="ls-input-fields" ng-model="createMealFormData.ingredients"></textarea>
                                     </label>
-                                    <label for="mealCat">
-                                        Meal Category
-                                    </label>
-                                     <select name="mealCat" id="mealCat" class="ls-input-fields">
-                                        <option value="">---</option>
-                                        <option value="">Asian</option>
-                                    </select>
                                 </div>
                             </div>
                             <div class="grid-block">

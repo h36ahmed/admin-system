@@ -25,7 +25,10 @@ url: /create-owner
 
                                 </div>
                                 <div class="small-6 grid-content text-center">
-                                    <select class="ls-input-fields" ng-options="owner as owner.email for owner in owners track by owner.id" ng-model="createOwnerFormData.user">
+                                    <label for="userEmail">
+                                       Owners
+                                    </label>
+                                    <select class="ls-input-fields" ng-options="owner as owner.email for owner in owners track by owner.id" ng-model="createOwnerFormData.user" name="userEmail" id="userEmail">
                                     </select>
                                 </div>
                                 <div class="small-3 grid-content text-center">

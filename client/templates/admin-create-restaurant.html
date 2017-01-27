@@ -21,13 +21,14 @@ url: /create-restaurant
                    <div class="grid-content">
                         <form class="ls-form ls-create-form" ng-controller="createRestaurantCtrl as createRestaurant"
                            name="createRestaurantForm" ng-submit="submitForm(createRestaurantForm.$valid)">
-                            <div class="grid-block">
+                            <div class="grid-block ls-top-form-header">
                                 <div class="small-3 grid-content text-center">
                                 </div>
                                 <div class="small-6 grid-content text-center">
-                                    <select class="ls-input-fields" ng-model="createRestaurantFormData.owner" ng-options="owner as owner.label for owner in owners track by owner.id">
-                                        <!--<option value="1">John Doe - xxx@email.com</option>
-                                        <option value="2">John Tro - xxx@email.com</option>-->
+                                    <label for="ownerEmail">
+                                       Owners
+                                    </label>
+                                    <select class="ls-input-fields" ng-model="createRestaurantFormData.owner" ng-options="owner as owner.user.email for owner in owners track by owner.id" name="ownerEmail" id="ownerEmail">
                                     </select>
                                 </div>
                                 <div class="small-3 grid-content text-center">
