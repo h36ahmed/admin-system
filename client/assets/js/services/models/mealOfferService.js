@@ -10,7 +10,6 @@ app.service(
         // Return public API.
         return({
             createMealOffer: createMealOffer,
-            editMealOffer: editMealOffer,
             getMealOffers: getMealOffers,
             deleteMealOffer: deleteMealOffer
         });
@@ -23,7 +22,7 @@ app.service(
         function createMealOffer(data) {
             var request = $http({
                 method: "post",
-                url: baseUrl + baseApi + 'meal-offer',
+                url: baseUrl + baseApi + 'offer',
                 data: data,
                 headers : {
                     'Content-Type': 'application/json'
@@ -35,19 +34,8 @@ app.service(
         function getMealOffers(data) {
             var request = $http({
                 method: "get",
-                url: baseUrl + baseApi + "meal-offers",
+                url: baseUrl + baseApi + "offers",
                 params: data,
-                headers : {
-                    'Content-Type': 'application/json'
-                }
-            });
-            return request;
-        }
-
-        function editMealOffer() {
-            var request = $http({
-                method: "put",
-                url: baseUrl + baseApi + "meal-offer",
                 headers : {
                     'Content-Type': 'application/json'
                 }
@@ -58,7 +46,7 @@ app.service(
         function deleteMealOffer() {
             var request = $http({
                 method: "delete",
-                url: baseUrl + baseApi + "meal-offer",
+                url: baseUrl + baseApi + "offer",
                 headers : {
                     'Content-Type': 'application/json'
                 }
