@@ -15,7 +15,7 @@ url: /manage-meals
                         <h2>Manage Meals</h2>
                         <ul>
                             <li class="ls-card ls-meal-card" ng-repeat="meal in meals">
-                                <a ui-sref="edit-meal" class="ls-card-link">x</a>
+                                <a ui-sref="meal({id:meal.id})" class="ls-card-link">x</a>
                                 <figure class="ls-meal-card-info">
                                     <img src="http://lorempixel.com/400/400/food"/>
                                     <figcaption class="ls-meal-card-caption">

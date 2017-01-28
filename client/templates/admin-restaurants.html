@@ -15,7 +15,7 @@ url: /manage-restaurants
                         <h2>Manage Restaurants</h2>
                         <ul>
                             <li class="ls-card ls-restaurant-card" ng-repeat="restaurant in restaurants">
-                                <a ui-sref="restaurant-details" class="ls-card-link">x</a>
+                                <a ui-sref="restaurant({id:restaurant.id})"  class="ls-card-link">x</a>
                                 <figure class="ls-restaurant-card-info">
                                     <img src="http://lorempixel.com/400/400/"/>
                                     <figcaption class="ls-restaurant-card-caption">

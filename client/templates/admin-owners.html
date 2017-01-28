@@ -15,7 +15,7 @@ url: /manage-owners
                         <h2>Manage Owners</h2>
                         <ul>
                             <li class="ls-card ls-users-card" ng-repeat="owner in owners">
-                                <a href="" class="ls-card-link"></a>
+                                <a ui-sref="owner({id:owner.id})" class="ls-card-link"></a>
                                 <figure class="ls-user-card-info">
                                     <img src="http://lorempixel.com/400/400/"/>
                                     <figcaption class="ls-user-card-caption">

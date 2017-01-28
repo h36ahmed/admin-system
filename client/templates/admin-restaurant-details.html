@@ -1,6 +1,6 @@
 ---
-name: restaurant-details
-url: /restaurant-details
+name: restaurant
+url: /restaurant/:id
 ---
 <div class="vertical grid-frame">
     <div class="grid-content shrink" style="padding: 0;">
@@ -19,7 +19,7 @@ url: /restaurant-details
                 <div class="grid-block small-3 vertical">
                     <div class="grid-content text-right">
                         <img src="http://lorempixel.com/400/400/" alt="">
-                        <a ui-sref="edit-restaurant" class="button edit-button">Edit Information</a>
+                        <a ui-sref="restaurant-edit({id:1})" class="button edit-button">Edit Information</a>
                     </div>
                 </div>
            </div>
