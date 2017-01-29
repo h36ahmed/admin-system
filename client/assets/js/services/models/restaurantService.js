@@ -11,6 +11,8 @@ app.service(
         return({
             createRestaurant: createRestaurant,
             getRestaurants: getRestaurants,
+            editRestaurant: editRestaurant,
+            getRestaurant: getRestaurant,
             deleteRestaurant: deleteRestaurant
         });
 
@@ -42,6 +44,28 @@ app.service(
             return request;
         }
 
+        function getRestaurant(data) {
+            var request = $http({
+                method: "get",
+                url: baseUrl + baseApi + "restaurants" + "/" + data.id,
+                headers : {
+                    'Content-Type': 'application/json'
+                }
+            });
+            return request;
+        }
+
+        function editRestaurant(data) {
+            var request = $http({
+                method: "put",
+                url: baseUrl + baseApi + "restaurant",
+                params: data,
+                headers : {
+                    'Content-Type': 'application/json'
+                }
+            });
+            return request;
+        }
 
         function deleteRestaurant( id ) {
             var request = $http({

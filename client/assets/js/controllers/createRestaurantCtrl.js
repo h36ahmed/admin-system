@@ -46,6 +46,6 @@ var createRestaurantCtrl = function($scope, $location, ownerService, restaurantS
 
 };
 
-createRestaurantCtrl.inject = ['$scope', '$location', 'userService', 'restaurantService'];
+createRestaurantCtrl.inject = ['$scope', '$location', 'ownerService', 'restaurantService'];
 
 app.controller('createRestaurantCtrl', createRestaurantCtrl);

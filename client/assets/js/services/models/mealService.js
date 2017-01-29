@@ -10,6 +10,7 @@ app.service(
         // Return public API.
         return({
             createMeal: createMeal,
+            getMeal: getMeal,
             editMeal: editMeal,
             getMeals: getMeals,
             deleteMeal: deleteMeal
@@ -44,10 +45,23 @@ app.service(
             return request;
         }
 
-        function editMeal() {
+        function getMeal(data) {
+            var request = $http({
+                method: "get",
+                url: baseUrl + baseApi + "meals" + "/" + data.id,
+                params: data,
+                headers : {
+                    'Content-Type': 'application/json'
+                }
+            });
+            return request;
+        }
+
+        function editMeal(data) {
             var request = $http({
                 method: "put",
                 url: baseUrl + baseApi + "meal",
+                params: data,
                 headers : {
                     'Content-Type': 'application/json'
                 }

@@ -8,7 +8,7 @@ url: /restaurant-edit/:id
     </div>
     <div ng-include="'/templates/partials/side_bar.html'"></div>
     <div class="ls-app-body">
-        <div class="grid-container ls-res-info">
+        <div class="grid-container ls-res-info" ng-controller="editRestaurantCtrl as editRes">
             <div class="grid-block ls-title-bar">
                 <div class="grid-block small-8 vertical">
                     <div class="grid-content">
@@ -17,7 +17,7 @@ url: /restaurant-edit/:id
                 </div>
                 <div class="grid-block small-4 vertical">
                     <div class="grid-content text-right">
-                        <form class="ls-form ls-delete-form">
+                        <form class="ls-form ls-delete-form"  name="deleteResForm" ng-submit="submitDeleteForm()">
                             <input type="submit" class="alert button" name="deleteRes" value="Delete Restaurant">
                         </form>
                     </div>
@@ -26,49 +26,57 @@ url: /restaurant-edit/:id
             <div class="grid-block">
                 <div class="grid-block small-12 vertical">
                     <div class="grid-content">
-                        <form class="ls-form ls-edit-form">
+                        <form class="ls-form ls-edit-form"
+                           name="editResForm" ng-submit="submitEditForm(editResForm.$valid)">
+                           <div class="grid-block ls-top-form-header">
+                                <div class="small-3 grid-content text-center">
+                                </div>
+                                <div class="small-6 grid-content text-center">
+                                    <label for="ownerEmail">
+                                       Owners
+                                    </label>
+                                    <select class="ls-input-fields" ng-model="editResFormData.owner" ng-options="owner as owner.user.email for owner in owners track by owner.id" name="ownerEmail" id="ownerEmail">
+                                    </select>
+                                </div>
+                                <div class="small-3 grid-content text-center">
+                                </div>
+                            </div>
                             <div class="grid-block">
                                 <div class="small-12 medium-6 grid-content">
-                                    <label for="resName">
+                                   <label for="resName">
                                         Restaurant Name
-                                        <input type="text" placeholder="Restaurant Name" class="ls-input-fields" name="resName" id="resName">
+                                        <input type="text" placeholder="Restaurant Name" class="ls-input-fields" name="resName" id="resName" ng-model="editResFormData.name">
                                     </label>
                                     <label for="resPN">
                                         Phone Number
-                                        <input type="tel" placeholder="Phone Number" class="ls-input-fields" name="resPN" id="resPN">
-                                    </label>
-                                    <label for="ownerName">
-                                        Owner's Name
-                                        <input type="text" placeholder="Owner's Name" class="ls-input-fields" name="ownerName" id="ownerName">
-                                    </label>
-                                    <label for="ownerPN">
-                                        Owner's Phone Number
-                                        <input type="tel" placeholder="Owner's Phone Number" class="ls-input-fields" name="ownerPN" id="ownerPN">
-                                    </label>
-                                    <label for="resLogo">
-                                        Restaurant Logo <br>
-                                        <input type="file" placeholder="Restaurant Logo" class="ls-input-fields" name="resLogo" id="resLogo">
-                                    </label>
-                                </div>
-                                <div class="small-12 medium-6 grid-content">
-                                    <label for="resSA">
-                                        Street Address <input type="text" placeholder="e.g. 75 Queens Wharf" class="ls-input-fields" name="resSA" id="resSA"/>
-                                    </label>
-                                    <label for="resCity">
-                                        City
-                                        <input type="text" placeholder="e.g. Toronto" class="ls-input-fields" name="resCity" id="resCity">
-                                    </label>
-                                    <label for="resState">
-                                        State / Province
-                                        <input type="text" placeholder="e.g. Ontario" class="ls-input-fields" name="resState" id="resState">
-                                    </label>
-                                    <label for="resCountry">
-                                        Country
-                                        <input type="text" placeholder="e.g. Canada" class="ls-input-fields" name="resCountry" id="resCountry">
+                                        <input type="tel" placeholder="Phone Number" class="ls-input-fields" name="resPN" id="resPN" ng-model="editResFormData.phone_number">
                                     </label>
                                     <label for="resPC">
                                         Postal Code
-                                        <input type="text" placeholder="e.g. M5V4B1" class="ls-input-fields" name="resPC" id="resPC">
+                                        <input type="text" placeholder="e.g. M5V4B1" class="ls-input-fields" name="resPC" id="resPC" ng-model="editResFormData.postal_code">
+                                    </label>
+                                    <label for="resLogo">
+                                        Restaurant Logo <br>
+                                        <input type="file" placeholder="Restaurant Logo" class="ls-input-fields" name="resLogo" id="resLogo" ng-model="editResFormData.logo">
+                                    </label>
+
+                                </div>
+                                <div class="small-12 medium-6 grid-content">
+                                    <label for="resSA">
+                                        Street Address
+                                        <input type="text" placeholder="e.g. 75 Queens Wharf" class="ls-input-fields" name="resSA" id="resSA" ng-model="editResFormData.street_address"/>
+                                    </label>
+                                    <label for="resCity">
+                                        City
+                                        <input type="text" placeholder="e.g. Toronto" class="ls-input-fields" name="resCity" id="resCity" ng-model="editResFormData.city">
+                                    </label>
+                                    <label for="resState">
+                                        State / Province
+                                        <input type="text" placeholder="e.g. Ontario" class="ls-input-fields" name="resState" id="resState" ng-model="editResFormData.state">
+                                    </label>
+                                    <label for="resCountry">
+                                        Country
+                                        <input type="text" placeholder="e.g. Canada" class="ls-input-fields" name="resCountry" id="resCountry" ng-model="editResFormData.country">
                                     </label>
                                 </div>
                             </div>

@@ -8,12 +8,13 @@ url: /restaurant/:id
     </div>
     <div ng-include="'/templates/partials/side_bar.html'"></div>
     <div class="ls-app-body">
-        <div class="grid-container ls-res-details">
+        <div class="grid-container ls-res-details" ng-controller="restaurantInfoCtrl as resInfo">
             <div class="grid-block">
                 <div class="grid-block small-9 vertical">
                     <div class="grid-content">
-                        <h2>Chipotle</h2>
-                        <h4>187 Fake Address St.</h4>
+                        <h2>{{restaurant.name}}</h2>
+                        <h4>{{restaurant.street_address}}</h4>
+                        <h6>{{restaurant.phone_number}}</h6>
                     </div>
                 </div>
                 <div class="grid-block small-3 vertical">
@@ -28,27 +29,13 @@ url: /restaurant/:id
                     <div class="grid-content">
                         <h3>Meals</h3>
                         <ul>
-                            <li class="ls-card ls-meals-card">
-                                <a ui-sref="edit-meal" class="ls-card-link">x</a>
+                            <li class="ls-card ls-meals-card" ng-repeat="meal in restaurant.meals">
+                                <a ui-sref="meal({id:meal.id})" class="ls-card-link">x</a>
                                 <figure class="ls-meal-card-info">
                                     <img src="http://lorempixel.com/400/400/"/>
                                     <figcaption class="ls-meal-card-caption">
                                         <div class="ls-meal-card-title">
-                                            <h4>Chicken Burrito</h4>
-                                            <p>STATUS: <span class="ls-status ls-inactive">Not Available</span></p>
-                                        </div>
-                                        <a href="" class="button">More Info</a>
-                                    </figcaption>
-                                </figure>
-                            </li>
-                            <li class="ls-card ls-meals-card">
-                                <a ui-sref="edit-meal" class="ls-card-link">x</a>
-                                <figure class="ls-meal-card-info">
-                                    <img src="http://lorempixel.com/400/400/"/>
-                                    <figcaption class="ls-meal-card-caption">
-                                        <div class="ls-meal-card-title">
-                                            <h4>Beef Burrito</h4>
-                                            <p>STATUS: <span class="ls-status ls-active">Available</span></p>
+                                            <h4>{{meal.name}}</h4>
                                         </div>
                                         <a href="" class="button">More Info</a>
                                     </figcaption>
@@ -61,14 +48,14 @@ url: /restaurant/:id
                     <div class="grid-content">
                         <h3>Address</h3>
                         <p>
-                            187 Fake Address St.,<br>
-                            Toronto, Ontario,<br>
-                            Canada, M5V310
+                            {{restaurant.street_address}},<br>
+                            {{restaurant.city}}, {{restaurant.state}},<br>
+                            {{restaurant.country}}, {{restaurant.postal_code}}
                         </p>
                         <h3>Owner's Information</h3>
                         <p>
-                            Hassan Ahmed,<br>
-                            516-283-8921
+                            {{restaurant.owner.first_name}} {{restaurant.owner.last_name}},<br>
+                            {{restaurant.owner.phone_number}}
                         </p>
                     </div>
                 </div>

@@ -1,0 +1,64 @@
+var app = angular.module('lunchSociety');
+
+var editMealCtrl = function($scope, $state, $location, $stateParams, mealService, restaurantService) {
+
+  $scope.meal = {};
+  $scope.editMealFormData = {};
+  $scope.restaurants = [];
+
+  restaurantService
+    .getRestaurants()
+    .success(function(data, status, headers, config) {
+      $scope.restaurants = data;
+    })
+    .error(function(data, status, headers, config) {
+      // Handle login errors here
+      $scope.message = 'Error: Something Went Wrong';
+    });
+
+  if ($stateParams.id) {
+    mealService
+      .getMeal({
+        id: $stateParams.id
+      })
+      .success(function(data, status, headers, config) {
+        $scope.meal = data;
+        fillFormData();
+      })
+      .error(function(data, status, headers, config) {
+        // Handle login errors here
+        $scope.message = 'Error: Something Went Wrong';
+      });
+  } else {
+    $location.path('manage-meals');
+  }
+
+  function fillFormData() {
+    $scope.editMealFormData.name = $scope.meal.name;
+    $scope.editMealFormData.tagline = $scope.meal.tagline;
+    $scope.editMealFormData.price = $scope.meal.price;
+    $scope.editMealFormData.restaurant = $scope.restaurants[$scope.meal.restaurant_id - 1];
+    $scope.editMealFormData.description = $scope.meal.description;
+    $scope.editMealFormData.ingredients = $scope.meal.ingredients;
+  }
+
+  $scope.submitEditForm = function(isValid) {
+    // check to make sure the form is completely valid
+    if (isValid) {
+      $scope.editMealFormData.restaurant_id = $scope.editMealFormData.restaurant.id;
+      mealService
+        .editMeal($scope.editMealFormData)
+        .success(function(data, status, headers, config) {
+          alert('yes');
+        })
+        .error(function(data, status, headers, config) {
+          // Handle login errors here
+          $scope.message = 'Error: Something Went Wrong';
+        });
+    }
+  };
+};
+
+editMealCtrl.inject = ['$scope', '$state', '$location', '$stateParams', 'mealService', 'restaurantService'];
+
+app.controller('editMealCtrl', editMealCtrl);
