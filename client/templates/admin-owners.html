@@ -10,9 +10,20 @@ url: /manage-owners
     <div class="ls-app-body">
         <div class="grid-container ls-manage-accounts" ng-controller="manageOwnerCtrl as manageOwner">
             <div class="grid-block">
+                <div class="grid-block small-8 vertical">
+                   <div class="grid-content">
+                       <h2>Manage Owners</h2>
+                   </div>
+                </div>
+                <div class="grid-block small-4 vertical">
+                   <div class="grid-content text-right">
+                       <a ui-sref="create-account" class="button success ls-create-button">Create Owner</a>
+                   </div>
+                </div>
+            </div>
+            <div class="grid-block">
                <div class="grid-block small-12 vertical">
                    <div class="grid-content">
-                        <h2>Manage Owners</h2>
                         <ul>
                             <li class="ls-card ls-users-card" ng-repeat="owner in owners">
                                 <a ui-sref="owner({id:owner.id})" class="ls-card-link"></a>
