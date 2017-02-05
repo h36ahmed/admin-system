@@ -1,0 +1,33 @@
+---
+name: manage-meal-offers
+url: /manage-meal-offers
+---
+<div class="vertical grid-frame">
+    <div class="grid-content shrink" style="padding: 0;">
+        <div ng-include="'/templates/partials/menu_bar.html'"></div>
+    </div>
+    <div ng-include="'/templates/partials/side_bar.html'"></div>
+    <div class="ls-app-body">
+        <div class="grid-container ls-table-layout-pages ls-meal-offers" ng-controller="">
+            <div class="grid-block">
+                <div class="grid-block small-8 vertical">
+                   <div class="grid-content">
+                       <h2>Meal Offers</h2>
+                   </div>
+                </div>
+                <div class="grid-block small-4 vertical">
+                   <div class="grid-content text-right">
+                       <a ui-sref="create-meal-offer" class="button success ls-create-button">Create Meal Offer</a>
+                   </div>
+                </div>
+            </div>
+            <div class="grid-block">
+               <div class="grid-block small-12 vertical">
+                   <div class="grid-content">
+                        <table></table>
+                    </div>
+                </div>
+           </div>
+        </div>
+    </div>
+</div>
