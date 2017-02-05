@@ -1,6 +1,6 @@
 var app = angular.module('lunchSociety');
 
-var createOwnerCtrl = function($scope, $location, userService, ownerService) {
+var createOwnerCtrl = function($scope, $location, userService, ownerService, modalService) {
 
   $scope.createOwnerFormData = {};
 
@@ -22,26 +22,27 @@ var createOwnerCtrl = function($scope, $location, userService, ownerService) {
   $scope.submitForm = function(isValid) {
     // check to make sure the form is completely valid
     if (isValid) {
-      modalService.openModal('status-modal');
+      modalService.openModal('ls-status-modal');
       $scope.createOwnerFormData.user_id = $scope.createOwnerFormData.user.id;
 
       ownerService
         .createOwner($scope.createOwnerFormData)
         .success(function(data, status, headers, config) {
-          modalService.closeModal('status-modal');
+          modalService.closeModal('ls-status-modal');
           $location.path('create-restaurant').search({
             id: data.id
           });
         })
         .error(function(data, status, headers, config) {
-          // Handle login errors here
-          $scope.message = 'Error: Something Went Wrong';
+          modalService.closeModal('ls-status-modal');
+          modalService.openModal('ls-feedback-modal');
+          $("#ls-feedback-message").html('Error: Something Went Wrong');
         });
     }
   };
 
 };
 
-createOwnerCtrl.inject = ['$scope', '$location', 'userService', 'ownerService'];
+createOwnerCtrl.inject = ['$scope', '$location', 'userService', 'ownerService', 'modalService'];
 
 app.controller('createOwnerCtrl', createOwnerCtrl);

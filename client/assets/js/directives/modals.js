@@ -1,8 +1,17 @@
 var app = angular.module('lunchSociety');
 
-app.directive('modal', modalDirective);
+app.directive('lsModal', modalDirective);
 
 function modalDirective($, modalService) {
+   var controller = ['$scope', 'modalService', function ($scope, modalService) {
+
+      $scope.closeModal = function (id) {
+          modalService.closeModal(id);
+          $(id).hide();
+          $('body').removeClass('ls-modal-open');
+      };
+  }];
+
   return {
     link: function(scope, element, attrs) {
       // ensure id attribute exists
@@ -13,14 +22,6 @@ function modalDirective($, modalService) {
 
       // move element to bottom of page (just before </body>) so it can be displayed above everything else
       element.appendTo('body');
-
-      // close modal on background click
-      element.on('click', function(e) {
-        var target = $(e.target);
-        if (!target.closest('.modal-body').length) {
-          scope.$evalAsync(closeModal);
-        }
-      });
 
       // add self (this modal instance) to the modal service so it's accessible from controllers
       var modal = {
@@ -40,14 +41,15 @@ function modalDirective($, modalService) {
       // open modal
       function openModal() {
         element.show();
-        $('body').addClass('modal-open');
+        $('body').addClass('ls-modal-open');
       }
 
       // close modal
       function closeModal() {
         element.hide();
-        $('body').removeClass('modal-open');
+        $('body').removeClass('ls-modal-open');
       }
-    }
+    },
+    controller: controller
   };
 }

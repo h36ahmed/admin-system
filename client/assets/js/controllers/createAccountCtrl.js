@@ -7,22 +7,24 @@ var createAccountCtrl = function($scope, $window, $location, userService, modalS
   $scope.submitForm = function(isValid) {
     // check to make sure the form is completely valid
     if (isValid) {
-      modalService.openModal('status-modal');
+      modalService.openModal('ls-status-modal');
       userService
         .createUser($scope.registerFormData)
         .success(function(data, status, headers, config) {
-          modalService.closeModal('status-modal');
+          modalService.closeModal('ls-status-modal');
           if (data.type == 'owner') {
             $location.path('create-owner').search({
               id: data.id
             });
           } else {
-            // Show Modal saying customer Added
+            modalService.openModal('ls-feedback-modal');
+            $("#ls-feedback-message").html('Customer Added & Email Sent!');
           }
         })
         .error(function(data, status, headers, config) {
-          // Handle errors here
-          console.log(data);
+          modalService.closeModal('ls-status-modal');
+          modalService.openModal('ls-feedback-modal');
+          $("#ls-feedback-message").html('Error: Something Went Wrong');
         });
     }
   };

@@ -18,14 +18,23 @@
     <div ui-view>
 
     </div>
-    <modal id="status-modal">
+    <ls-modal id="ls-status-modal">
         <div class="modal">
-            <div class="modal-body">
+            <div class="ls-modal-body">
                 <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
                 <span class="sr-only">Loading...</span>
             </div>
         </div>
-        <div class="modal-background"></div>
-    </modal>
+        <div class="ls-modal-background"></div>
+    </ls-modal>
+    <ls-modal id="ls-feedback-modal">
+        <div class="modal">
+            <div class="ls-modal-body">
+                <p id="ls-feedback-message"></p>
+                <button class="button" ng-click="closeModal('ls-feedback-modal');">Close</button>
+            </div>
+        </div>
+        <div class="ls-modal-background"></div>
+    </ls-modal>
   </body>
 </html>

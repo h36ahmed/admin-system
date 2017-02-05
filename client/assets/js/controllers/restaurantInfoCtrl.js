@@ -10,7 +10,6 @@ var restaurantInfoCtrl = function($scope, $state, $location, $stateParams, resta
       })
       .success(function(data, status, headers, config) {
         $scope.restaurant = data;
-        console.log($scope.restaurant);
       })
       .error(function(data, status, headers, config) {
         // Handle login errors here

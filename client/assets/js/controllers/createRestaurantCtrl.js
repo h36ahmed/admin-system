@@ -1,6 +1,6 @@
 var app = angular.module('lunchSociety');
 
-var createRestaurantCtrl = function($scope, $location, ownerService, restaurantService) {
+var createRestaurantCtrl = function($scope, $location, ownerService, restaurantService, modalService) {
 
   $scope.createRestaurantFormData = {};
 
@@ -28,24 +28,27 @@ var createRestaurantCtrl = function($scope, $location, ownerService, restaurantS
   $scope.submitForm = function(isValid) {
     // check to make sure the form is completely valid
     if (isValid) {
+      modalService.openModal('ls-status-modal');
       $scope.createRestaurantFormData.owner_id = $scope.createRestaurantFormData.owner.id;
       $scope.createRestaurantFormData.phone_number = parseInt($scope.createRestaurantFormData.phone_number);
       restaurantService
         .createRestaurant($scope.createRestaurantFormData)
         .success(function(data, status, headers, config) {
+          modalService.closeModal('ls-status-modal');
           $location.path('create-meal').search({
             id: data.id
           });
         })
         .error(function(data, status, headers, config) {
-          // Handle login errors here
-          $scope.message = 'Error: Something Went Wrong';
+          modalService.closeModal('ls-status-modal');
+          modalService.openModal('ls-feedback-modal');
+          $("#ls-feedback-message").html('Error: Something Went Wrong');
         });
     }
   };
 
 };
 
-createRestaurantCtrl.inject = ['$scope', '$location', 'ownerService', 'restaurantService'];
+createRestaurantCtrl.inject = ['$scope', '$location', 'ownerService', 'restaurantService', 'modalService'];
 
 app.controller('createRestaurantCtrl', createRestaurantCtrl);

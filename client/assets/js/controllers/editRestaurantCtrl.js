@@ -1,6 +1,8 @@
 var app = angular.module('lunchSociety');
 
-var editRestaurantCtrl = function($scope, $state, $location, $stateParams, restaurantService, ownerService) {
+var editRestaurantCtrl = function($scope, $state, $location,
+  $stateParams, restaurantService,
+  ownerService, modalService) {
 
   $scope.restaurant = {};
   $scope.editResFormData = {};
@@ -29,8 +31,9 @@ var editRestaurantCtrl = function($scope, $state, $location, $stateParams, resta
       }
     })
     .error(function(data, status, headers, config) {
-      // Handle login errors here
-      $scope.message = 'Error: Something Went Wrong';
+      modalService.closeModal('status-modal');
+      modalService.openModal('feedback-modal');
+      $("#feedback-message").html('Error: Something Went Wrong');
     });
 
 
@@ -54,16 +57,19 @@ var editRestaurantCtrl = function($scope, $state, $location, $stateParams, resta
       restaurantService
         .editRestaurant($scope.editResFormData)
         .success(function(data, status, headers, config) {
-          alert('yes');
+          modalService.closeModal('ls-status-modal');
+          modalService.openModal('ls-feedback-modal');
+          $("#ls-feedback-message").html('Restaurant Updated!');
         })
         .error(function(data, status, headers, config) {
-          // Handle login errors here
-          $scope.message = 'Error: Something Went Wrong';
+          modalService.closeModal('ls-status-modal');
+          modalService.openModal('ls-feedback-modal');
+          $("#ls-feedback-message").html('Error: Something Went Wrong');
         });
     }
   };
 };
 
-editRestaurantCtrl.inject = ['$scope', '$state', ' $location', '$stateParams', 'restaurantService', 'ownerService'];
+editRestaurantCtrl.inject = ['$scope', '$state', ' $location', '$stateParams', 'restaurantService', 'ownerService', 'modalService'];
 
 app.controller('editRestaurantCtrl', editRestaurantCtrl);

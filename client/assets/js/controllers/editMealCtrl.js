@@ -1,6 +1,8 @@
 var app = angular.module('lunchSociety');
 
-var editMealCtrl = function($scope, $state, $location, $stateParams, mealService, restaurantService) {
+var editMealCtrl = function($scope, $state, $location,
+  $stateParams, mealService,
+  restaurantService, modalService) {
 
   $scope.meal = {};
   $scope.editMealFormData = {};
@@ -49,16 +51,19 @@ var editMealCtrl = function($scope, $state, $location, $stateParams, mealService
       mealService
         .editMeal($scope.editMealFormData)
         .success(function(data, status, headers, config) {
-          alert('yes');
+          modalService.closeModal('ls-status-modal');
+          modalService.openModal('ls-feedback-modal');
+          $("#ls-feedback-message").html('Meal Updated!');
         })
         .error(function(data, status, headers, config) {
-          // Handle login errors here
-          $scope.message = 'Error: Something Went Wrong';
+          modalService.closeModal('ls-status-modal');
+          modalService.openModal('ls-feedback-modal');
+          $("#ls-feedback-message").html('Error: Something Went Wrong');
         });
     }
   };
 };
 
-editMealCtrl.inject = ['$scope', '$state', '$location', '$stateParams', 'mealService', 'restaurantService'];
+editMealCtrl.inject = ['$scope', '$state', '$location', '$stateParams', 'mealService', 'restaurantService', 'modalService'];
 
 app.controller('editMealCtrl', editMealCtrl);
