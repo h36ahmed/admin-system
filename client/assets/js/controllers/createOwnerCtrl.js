@@ -5,7 +5,6 @@ var createOwnerCtrl = function($scope, $location, userService, ownerService) {
   $scope.createOwnerFormData = {};
 
   $scope.owners = [];
-
   userService
     .getUsers({
       type: "owner"
@@ -22,12 +21,14 @@ var createOwnerCtrl = function($scope, $location, userService, ownerService) {
 
   $scope.submitForm = function(isValid) {
     // check to make sure the form is completely valid
-   if (isValid) {
+    if (isValid) {
+      modalService.openModal('status-modal');
       $scope.createOwnerFormData.user_id = $scope.createOwnerFormData.user.id;
-       console.log($scope.createOwnerFormData);
+
       ownerService
         .createOwner($scope.createOwnerFormData)
         .success(function(data, status, headers, config) {
+          modalService.closeModal('status-modal');
           $location.path('create-restaurant').search({
             id: data.id
           });

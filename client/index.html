@@ -14,8 +14,17 @@
     <script src="./assets/js/services.js"></script>
   </head>
   <body>
-     <div ui-view>
+    <div ui-view>
 
     </div>
+    <modal id="status-modal">
+        <div class="modal">
+            <div class="modal-body">
+                <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <div class="modal-background"></div>
+    </modal>
   </body>
 </html>

@@ -1,18 +1,21 @@
 (function() {
   'use strict';
 
-  angular.module('lunchSociety', [
-    'ui.router',
-    'ngAnimate',
+  angular
+    .module('lunchSociety', [
+      'ui.router',
+      'ngAnimate',
 
-    //foundation
-    'foundation',
-    'foundation.dynamicRouting',
-    'foundation.dynamicRouting.animations'
-  ])
+      //foundation
+      'foundation',
+      'foundation.dynamicRouting',
+      'foundation.dynamicRouting.animations',
+
+      'underscore',
+      'jquery'
+    ])
     .config(config)
-    .run(run)
-  ;
+    .run(run);
 
   config.$inject = ['$urlRouterProvider', '$locationProvider'];
 
@@ -20,7 +23,7 @@
     $urlProvider.otherwise('/');
 
     $locationProvider.html5Mode({
-      enabled:false,
+      enabled: false,
       requireBase: false
     });
 

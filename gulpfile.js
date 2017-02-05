@@ -42,7 +42,9 @@ var paths = {
     'bower_components/angular-ui-router/release/angular-ui-router.js',
     'bower_components/foundation-apps/js/vendor/**/*.js',
     'bower_components/foundation-apps/js/angular/**/*.js',
-    '!bower_components/foundation-apps/js/angular/app.js'
+    '!bower_components/foundation-apps/js/angular/app.js',
+    'bower_components/underscore/underscore.js',
+    'bower_components/jquery/dist/jquery.js',
   ],
   // These files are for your app's JavaScript
   appJS: [
@@ -183,6 +185,21 @@ gulp.task('uglify:services', function () {
         .pipe($.concat('services.js'))
         .pipe(gulp.dest('./build/assets/js/'));
 });
+
+// Starts a test server, which you can view at http://localhost:8079
+/*
+gulp.task('server', ['build'], function() {
+  gulp.src('./build')
+    .pipe($.webserver({
+      port: 8079,
+      host: 'localhost',
+      fallback: 'index.html',
+      livereload: true,
+      open: true
+    }))
+  ;
+});
+*/
 
 gulp.task('server', ['build'], function() {
   $.connect.server({
