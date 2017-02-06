@@ -12,28 +12,29 @@ var editMealCtrl = function($scope, $state, $location,
     .getRestaurants()
     .success(function(data, status, headers, config) {
       $scope.restaurants = data;
+
+      if ($stateParams.id) {
+        mealService
+          .getMeal({
+            id: $stateParams.id
+          })
+          .success(function(data, status, headers, config) {
+            $scope.meal = data;
+            fillFormData();
+          })
+          .error(function(data, status, headers, config) {
+            // Handle login errors here
+            $scope.message = 'Error: Something Went Wrong';
+          });
+      } else {
+        $location.path('manage-meals');
+      }
+
     })
     .error(function(data, status, headers, config) {
       // Handle login errors here
       $scope.message = 'Error: Something Went Wrong';
     });
-
-  if ($stateParams.id) {
-    mealService
-      .getMeal({
-        id: $stateParams.id
-      })
-      .success(function(data, status, headers, config) {
-        $scope.meal = data;
-        fillFormData();
-      })
-      .error(function(data, status, headers, config) {
-        // Handle login errors here
-        $scope.message = 'Error: Something Went Wrong';
-      });
-  } else {
-    $location.path('manage-meals');
-  }
 
   function fillFormData() {
     $scope.editMealFormData.name = $scope.meal.name;
@@ -48,6 +49,7 @@ var editMealCtrl = function($scope, $state, $location,
     // check to make sure the form is completely valid
     if (isValid) {
       $scope.editMealFormData.restaurant_id = $scope.editMealFormData.restaurant.id;
+      $scope.editMealFormData.id = $stateParams.id;
       mealService
         .editMeal($scope.editMealFormData)
         .success(function(data, status, headers, config) {
@@ -62,6 +64,23 @@ var editMealCtrl = function($scope, $state, $location,
         });
     }
   };
+    $scope.submitDeleteForm = function() {
+    mealService
+      .deleteMeal({
+        id: $stateParams.id
+      })
+      .success(function(data, status, headers, config) {
+        modalService.closeModal('ls-status-modal');
+        modalService.openModal('ls-feedback-modal');
+        $("#ls-feedback-message").html('Meal Deleted!');
+        $location.path('manage-meals');
+      })
+      .error(function(data, status, headers, config) {
+        modalService.closeModal('ls-status-modal');
+        modalService.openModal('ls-feedback-modal');
+        $("#ls-feedback-message").html('Error: Something Went Wrong');
+      });
+  }
 };
 
 editMealCtrl.inject = ['$scope', '$state', '$location', '$stateParams', 'mealService', 'restaurantService', 'modalService'];

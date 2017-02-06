@@ -58,8 +58,8 @@ app.service(
         function editRestaurant(data) {
             var request = $http({
                 method: "put",
-                url: baseUrl + baseApi + "restaurant",
-                params: data,
+                url: baseUrl + baseApi + "restaurant" + "/" + data.id,
+                data: data,
                 headers : {
                     'Content-Type': 'application/json'
                 }
@@ -67,16 +67,10 @@ app.service(
             return request;
         }
 
-        function deleteRestaurant( id ) {
+        function deleteRestaurant(data) {
             var request = $http({
                 method: "delete",
-                url: baseUrl + baseApi + "restaurant",
-                params: {
-                    action: "delete"
-                },
-                data: {
-                    id: id
-                },
+                url: baseUrl + baseApi + "restaurant" + "/" + data.id,
                 headers : {
                     'Content-Type': 'application/json'
                 }

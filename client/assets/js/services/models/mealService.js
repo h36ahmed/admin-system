@@ -49,7 +49,6 @@ app.service(
             var request = $http({
                 method: "get",
                 url: baseUrl + baseApi + "meals" + "/" + data.id,
-                params: data,
                 headers : {
                     'Content-Type': 'application/json'
                 }
@@ -60,8 +59,8 @@ app.service(
         function editMeal(data) {
             var request = $http({
                 method: "put",
-                url: baseUrl + baseApi + "meal",
-                params: data,
+                url: baseUrl + baseApi + "meal" + "/" + data.id,
+                data: data,
                 headers : {
                     'Content-Type': 'application/json'
                 }
@@ -69,10 +68,10 @@ app.service(
             return request;
         }
 
-        function deleteMeal() {
+        function deleteMeal(data) {
             var request = $http({
                 method: "delete",
-                url: baseUrl + baseApi + "meal",
+                url: baseUrl + baseApi + "meal" + "/" + data.id,
                 headers : {
                     'Content-Type': 'application/json'
                 }

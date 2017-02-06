@@ -13,6 +13,7 @@ var editRestaurantCtrl = function($scope, $state, $location,
     .getOwners()
     .success(function(data, status, headers, config) {
       $scope.owners = data;
+
       if ($stateParams.id) {
         restaurantService
           .getRestaurant({
@@ -29,6 +30,7 @@ var editRestaurantCtrl = function($scope, $state, $location,
       } else {
         $location.path('manage-restaurants');
       }
+
     })
     .error(function(data, status, headers, config) {
       modalService.closeModal('status-modal');
@@ -54,6 +56,7 @@ var editRestaurantCtrl = function($scope, $state, $location,
     if (isValid) {
       $scope.editResFormData.owner_id = $scope.editResFormData.owner.id;
       $scope.editResFormData.phone_number = parseInt($scope.editResFormData.phone_number);
+      $scope.editResFormData.id = $stateParams.id;
       restaurantService
         .editRestaurant($scope.editResFormData)
         .success(function(data, status, headers, config) {
@@ -68,6 +71,23 @@ var editRestaurantCtrl = function($scope, $state, $location,
         });
     }
   };
+  $scope.submitDeleteForm = function() {
+    restaurantService
+      .deleteRestaurant({
+        id: $stateParams.id
+      })
+      .success(function(data, status, headers, config) {
+        modalService.closeModal('ls-status-modal');
+        modalService.openModal('ls-feedback-modal');
+        $("#ls-feedback-message").html('Restaurant Deleted!');
+        $location.path('manage-restaurants');
+      })
+      .error(function(data, status, headers, config) {
+        modalService.closeModal('ls-status-modal');
+        modalService.openModal('ls-feedback-modal');
+        $("#ls-feedback-message").html('Error: Something Went Wrong');
+      });
+  }
 };
 
 editRestaurantCtrl.inject = ['$scope', '$state', ' $location', '$stateParams', 'restaurantService', 'ownerService', 'modalService'];
