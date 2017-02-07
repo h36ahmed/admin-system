@@ -3,10 +3,11 @@ var app = angular.module('lunchSociety');
 var restaurantInfoCtrl = function($scope, $state, $location, $stateParams, restaurantService) {
 
   $scope.restaurant = {};
+  $scope.restaurant_id = $stateParams.id;
   if ($stateParams.id) {
     restaurantService
       .getRestaurant({
-        id: $stateParams.id
+        id: $scope.restaurant_id
       })
       .success(function(data, status, headers, config) {
         $scope.restaurant = data;

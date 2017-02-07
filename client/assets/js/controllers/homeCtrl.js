@@ -7,21 +7,45 @@ var homeCtrl = function($scope, $window, $location, commonService, modalService)
   $scope.submitForm = function(isValid) {
     // check to make sure the form is completely valid
     if (isValid) {
-        modalService.openModal('ls-status-modal');
+      var promise = modalService.open(
+        "status", {}
+      );
+      console.log(promise);
       commonService
         .loginUser($scope.userFormData)
         .success(function(data, status, headers, config) {
-          modalService.closeModal('ls-status-modal');
-          $window.sessionStorage.token = data.token;
-          $location.path('admin-dashboard');
+          modalService.resolve();
+          promise.then(
+            function handleResolve(response) {
+              $window.sessionStorage.token = data.token;
+              $location.path('admin-dashboard');
+            },
+            function handleReject(error) {
+              console.log('Why is it rejected?');
+            }
+          );
+
         })
         .error(function(data, status, headers, config) {
-          // Erase the token if the user fails to log in
-          delete $window.sessionStorage.token;
-          // Handle login errors here
-          modalService.closeModal('ls-status-modal');
-          modalService.openModal('ls-feedback-modal');
-          $("#ls-feedback-message").html('Error: Invalid user or password');
+          modalService.resolve();
+          promise.then(
+            function handleResolve(response) {
+              delete $window.sessionStorage.token;
+              promise = modalService.open(
+                "alert", {
+                  message: 'Error: Invalid user or password'
+                }
+              );
+              promise.then(function handleResolve(response) {
+                console.log("Alert resolved.");
+              }, function handleReject(error) {
+                console.warn("Alert rejected!");
+              });
+            },
+            function handleReject(error) {
+              console.log('Why is it rejected?');
+            }
+          );
         });
     }
   };

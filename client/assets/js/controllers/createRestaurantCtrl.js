@@ -1,6 +1,6 @@
 var app = angular.module('lunchSociety');
 
-var createRestaurantCtrl = function($scope, $location, ownerService, restaurantService, modalService) {
+var createRestaurantCtrl = function($scope, $location, ownerService, restaurantService, modalService, _) {
 
   $scope.createRestaurantFormData = {};
 
@@ -28,21 +28,42 @@ var createRestaurantCtrl = function($scope, $location, ownerService, restaurantS
   $scope.submitForm = function(isValid) {
     // check to make sure the form is completely valid
     if (isValid) {
-      modalService.openModal('ls-status-modal');
+      var promise = modalService.open(
+        "status", {}
+      );
       $scope.createRestaurantFormData.owner_id = $scope.createRestaurantFormData.owner.id;
       $scope.createRestaurantFormData.phone_number = parseInt($scope.createRestaurantFormData.phone_number);
       restaurantService
         .createRestaurant($scope.createRestaurantFormData)
         .success(function(data, status, headers, config) {
-          modalService.closeModal('ls-status-modal');
-          $location.path('create-meal').search({
-            id: data.id
-          });
+          modalService.resolve();
+          promise.then(
+            function handleResolve(response) {
+              $location.path('create-meal').search({
+                id: data.id
+              });
+            },
+            function handleReject(error) {
+              console.log('Why is it rejected?');
+            }
+          );
         })
         .error(function(data, status, headers, config) {
-          modalService.closeModal('ls-status-modal');
-          modalService.openModal('ls-feedback-modal');
-          $("#ls-feedback-message").html('Error: Something Went Wrong');
+         modalService.resolve();
+          promise.then(
+            function handleResolve(response) {
+              promise = modalService.open(
+                "alert", {
+                  message: 'Error: Something Went Wrong'
+                }
+              );
+              promise.then(function handleResolve(response) {},
+                           function handleReject(error) {});
+            },
+            function handleReject(error) {
+              console.log('Why is it rejected?');
+            }
+          );
         });
     }
   };

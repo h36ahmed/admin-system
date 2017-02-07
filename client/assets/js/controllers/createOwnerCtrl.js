@@ -1,6 +1,6 @@
 var app = angular.module('lunchSociety');
 
-var createOwnerCtrl = function($scope, $location, userService, ownerService, modalService) {
+var createOwnerCtrl = function($scope, $location, userService, ownerService, modalService, _) {
 
   $scope.createOwnerFormData = {};
 
@@ -22,21 +22,42 @@ var createOwnerCtrl = function($scope, $location, userService, ownerService, mod
   $scope.submitForm = function(isValid) {
     // check to make sure the form is completely valid
     if (isValid) {
-      modalService.openModal('ls-status-modal');
+      var promise = modalService.open(
+        "status", {}
+      );
       $scope.createOwnerFormData.user_id = $scope.createOwnerFormData.user.id;
 
       ownerService
         .createOwner($scope.createOwnerFormData)
         .success(function(data, status, headers, config) {
-          modalService.closeModal('ls-status-modal');
-          $location.path('create-restaurant').search({
-            id: data.id
-          });
+          modalService.resolve();
+          promise.then(
+            function handleResolve(response) {
+              $location.path('create-restaurant').search({
+                id: data.id
+              });
+            },
+            function handleReject(error) {
+              console.log('Why is it rejected?');
+            }
+          );
         })
         .error(function(data, status, headers, config) {
-          modalService.closeModal('ls-status-modal');
-          modalService.openModal('ls-feedback-modal');
-          $("#ls-feedback-message").html('Error: Something Went Wrong');
+          modalService.resolve();
+          promise.then(
+            function handleResolve(response) {
+              promise = modalService.open(
+                "alert", {
+                  message: 'Error: Something Went Wrong'
+                }
+              );
+              promise.then(function handleResolve(response) {},
+                function handleReject(error) {});
+            },
+            function handleReject(error) {
+              console.log('Why is it rejected?');
+            }
+          );
         });
     }
   };

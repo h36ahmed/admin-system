@@ -18,23 +18,91 @@
     <div ui-view>
 
     </div>
-    <ls-modal id="ls-status-modal">
-        <div class="modal">
+
+    <ls-modal
+        ng-show="subview"
+        ng-switch="subview">
+
+        <!-- BEGIN: Status Modal. -->
+        <div
+            ng-switch-when="status"
+            ng-controller="statusModalCtrl"
+            class="ls-modal">
+
             <div class="ls-modal-body">
                 <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
                 <span class="sr-only">Loading...</span>
             </div>
+
         </div>
-        <div class="ls-modal-background"></div>
-    </ls-modal>
-    <ls-modal id="ls-feedback-modal">
-        <div class="modal">
-            <div class="ls-modal-body">
-                <p id="ls-feedback-message"></p>
-                <button class="button" ng-click="closeModal('ls-feedback-modal');">Close</button>
-            </div>
+        <!-- END: Status Modal. -->
+
+
+        <!-- BEGIN: Alert Modal. -->
+        <div
+            ng-switch-when="alert"
+            ng-controller="alertModalCtrl"
+            class="ls-modal">
+
+            <p>
+                {{ message }}
+            </p>
+
+            <p>
+                <a ng-click="close()" class="button">Ok, I got it!</a>
+            </p>
+
         </div>
-        <div class="ls-modal-background"></div>
+        <!-- END: Alert Modal. -->
+
+
+        <!-- BEGIN: Confirm Modal. -->
+        <div
+            ng-switch-when="confirm"
+            ng-controller="confirmModalCtrl"
+            class="ls-modal">
+
+            <p>
+                {{ message }}
+            </p>
+
+            <p>
+                <a ng-click="confirm()" class="button">{{ confirmButton }}</a>
+                &mdash;
+                <a ng-click="deny()" class="button">{{ denyButton }}</a>
+            </p>
+
+        </div>
+        <!-- END: Confirm Modal. -->
+
+
+        <!-- BEGIN: Prompt Modal. -->
+        <form
+            ng-switch-when="prompt"
+            ng-controller="promptModalCtrl"
+            ng-submit="submit()"
+            class="ls-modal">
+
+            <p>
+                {{ message }}
+            </p>
+
+            <p ng-if="errorMessage">
+                <strong>Sorry:</strong> {{ errorMessage }}
+            </p>
+
+            <p>
+                <input type="text" ng-model="form.input" />
+            </p>
+
+            <p>
+                <a ng-click="submit()" class="button">Submit</a>
+                &mdash;
+                <a ng-click="cancel()" class="button">Cancel</a>
+            </p>
+
+        </form>
+        <!-- END: Prompt Modal. -->
+        <!--<div class="ls-modal-background"></div>-->
     </ls-modal>
-  </body>
 </html>

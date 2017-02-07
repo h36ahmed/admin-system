@@ -1,40 +1,41 @@
-/* MODAL STYLES
--------------------------------*/
 ls-modal {
-    /* modals are hidden by default */
-    display: none;
-
-    .modal {
-        @include center-both;
-        position: fixed;
-        /* z-index must be higher than .modal-background */
-        z-index: 1000;
-        /* enables scrolling for tall modals */
-        overflow: auto;
-        .ls-modal-body {
-            padding: 20px;
-            background: #fff;
-            text-align: center;
-            margin: 40px;
-            i {
-                color: $primary-color;
-            }
-        }
+	background-color: rgba( 0, 0, 0, 0.8 ) ;
+	bottom: 0px ;
+	left: 0px ;
+	position: fixed ;
+	right: 0px ;
+	top: 0px ;
+    &.ng-hide {
+        background-color: rgba( 0, 0, 0, 0 );
     }
-
-    .ls-modal-background {
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        background-color: #000;
-        opacity: 0.75;
-        z-index: 900;
+    &.ng-hide-add.ng-hide-add-active,
+    &.ng-hide-remove.ng-hide-remove-active {
+        transition: 250ms ease all ;
     }
-}
-
-body.ls-modal-open {
-    /* body overflow is hidden to hide main scrollbar when modal window is open */
-    overflow: hidden;
+    > .ls-modal {
+        background-color: #FAFAFA ;
+        border-radius: 3px 3px 3px 3px ;
+        box-sizing: border-box ;
+            -moz-box-sizing: border-box ;
+        padding: 20px 20px 20px 20px ;
+        position: fixed ;
+        left: 50% ;
+        margin-left: -200px ;
+        top: 200px ;
+        width: 400px ;
+        text-align: center;
+    }
+    &.ng-hide > .modal.ng-enter {
+        top: -200px ;
+        transition: 250ms ease top ;
+    }
+    &.ng-hide > .modal.ng-enter.ng-enter-active {
+        top: 200px ;
+    }
+    i {
+        color: $primary-color;
+    }
+    p {
+        font-size: 1.1rem;
+    }
 }
