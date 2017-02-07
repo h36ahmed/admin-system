@@ -188,7 +188,7 @@ gulp.task('uglify:services', function () {
 
 // Starts a test server, which you can view at http://localhost:8079
 
-gulp.task('server', ['build'], function() {
+/*gulp.task('server', ['build'], function() {
   gulp.src('./build')
     .pipe($.webserver({
       port: 8079,
@@ -198,9 +198,9 @@ gulp.task('server', ['build'], function() {
       open: true
     }))
   ;
-});
+});*/
 
-/*
+
 gulp.task('server', ['build'], function() {
   $.connect.server({
     root: ['./build'],
@@ -211,7 +211,7 @@ gulp.task('server', ['build'], function() {
     open('http://localhost:5000');
   }
 });
-*/
+
 // Builds your entire app once, without starting a server
 gulp.task('build', function(cb) {
   sequence('clean', ['copy', 'copy:foundation', 'sass', 'uglify'], 'copy:templates', cb);
