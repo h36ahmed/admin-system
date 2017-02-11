@@ -1,0 +1,49 @@
+---
+name: payment-plans
+url: /payment-plans
+---
+<div class="vertical grid-frame">
+    <div class="grid-content shrink" style="padding: 0;">
+        <div ng-include="'/templates/partials/menu_bar.html'"></div>
+    </div>
+    <div ng-include="'/templates/partials/side_bar.html'"></div>
+    <div class="ls-app-body">
+        <div class="grid-container ls-manage-payment-plans" ng-controller="">
+            <div class="grid-block">
+                <div class="grid-block small-8 vertical">
+                   <div class="grid-content">
+                       <h2>Manage Payment Plans</h2>
+                   </div>
+                </div>
+                <div class="grid-block small-4 vertical">
+                   <div class="grid-content text-right">
+                       <a ui-sref="create-restaurant" class="button success ls-create-button">Create Payment Plan</a>
+                   </div>
+                </div>
+            </div>
+            <div class="grid-block">
+               <div class="grid-block small-12 vertical">
+                   <div class="grid-content">
+                        <ul>
+                            <!--<li class="ls-card ls-restaurant-card" ng-repeat="restaurant in restaurants">
+                                <a ui-sref="restaurant({id:restaurant.id})"  class="ls-card-link">x</a>
+                                <figure class="ls-restaurant-card-info">
+                                    <img src="http://lorempixel.com/400/400/"/>
+                                    <figcaption class="ls-restaurant-card-caption">
+                                        <div class="ls-left-card-info">
+                                            <h4>{{restaurant.name}}</h4>
+                                            <p>{{restaurant.street_address}}</p>
+                                        </div>
+                                        <div class="ls-right-card-info">
+                                            <a class="button">Edit</a>
+                                        </div>
+                                    </figcaption>
+                                </figure>
+                            </li>-->
+                        </ul>
+                    </div>
+                </div>
+           </div>
+        </div>
+    </div>
+</div>
