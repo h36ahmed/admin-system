@@ -1,0 +1,44 @@
+---
+name: user
+url: /user/:id
+---
+<div class="vertical grid-frame">
+    <div class="grid-content shrink" style="padding: 0;">
+        <div ng-include="'/templates/partials/menu_bar.html'"></div>
+    </div>
+    <div ng-include="'/templates/partials/side_bar.html'"></div>
+    <div class="ls-app-body">
+        <div class="grid-container ls-owner" ng-controller="editUserCtrl as editUser">
+            <div class="grid-block ls-title-bar">
+                <div class="grid-block small-12 vertical">
+                    <div class="grid-content">
+                        <h2>Edit User Information</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-block">
+                <div class="grid-block small-12 vertical">
+                    <div class="grid-content">
+                        <form class="ls-form ls-edit-form" name="editUserForm" ng-submit="submitEditForm(editUserForm.$valid)">
+                            <div class="grid-block">
+                                <div class="small-12 medium-6 grid-content">
+
+                                </div>
+                                <div class="small-12 medium-6 grid-content">
+
+                                </div>
+                            </div>
+                            <div class="grid-block">
+                                <div class="small-6 grid-content text-right">
+                                </div>
+                                <div class="small-6 grid-content text-right">
+                                    <input type="submit" class="button" name="update" value="Update User Information">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+           </div>
+        </div>
+    </div>
+</div>

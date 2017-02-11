@@ -1,0 +1,35 @@
+---
+name: waiting-list
+url: /waiting-list
+---
+<div class="vertical grid-frame">
+    <div class="grid-content shrink" style="padding: 0;">
+        <div ng-include="'/templates/partials/menu_bar.html'"></div>
+    </div>
+    <div ng-include="'/templates/partials/side_bar.html'"></div>
+    <div class="ls-app-body">
+        <div class="grid-container ls-table-layout-pages ls-waiting-list" ng-controller="">
+            <div class="grid-block">
+                <div class="grid-block small-8 vertical">
+                   <div class="grid-content">
+                       <h2>Waiting List</h2>
+                   </div>
+                </div>
+                <div class="grid-block small-4 vertical">
+                   <div class="grid-content text-right">
+                        <form class="ls-form ls-export-form"  name="exportForm" ng-submit="submitExportForm()">
+                            <input type="submit" class="success button" name="export" value="Export as CSV">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-block">
+               <div class="grid-block small-12 vertical">
+                   <div class="grid-content">
+                        <table></table>
+                    </div>
+                </div>
+           </div>
+        </div>
+    </div>
+</div>

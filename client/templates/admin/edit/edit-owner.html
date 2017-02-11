@@ -1,0 +1,51 @@
+---
+name: owner
+url: /owner/:id
+---
+<div class="vertical grid-frame">
+    <div class="grid-content shrink" style="padding: 0;">
+        <div ng-include="'/templates/partials/menu_bar.html'"></div>
+    </div>
+    <div ng-include="'/templates/partials/side_bar.html'"></div>
+    <div class="ls-app-body">
+        <div class="grid-container ls-owner" ng-controller="editOwnerCtrl as editOwner">
+            <div class="grid-block ls-title-bar">
+                <div class="grid-block small-8 vertical">
+                    <div class="grid-content">
+                        <h2>Edit Owner Information</h2>
+                    </div>
+                </div>
+                <div class="grid-block small-4 vertical">
+                    <div class="grid-content text-right">
+                        <form class="ls-form ls-delete-form" name="deleteOwnerForm" ng-submit="submitDeleteForm()">
+                            <input type="submit" class="alert button" name="deleteOwner" value="Delete Owner">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-block">
+                <div class="grid-block small-12 vertical">
+                    <div class="grid-content">
+                        <form class="ls-form ls-edit-form" name="editOwnerForm" ng-submit="submitEditForm(editOwnerForm.$valid)">
+                            <div class="grid-block">
+                                <div class="small-12 medium-6 grid-content">
+
+                                </div>
+                                <div class="small-12 medium-6 grid-content">
+
+                                </div>
+                            </div>
+                            <div class="grid-block">
+                                <div class="small-6 grid-content text-right">
+                                </div>
+                                <div class="small-6 grid-content text-right">
+                                    <input type="submit" class="button" name="update" value="Update Owner Information">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+           </div>
+        </div>
+    </div>
+</div>

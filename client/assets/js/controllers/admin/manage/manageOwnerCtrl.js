@@ -1,15 +1,16 @@
 var app = angular.module('lunchSociety');
 
-var manageOwnerCtrl = function($scope, userService ) {
+var manageOwnerCtrl = function($scope, userService) {
 
   $scope.owners = [];
 
-   userService
+  userService
     .getUsers({
       type: "owner"
     })
     .success(function(data, status, headers, config) {
       $scope.owners = data;
+      console.log($scope.owners);
     })
     .error(function(data, status, headers, config) {
       // Handle login errors here
