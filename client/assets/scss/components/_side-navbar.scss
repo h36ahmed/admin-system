@@ -16,7 +16,9 @@
     }
     .block-list {
         padding: 0 0px;
-        margin-bottom: 30px;
+        + .block-list {
+            margin-bottom: 20px;
+        }
         ul {
             padding: 0 30px;
             li {

@@ -1,6 +1,6 @@
 ---
-name: meal-offers
-url: /meal-offers
+name: past-meal-offers
+url: /past-meal-offers
 ---
 <div class="vertical grid-frame">
     <div class="grid-content shrink" style="padding: 0;">
@@ -8,17 +8,19 @@ url: /meal-offers
     </div>
     <div ng-include="'/templates/partials/side_bar.html'"></div>
     <div class="ls-app-body">
-        <div class="grid-container ls-table-layout-pages ls-meal-offers" ng-controller="">
+        <div class="grid-container ls-table-layout-pages ls-past-orders" ng-controller="">
             <div class="grid-block">
                 <div class="grid-block small-8 vertical">
                    <div class="grid-content">
-                       <h2>Meal Offers</h2>
+                       <h2>Past Meal Offers</h2>
                    </div>
                 </div>
                 <div class="grid-block small-4 vertical">
                    <div class="grid-content text-right">
-                       <a ui-sref="create-meal-offer" class="button success ls-create-button">Create Meal Offer</a>
-                   </div>
+                        <form class="ls-form ls-export-form"  name="exportForm" ng-submit="submitExportForm()">
+                            <input type="submit" class="success button" name="export" value="Export as CSV">
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="grid-block">
