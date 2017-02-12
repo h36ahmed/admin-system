@@ -1,6 +1,6 @@
 var app = angular.module('lunchSociety');
 
-var homeCtrl = function($scope, $window, $location, commonService, modalService) {
+var homeCtrl = function($scope, $location, commonService, modalService) {
 
   $scope.userFormData = {};
 
@@ -10,14 +10,14 @@ var homeCtrl = function($scope, $window, $location, commonService, modalService)
       var promise = modalService.open(
         "status", {}
       );
-      console.log(promise);
       commonService
         .loginUser($scope.userFormData)
         .success(function(data, status, headers, config) {
           modalService.resolve();
           promise.then(
             function handleResolve(response) {
-              $window.sessionStorage.token = data.token;
+              commonService.setAuthToken(data.token);
+              commonService.setUserID(data.id);
               $location.path('admin-dashboard');
             },
             function handleReject(error) {
@@ -30,7 +30,7 @@ var homeCtrl = function($scope, $window, $location, commonService, modalService)
           modalService.resolve();
           promise.then(
             function handleResolve(response) {
-              delete $window.sessionStorage.token;
+              commonService.deleteAuthToken();
               promise = modalService.open(
                 "alert", {
                   message: 'Error: Invalid user or password'
@@ -52,6 +52,6 @@ var homeCtrl = function($scope, $window, $location, commonService, modalService)
 
 };
 
-homeCtrl.inject = ['$scope', '$window', '$location', 'commonService', 'modalService'];
+homeCtrl.inject = ['$scope', '$location', 'commonService', 'modalService'];
 
 app.controller('homeCtrl', homeCtrl);

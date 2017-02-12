@@ -1,21 +1,24 @@
 var app = angular.module('lunchSociety');
 
 var editUserCtrl = function($scope, $state, $location,
-  $stateParams, userService, modalService, _) {
+  $stateParams, userService, modalService, commonService, _) {
 
   $scope.user = {};
   $scope.editUserFormData = {};
-
+  var userID = commonService.getUserID();
+  var promise = modalService.open(
+    "status", {}
+  );
   userService
     .getUser({
-      id: 1
+      id: userID
     })
     .success(function(data, status, headers, config) {
       modalService.resolve();
-
       promise.then(
         function handleResolve(response) {
           $scope.user = data;
+          console.log($scope.user);
           $scope.editUserFormData.email = $scope.user.email;
         },
         function handleReject(error) {
@@ -47,9 +50,15 @@ var editUserCtrl = function($scope, $state, $location,
       promise = modalService.open(
         "status", {}
       );
-      $scope.editUserFormData.id = 1;
+      $scope.editUserFormData.id = userID;
+      var finalFormData = {};
+      if ($scope.editUserFormData.password.length < 6 || $scope.editUserFormData.password == null) {
+        finalFormData = _.omit($scope.editUserFormData, ['password']);
+      } else {
+        finalFormData = $scope.editUserFormData;
+      }
       userService
-        .editUser($scope.editUserFormData)
+        .editUser(finalFormData)
         .success(function(data, status, headers, config) {
           modalService.resolve();
           promise.then(
@@ -89,6 +98,6 @@ var editUserCtrl = function($scope, $state, $location,
 
 };
 
-editUserCtrl.inject = ['$scope', '$state', '$location', '$stateParams', 'userService', 'modalService'];
+editUserCtrl.inject = ['$scope', '$state', '$location', '$stateParams', 'userService', 'modalService', 'commonService'];
 
 app.controller('editUserCtrl', editUserCtrl);

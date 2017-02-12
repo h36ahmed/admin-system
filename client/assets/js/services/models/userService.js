@@ -5,63 +5,88 @@ var baseUrl = 'https://ls-backend.herokuapp.com';
 var baseApi = '/api/v1/';
 
 app.service(
-    "userService",
-    function( $http, $q ) {
-        // Return public API.
-        return({
-            createUser: createUser,
-            getUsers: getUsers,
-            deleteUser: deleteUser
-        });
+  "userService",
+  function($http, $q) {
+    // Return public API.
+    return ({
+      createUser: createUser,
+      getUsers: getUsers,
+      getUser: getUser,
+      editUser: editUser,
+      deleteUser: deleteUser
+    });
 
-        // ---
-        // PUBLIC METHODS.
-        // ---
+    // ---
+    // PUBLIC METHODS.
+    // ---
 
-        function createUser(data) {
-            var request = $http({
-                method: "post",
-                url: baseUrl + baseApi + 'user',
-                data: {
-                    email: data.email,
-                    password: data.password,
-                    type: data.type
-                },
-                headers : {
-                    'Content-Type': 'application/json',
-                }
-            });
-            return request;
+    function createUser(data) {
+      var request = $http({
+        method: "post",
+        url: baseUrl + baseApi + 'user',
+        data: {
+          email: data.email,
+          password: data.password,
+          type: data.type
+        },
+        headers: {
+          'Content-Type': 'application/json',
         }
-
-        function getUsers(data) {
-            var request = $http({
-                method: "get",
-                url: baseUrl + baseApi + "users",
-                params: data,
-                headers : {
-                    'Content-Type': 'application/json',
-                }
-            });
-            return request;
-        }
-
-
-        function deleteUser( id ) {
-            var request = $http({
-                method: "delete",
-                url: baseUrl + baseApi + "user",
-                params: {
-                    action: "delete"
-                },
-                data: {
-                    id: id
-                },
-                headers : {
-                    'Content-Type': 'application/json',
-                }
-            });
-            return request;
-        }
+      });
+      return request;
     }
+
+    function getUsers(data) {
+      var request = $http({
+        method: "get",
+        url: baseUrl + baseApi + "users",
+        params: data,
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+      return request;
+    }
+
+    function getUser(data) {
+      var request = $http({
+        method: "get",
+        url: baseUrl + baseApi + 'users' + "/" + data.id,
+        data: data,
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+      return request;
+    }
+
+    function editUser(data) {
+      var request = $http({
+        method: "put",
+        url: baseUrl + baseApi + "user" + "/" + data.id,
+        data: data,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      return request;
+    }
+
+    function deleteUser(id) {
+      var request = $http({
+        method: "delete",
+        url: baseUrl + baseApi + "user",
+        params: {
+          action: "delete"
+        },
+        data: {
+          id: id
+        },
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+      return request;
+    }
+  }
 );

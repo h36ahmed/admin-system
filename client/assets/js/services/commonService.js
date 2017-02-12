@@ -6,22 +6,58 @@ var baseApi = '/api/v1/';
 
 app.service(
     "commonService",
-    function( $http, $q ) {
+    function( $http, $q, $window ) {
+
         // Return public API.
         return({
             loginUser: loginUser,
-            getAuthToken: getAuthToken,
+            getUserID: getUserID,
+            setUserID: setUserID,
+            setCustomerID: setCustomerID,
+            getCustomerID: getCustomerID,
+            setOwnerID: setOwnerID,
+            getOwnerID: getOwnerID,
+            setAuthToken: setAuthToken,
+            deleteAuthToken: deleteAuthToken,
             logoutUser: logoutUser
         });
-
-        var authToken;
 
         // ---
         // PUBLIC METHODS.
         // ---
 
-        function getAuthToken() {
-            return authToken;
+
+        function setAuthToken(token) {
+            $window.sessionStorage.token = token;
+        }
+
+        function deleteAuthToken() {
+            delete $window.sessionStorage.token;
+            delete $window.sessionStorage.userID;
+        }
+
+        function setUserID(id) {
+            $window.sessionStorage.userID = id;
+        }
+
+        function getUserID() {
+            return $window.sessionStorage.userID;
+        }
+
+        function setCustomerID(id) {
+            $window.sessionStorage.customerID = id;
+        }
+
+        function getCustomerID() {
+            return $window.sessionStorage.customerID;
+        }
+
+        function setOwnerID(id) {
+            $window.sessionStorage.ownerID = id;
+        }
+
+        function getOwnerID() {
+            return $window.sessionStorage.ownerID;
         }
 
         function loginUser(data) {
@@ -48,6 +84,7 @@ app.service(
                     'Content-Type': 'application/json'
                 }
             });
+
             return request;
         }
 
