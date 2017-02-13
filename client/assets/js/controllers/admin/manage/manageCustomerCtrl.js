@@ -1,13 +1,11 @@
 var app = angular.module('lunchSociety');
 
-var manageCustomerCtrl = function($scope, userService ) {
+var manageCustomerCtrl = function($scope, customerService ) {
 
   $scope.customers = [];
 
-  userService
-    .getUsers({
-      type: "customer"
-    })
+  customerService
+    .getCustomers()
     .success(function(data, status, headers, config) {
       $scope.customers = data;
     })
@@ -18,6 +16,6 @@ var manageCustomerCtrl = function($scope, userService ) {
 
 };
 
-manageCustomerCtrl.inject = ['$scope', 'userService'];
+manageCustomerCtrl.inject = ['$scope', 'customerService'];
 
 app.controller('manageCustomerCtrl', manageCustomerCtrl);

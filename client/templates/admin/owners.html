@@ -31,9 +31,10 @@ url: /owners
                                     <img src="http://lorempixel.com/400/400/"/>
                                     <figcaption class="ls-user-card-caption">
                                         <div class="ls-user-card-title">
-                                            <h4>{{owner.first_name}}</h4>
+                                            <h4>{{owner.first_name}} {{owner.last_name}}</h4>
+                                            <p>{{owner.phone_number}}</p>
                                         </div>
-                                        <a href="" class="button">
+                                        <a ui-sref="owner({id:owner.id})" class="button ls-card-button">
                                             More Info</a>
                                     </figcaption>
                                 </figure>
