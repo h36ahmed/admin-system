@@ -12,6 +12,7 @@ app.service(
             createOwner: createOwner,
             editOwner: editOwner,
             getOwners: getOwners,
+            getOwner: getOwner,
             deleteOwner: deleteOwner
         });
 
@@ -39,6 +40,17 @@ app.service(
                 params: data,
                 headers : {
                     'Content-Type': 'application/json',
+                }
+            });
+            return request;
+        }
+
+        function getOwner(data) {
+            var request = $http({
+                method: "get",
+                url: baseUrl + baseApi + "owners" + "/" + data.id,
+                headers : {
+                    'Content-Type': 'application/json'
                 }
             });
             return request;

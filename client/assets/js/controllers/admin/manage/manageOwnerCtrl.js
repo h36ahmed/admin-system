@@ -1,13 +1,11 @@
 var app = angular.module('lunchSociety');
 
-var manageOwnerCtrl = function($scope, userService) {
+var manageOwnerCtrl = function($scope, ownerService) {
 
   $scope.owners = [];
 
-  userService
-    .getUsers({
-      type: "owner"
-    })
+  ownerService
+    .getOwners()
     .success(function(data, status, headers, config) {
       $scope.owners = data;
       console.log($scope.owners);
@@ -19,6 +17,6 @@ var manageOwnerCtrl = function($scope, userService) {
 
 };
 
-manageOwnerCtrl.inject = ['$scope', 'userService'];
+manageOwnerCtrl.inject = ['$scope', 'ownerService'];
 
 app.controller('manageOwnerCtrl', manageOwnerCtrl);

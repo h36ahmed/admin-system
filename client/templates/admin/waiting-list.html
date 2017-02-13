@@ -8,7 +8,7 @@ url: /waiting-list
     </div>
     <div ng-include="'/templates/partials/side_bar.html'"></div>
     <div class="ls-app-body">
-        <div class="grid-container ls-table-layout-pages ls-waiting-list" ng-controller="">
+        <div class="grid-container ls-table-layout-pages ls-waiting-list" ng-controller="waitingListCtrl as waiting">
             <div class="grid-block">
                 <div class="grid-block small-8 vertical">
                    <div class="grid-content">
@@ -18,7 +18,7 @@ url: /waiting-list
                 <div class="grid-block small-4 vertical">
                    <div class="grid-content text-right">
                         <form class="ls-form ls-export-form"  name="exportForm" ng-submit="submitExportForm()">
-                            <input type="submit" class="success button" name="export" value="Export as CSV">
+                            <input type="submit" class="success button ls-export-button" name="export" value="Export as CSV">
                         </form>
                     </div>
                 </div>
@@ -26,7 +26,35 @@ url: /waiting-list
             <div class="grid-block">
                <div class="grid-block small-12 vertical">
                    <div class="grid-content">
-                        <table></table>
+                      <div class="ls-table-responsive-vertical shadow-z-1">
+                          <table id="table" class="ls-table ls-table-hover">
+                              <thead>
+                                <tr>
+                                  <th>ID</th>
+                                  <th>Email Address</th>
+                                  <th>Type</th>
+                                  <th>Action</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr ng-repeat="user in users">
+                                  <td data-title="id">
+                                      {{user.id}}
+                                  </td>
+                                  <td data-title="email">
+                                      {{user.email}}
+                                  </td>
+                                  <td data-title="type">
+                                      {{user.type | titleCase}}
+                                  </td>
+                                  <td data-title="action">
+                                      <span ng-if="user.type == 'customer'">Waiting For Confirmation</span>
+                                      <a ng-if="user.type == 'owner'" ui-sref="create-owner({user_id: {{user.id}}})">Create Owner Profile</a>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                       </div>
                     </div>
                 </div>
            </div>

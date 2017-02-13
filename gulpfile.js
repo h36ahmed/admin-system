@@ -58,6 +58,9 @@ var paths = {
   ],
   servicesJS: [
     'client/assets/js/services/**/*.js'
+  ],
+  filtersJS: [
+    'client/assets/js/filters/**/*.js'
   ]
 }
 
@@ -124,7 +127,7 @@ gulp.task('sass', function() {
 });
 
 // Compiles and copies the Foundation for Apps JavaScript, as well as your app's custom JS
-gulp.task('uglify', ['uglify:foundation', 'uglify:app', 'uglify:controllers', 'uglify:directives', 'uglify:services'])
+gulp.task('uglify', ['uglify:foundation', 'uglify:app', 'uglify:controllers', 'uglify:directives', 'uglify:services', 'uglify:filters'])
 
 gulp.task('uglify:foundation', function(cb) {
   var uglify = $.if(isProduction, $.uglify()
@@ -186,6 +189,18 @@ gulp.task('uglify:services', function () {
         .pipe(gulp.dest('./build/assets/js/'));
 });
 
+gulp.task('uglify:filters', function () {
+    var uglify = $.if(isProduction, $.uglify()
+        .on('error', function (e) {
+            console.log(e);
+        }));
+
+    return gulp.src(paths.filtersJS)
+        .pipe(uglify)
+        .pipe($.concat('filters.js'))
+        .pipe(gulp.dest('./build/assets/js/'));
+});
+
 // Starts a test server, which you can view at http://localhost:8079
 
 /*gulp.task('server', ['build'], function() {
@@ -223,7 +238,7 @@ gulp.task('default', ['server'], function() {
   gulp.watch(['./client/assets/scss/**/*', './scss/**/*'], ['sass']);
 
   // Watch JavaScript
-  gulp.watch(['./client/assets/js/**/*', './js/**/*'], ['uglify:app', 'uglify:controllers', 'uglify:directives', 'uglify:services']);
+  gulp.watch(['./client/assets/js/**/*', './js/**/*'], ['uglify:app', 'uglify:controllers', 'uglify:directives', 'uglify:services', 'uglify:filters']);
 
   // Watch static files
   gulp.watch(['./client/**/*.*', '!./client/templates/**/*.*', '!./client/assets/{scss,js}/**/*.*'], ['copy']);
