@@ -56,10 +56,10 @@ app.service(
             return request;
         }
 
-        function editOwner() {
+        function editOwner(data) {
             var request = $http({
                 method: "put",
-                url: baseUrl + baseApi + "owner",
+                url: baseUrl + baseApi + "owner" + "/" + data.id,
                 headers : {
                     'Content-Type': 'application/json'
                 }

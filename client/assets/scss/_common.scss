@@ -104,55 +104,6 @@
   overflow: auto;
 }
 
-.ls-card {
-  width: 100%;
-  display: block;
-  background-color: #fff;
-  padding: 15px;
-  @include border-radius(2px);
-  margin-top: 10px;
-  margin-bottom: 20px;
-  box-shadow: -1px 0 2px 0 rgba(0, 0, 0, 0.12), 1px 0 2px 0 rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.24);
-  -webkit-transition: all .15s cubic-bezier(.33, .66, .66, 1);
-  transition: all .15s cubic-bezier(.33, .66, .66, 1);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-perspective: 1000px;
-  perspective: 1000px;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  &.ls-card-circle {
-    @include border-radius(50%);
-    @include size(176px);
-    padding: 1px;
-    margin: 0 auto;
-    display: block;
-    text-align: center;
-  }
-  &:hover {
-    box-shadow: -2px 0 2px 0 rgba(0, 0, 0, 0.16), 2px 0 2px 0 rgba(0, 0, 0, 0.16), 0 2px 2px 0 rgba(0, 0, 0, 0.23);
-    -webkit-transform: translate3d(0, -3px, 0);
-    transform: translate3d(0, -3px, 0);
-  }
-  .ls-card-link {
-    display: block;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    z-index: 3;
-    font-size: 0;
-  }
-  .ls-card-button {
-    display: block;
-    z-index: 4;
-    font-size: 0;
-  }
-}
-
 input[type="text"],
 input[type="email"],
 input[type="password"],

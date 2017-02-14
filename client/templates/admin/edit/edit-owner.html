@@ -8,7 +8,7 @@ url: /owner/:id
     </div>
     <div ng-include="'/templates/partials/side_bar.html'"></div>
     <div class="ls-app-body">
-        <div class="grid-container ls-owner" ng-controller="editOwnerCtrl as editOwner">
+        <div class="grid-container ls-edit-pages" ng-controller="editOwnerCtrl as editOwner">
             <div class="grid-block ls-title-bar">
                 <div class="grid-block small-8 vertical">
                     <div class="grid-content">
@@ -29,14 +29,55 @@ url: /owner/:id
                         <form class="ls-form ls-edit-form" name="editOwnerForm" ng-submit="submitEditForm(editOwnerForm.$valid)">
                             <div class="grid-block">
                                 <div class="small-12 medium-6 grid-content">
-
+                                    <h4>Owner Details</h4>
+                                    <label for="ownerEmail">
+                                       Owners
+                                    </label>
+                                    <select class="ls-input-fields" ng-model="editOwnerFormData.owner" ng-options="owner as owner.email for owner in owners track by owner.id" name="ownerEmail" id="ownerEmail">
+                                    </select>
+                                    <label for="ownerFN">
+                                        First Name
+                                        <input type="text" placeholder="First Name" class="ls-input-fields" name="ownerFN" id="ownerFN" ng-model="editOwnerFormData.first_name">
+                                    </label>
+                                    <label for="ownerLN">
+                                        Last Name
+                                        <input type="text" placeholder="Last Name" class="ls-input-fields" name="ownerLN" id="ownerLN" ng-model="editOwnerFormData.last_name"/>
+                                    </label>
+                                    <label for="ownerPN">
+                                        Phone Number
+                                        <input type="tel" placeholder="Phone Number" class="ls-input-fields" name="ownerPN" id="ownerPN" ng-model="editOwnerFormData.phone_number">
+                                    </label>
+                                    <img src="http://lorempixel.com/200/200/people" class="ls-image"/>
+                                    <label for="proImage">
+                                        Profile Image <br>
+                                        <input type="file" class="ls-input-fields" name="proImage" id="proImage" ng-model="editOwnerFormData.profile_image">
+                                    </label>
                                 </div>
                                 <div class="small-12 medium-6 grid-content">
-
+                                    <h4>Restaurant</h4>
+                                    <ul>
+                                        <li class="ls-card ls-restaurant-card">
+                                            <a ui-sref="restaurant({id:owner.restaurant.id})"  class="ls-card-link">x</a>
+                                                <figure class="ls-restaurant-card-info">
+                                                    <img src="http://lorempixel.com/400/400/"/>
+                                                    <figcaption class="ls-restaurant-card-caption">
+                                                        <div class="ls-left-card-info">
+                                                            <h4>{{owner.restaurant.name}}</h4>
+                                                            <p>{{owner.restaurant.phone_number}}</p>
+                                                        </div>
+                                                        <div class="ls-right-card-info">
+                                                            <a ui-sref="restaurant-edit({id:owner.restaurant.id})" class="button">Edit</a>
+                                                        </div>
+                                                    </figcaption>
+                                                </figure>
+                                            </figure>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                             <div class="grid-block">
-                                <div class="small-6 grid-content text-right">
+                                <div class="small-6 grid-content">
+
                                 </div>
                                 <div class="small-6 grid-content text-right">
                                     <input type="submit" class="button" name="update" value="Update Owner Information">

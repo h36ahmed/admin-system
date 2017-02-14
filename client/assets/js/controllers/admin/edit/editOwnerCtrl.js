@@ -2,21 +2,22 @@ var app = angular.module('lunchSociety');
 
 var editOwnerCtrl = function($scope, $state, $location,
   $stateParams, ownerService,
-  userService, modalService,_) {
+  userService, modalService, _) {
 
   $scope.owner = {};
   $scope.editOwnerFormData = {};
-  $scope.users = [];
+  $scope.owners = [];
 
   var promise = modalService.open(
     "status", {}
   );
   userService
     .getUsers({
-      type: "owners"
-  })
+      type: "owner"
+    })
     .success(function(data, status, headers, config) {
-      $scope.users = data;
+      $scope.owners = data;
+      console.log($scope.owners);
       if ($stateParams.id) {
         ownerService
           .getOwner({
@@ -28,6 +29,7 @@ var editOwnerCtrl = function($scope, $state, $location,
             promise.then(
               function handleResolve(response) {
                 $scope.owner = data;
+                console.log($scope.owner);
                 fillFormData();
               },
               function handleReject(error) {
@@ -41,10 +43,12 @@ var editOwnerCtrl = function($scope, $state, $location,
               function handleResolve(response) {
                 promise = modalService.open(
                   "alert", {
-                    message: 'Error: Something Went Wrong'
+                    message: 'Error: Owner ID Does Not Exist'
                   }
                 );
-                promise.then(function handleResolve(response) {},
+                promise.then(function handleResolve(response) {
+                    $location.path('owners');
+                },
                   function handleReject(error) {});
               },
               function handleReject(error) {
@@ -80,8 +84,10 @@ var editOwnerCtrl = function($scope, $state, $location,
     $scope.editOwnerFormData.first_name = $scope.owner.first_name;
     $scope.editOwnerFormData.last_name = $scope.owner.last_name;
     $scope.editOwnerFormData.phone_number = $scope.owner.phone_number;
-    $scope.editOwnerFormData.user = _.findWhere($scope.users, {id: $scope.owner.user_id});
-    $scope.editOwnerFormData.confirmed_email = $scope.owner.user.confirmed_email;
+    $scope.editOwnerFormData.owner = _.findWhere($scope.owners, {
+      id: $scope.owner.user_id
+    });
+    $scope.editOwnerFormData.confirmed_email = $scope.editOwnerFormData.user.confirmed_email;
   }
 
   $scope.submitEditForm = function(isValid) {
@@ -90,8 +96,9 @@ var editOwnerCtrl = function($scope, $state, $location,
       promise = modalService.open(
         "status", {}
       );
-      $scope.editOwnerFormData.user_id = $scope.editOwnerFormData.user.id;
+      $scope.editOwnerFormData.user_id = $scope.editOwnerFormData.owner.id;
       $scope.editOwnerFormData.id = $stateParams.id;
+      console.log($scope.editOwnerFormData);
       ownerService
         .editOwner($scope.editOwnerFormData)
         .success(function(data, status, headers, config) {

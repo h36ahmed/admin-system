@@ -43,10 +43,10 @@ app.service(
             return request;
         }
 
-        function deleteMealOffer() {
+        function deleteMealOffer(data) {
             var request = $http({
                 method: "delete",
-                url: baseUrl + baseApi + "offer",
+                url: baseUrl + baseApi + "offer" + "/" + data.id,
                 headers : {
                     'Content-Type': 'application/json'
                 }

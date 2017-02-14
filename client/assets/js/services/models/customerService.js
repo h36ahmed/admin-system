@@ -44,10 +44,10 @@ app.service(
             return request;
         }
 
-        function editCustomer() {
+        function editCustomer(data) {
             var request = $http({
                 method: "put",
-                url: baseUrl + baseApi + "customer",
+                url: baseUrl + baseApi + "customer" + "/" + data.id,
                 headers : {
                     'Content-Type': 'application/json'
                 }
@@ -55,10 +55,10 @@ app.service(
             return request;
         }
 
-        function deleteCustomer() {
+        function deleteCustomer(data) {
             var request = $http({
                 method: "delete",
-                url: baseUrl + baseApi + "customer",
+                url: baseUrl + baseApi + "customer" + "/" + data.id,
                 headers : {
                     'Content-Type': 'application/json',
                 }
