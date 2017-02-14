@@ -60,6 +60,7 @@ app.service(
             var request = $http({
                 method: "put",
                 url: baseUrl + baseApi + "owner" + "/" + data.id,
+                data: data,
                 headers : {
                     'Content-Type': 'application/json'
                 }
@@ -67,10 +68,10 @@ app.service(
             return request;
         }
 
-        function deleteOwner() {
+        function deleteOwner(data) {
             var request = $http({
                 method: "delete",
-                url: baseUrl + baseApi + "owner",
+                url: baseUrl + baseApi + "owner" + "/" + data.id,
                 headers : {
                     'Content-Type': 'application/json',
                 }

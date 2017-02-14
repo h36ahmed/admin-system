@@ -9,11 +9,10 @@ var editRestaurantCtrl = function($scope, $state, $location,
 
   $scope.owners = [];
 
-/*  var promise = modalService.open(
+  var promise = modalService.open(
     "status", {}
-  );*/
+  );
 
-  // FILL INITIAL DATA
   ownerService
     .getOwners()
     .success(function(data, status, headers, config) {
@@ -26,10 +25,9 @@ var editRestaurantCtrl = function($scope, $state, $location,
             id: $stateParams.id
           })
           .success(function(data, status, headers, config) {
-             $scope.restaurant = data;
-     fillFormData();
-            /*modalService.resolve();
-
+            $scope.restaurant = data;
+            fillFormData();
+            modalService.resolve();
             promise.then(
               function handleResolve(response) {
 
@@ -37,26 +35,27 @@ var editRestaurantCtrl = function($scope, $state, $location,
               function handleReject(error) {
                 console.log('Why is it rejected?');
               }
-            );*/
+            );
 
           })
           .error(function(data, status, headers, config) {
 
-            /*modalService.resolve();
+            modalService.resolve();
             promise.then(
               function handleResolve(response) {
                 promise = modalService.open(
                   "alert", {
-                    message: 'Error: Something Went Wrong'
+                    message: 'Error: Restaurant ID Does Not Exist'
                   }
                 );
-                promise.then(function handleResolve(response) {},
-                  function handleReject(error) {});
+                promise.then(function handleResolve(response) {
+                  $location.path('restaurants');
+                }, function handleReject(error) {});
               },
               function handleReject(error) {
                 console.log('Why is it rejected?');
               }
-            );*/
+            );
 
           });
 
@@ -68,7 +67,7 @@ var editRestaurantCtrl = function($scope, $state, $location,
 
     })
     .error(function(data, status, headers, config) {
-      /*modalService.resolve();
+      modalService.resolve();
       promise.then(
         function handleResolve(response) {
           promise = modalService.open(
@@ -83,7 +82,7 @@ var editRestaurantCtrl = function($scope, $state, $location,
         function handleReject(error) {
           console.log('Why is it rejected?');
         }
-      );*/
+      );
     });
 
   // FILL FORM DATA
@@ -92,7 +91,9 @@ var editRestaurantCtrl = function($scope, $state, $location,
     $scope.editResFormData.name = $scope.restaurant.name;
     $scope.editResFormData.phone_number = $scope.restaurant.phone_number;
     $scope.editResFormData.postal_code = $scope.restaurant.postal_code;
-    $scope.editResFormData.owner = _.findWhere($scope.owners, {id: $scope.restaurant.owner_id});
+    $scope.editResFormData.owner = _.findWhere($scope.owners, {
+      id: $scope.restaurant.owner_id
+    });
     $scope.editResFormData.street_address = $scope.restaurant.street_address;
     $scope.editResFormData.city = $scope.restaurant.city;
     $scope.editResFormData.country = $scope.restaurant.country;
@@ -103,13 +104,11 @@ var editRestaurantCtrl = function($scope, $state, $location,
 
   $scope.submitEditForm = function(isValid) {
 
-    // check to make sure the form is completely valid
-
     if (isValid) {
       promise = modalService.open(
         "status", {}
       );
-      $scope.editResFormData.owner_id = $scope.editResFormData.owner.id;
+      $scope.editResFormData.owner_id = parseInt($scope.editResFormData.owner.id);
       $scope.editResFormData.phone_number = parseInt($scope.editResFormData.phone_number);
       $scope.editResFormData.id = $stateParams.id;
       restaurantService
@@ -166,24 +165,24 @@ var editRestaurantCtrl = function($scope, $state, $location,
           })
           .success(function(data, status, headers, config) {
             promise = modalService.open(
-                "alert", {
-                  message: 'Restaurant Deleted!'
-                }
-              );
-              promise.then(function handleResolve(response) {
+              "alert", {
+                message: 'Restaurant Deleted!'
+              }
+            );
+            promise.then(function handleResolve(response) {
                 $location.path('manage-restaurants');
               },
-                function handleReject(error) {});
+              function handleReject(error) {});
 
           })
           .error(function(data, status, headers, config) {
-             promise = modalService.open(
-                "alert", {
-                  message: 'Error: Something Went Wrong'
-                }
-              );
-              promise.then(function handleResolve(response) {},
-                function handleReject(error) {});
+            promise = modalService.open(
+              "alert", {
+                message: 'Error: Something Went Wrong'
+              }
+            );
+            promise.then(function handleResolve(response) {},
+              function handleReject(error) {});
           });
       },
       function handleReject(error) {

@@ -40,10 +40,12 @@ var editMealCtrl = function($scope, $state, $location,
               function handleResolve(response) {
                 promise = modalService.open(
                   "alert", {
-                    message: 'Error: Something Went Wrong'
+                    message: 'Error: Meal ID Does Not Exist'
                   }
                 );
-                promise.then(function handleResolve(response) {},
+                promise.then(function handleResolve(response) {
+                    $location.path('meals');
+                },
                   function handleReject(error) {});
               },
               function handleReject(error) {

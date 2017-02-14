@@ -96,12 +96,15 @@ var editOwnerCtrl = function($scope, $state, $location,
       promise = modalService.open(
         "status", {}
       );
-      $scope.editOwnerFormData.user_id = $scope.editOwnerFormData.owner.id;
+      $scope.editOwnerFormData.user_id = parseInt($scope.editOwnerFormData.owner.id);
       $scope.editOwnerFormData.id = $stateParams.id;
-      console.log($scope.editOwnerFormData);
+      console.log('Before');
+      console.log(JSON.stringify($scope.editOwnerFormData));
       ownerService
         .editOwner($scope.editOwnerFormData)
         .success(function(data, status, headers, config) {
+          console.log('After');
+          console.log(data);
           modalService.resolve();
           promise.then(
             function handleResolve(response) {
@@ -159,7 +162,7 @@ var editOwnerCtrl = function($scope, $state, $location,
               }
             );
             promise.then(function handleResolve(response) {
-                $location.path('manage-owners');
+                $location.path('owners');
               },
               function handleReject(error) {});
 

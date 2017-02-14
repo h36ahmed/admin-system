@@ -48,6 +48,7 @@ app.service(
             var request = $http({
                 method: "put",
                 url: baseUrl + baseApi + "order" + "/" + data.id,
+                data: data,
                 headers : {
                     'Content-Type': 'application/json'
                 }
