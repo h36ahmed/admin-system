@@ -26,7 +26,50 @@ url: /feedbacks
             <div class="grid-block">
                <div class="grid-block small-12 vertical">
                    <div class="grid-content">
-                        <table></table>
+                        <div class="ls-table-responsive-vertical shadow-z-1">
+                          <table id="table" class="ls-table ls-table-hover">
+                              <thead>
+                                <tr>
+                                  <th>ID</th>
+                                  <th>Feedback Date</th>
+                                  <th>Customer Name</th>
+                                  <th>Meal</th>
+                                  <th>Restaurant</th>
+                                  <th>Flavour</th>
+                                  <th>Portion Size</th>
+                                  <th>Overall</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr ng-repeat="feedback in feedbacks">
+                                  <td data-title="id">
+                                      {{feedback.id}}
+                                  </td>
+                                  <td data-title="feedback date">
+                                      {{feedback.order.order_date}}
+                                  </td>
+                                  <td data-title="customer name">
+                                      <a ui-sref="customer({id: {{feedback.order.customer.id}}})">{{feedback.order.customer.first_name | titleCase}} {{feedback.order.customer.last_name | titleCase}} </a>
+                                  </td>
+                                  <td data-title="meal">
+                                      <a ui-sref="offer({id: {{feedback.offer.id}}})">{{feedback.offer.meal.name | titleCase}}</a>
+                                  </td>
+                                  <td data-title="restaurant">
+                                      <a ui-sref="offer({id: {{feedback.offer.meal.restaurant.id}}})">{{feedback.offer.meal.restaurant.name | titleCase}}</a>
+                                  </td>
+                                  <td data-title="flavour">
+                                      {{feedback.status}}
+                                  </td>
+                                  <td data-title="portion size">
+                                      {{feedback.portion_size}}
+                                  </td>
+                                  <td data-title="overall">
+                                      {{feedback.overall}}
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                       </div>
                     </div>
                 </div>
            </div>
