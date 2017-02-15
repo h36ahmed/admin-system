@@ -8,7 +8,7 @@ url: /payment-plans
     </div>
     <div ng-include="'/templates/partials/side_bar.html'"></div>
     <div class="ls-app-body">
-        <div class="grid-container ls-manage-payment-plans" ng-controller="">
+        <div class="grid-container ls-manage-pages" ng-controller="managePaymentPlanCtrl as paymentPlan">
             <div class="grid-block">
                 <div class="grid-block small-8 vertical">
                    <div class="grid-content">
@@ -17,7 +17,7 @@ url: /payment-plans
                 </div>
                 <div class="grid-block small-4 vertical">
                    <div class="grid-content text-right">
-                       <a ui-sref="create-restaurant" class="button success ls-create-button">Create Payment Plan</a>
+                       <a ui-sref="create-payment-plan" class="button success ls-create-button">Create Payment Plan</a>
                    </div>
                 </div>
             </div>
@@ -25,21 +25,18 @@ url: /payment-plans
                <div class="grid-block small-12 vertical">
                    <div class="grid-content">
                         <ul>
-                            <!--<li class="ls-card ls-restaurant-card" ng-repeat="restaurant in restaurants">
-                                <a ui-sref="restaurant({id:restaurant.id})"  class="ls-card-link">x</a>
-                                <figure class="ls-restaurant-card-info">
+                            <li class="ls-card ls-payment-plan-card" ng-repeat="plan in paymentPlans">
+                                <a ui-sref="plan({id:plan.id})"  class="ls-card-link">x</a>
+                                <figure class="ls-plan-card-info">
+                                    <h4>{{plan.name}}</h4>
                                     <img src="http://lorempixel.com/400/400/"/>
-                                    <figcaption class="ls-restaurant-card-caption">
-                                        <div class="ls-left-card-info">
-                                            <h4>{{restaurant.name}}</h4>
-                                            <p>{{restaurant.street_address}}</p>
-                                        </div>
-                                        <div class="ls-right-card-info">
-                                            <a class="button">Edit</a>
-                                        </div>
+                                    <figcaption class="ls-plan-card-caption">
+                                        <p>{{plan.description}}</p>
+                                        <h6>{{plan.price}}</h6>
+                                         <a href="" class="button">Edit</a>
                                     </figcaption>
                                 </figure>
-                            </li>-->
+                            </li>
                         </ul>
                     </div>
                 </div>

@@ -1,0 +1,60 @@
+---
+name: create-payment-plan
+url: /create-payment-plan
+---
+<div class="vertical grid-frame">
+    <div class="grid-content shrink" style="padding: 0;">
+        <div ng-include="'/templates/partials/menu_bar.html'"></div>
+    </div>
+    <div ng-include="'/templates/partials/side_bar.html'"></div>
+    <div class="ls-app-body">
+        <div class="grid-container ls-res-info">
+            <div class="grid-block ls-title-bar">
+                <div class="grid-block small-12 vertical">
+                    <div class="grid-content">
+                         <h2>Create Payment Plan</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-block">
+               <div class="grid-block small-12 vertical">
+                   <div class="grid-content">
+                        <form class="ls-form ls-create-form" ng-controller="createPaymentPlanCtrl as createPaymentPlan"
+                           name="createPaymentPlanForm" ng-submit="submitForm(createPaymentPlanForm.$valid)">
+                            <div class="grid-block">
+                                <div class="small-12 medium-6 grid-content">
+                                    <label for="planName">
+                                        Name
+                                        <input type="text" placeholder="Payment Plan Name" class="ls-input-fields" name="planName" id="planName" ng-model="paymentPlanFormData.name">
+                                    </label>
+                                    <label for="planDesc">
+                                        Description
+                                        <textarea name="planDesc" id="planDesc" cols="30" rows="8" placeholder="Description" class="ls-input-fields" ng-model="paymentPlanFormData.description"></textarea>
+                                    </label>
+                                    <label for="planPrice">
+                                        Price
+                                        <input type="number" placeholder="e.g. 9.99" class="ls-input-fields" name="planPrice" id="planPrice" ng-model="paymentPlanFormData.price">
+                                    </label>
+                                </div>
+                                <div class="small-12 medium-6 grid-content">
+                                    <label for="planImage">
+                                        Icon Image <br>
+                                        <input type="file" name="planImage" id="planImage" ng-model="paymentPlanFormData.image">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="grid-block">
+                                <div class="small-6 grid-content text-right">
+
+                                </div>
+                                <div class="small-6 grid-content text-right">
+                                    <input type="submit" class="button" value="Add Payment Plan">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+           </div>
+        </div>
+    </div>
+</div>

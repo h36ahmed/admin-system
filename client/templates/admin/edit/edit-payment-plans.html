@@ -1,0 +1,65 @@
+---
+name: plan
+url: /plan/:id
+---
+<div class="vertical grid-frame">
+    <div class="grid-content shrink" style="padding: 0;">
+        <div ng-include="'/templates/partials/menu_bar.html'"></div>
+    </div>
+    <div ng-include="'/templates/partials/side_bar.html'"></div>
+    <div class="ls-app-body">
+        <div class="grid-container ls-edit-pages" ng-controller="editPaymentPlanCtrl as editPaymentPlan">
+            <div class="grid-block ls-title-bar">
+                <div class="grid-block small-8 vertical">
+                    <div class="grid-content">
+                        <h2>Edit Payment Plan Information</h2>
+                    </div>
+                </div>
+                <div class="grid-block small-4 vertical">
+                    <div class="grid-content text-right">
+                        <form class="ls-form ls-delete-form" name="deletePaymentPlanForm" ng-submit="submitDeleteForm()">
+                            <input type="submit" class="alert button" name="deletePaymentPlan" value="Delete Payment Plan">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-block">
+                <div class="grid-block small-12 vertical">
+                    <div class="grid-content">
+                        <form class="ls-form ls-edit-form" name="editPaymentPlanForm" ng-submit="submitEditForm(editPaymentPlanForm.$valid)">
+                            <div class="grid-block">
+                                <div class="small-12 medium-6 grid-content">
+                                    <label for="planName">
+                                        Name
+                                        <input type="text" placeholder="Payment Plan Name" class="ls-input-fields" name="planName" id="planName" ng-model="editPaymentPlanFormData.name">
+                                    </label>
+                                    <label for="planDesc">
+                                        Description
+                                        <textarea name="planDesc" id="planDesc" cols="30" rows="8" placeholder="Description" class="ls-input-fields" ng-model="editPaymentPlanFormData.description"></textarea>
+                                    </label>
+                                    <label for="planPrice">
+                                        Price
+                                        <input type="number" placeholder="e.g. 9.99" class="ls-input-fields" name="planPrice" id="planPrice" ng-model="editPaymentPlanFormData.price">
+                                    </label>
+                                </div>
+                                <div class="small-12 medium-6 grid-content">
+                                    <label for="planImage">
+                                        Icon Image <br>
+                                        <input type="file" name="planImage" id="planImage" ng-model="editPaymentPlanFormData.image">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="grid-block">
+                                <div class="small-6 grid-content text-right">
+                                </div>
+                                <div class="small-6 grid-content text-right">
+                                    <input type="submit" class="button" name="update" value="Update Plan Information">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+           </div>
+        </div>
+    </div>
+</div>

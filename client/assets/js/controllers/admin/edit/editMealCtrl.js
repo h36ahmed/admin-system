@@ -54,7 +54,7 @@ var editMealCtrl = function($scope, $state, $location,
             );
           });
       } else {
-        $location.path('manage-meals');
+        $location.path('meals');
       }
 
     })
