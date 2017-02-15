@@ -40,6 +40,11 @@
     z-index: 3;
     font-size: 0;
   }
+  .ls-card-button {
+    display: block;
+    z-index: 4;
+    font-size: 0;
+  }
   &.ls-restaurant-card {
     padding: 0;
     .ls-restaurant-card-info {
@@ -121,12 +126,34 @@
       }
     }
   }
-  .ls-card-button {
-    display: block;
-    z-index: 4;
-    font-size: 0;
-  }
   &.ls-payment-plan-card {
-
+    text-align: center;
+    padding: 0;
+    overflow: hidden;
+    .ls-image {
+      height: 200px;
+      width: 100%;
     }
+    p {
+      width: 90%;
+      margin: 10px auto;
+    }
+      h6 {
+          font-size: 2rem;
+          margin-bottom: 0;
+
+      }
+    .button {
+      width: 100%;
+      margin-top: 10px;
+      position: absolute;
+      bottom: 0;
+        left: 0;
+      height: 40px;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 0;
+      z-index: 4;
+    }
+  }
 }
