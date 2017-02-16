@@ -7,7 +7,7 @@ var manageInvoiceCtrl = function($scope, invoiceService ) {
   invoiceService
     .getInvoices()
     .success(function(data, status, headers, config) {
-      $scope.orders = data;
+      $scope.invoices = data;
     })
     .error(function(data, status, headers, config) {
       // Handle login errors here

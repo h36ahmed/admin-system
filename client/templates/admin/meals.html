@@ -32,9 +32,9 @@ url: /meals
                                     <figcaption class="ls-meal-card-caption">
                                         <div class="ls-meal-card-title">
                                             <h4>{{meal.name}}</h4>
-                                            <p>{{meal.restaurant_id}}</p>
+                                            <p>{{meal.restaurant.name}}</p>
                                         </div>
-                                        <a href="" class="button">Edit </a>
+                                        <a ui-sref="meal({id:meal.id})" class="button">Edit </a>
                                     </figcaption>
                                 </figure>
                             </li>

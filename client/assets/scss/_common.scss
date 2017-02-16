@@ -161,7 +161,8 @@ select {
 }
 
 .ls-create-button, .ls-export-button {
-    margin-top: 8px;
+    margin-top: 8px !important;
+    margin-right: 0 !important;
 }
 
 .ls-edit-form {

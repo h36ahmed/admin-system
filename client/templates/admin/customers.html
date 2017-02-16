@@ -8,7 +8,7 @@ url: /customers
     </div>
     <div ng-include="'/templates/partials/side_bar.html'"></div>
     <div class="ls-app-body">
-        <div class="grid-container ls-manage-pages">
+        <div class="grid-container ls-manage-pages" ng-controller="manageCustomerCtrl as customersCtrl">
             <div class="grid-block">
                 <div class="grid-block small-8 vertical">
                    <div class="grid-content">
@@ -25,16 +25,16 @@ url: /customers
                <div class="grid-block small-12 vertical">
                    <div class="grid-content">
                         <ul>
-                            <li class="ls-card ls-users-card">
-                                <a href="" class="ls-card-link"></a>
+                            <li class="ls-card ls-users-card" ng-repeat="customer in customers">
+                                <a ui-sref="customer({id:customer.id})"  class="ls-card-link"></a>
                                 <figure class="ls-user-card-info">
                                     <img src="http://lorempixel.com/400/400/"/>
                                     <figcaption class="ls-user-card-caption">
                                         <div class="ls-user-card-title">
-                                            <h4>Daniel Janetos</h4>
-                                            <p>STATUS: <span class="ls-status ls-inactive">Inactive</span></p>
+                                            <h4>{{customer.first_name}} {{customer.last_name}}</h4>
+                                            <p>STATUS: <span class="ls-status ls-active" ng-if="customer.active">ACTIVE</span><span class="ls-status ls-inactive" ng-if="!customer.active">INACTIVE</span></p>
                                         </div>
-                                        <a href="" class="button">
+                                        <a ui-sref="customer({id:customer.id})"  class="button">
                                             More Info</a>
                                     </figcaption>
                                 </figure>
