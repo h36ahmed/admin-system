@@ -2,29 +2,50 @@ var app = angular.module('lunchSociety');
 
 var createMealOfferCtrl = function($scope, $location, restaurantService, mealOfferService, modalService) {
 
-  $scope.createOfferFormData = {};
+  $scope.createMealOfferFormData = {};
 
   $scope.restaurants = [];
+
+  $scope.meals = [];
 
   restaurantService
     .getRestaurants()
     .success(function(data, status, headers, config) {
       $scope.restaurants = data;
-       $scope.createOfferFormData.restaurant = $scope.restaurants[0];
-
+      console.log($scope.restaurants);
     })
     .error(function(data, status, headers, config) {
       // Handle login errors here
       $scope.message = 'Error: Something Went Wrong';
     });
 
+  $scope.displayMeals = function() {
+    $scope.meals = $scope.createMealOfferFormData.restaurant.meals;
+  };
+
+  $scope.selectMeal = function(id) {
+    $scope.createMealOfferFormData.meal_id = id;
+  }
+
+  $scope.unselectMeal = function() {
+    $scope.createMealOfferFormData.meal_id = null;
+  }
+
+  $scope.allValuesPresent = function() {
+
+      if ($scope.createMealOfferFormData.meal_id == null
+          || $scope.createMealOfferFormData.plates_left == null
+          || $scope.createMealOfferFormData.offer_date == null) {
+          return false;
+      }
+      return true;
+  }
 
   $scope.submitForm = function(isValid) {
     // check to make sure the form is completely valid
-    if (isValid) {
+    if (isValid && allValuesPresent() ) {
 
-      //$scope.createOfferFormData.restaurant_id = $scope.createOfferFormData.restaurant.id;
-
+      $scope.createMealOfferFormData.plates_left = $scope.createMealOfferFormData.plates_assigned;
       var promise = modalService.open(
         "status", {}
       );
@@ -32,8 +53,8 @@ var createMealOfferCtrl = function($scope, $location, restaurantService, mealOff
       mealOfferService
         .createMealOffer($scope.createOfferFormData)
         .success(function(data, status, headers, config) {
-           modalService.resolve();
-           promise.then(
+          modalService.resolve();
+          promise.then(
             function handleResolve(response) {
               promise = modalService.open(
                 "alert", {

@@ -8,7 +8,7 @@ url: /create-meal-offer
     </div>
     <div ng-include="'/templates/partials/side_bar.html'"></div>
     <div class="ls-app-body">
-        <div class="grid-container">
+        <div class="grid-container ls-create-pages" ng-controller="createMealOfferCtrl as offerCtrl">
            <div class="grid-block ls-title-bar">
                 <div class="grid-block small-12 vertical">
                     <div class="grid-content">
@@ -19,9 +19,75 @@ url: /create-meal-offer
             <div class="grid-block">
                 <div class="grid-block small-12 vertical">
                     <div class="grid-content">
-                        <form class="ls-form ls-create-form" ng-controller="">
-                            <div class="grid-block">
-
+                        <form class="ls-form ls-create-form">
+                            <section class="grid-block ls-form-section">
+                                <div class="grid-content">
+                                    <header class="ls-section-header">
+                                        <span class="ls-section-number">1</span>
+                                        <h3 class="ls-section-title">Select Restaurant</h3>
+                                    </header>
+                                    <article>
+                                        <label for="resName">Restaurant Name</label>
+                                        <select name="resName" id="resName" class="ls-input-fields" ng-model="createMealOfferFormData.restaurant" ng-options="restaurant as restaurant.name for restaurant in restaurants track by restaurant.id" ng-change="displayMeals()">
+                                        </select>
+                                    </article>
+                                </div>
+                            </section>
+                            <section class="grid-block ls-form-section">
+                                <div class="grid-content">
+                                    <header class="ls-section-header">
+                                        <span class="ls-section-number">2</span>
+                                        <h3 class="ls-section-title">Select Meal</h3>
+                                    </header>
+                                    <article>
+                                        <ul ng-if ="createMealOfferFormData.restaurant != null">
+                                            <li class="ls-card ls-meal-card" ng-repeat="meal in meals">
+                                                <a ui-sref="meal({id:meal.id})" class="ls-card-link">x</a>
+                                                <figure class="ls-meal-card-info">
+                                                    <img src="http://lorempixel.com/400/400/food" ng-class="{'ls-inactive-card': createMealOfferFormData.meal_id != meal.id && createMealOfferFormData.meal_id != null}"/>
+                                                    <figcaption class="ls-meal-card-caption">
+                                                        <div class="ls-meal-card-title" ng-class="{'ls-inactive-card': createMealOfferFormData.meal_id != meal.id && createMealOfferFormData.meal_id != null}">
+                                                            <h4>{{meal.name}}</h4>
+                                                            <p>{{meal.ingredients}}</p>
+                                                        </div>
+                                                        <button class="button" type="button" ng-if="createMealOfferFormData.meal_id != meal.id" ng-click="selectMeal(meal.id)">Select Meal</button>
+                                                        <button class="button alert" type="button" ng-if="createMealOfferFormData.meal_id == meal.id" ng-click="unselectMeal()">Unselect Meal</button>
+                                                    </figcaption>
+                                                </figure>
+                                            </li>
+                                        </ul>
+                                        <p ng-if ="createMealOfferFormData.restaurant == null">
+                                            No Meals Displayed. Please select restaurant
+                                        </p>
+                                    </article>
+                                </div>
+                            </section>
+                            <section class="grid-block ls-form-section">
+                                <div class="small-6 grid-content">
+                                    <header class="ls-section-header">
+                                        <span class="ls-section-number">3</span>
+                                        <h3 class="ls-section-title">Input Number of Plates Offered</h3>
+                                    </header>
+                                    <article>
+                                        <label for="platesOffered">
+                                            Number of Plates Offered
+                                            <input type="number" placeholder="e.g. 50" class="ls-input-fields" name="platesOffered" id="platesOffered" ng-model="createMealOfferFormData.plates_assigned" step="1">
+                                        </label>
+                                    </article>
+                                </div>
+                                <div class="small-6 grid-content">
+                                    <header class="ls-section-header">
+                                        <span class="ls-section-number">4</span>
+                                        <h3 class="ls-section-title">Select Offer Date</h3>
+                                    </header>
+                                    <article>
+                                        <label for="offerDate">
+                                            Offer Date
+                                            <input type="text" placeholder="e.g. Select a Date" class="ls-input-fields" name="offerDate" id="offerDate" ng-model="createMealOfferFormData.offer_date">
+                                        </label>
+                                    </article>
+                                </div>
+                            </section>
                             <div class="grid-block">
                                 <div class="small-6 grid-content text-right">
 

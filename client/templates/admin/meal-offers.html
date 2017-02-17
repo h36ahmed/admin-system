@@ -8,7 +8,7 @@ url: /meal-offers
     </div>
     <div ng-include="'/templates/partials/side_bar.html'"></div>
     <div class="ls-app-body">
-        <div class="grid-container ls-table-layout-pages ls-meal-offers" ng-controller="">
+        <div class="grid-container ls-table-layout-pages ls-meal-offers" ng-controller="manageMealOfferCtrl as mealOffersCtrl">
             <div class="grid-block">
                 <div class="grid-block small-8 vertical">
                    <div class="grid-content">
@@ -22,9 +22,33 @@ url: /meal-offers
                 </div>
             </div>
             <div class="grid-block">
+                <div class="grid-block small-12 vertical">
+                   <div class="grid-content">
+                       <h3>Thursday Feb 2, 2017</h3>
+                   </div>
+                </div>
+            </div>
+            <div class="grid-block">
                <div class="grid-block small-12 vertical">
                    <div class="grid-content">
-                        <table></table>
+                        <div class="ls-table-responsive-vertical shadow-z-1">
+                          <table id="table" class="ls-table ls-table-hover">
+                              <thead>
+                                <tr>
+                                  <th>ID</th>
+                                  <th>Restaurant Name</th>
+                                  <th>Meal Name</th>
+                                  <th>Number of Plates Offered</th>
+                                  <th>Number of Plates Left</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr ng-repeat="offer in offers">
+
+                                </tr>
+                              </tbody>
+                            </table>
+                       </div>
                     </div>
                 </div>
            </div>

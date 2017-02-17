@@ -24,9 +24,35 @@ url: /orders
                 </div>
             </div>
             <div class="grid-block">
+                <div class="grid-block small-12 vertical">
+                   <div class="grid-content">
+                       <h3>Thursday Feb 2, 2017</h3>
+                   </div>
+                </div>
+            </div>
+            <!--ng-repeat="restaurant in restuarants"-->
+            <div class="grid-block" >
                <div class="grid-block small-12 vertical">
                    <div class="grid-content">
-                        <table></table>
+                        <h4>Restaurant Name</h4>
+                        <p>Meal Name</p>
+                        <p>Meal Ingredients</p>
+                        <div class="ls-table-responsive-vertical shadow-z-1">
+                           <table id="table" class="ls-table ls-table-hover">
+                              <thead>
+                                <tr>
+                                  <th>ID</th>
+                                  <th>Customer Name</th>
+                                  <th>Pickup Time</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr ng-repeat="order in orders">
+
+                                </tr>
+                              </tbody>
+                            </table>
+                       </div>
                     </div>
                 </div>
            </div>

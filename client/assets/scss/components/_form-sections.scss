@@ -1,0 +1,26 @@
+.ls-form-section {
+     margin-bottom: 20px;
+    .ls-section-header {
+        @include clearfix;
+        width: 100%;
+        display: block;
+        margin-bottom: 10px;
+        .ls-section-number {
+            width: 37px;
+            height: 37px;
+            display: block;
+            color: #fff;
+            background-color: $primary-color;
+            @include border-radius(50%);
+            text-align: center;
+            line-height: 37px;
+            float:left;
+            margin-right: 15px;
+        }
+        .ls-section-title {
+            float:left;
+            font-size: 1.4rem;
+        }
+    }
+
+}
