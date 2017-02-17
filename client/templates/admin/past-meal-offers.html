@@ -23,10 +23,80 @@ url: /past-meal-offers
                     </div>
                 </div>
             </div>
+            <div class="grid-block ls-nav-header">
+                <div class="grid-block medium-3 vertical">
+                   <div class="grid-content">
+                        <a ng-click="changeDate('previous')" class="ls-link ls-prev-link"><i class="fa fa-angle-left" aria-hidden="true"></i> Previous Day</a>
+                   </div>
+                </div>
+                <div class="grid-block medium-6 vertical">
+                   <div class="grid-content text-center">
+                        <h4>Thursday Feb 2, 2017</h4>
+                   </div>
+                </div>
+                <div class="grid-block medium-3 vertical">
+                   <div class="grid-content">
+                        <a ng-click="changeDate('next')" class="ls-link ls-next-link">Next Day <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                   </div>
+                </div>
+            </div>
+            <form class="ls-form ls-filter-form"  name="filterDateForm" ng-submit="filterDates()">
+                <div class="grid-block">
+                    <div class="grid-block medium-6 vertical">
+                       <div class="grid-content">
+                            <label for="offerDate">
+                                Filter By Date
+                                <input type="date" placeholder="e.g. Select a Date" class="ls-input-fields" name="filterDate" id="filterDate" ng-model="createMealOfferFormData.filterDate">
+                            </label>
+                       </div>
+                    </div>
+                    <div class="grid-block medium-3 vertical">
+                       <div class="grid-content">
+                             <input type="submit" class="success button" name="filter" value="Filter By Date">
+                       </div>
+                    </div>
+                    <div class="grid-block medium-3 vertical">
+                       <div class="grid-content">
+                             <a ng-click="changeDate('today')" class="button">Today's Offers</a>
+                       </div>
+                    </div>
+                </div>
+            </form>
             <div class="grid-block">
                <div class="grid-block small-12 vertical">
                    <div class="grid-content">
-                        <table></table>
+                        <div class="ls-table-responsive-vertical shadow-z-1">
+                          <table id="table" class="ls-table ls-table-hover">
+                              <thead>
+                                <tr>
+                                  <th>ID</th>
+                                  <th>Restaurant Name</th>
+                                  <th>Meal Name</th>
+                                  <th>Number of Plates Offered</th>
+                                  <th>Number of Plates Left</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr ng-repeat="offer in offers">
+                                  <td data-title="id">
+                                      {{offer.id}}
+                                  </td>
+                                  <td data-title="restaurant">
+                                      <a ui-sref="restaurant({id: offer.meal.restaurant.id })">{{offer.meal.restaurant.name | titleCase}}</a>
+                                  </td>
+                                  <td data-title="meal">
+                                      <a ui-sref="meal({id: offer.meal.id })">{{offer.meal.name | titleCase}}</a>
+                                  </td>
+                                  <td data-title="offered">
+                                      {{offer.plates_assigned}}
+                                  </td>
+                                  <td data-title="left">
+                                      {{offer.plates_left}}
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                       </div>
                     </div>
                 </div>
            </div>

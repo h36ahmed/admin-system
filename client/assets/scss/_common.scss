@@ -170,3 +170,12 @@ select {
         margin-top: 20px;
     }
 }
+
+.ls-link {
+    margin-top: 20px;
+    display: block;
+    width: 100%;
+    &.ls-next-link {
+        text-align: right;
+    }
+}
