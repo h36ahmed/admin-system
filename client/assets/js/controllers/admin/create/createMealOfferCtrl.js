@@ -2,7 +2,12 @@ var app = angular.module('lunchSociety');
 
 var createMealOfferCtrl = function($scope, $location, restaurantService, mealOfferService, modalService) {
 
-  $scope.createMealOfferFormData = {};
+  $scope.createMealOfferFormData = {
+      meal_id: null,
+      plates_left: null,
+      plates_assigned: null,
+      offer_date: null
+  };
 
   $scope.restaurants = [];
 
@@ -12,7 +17,6 @@ var createMealOfferCtrl = function($scope, $location, restaurantService, mealOff
     .getRestaurants()
     .success(function(data, status, headers, config) {
       $scope.restaurants = data;
-      console.log($scope.restaurants);
     })
     .error(function(data, status, headers, config) {
       // Handle login errors here
@@ -31,19 +35,35 @@ var createMealOfferCtrl = function($scope, $location, restaurantService, mealOff
     $scope.createMealOfferFormData.meal_id = null;
   }
 
-  $scope.allValuesPresent = function() {
+  var allValuesPresent = function() {
 
       if ($scope.createMealOfferFormData.meal_id == null
-          || $scope.createMealOfferFormData.plates_left == null
+          || $scope.createMealOfferFormData.plates_assigned == null
           || $scope.createMealOfferFormData.offer_date == null) {
           return false;
       }
       return true;
   }
 
+  var checkDate = function(date) {
+      var today = new Date();
+      if (date < today) {
+          return false;
+      }
+      return true;
+  }
+
+  var clearValues = function() {
+      scope.createMealOfferFormData.plates_left
+  }
+
   $scope.submitForm = function(isValid) {
     // check to make sure the form is completely valid
-    if (isValid && allValuesPresent() ) {
+
+    var isDateValid = checkDate($scope.createMealOfferFormData.offer_date);
+    var isComplete = allValuesPresent();
+
+    if (isValid && isDateValid && isComplete) {
 
       $scope.createMealOfferFormData.plates_left = $scope.createMealOfferFormData.plates_assigned;
       var promise = modalService.open(
@@ -51,7 +71,7 @@ var createMealOfferCtrl = function($scope, $location, restaurantService, mealOff
       );
 
       mealOfferService
-        .createMealOffer($scope.createOfferFormData)
+        .createMealOffer($scope.createMealOfferFormData)
         .success(function(data, status, headers, config) {
           modalService.resolve();
           promise.then(
@@ -61,7 +81,14 @@ var createMealOfferCtrl = function($scope, $location, restaurantService, mealOff
                   message: 'Offer Created'
                 }
               );
-              promise.then(function handleResolve(response) {},
+              promise.then(function handleResolve(response) {
+                  $scope.createMealOfferFormData = {
+                      meal_id: null,
+                      plates_left: null,
+                      plates_assigned: null,
+                      offer_date: null
+                  };
+              },
                 function handleReject(error) {});
             },
             function handleReject(error) {

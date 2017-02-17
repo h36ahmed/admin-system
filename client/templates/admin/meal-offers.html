@@ -24,7 +24,7 @@ url: /meal-offers
             <div class="grid-block">
                 <div class="grid-block small-12 vertical">
                    <div class="grid-content">
-                       <h3>Thursday Feb 2, 2017</h3>
+                       <h3>{{today_date | date}}</h3>
                    </div>
                 </div>
             </div>
@@ -44,7 +44,21 @@ url: /meal-offers
                               </thead>
                               <tbody>
                                 <tr ng-repeat="offer in offers">
-
+                                  <td data-title="id">
+                                      {{offer.id}}
+                                  </td>
+                                  <td data-title="restaurant">
+                                      <a ui-sref="restaurant({id: offer.meal.restaurant.id })">{{offer.meal.restaurant.name | titleCase}}</a>
+                                  </td>
+                                  <td data-title="meal">
+                                      <a ui-sref="meal({id: offer.meal.id })">{{offer.meal.name | titleCase}}</a>
+                                  </td>
+                                  <td data-title="offered">
+                                      {{offer.plates_assigned}}
+                                  </td>
+                                  <td data-title="left">
+                                      {{offer.plates_left}}
+                                  </td>
                                 </tr>
                               </tbody>
                             </table>

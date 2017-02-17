@@ -2,12 +2,13 @@ var app = angular.module('lunchSociety');
 
 var manageMealOfferCtrl = function($scope, mealOfferService ) {
 
-  $scope.mealOffers = [];
+  $scope.offers = [];
+  $scope.today_date = new Date();
 
   mealOfferService
     .getMealOffers()
     .success(function(data, status, headers, config) {
-      $scope.mealOffers = data;
+      $scope.offers = data;
     })
     .error(function(data, status, headers, config) {
       // Handle login errors here

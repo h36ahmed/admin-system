@@ -8,6 +8,7 @@ var manageFeedbackCtrl = function($scope, feedbackService ) {
     .getFeedbacks()
     .success(function(data, status, headers, config) {
       $scope.feedbacks = data;
+
     })
     .error(function(data, status, headers, config) {
       // Handle login errors here

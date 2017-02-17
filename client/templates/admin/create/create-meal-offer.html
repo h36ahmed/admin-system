@@ -19,7 +19,7 @@ url: /create-meal-offer
             <div class="grid-block">
                 <div class="grid-block small-12 vertical">
                     <div class="grid-content">
-                        <form class="ls-form ls-create-form">
+                        <form class="ls-form ls-create-form" name="createMealOfferForm" ng-submit="submitForm(createMealOfferForm.$valid)">
                             <section class="grid-block ls-form-section">
                                 <div class="grid-content">
                                     <header class="ls-section-header">
@@ -83,7 +83,7 @@ url: /create-meal-offer
                                     <article>
                                         <label for="offerDate">
                                             Offer Date
-                                            <input type="text" placeholder="e.g. Select a Date" class="ls-input-fields" name="offerDate" id="offerDate" ng-model="createMealOfferFormData.offer_date">
+                                            <input type="date" placeholder="e.g. Select a Date" class="ls-input-fields" name="offerDate" id="offerDate" ng-model="createMealOfferFormData.offer_date">
                                         </label>
                                     </article>
                                 </div>
