@@ -18,7 +18,7 @@ var createAccountCtrl = function($scope, $window, $location, userService, modalS
             function handleResolve(response) {
               if (data.type == 'owner') {
                 $location.path('create-owner').search({
-                  id: data.id
+                  user_id: data.id
                 });
               } else {
                 promise = modalService.open(

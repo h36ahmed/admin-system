@@ -7,7 +7,9 @@ var createRestaurantCtrl = function($scope, $location, ownerService, restaurantS
   $scope.owners = [];
 
   ownerService
-    .getOwners()
+    .getOwners({
+     no_restaurant_list: true
+    })
     .success(function(data, status, headers, config) {
       $scope.owners = data;
       if ($location.search().id) {

@@ -7,7 +7,8 @@ var createOwnerCtrl = function($scope, $location, userService, ownerService, mod
   $scope.owners = [];
   userService
     .getUsers({
-      type: "owner"
+      type: "owner",
+      owner_list: true
     })
     .success(function(data, status, headers, config) {
       $scope.owners = data;

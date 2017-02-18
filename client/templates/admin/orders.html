@@ -8,11 +8,11 @@ url: /orders
     </div>
     <div ng-include="'/templates/partials/side_bar.html'"></div>
     <div class="ls-app-body">
-        <div class="grid-container ls-table-layout-pages ls-orders" ng-controller="">
+        <div class="grid-container ls-table-layout-pages ls-orders" ng-controller="manageOrderCtrl as orderCtrl">
             <div class="grid-block">
                 <div class="grid-block small-8 vertical">
                    <div class="grid-content">
-                       <h2>Orders</h2>
+                       <h2>Orders For {{today_date | date}}</h2>
                    </div>
                 </div>
                 <div class="grid-block small-4 vertical">
@@ -23,20 +23,13 @@ url: /orders
                     </div>
                 </div>
             </div>
-            <div class="grid-block">
-                <div class="grid-block small-12 vertical">
-                   <div class="grid-content">
-                       <h3>Thursday Feb 2, 2017</h3>
-                   </div>
-                </div>
-            </div>
-            <!--ng-repeat="restaurant in restuarants"-->
-            <div class="grid-block" >
+            <div class="grid-block" ng-repeat="offer in offers">
                <div class="grid-block small-12 vertical">
                    <div class="grid-content">
-                        <h4>Restaurant Name</h4>
-                        <p>Meal Name</p>
-                        <p>Meal Ingredients</p>
+                        <h4>{{offer.meal.restaurant.name}}</h4>
+                        <p><strong>{{offer.meal.name}}</strong>
+                        <br> {{offer.meal.ingredients}}
+                        </p>
                         <div class="ls-table-responsive-vertical shadow-z-1">
                            <table id="table" class="ls-table ls-table-hover">
                               <thead>
@@ -47,8 +40,10 @@ url: /orders
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr ng-repeat="order in orders">
-
+                                <tr ng-repeat="order in offer.orders">
+                                    <td>{{order.id}}</td>
+                                    <td><a ui-sref="customer({id: {{feedback.order.customer.id}}})">{{order.customer.first_name | titleCase}} {{order.customer.last_name | titleCase}} </a></td>
+                                    <td>{{order.pickup_time.pickup_time}}</td>
                                 </tr>
                               </tbody>
                             </table>
