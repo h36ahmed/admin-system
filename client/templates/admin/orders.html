@@ -42,7 +42,7 @@ url: /orders
                               <tbody>
                                 <tr ng-repeat="order in offer.orders">
                                     <td>{{order.id}}</td>
-                                    <td><a ui-sref="customer({id: {{feedback.order.customer.id}}})">{{order.customer.first_name | titleCase}} {{order.customer.last_name | titleCase}} </a></td>
+                                    <td><a ui-sref="customer({id: order.customer.id })">{{order.customer.first_name | titleCase}} {{order.customer.last_name | titleCase}} </a></td>
                                     <td>{{order.pickup_time.pickup_time}}</td>
                                 </tr>
                               </tbody>
