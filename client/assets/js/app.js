@@ -17,9 +17,9 @@
     .config(config)
     .run(run);
 
-  config.$inject = ['$urlRouterProvider', '$locationProvider'];
+  config.$inject = ['$urlRouterProvider', '$locationProvider', '$stateProvider'];
 
-  function config($urlProvider, $locationProvider) {
+  function config($urlProvider, $locationProvider, $stateProvider) {
     $urlProvider.otherwise('/');
 
     $locationProvider.html5Mode({
@@ -30,8 +30,19 @@
     $locationProvider.hashPrefix('!');
   }
 
-  function run() {
+  function run($rootScope, $urlRouter, $window, $location) {
     FastClick.attach(document.body);
+    $rootScope.$on('$locationChangeSuccess', function(evt) {
+      // Halt state change from even starting
+      evt.preventDefault();
+      // Perform custom logic
+
+      if (!$window.sessionStorage.token && $window.sessionStorage.loginPage) {
+        $location.path('/');
+      } else {
+        $urlRouter.sync();
+      }
+    });
   }
 
 })();

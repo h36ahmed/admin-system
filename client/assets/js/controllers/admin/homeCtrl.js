@@ -1,10 +1,12 @@
 var app = angular.module('lunchSociety');
 
-var homeCtrl = function($scope, $location, commonService, modalService) {
+var homeCtrl = function($scope, $location, commonService, modalService, $window) {
 
+  $window.sessionStorage.loginPage = true;
   $scope.userFormData = {};
 
   $scope.submitForm = function(isValid) {
+    delete  $window.sessionStorage.loginPage;
     // check to make sure the form is completely valid
     if (isValid) {
       var promise = modalService.open(
@@ -16,6 +18,7 @@ var homeCtrl = function($scope, $location, commonService, modalService) {
           modalService.resolve();
           promise.then(
             function handleResolve(response) {
+
               commonService.setAuthToken(data.token);
               commonService.setUserID(data.id);
               $location.path('admin-dashboard');
@@ -38,6 +41,7 @@ var homeCtrl = function($scope, $location, commonService, modalService) {
               );
               promise.then(function handleResolve(response) {
                 console.log("Alert resolved.");
+                $window.sessionStorage.loginPage = true;
               }, function handleReject(error) {
                 console.warn("Alert rejected!");
               });
@@ -52,6 +56,6 @@ var homeCtrl = function($scope, $location, commonService, modalService) {
 
 };
 
-homeCtrl.inject = ['$scope', '$location', 'commonService', 'modalService'];
+homeCtrl.inject = ['$scope', '$location', 'commonService', 'modalService', '$window'];
 
 app.controller('homeCtrl', homeCtrl);

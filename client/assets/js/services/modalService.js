@@ -2,7 +2,7 @@ var app = angular.module('lunchSociety');
 
 app.service(
     "modalService",
-    function($rootScope, $q) {
+    function($rootScope, $q, $window, $location) {
         // I represent the currently active modal window instance.
         var modal = {
             deferred: null,
@@ -28,6 +28,9 @@ app.service(
         function open( type, params, pipeResponse ) {
             var previousDeferred = modal.deferred;
             // Setup the new modal instance properties.
+            if (!$window.sessionStorage.token && $window.sessionStorage.loginPage) {
+                return false;
+            }
             modal.deferred = $q.defer();
             modal.params = params;
             // We're going to pipe the new window response into the previous

@@ -12,7 +12,7 @@ var manageOrderCtrl = function($scope, orderService, modalService) {
 
   var options = {
     order_date: $scope.currentViewDate,
-    cancelled: false
+    status: 'active'
   }
 
   $scope.changeDate = function(action) {
@@ -20,15 +20,18 @@ var manageOrderCtrl = function($scope, orderService, modalService) {
       case 'nextDay':
         $scope.currentViewDate.setDate($scope.currentViewDate.getDate() + 1);
         options.order_date = $scope.currentViewDate;
+        options.status = '';
         getOffers(options);
         break;
       case 'prevDay':
         $scope.currentViewDate.setDate($scope.currentViewDate.getDate() - 1);
         options.order_date = $scope.currentViewDate;
+        options.status = '';
         getOffers(options);
         break;
       case 'today':
         options.order_date = $scope.today_date;
+        options.status = '';
         getOffers(options);
         $scope.currentViewDate = new Date();
         break;
@@ -36,6 +39,7 @@ var manageOrderCtrl = function($scope, orderService, modalService) {
         if ($scope.filterDate != null || $scope.filterDate.length > 0) {
           var customDate = new Date($scope.filterDate);
           options.order_date = customDate;
+          options.status = '';
           getOffers(options);
           $scope.currentViewDate = customDate;
         }

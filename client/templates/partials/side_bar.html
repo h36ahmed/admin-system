@@ -1,4 +1,4 @@
-<div class="sidebar grid-content">
+<div class="sidebar grid-content" ng-controller="sideBarCtrl as sidebar">
     <section class="block-list">
         <ul class="fa-ul">
             <li>
@@ -68,7 +68,7 @@
                 <a ui-sref="edit-account"><i class="fa-li fa fa-pencil-square-o" aria-hidden="true"></i>Edit Account</a>
             </li>
             <li>
-                <a ui-sref="logout"><i class="fa-li fa fa-sign-out" aria-hidden="true"></i>Logout</a>
+                <a ng-click="logout()"><i class="fa-li fa fa-sign-out" aria-hidden="true"></i>Logout</a>
             </li>
         </ul>
     </section>
