@@ -3,6 +3,13 @@ var app = angular.module('lunchSociety');
 var customerInfoCtrl = function($scope, $state, $location, $stateParams, customerService) {
 
   $scope.customer = {};
+
+  $scope.tabview = "orders";
+
+  $scope.changeTabview = function(tabview) {
+    $scope.tabview = tabview;
+  }
+
   $scope.customer_id = $stateParams.id;
   if ($stateParams.id) {
     customerService
@@ -11,6 +18,7 @@ var customerInfoCtrl = function($scope, $state, $location, $stateParams, custome
       })
       .success(function(data, status, headers, config) {
         $scope.customer = data;
+        console.log($scope.customer);
       })
       .error(function(data, status, headers, config) {
         // Handle login errors here
