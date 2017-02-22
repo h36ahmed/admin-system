@@ -1,0 +1,112 @@
+---
+name: customer
+url: /customer/:id
+---
+<div class="vertical grid-frame">
+    <div class="grid-content shrink" style="padding: 0;">
+        <div ng-include="'/templates/partials/menu_bar.html'"></div>
+    </div>
+    <div ng-include="'/templates/partials/side_bar.html'"></div>
+    <div class="ls-app-body">
+        <div class="grid-container ls-res-details" ng-controller="customerInfoCtrl as resInfo">
+            <div class="grid-block">
+                <div class="grid-block small-9 vertical">
+                    <div class="grid-content">
+                        <h2>{{customer.first_name | titleCase}} {{customer.last_name | titleCase}}</h2>
+                        <h4>{{customer.city}}, {{customer.country}}</h4>
+                        <h6>{{customer.phone_number}}</h6>
+                    </div>
+                </div>
+                <div class="grid-block small-3 vertical">
+                    <div class="grid-content text-right">
+                        <img src="http://lorempixel.com/400/400/" alt="">
+                    </div>
+                </div>
+           </div>
+           <div class="grid-block">
+                <div class="grid-block small-9 vertical">
+                    <div class="grid-content">
+                        <h3>Account Information</h3>
+                        <p><strong>Date Joined:</strong> {{customer.date_joined}}</p>
+                        <p><strong>Email:</strong> {{customer.user.email}}</p>
+                        <p><strong>Status:</strong> {{customer.active}}</p>
+                        <p><strong>Reminder Emails:</strong> {{customer.reminder_emails}}</p>
+                        <p><strong>Payment Plan:</strong> {{customer.payment_plan.name}}</p>
+                        <p><strong>Referral Code:</strong> {{customer.referral_code.referral_code}}</p>
+                    </div>
+                </div>
+                <div class="grid-block small-3 vertical">
+                    <div class="grid-content text-right">
+                        <p><strong>Meals Remaining:</strong> {{customer.meals_remaining}}</p>
+                    </div>
+                </div>
+           </div>
+           <div class="grid-block">
+                <div class="grid-block small-6 vertical">
+                    <div class="grid-content">
+                        <h3>Orders</h3>
+                        <div class="ls-table-responsive-vertical shadow-z-1">
+                           <table id="table" class="ls-table ls-table-hover">
+                              <thead>
+                                <tr>
+                                  <th>ID</th>
+                                  <th>Order Date</th>
+                                  <th>Meal Name</th>
+                                  <th>Restuarant Name</th>
+                                  <th>Pickup Time</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr ng-repeat="order in customer.orders">
+                                    <td>{{order.id}}</td>
+                                    <td>{{order.order_date}}</td>
+                                    <td>{{order.offer.meal.name}}</td>
+                                    <td>{{order.offer.meal.restuarant.name}}</td>
+                                    <td>{{order.pickup_time.pickup_time}}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                       </div>
+                    </div>
+                </div>
+                <div class="grid-block small-6 vertical">
+                    <div class="grid-content">
+                        <h3>Invoices</h3>
+                        <div class="ls-table-responsive-vertical shadow-z-1">
+                          <table id="table" class="ls-table ls-table-hover">
+                              <thead>
+                                <tr>
+                                  <th>ID</th>
+                                  <th>Invoice Date</th>
+                                  <th>Total Payment (BT)</th>
+                                  <th>Tax Amount</th>
+                                  <th>Status</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr ng-repeat="invoice in customer.invoices">
+                                  <td data-title="id">
+                                      {{invoice.id}}
+                                  </td>
+                                  <td data-title="invoice date">
+                                      {{invoice.invoice_date | date}}
+                                  </td>
+                                  <td data-title="total payment before tax">
+                                      {{invoice.total_payment_before_tax | currency}}
+                                  </td>
+                                  <td data-title="tax amount">
+                                      {{invoice.tax_amount | currency}}
+                                  </td>
+                                  <td data-title="status">
+                                      {{invoice.status | uppercase }}
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                       </div>
+                    </div>
+                </div>
+           </div>
+        </div>
+    </div>
+</div>

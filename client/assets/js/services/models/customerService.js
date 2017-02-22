@@ -12,6 +12,7 @@ app.service(
             createCustomer: createCustomer,
             editCustomer: editCustomer,
             getCustomers: getCustomers,
+            getCustomer: getCustomer,
             deleteCustomer: deleteCustomer
         });
 
@@ -37,6 +38,17 @@ app.service(
                 method: "get",
                 url: baseUrl + baseApi + "customers",
                 params: data,
+                headers : {
+                    'Content-Type': 'application/json',
+                }
+            });
+            return request;
+        }
+
+        function getCustomer(data) {
+            var request = $http({
+                method: "get",
+                url: baseUrl + baseApi + "customers" + "/" + data.id,
                 headers : {
                     'Content-Type': 'application/json',
                 }

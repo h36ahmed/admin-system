@@ -17,7 +17,7 @@ var restaurantInfoCtrl = function($scope, $state, $location, $stateParams, resta
         $scope.message = 'Error: Something Went Wrong';
       });
   } else {
-    $location.path('manage-restaurants');
+    $location.path('restaurants');
   }
 
 };
