@@ -45,6 +45,7 @@ var paths = {
     '!bower_components/foundation-apps/js/angular/app.js',
     'bower_components/underscore/underscore.js',
     'bower_components/jquery/dist/jquery.js',
+    'bower_components/ng-file-upload/ng-file-upload.js'
   ],
   // These files are for your app's JavaScript
   appJS: [
@@ -153,52 +154,52 @@ gulp.task('uglify:app', function() {
     .pipe(gulp.dest('./build/assets/js/'));
 });
 
-gulp.task('uglify:controllers', function () {
-    var uglify = $.if(isProduction, $.uglify()
-        .on('error', function (e) {
-            console.log(e);
-        }));
+gulp.task('uglify:controllers', function() {
+  var uglify = $.if(isProduction, $.uglify()
+    .on('error', function(e) {
+      console.log(e);
+    }));
 
-    return gulp.src(paths.controllersJS)
-        .pipe(uglify)
-        .pipe($.concat('controllers.js'))
-        .pipe(gulp.dest('./build/assets/js/'));
+  return gulp.src(paths.controllersJS)
+    .pipe(uglify)
+    .pipe($.concat('controllers.js'))
+    .pipe(gulp.dest('./build/assets/js/'));
 });
 
-gulp.task('uglify:directives', function () {
-    var uglify = $.if(isProduction, $.uglify()
-        .on('error', function (e) {
-            console.log(e);
-        }));
+gulp.task('uglify:directives', function() {
+  var uglify = $.if(isProduction, $.uglify()
+    .on('error', function(e) {
+      console.log(e);
+    }));
 
-    return gulp.src(paths.directivesJS)
-        .pipe(uglify)
-        .pipe($.concat('directives.js'))
-        .pipe(gulp.dest('./build/assets/js/'));
+  return gulp.src(paths.directivesJS)
+    .pipe(uglify)
+    .pipe($.concat('directives.js'))
+    .pipe(gulp.dest('./build/assets/js/'));
 });
 
-gulp.task('uglify:services', function () {
-    var uglify = $.if(isProduction, $.uglify()
-        .on('error', function (e) {
-            console.log(e);
-        }));
+gulp.task('uglify:services', function() {
+  var uglify = $.if(isProduction, $.uglify()
+    .on('error', function(e) {
+      console.log(e);
+    }));
 
-    return gulp.src(paths.servicesJS)
-        .pipe(uglify)
-        .pipe($.concat('services.js'))
-        .pipe(gulp.dest('./build/assets/js/'));
+  return gulp.src(paths.servicesJS)
+    .pipe(uglify)
+    .pipe($.concat('services.js'))
+    .pipe(gulp.dest('./build/assets/js/'));
 });
 
-gulp.task('uglify:filters', function () {
-    var uglify = $.if(isProduction, $.uglify()
-        .on('error', function (e) {
-            console.log(e);
-        }));
+gulp.task('uglify:filters', function() {
+  var uglify = $.if(isProduction, $.uglify()
+    .on('error', function(e) {
+      console.log(e);
+    }));
 
-    return gulp.src(paths.filtersJS)
-        .pipe(uglify)
-        .pipe($.concat('filters.js'))
-        .pipe(gulp.dest('./build/assets/js/'));
+  return gulp.src(paths.filtersJS)
+    .pipe(uglify)
+    .pipe($.concat('filters.js'))
+    .pipe(gulp.dest('./build/assets/js/'));
 });
 
 // Starts a test server, which you can view at http://localhost:8079

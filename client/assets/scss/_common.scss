@@ -133,6 +133,14 @@ select {
       text-align: center;
     }
   }
+    &.ls-create-form, &.ls-edit-form {
+        padding-bottom: 30px;
+        img {
+            width:150px;
+            height: auto;
+            margin-top: 20px;
+        }
+    }
   &.ls-delete-form {
     text-align: right;
     .button {

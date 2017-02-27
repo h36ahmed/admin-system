@@ -12,7 +12,8 @@
       'foundation.dynamicRouting.animations',
 
       'underscore',
-      'jquery'
+      'jquery',
+      'ngFileUpload'
     ])
     .config(config)
     .run(run);
