@@ -1,8 +1,12 @@
 var app = angular.module('lunchSociety');
 
-var createAccountCtrl = function($scope, $window, $location, userService, modalService) {
+var createAccountCtrl = function($scope, $window, $location, userService, modalService, passwordService) {
 
-  $scope.registerFormData = {};
+  $scope.registerForm = {};
+
+  $scope.generatePassword = function() {
+    $scope.registerForm.password = passwordService.generatePassword();
+  };
 
   $scope.submitForm = function(isValid) {
     // check to make sure the form is completely valid
@@ -11,24 +15,26 @@ var createAccountCtrl = function($scope, $window, $location, userService, modalS
         "status", {}
       );
       userService
-        .createUser($scope.registerFormData)
+        .createUser($scope.registerForm)
         .success(function(data, status, headers, config) {
           modalService.resolve();
           promise.then(
             function handleResolve(response) {
-              if (data.type == 'owner') {
-                $location.path('create-owner').search({
-                  user_id: data.id
-                });
-              } else {
+                $scope.registerForm = {};
                 promise = modalService.open(
                   "alert", {
-                    message: 'Customer Added & Email Sent!'
+                    message: 'User Added & Email Sent!'
                   }
                 );
-                promise.then(function handleResolve(response) {},
+                promise.then(function handleResolve(response) {
+                  if (data.type == 'owner') {
+                    $location.path('create-owner').search({
+                      user_id: data.id
+                    });
+                  }
+                },
                   function handleReject(error) {});
-              }
+
             },
             function handleReject(error) {
               console.log('Why is it rejected?');
@@ -58,6 +64,6 @@ var createAccountCtrl = function($scope, $window, $location, userService, modalS
 
 };
 
-createAccountCtrl.inject = ['$scope', '$window', '$location', 'userService', 'modalService'];
+createAccountCtrl.inject = ['$scope', '$window', '$location', 'userService', 'modalService', 'passwordService'];
 
 app.controller('createAccountCtrl', createAccountCtrl);
