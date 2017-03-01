@@ -83,7 +83,7 @@ var editOwnerCtrl = function($scope, $state, $location,
   function fillFormData() {
     $scope.editOwnerFormData.first_name = $scope.owner.first_name;
     $scope.editOwnerFormData.last_name = $scope.owner.last_name;
-    $scope.editOwnerFormData.phone_number = $scope.owner.phone_number;
+    $scope.editOwnerFormData.phone_number = parseInt($scope.owner.phone_number);
     $scope.editOwnerFormData.owner = _.findWhere($scope.owners, {
       id: $scope.owner.user_id
     });

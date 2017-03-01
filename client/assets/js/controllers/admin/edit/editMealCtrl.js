@@ -15,7 +15,6 @@ var editMealCtrl = function($scope, $state, $location,
     .getRestaurants()
     .success(function(data, status, headers, config) {
       $scope.restaurants = data;
-      console.log($scope.restaurants);
       if ($stateParams.id) {
         mealService
           .getMeal({

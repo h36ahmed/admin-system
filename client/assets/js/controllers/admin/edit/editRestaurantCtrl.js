@@ -5,7 +5,7 @@ var editRestaurantCtrl = function($scope, $state, $location,
   ownerService, modalService, _) {
 
   $scope.restaurant = {};
-  $scope.editResFormData = {};
+  $scope.editRestaurantFormData = {};
 
   $scope.owners = [];
 
@@ -88,16 +88,16 @@ var editRestaurantCtrl = function($scope, $state, $location,
   // FILL FORM DATA
 
   function fillFormData() {
-    $scope.editResFormData.name = $scope.restaurant.name;
-    $scope.editResFormData.phone_number = $scope.restaurant.phone_number;
-    $scope.editResFormData.postal_code = $scope.restaurant.postal_code;
-    $scope.editResFormData.owner = _.findWhere($scope.owners, {
+    $scope.editRestaurantFormData.name = $scope.restaurant.name;
+    $scope.editRestaurantFormData.phone_number = parseInt($scope.restaurant.phone_number);
+    $scope.editRestaurantFormData.postal_code = $scope.restaurant.postal_code;
+    $scope.editRestaurantFormData.owner = _.findWhere($scope.owners, {
       id: $scope.restaurant.owner_id
     });
-    $scope.editResFormData.street_address = $scope.restaurant.street_address;
-    $scope.editResFormData.city = $scope.restaurant.city;
-    $scope.editResFormData.country = $scope.restaurant.country;
-    $scope.editResFormData.state = $scope.restaurant.state;
+    $scope.editRestaurantFormData.street_address = $scope.restaurant.street_address;
+    $scope.editRestaurantFormData.city = $scope.restaurant.city;
+    $scope.editRestaurantFormData.country = $scope.restaurant.country;
+    $scope.editRestaurantFormData.state = $scope.restaurant.state;
   }
 
   // SUBMIT EDIT FORM
@@ -108,11 +108,11 @@ var editRestaurantCtrl = function($scope, $state, $location,
       promise = modalService.open(
         "status", {}
       );
-      $scope.editResFormData.owner_id = parseInt($scope.editResFormData.owner.id);
-      $scope.editResFormData.phone_number = parseInt($scope.editResFormData.phone_number);
-      $scope.editResFormData.id = $stateParams.id;
+      $scope.editRestaurantFormData.owner_id = parseInt($scope.editRestaurantFormData.owner.id);
+      $scope.editRestaurantFormData.phone_number = parseInt($scope.editRestaurantFormData.phone_number);
+      $scope.editRestaurantFormData.id = $stateParams.id;
       restaurantService
-        .editRestaurant($scope.editResFormData)
+        .editRestaurant($scope.editRestaurantFormData)
         .success(function(data, status, headers, config) {
           modalService.resolve();
           promise.then(

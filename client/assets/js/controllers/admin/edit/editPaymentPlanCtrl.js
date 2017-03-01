@@ -3,7 +3,7 @@ var app = angular.module('lunchSociety');
 var editPaymentPlanCtrl = function($scope, $state, $location,
   $stateParams, paymentPlanService, modalService) {
 
-  $scope.editPaymentPlanFormData = {};
+  $scope.paymentPlanFormData = {};
 
   var promise = modalService.open(
     "status", {}
@@ -52,9 +52,9 @@ var editPaymentPlanCtrl = function($scope, $state, $location,
 
 
   function fillFormData() {
-    $scope.editPaymentPlanFormData.name = $scope.paymentPlan.name;
-    $scope.editPaymentPlanFormData.price = $scope.paymentPlan.price;
-    $scope.editPaymentPlanFormData.description = $scope.paymentPlan.description;
+    $scope.paymentPlanFormData.name = $scope.paymentPlan.name;
+    $scope.paymentPlanFormData.price = $scope.paymentPlan.price;
+    $scope.paymentPlanFormData.description = $scope.paymentPlan.description;
   }
 
   $scope.submitEditForm = function(isValid) {
@@ -63,9 +63,9 @@ var editPaymentPlanCtrl = function($scope, $state, $location,
       promise = modalService.open(
         "status", {}
       );
-      $scope.editPaymentPlanFormData.id = $stateParams.id;
+      $scope.paymentPlanFormData.id = $stateParams.id;
       paymentPlanService
-        .editPaymentPlan($scope.editPaymentPlanFormData)
+        .editPaymentPlan($scope.paymentPlanFormData)
         .success(function(data, status, headers, config) {
           modalService.resolve();
           promise.then(

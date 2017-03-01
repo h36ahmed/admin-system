@@ -26,32 +26,47 @@ url: /owner/:id
             <div class="grid-block">
                 <div class="grid-block small-12 vertical">
                     <div class="grid-content">
-                        <form class="ls-form ls-edit-form" name="editOwnerForm" ng-submit="submitEditForm(editOwnerForm.$valid)">
+                        <form class="ls-form ls-edit-form" name="editOwnerForm" ng-submit="submitEditForm(editOwnerForm.$valid)" novalidate>
                             <div class="grid-block">
                                 <div class="small-12 medium-6 grid-content">
                                     <h4>Owner Details</h4>
-                                    <label for="ownerEmail">
-                                       Owners
-                                    </label>
-                                    <select class="ls-input-fields" ng-model="editOwnerFormData.owner" ng-options="owner as owner.email for owner in owners track by owner.id" name="ownerEmail" id="ownerEmail">
-                                    </select>
-                                    <label for="ownerFN">
-                                        First Name
-                                        <input type="text" placeholder="First Name" class="ls-input-fields" name="ownerFN" id="ownerFN" ng-model="editOwnerFormData.first_name">
-                                    </label>
-                                    <label for="ownerLN">
-                                        Last Name
-                                        <input type="text" placeholder="Last Name" class="ls-input-fields" name="ownerLN" id="ownerLN" ng-model="editOwnerFormData.last_name"/>
-                                    </label>
-                                    <label for="ownerPN">
-                                        Phone Number
-                                        <input type="tel" placeholder="Phone Number" class="ls-input-fields" name="ownerPN" id="ownerPN" ng-model="editOwnerFormData.phone_number">
-                                    </label>
-                                    <img src="http://lorempixel.com/200/200/people" class="ls-image"/>
-                                    <label for="proImage">
-                                        Profile Image <br>
-                                        <input type="file" class="ls-input-fields" name="proImage" id="proImage" ng-model="editOwnerFormData.profile_image">
-                                    </label>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : editOwnerForm.userEmail.$invalid && !editOwnerForm.userEmail.$pristine }">
+                                        <label for="userEmail">
+                                           Owners
+                                        </label>
+                                        <select class="ls-input-fields" ng-model="editOwnerFormData.owner" ng-options="owner as owner.email for owner in owners track by owner.id" name="ownerEmail" id="ownerEmail" required>
+                                        </select>
+                                        <p ng-show="editOwnerForm.userEmail.$invalid && !editOwnerForm.userEmail.$pristine" class="ls-help-block">Select the user to fill the details of owner.</p>
+                                    </div>
+
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : editOwnerForm.ownerFN.$invalid && !editOwnerForm.ownerFN.$pristine }">
+                                        <label for="ownerFN">
+                                            First Name
+                                            <input type="text" placeholder="First Name" class="ls-input-fields" name="ownerFN" id="ownerFN" ng-model="editOwnerFormData.first_name" required>
+                                        </label>
+                                        <p ng-show="editOwnerForm.ownerFN.$invalid && !editOwnerForm.ownerFN.$pristine" class="ls-help-block">Enter a valid first name.</p>
+                                    </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : editOwnerForm.ownerLN.$invalid && !editOwnerForm.ownerLN.$pristine }">
+                                        <label for="ownerLN">
+                                            Last Name
+                                            <input type="text" placeholder="Last Name" class="ls-input-fields" name="ownerLN" id="ownerLN" ng-model="editOwnerFormData.last_name" required/>
+                                        </label>
+                                        <p ng-show="editOwnerForm.ownerLN.$invalid && !editOwnerForm.ownerLN.$pristine" class="ls-help-block">Enter a valid last name.</p>
+                                    </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : editOwnerForm.ownerPN.$invalid && !editOwnerForm.ownerPN.$pristine }">
+                                        <label for="ownerPN">
+                                            Phone Number
+                                            <input type="number" placeholder="Phone Number" class="ls-input-fields" name="ownerPN" id="ownerPN" ng-model="editOwnerFormData.phone_number" required ng-minlength="10" ng-maxlength="10">
+                                        </label>
+                                        <p ng-show="editOwnerForm.ownerPN.$invalid && !editOwnerForm.ownerPN.$pristine" class="ls-help-block">Enter a valid phone number.</p>
+                                    </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : editOwnerForm.proImage.$invalid && !editOwnerForm.proImage.$pristine }">
+                                        <label for="proImage">
+                                            Profile Image <br>
+                                            <input type="file" class="ls-input-fields" name="proImage" id="proImage" ng-model="editOwnerFormData.profile_image">
+                                        </label>
+                                        <p ng-show="editOwnerForm.proImage.$invalid && !editOwnerForm.proImage.$pristine" class="ls-help-block">Choose profile image file for the meal.</p>
+                                    </div>
                                 </div>
                                 <div class="small-12 medium-6 grid-content">
                                     <h4>Restaurant</h4>
@@ -81,7 +96,7 @@ url: /owner/:id
 
                                 </div>
                                 <div class="small-6 grid-content text-right">
-                                    <input type="submit" class="button" name="update" value="Update Owner Information">
+                                    <input type="submit" class="button" name="update" value="Update Owner Information" ng-disabled="editOwnerForm.$invalid">
                                 </div>
                             </div>
                         </form>

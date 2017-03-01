@@ -27,57 +27,83 @@ url: /restaurant-edit/:id
                 <div class="grid-block small-12 vertical">
                     <div class="grid-content">
                         <form class="ls-form ls-edit-form"
-                           name="editResForm" ng-submit="submitEditForm(editResForm.$valid)">
+                           name="editResForm" ng-submit="submitEditForm(editResForm.$valid)" novalidate>
                            <div class="grid-block ls-top-form-header">
                                 <div class="small-3 grid-content text-center">
                                 </div>
                                 <div class="small-6 grid-content text-center">
-                                    <label for="ownerEmail">
-                                       Owners
-                                    </label>
-                                    <select class="ls-input-fields" ng-model="editResFormData.owner" ng-options="owner as owner.user.email for owner in owners track by owner.id" name="ownerEmail" id="ownerEmail">
-                                    </select>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : editRestaurantForm.ownerEmail.$invalid && !editRestaurantForm.ownerEmail.$pristine }">
+                                        <label for="ownerEmail">
+                                           Owners
+                                        </label>
+                                        <select class="ls-input-fields" ng-model="editRestaurantFormData.owner" ng-options="owner as owner.user.email for owner in owners track by owner.id" name="ownerEmail" id="ownerEmail" required>
+                                        </select>
+                                        <p ng-show="editRestaurantForm.ownerEmail.$invalid && !editRestaurantForm.ownerEmail.$pristine" class="ls-help-block">Select the owner for the restaurant.</p>
+                                    </div>
                                 </div>
                                 <div class="small-3 grid-content text-center">
                                 </div>
                             </div>
                             <div class="grid-block">
                                 <div class="small-12 medium-6 grid-content">
-                                   <label for="resName">
-                                        Restaurant Name
-                                        <input type="text" placeholder="Restaurant Name" class="ls-input-fields" name="resName" id="resName" ng-model="editResFormData.name">
-                                    </label>
-                                    <label for="resPN">
-                                        Phone Number
-                                        <input type="tel" placeholder="Phone Number" class="ls-input-fields" name="resPN" id="resPN" ng-model="editResFormData.phone_number">
-                                    </label>
-                                    <label for="resPC">
-                                        Postal Code
-                                        <input type="text" placeholder="e.g. M5V4B1" class="ls-input-fields" name="resPC" id="resPC" ng-model="editResFormData.postal_code">
-                                    </label>
-                                    <label for="resLogo">
-                                        Restaurant Logo <br>
-                                        <input type="file" placeholder="Restaurant Logo" class="ls-input-fields" name="resLogo" id="resLogo" ng-model="editResFormData.logo">
-                                    </label>
-
+                                   <div class="ls-form-group" ng-class="{ 'ls-has-error' : editRestaurantForm.resName.$invalid && !editRestaurantForm.resName.$pristine }">
+                                        <label for="resName">
+                                            Restaurant Name
+                                            <input type="text" placeholder="Restaurant Name" class="ls-input-fields" name="resName" id="resName" ng-model="editRestaurantFormData.name" required>
+                                        </label>
+                                        <p ng-show="editRestaurantForm.resName.$invalid && !editRestaurantForm.resName.$pristine" class="ls-help-block">Enter a valid restaurant name.</p>
+                                    </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : editRestaurantForm.resPN.$invalid && !editRestaurantForm.resPN.$pristine }">
+                                        <label for="resPN">
+                                            Phone Number
+                                            <input type="number" placeholder="Phone Number" class="ls-input-fields" name="resPN" id="resPN" ng-model="editRestaurantFormData.phone_number" required ng-minlength="10" ng-maxlength="10">
+                                        </label>
+                                        <p ng-show="editRestaurantForm.resPN.$invalid && !editRestaurantForm.resPN.$pristine" class="ls-help-block">Enter a valid phone number.</p>
+                                    </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : editRestaurantForm.resPC.$invalid && !editRestaurantForm.resPC.$pristine }">
+                                        <label for="resPC">
+                                            Postal Code
+                                            <input type="text" placeholder="e.g. M5V4B1" class="ls-input-fields" name="resPC" id="resPC" ng-model="editRestaurantFormData.postal_code" ng-maxlength="6" required>
+                                        </label>
+                                        <p ng-show="editRestaurantForm.resPC.$invalid && !editRestaurantForm.resPC.$pristine" class="ls-help-block">Enter a valid postal code.</p>
+                                    </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : editRestaurantForm.resLogo.$invalid && !editRestaurantForm.resLogo.$pristine }">
+                                        <label for="resLogo">
+                                            Restaurant Logo <br>
+                                            <input type="file" placeholder="Restaurant Logo" class="ls-input-fields" name="resLogo" id="resLogo" ng-model="editRestaurantFormData.logo">
+                                        </label>
+                                        <p ng-show="editRestaurantForm.resLogo.$invalid && !editRestaurantForm.resLogo.$pristine" class="ls-help-block">Choose image file for the restaurant logo.</p>
+                                    </div>
                                 </div>
                                 <div class="small-12 medium-6 grid-content">
-                                    <label for="resSA">
-                                        Street Address
-                                        <input type="text" placeholder="e.g. 75 Queens Wharf" class="ls-input-fields" name="resSA" id="resSA" ng-model="editResFormData.street_address"/>
-                                    </label>
-                                    <label for="resCity">
-                                        City
-                                        <input type="text" placeholder="e.g. Toronto" class="ls-input-fields" name="resCity" id="resCity" ng-model="editResFormData.city">
-                                    </label>
-                                    <label for="resState">
-                                        State / Province
-                                        <input type="text" placeholder="e.g. Ontario" class="ls-input-fields" name="resState" id="resState" ng-model="editResFormData.state">
-                                    </label>
-                                    <label for="resCountry">
-                                        Country
-                                        <input type="text" placeholder="e.g. Canada" class="ls-input-fields" name="resCountry" id="resCountry" ng-model="editResFormData.country">
-                                    </label>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : editRestaurantForm.resSA.$invalid && !editRestaurantForm.resSA.$pristine }">
+                                        <label for="resSA">
+                                            Street Address
+                                            <input type="text" placeholder="e.g. 75 Queens Wharf" class="ls-input-fields" name="resSA" id="resSA" ng-model="editRestaurantFormData.street_address" required/>
+                                        </label>
+                                        <p ng-show="editRestaurantForm.resSA.$invalid && !editRestaurantForm.resSA.$pristine" class="ls-help-block">Enter a valid street address.</p>
+                                    </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : editRestaurantForm.resCity.$invalid && !editRestaurantForm.resCity.$pristine }">
+                                        <label for="resCity">
+                                            City
+                                            <input type="text" placeholder="e.g. Toronto" class="ls-input-fields" name="resCity" id="resCity" ng-model="editRestaurantFormData.city" required>
+                                        </label>
+                                        <p ng-show="editRestaurantForm.resCity.$invalid && !editRestaurantForm.resCity.$pristine" class="ls-help-block">Enter a valid city.</p>
+                                    </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : editRestaurantForm.resState.$invalid && !editRestaurantForm.resState.$pristine }">
+                                        <label for="resState">
+                                            State / Province
+                                            <input type="text" placeholder="e.g. Ontario" class="ls-input-fields" name="resState" id="resState" ng-model="editRestaurantFormData.state" required>
+                                        </label>
+                                        <p ng-show="editRestaurantForm.resState.$invalid && !editRestaurantForm.resState.$pristine" class="ls-help-block">Enter a valid state or province.</p>
+                                    </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : editRestaurantForm.resCountry.$invalid && !editRestaurantForm.resCountry.$pristine }">
+                                        <label for="resCountry">
+                                            Country
+                                            <input type="text" placeholder="e.g. Canada" class="ls-input-fields" name="resCountry" id="resCountry" ng-model="editRestaurantFormData.country" required>
+                                        </label>
+                                        <p ng-show="editRestaurantForm.resCountry.$invalid && !editRestaurantForm.resCountry.$pristine" class="ls-help-block">Enter a valid country.</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="grid-block">
@@ -91,7 +117,7 @@ url: /restaurant-edit/:id
                                     </div>
                                 </div>
                                 <div class="small-6 grid-content text-right">
-                                    <input type="submit" class="button" name="update" value="Update Restaurant Information">
+                                    <input type="submit" class="button" name="update" value="Update Restaurant Information" ng-disabled="editResForm.$invalid">
                                 </div>
                             </div>
                         </form>

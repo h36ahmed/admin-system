@@ -19,28 +19,29 @@ url: /edit-account
             <div class="grid-block">
                 <div class="grid-block small-12 vertical">
                     <div class="grid-content">
-                        <form class="ls-form ls-edit-form" name="editUserForm" ng-submit="submitEditForm(editUserForm.$valid)">
+                        <form class="ls-form ls-edit-form" name="editUserForm" ng-submit="submitEditForm(editUserForm.$valid)" novalidate>
                             <div class="grid-block">
                                 <div class="small-12 medium-6 grid-content">
                                     <label>
                                         Email Address
-                                        <input type="text" placeholder="Email Address" class="ls-input-fields" ng-model="editUserFormData.email" >
+                                        <input type="text" name="email" placeholder="Email Address" class="ls-input-fields" ng-model="editUserFormData.email" disabled>
                                     </label>
-
                                 </div>
                                 <div class="small-12 medium-6 grid-content">
-                                    <label>
-                                        Password
-                                        <input type="text" placeholder="Password" class="ls-input-fields" ng-model="editUserFormData.password">
-                                    </label>
-                                    <button type="button" class="button secondary">Generate Password</button>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : editUserForm.password.$invalid && !editUserForm.password.$pristine }">
+                                        <label>
+                                            Password
+                                            <input type="text" name="password" placeholder="Password" class="ls-input-fields" ng-model="editUserFormData.password" required>
+                                        </label>
+                                        <p ng-show="editUserForm.password.$invalid && !editUserForm.password.$pristine" class="ls-help-block">Enter a valid password.</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="grid-block">
                                 <div class="small-6 grid-content text-right">
                                 </div>
                                 <div class="small-6 grid-content text-right">
-                                    <input type="submit" class="button" name="update" value="Update User Information">
+                                    <input type="submit" class="button" name="update" value="Update User Information" ng-disabled="editUserForm.$invalid">
                                 </div>
                             </div>
                         </form>

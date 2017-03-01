@@ -26,34 +26,46 @@ url: /plan/:id
             <div class="grid-block">
                 <div class="grid-block small-12 vertical">
                     <div class="grid-content">
-                        <form class="ls-form ls-edit-form" name="editPaymentPlanForm" ng-submit="submitEditForm(editPaymentPlanForm.$valid)">
+                        <form class="ls-form ls-edit-form" name="editPaymentPlanForm" ng-submit="submitEditForm(editPaymentPlanForm.$valid)" novalidate>
                             <div class="grid-block">
                                 <div class="small-12 medium-6 grid-content">
-                                    <label for="planName">
-                                        Name
-                                        <input type="text" placeholder="Payment Plan Name" class="ls-input-fields" name="planName" id="planName" ng-model="editPaymentPlanFormData.name">
-                                    </label>
-                                    <label for="planDesc">
-                                        Description
-                                        <textarea name="planDesc" id="planDesc" cols="30" rows="8" placeholder="Description" class="ls-input-fields" ng-model="editPaymentPlanFormData.description"></textarea>
-                                    </label>
-                                    <label for="planPrice">
-                                        Price
-                                        <input type="number" placeholder="e.g. 9.99" class="ls-input-fields" name="planPrice" id="planPrice" ng-model="editPaymentPlanFormData.price">
-                                    </label>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : editPaymentPlanForm.planName.$invalid && !editPaymentPlanForm.planName.$pristine }">
+                                        <label for="planName">
+                                            Name
+                                            <input type="text" placeholder="Payment Plan Name" class="ls-input-fields" name="planName" id="planName" ng-model="paymentPlanFormData.name" required>
+                                        </label>
+                                        <p ng-show="editPaymentPlanForm.planName.$invalid && !editPaymentPlanForm.planName.$pristine" class="ls-help-block">Enter a valid payment plan name.</p>
+                                    </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : editPaymentPlanForm.planDesc.$invalid && !editPaymentPlanForm.planDesc.$pristine }">
+                                        <label for="planDesc">
+                                            Description
+                                            <textarea name="planDesc" id="planDesc" cols="30" rows="8" placeholder="Description" class="ls-input-fields" ng-model="paymentPlanFormData.description" required></textarea>
+                                        </label>
+                                        <p ng-show="editPaymentPlanForm.planDesc.$invalid && !editPaymentPlanForm.planDesc.$pristine" class="ls-help-block">Enter a valid payment plan description.</p>
+                                    </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : editPaymentPlanForm.planPrice.$invalid && !editPaymentPlanForm.planPrice.$pristine }">
+                                        <label for="planPrice">
+                                            Price
+                                            <input type="number" placeholder="e.g. 9.99" class="ls-input-fields" name="planPrice" id="planPrice" ng-model="paymentPlanFormData.price" step="0.01" required>
+                                        </label>
+                                        <p ng-show="editPaymentPlanForm.planPrice.$invalid && !editPaymentPlanForm.planPrice.$pristine" class="ls-help-block">Enter a valid payment plan price.</p>
+                                    </div>
                                 </div>
                                 <div class="small-12 medium-6 grid-content">
-                                    <label for="planImage">
-                                        Icon Image <br>
-                                        <input type="file" name="planImage" id="planImage" ng-model="editPaymentPlanFormData.image">
-                                    </label>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : editPaymentPlanForm.planImage.$invalid && !editPaymentPlanForm.planImage.$pristine }">
+                                        <label for="planImage">
+                                            Icon Image <br>
+                                            <input type="file" name="planImage" id="planImage" ng-model="paymentPlanFormData.image" required>
+                                        </label>
+                                        <p ng-show="editPaymentPlanForm.planImage.$invalid && !editPaymentPlanForm.planImage.$pristine" class="ls-help-block">Choose image file for the icon.</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="grid-block">
                                 <div class="small-6 grid-content text-right">
                                 </div>
                                 <div class="small-6 grid-content text-right">
-                                    <input type="submit" class="button" name="update" value="Update Plan Information">
+                                    <input type="submit" class="button" name="update" value="Update Plan Information" ng-disabled="editPaymentPlanForm.$invalid">
                                 </div>
                             </div>
                         </form>
