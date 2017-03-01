@@ -2,10 +2,10 @@ var app = angular.module('lunchSociety');
 
 var createAccountCtrl = function($scope, $window, $location, userService, modalService, passwordService) {
 
-  $scope.registerForm = {};
+  $scope.registerFormData = {};
 
   $scope.generatePassword = function() {
-    $scope.registerForm.password = passwordService.generatePassword();
+    $scope.registerFormData.password = passwordService.generatePassword();
   };
 
   $scope.submitForm = function(isValid) {
@@ -15,12 +15,12 @@ var createAccountCtrl = function($scope, $window, $location, userService, modalS
         "status", {}
       );
       userService
-        .createUser($scope.registerForm)
+        .createUser($scope.registerFormData)
         .success(function(data, status, headers, config) {
           modalService.resolve();
           promise.then(
             function handleResolve(response) {
-                $scope.registerForm = {};
+                $scope.registerFormData = {};
                 promise = modalService.open(
                   "alert", {
                     message: 'User Added & Email Sent!'

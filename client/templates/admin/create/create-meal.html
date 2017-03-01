@@ -8,7 +8,7 @@ url: /create-meal/:res_id
     </div>
     <div ng-include="'/templates/partials/side_bar.html'"></div>
     <div class="ls-app-body">
-        <div class="grid-container ls-meal-info">
+        <div class="grid-container ls-meal-info" ng-controller="createMealCtrl as createMeal">
            <div class="grid-block ls-title-bar">
                 <div class="grid-block small-12 vertical">
                     <div class="grid-content">
@@ -19,40 +19,61 @@ url: /create-meal/:res_id
             <div class="grid-block">
                 <div class="grid-block small-12 vertical">
                     <div class="grid-content">
-                        <form class="ls-form ls-create-form" ng-controller="createMealCtrl as createMeal"
+                        <form class="ls-form ls-create-form"
                            name="createMealForm" ng-submit="submitForm(createMealForm.$valid)">
                             <div class="grid-block">
                                 <div class="small-12 medium-6 grid-content">
-                                    <label for="resName">Restaurant Name</label>
-                                    <select name="resName" id="resName" class="ls-input-fields" ng-model="createMealFormData.restaurant" ng-options="restaurant as restaurant.name for restaurant in restaurants track by restaurant.id">
-                                    </select>
-                                    <label for="mealName">
-                                        Meal Name
-                                        <input type="text" placeholder="e.g. Soft Glazed Duck" class="ls-input-fields" name="mealName" id="mealName" ng-model="createMealFormData.name">
-                                    </label>
-                                    <label for="mealTag">
-                                        Meal Tagline
-                                        <input type="text" placeholder="e.g. Finger Lickin' Good" class="ls-input-fields" name="mealTag" id="mealTag" ng-model="createMealFormData.tagline">
-                                    </label>
-                                    <label for="mealPrice">
-                                        Meal Price
-                                        <input type="number" placeholder="e.g. 9.99" class="ls-input-fields" name="mealPrice" id="mealPrice" ng-model="createMealFormData.price" step="0.01">
-                                    </label>
-                                    <label for="mealImage">
-                                        Meal Image <br>
-                                        <input type="file" ngf-select name="mealImage" id="mealImage" ng-model="createMealFormData.meal_image" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB">
-                                        <img ngf-src="createMealFormData.meal_image || '/assets/img/lunchsociety-thumb.png'">
-                                    </label>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : createMealForm.resName.$invalid && !createMealForm.resName.$pristine }">
+                                        <label for="resName">Restaurant Name</label>
+                                        <select name="resName" id="resName" class="ls-input-fields" ng-model="createMealFormData.restaurant" ng-options="restaurant as restaurant.name for restaurant in restaurants track by restaurant.id" required>
+                                        </select>
+                                        <p ng-show="createMealForm.resName.$invalid && !createMealForm.resName.$pristine" class="ls-help-block">Select a valid restaurant name.</p>
+                                    </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : createMealForm.mealName.$invalid && !createMealForm.mealName.$pristine }">
+                                        <label for="mealName">
+                                            Meal Name
+                                            <input type="text" placeholder="e.g. Soft Glazed Duck" class="ls-input-fields" name="mealName" id="mealName" ng-model="createMealFormData.name" required>
+                                        </label>
+                                        <p ng-show="createMealForm.mealName.$invalid && !createMealForm.mealName.$pristine" class="ls-help-block">Enter a valid meal name.</p>
+                                    </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : createMealForm.mealTag.$invalid && !createMealForm.mealTag.$pristine }">
+                                        <label for="mealTag">
+                                            Meal Tagline
+                                            <input type="text" placeholder="e.g. Finger Lickin' Good" class="ls-input-fields" name="mealTag" id="mealTag" ng-model="createMealFormData.tagline" required>
+                                        </label>
+                                        <p ng-show="createMealForm.mealTag.$invalid && !createMealForm.mealTag.$pristine" class="ls-help-block">Enter a valid meal tag line.</p>
+                                    </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : createMealForm.mealPrice.$invalid && !createMealForm.mealPrice.$pristine }">
+                                        <label for="mealPrice">
+                                            Meal Price
+                                            <input type="number" placeholder="e.g. 9.99" class="ls-input-fields" name="mealPrice" id="mealPrice" ng-model="createMealFormData.price" step="0.01" required>
+                                        </label>
+                                        <p ng-show="createMealForm.mealPrice.$invalid && !createMealForm.mealPrice.$pristine" class="ls-help-block">Enter a valid meal price.</p>
+                                    </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : createMealForm.mealImage.$invalid && !createMealForm.mealImage.$pristine }">
+                                        <label for="mealImage">
+                                            Meal Image <br>
+                                            <input type="file" ngf-select name="mealImage" id="mealImage" ng-model="createMealFormData.meal_image" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" required>
+                                            <img ngf-src="createMealFormData.meal_image || '/assets/img/lunchsociety-thumb.png'">
+                                        </label>
+                                        <p ng-show="createMealForm.mealImage.$invalid && !createMealForm.mealImage.$pristine" class="ls-help-block">Choose image file for the meal.</p>
+                                    </div>
                                 </div>
                                 <div class="small-12 medium-6 grid-content">
-                                    <label for="mealDesc">
-                                        Meal Description
-                                        <textarea name="mealDesc" id="mealDesc" cols="30" rows="8" placeholder="e.g. Soft glazed duck served on sizzling plate." class="ls-input-fields" ng-model="createMealFormData.description"></textarea>
-                                    </label>
-                                    <label for="mealIngredients">
-                                        Meal Ingredients
-                                        <textarea name="mealIngredients" id="mealIngredients" cols="30" rows="8" placeholder="e.g. Cucumber, Avocado, Banana" class="ls-input-fields" ng-model="createMealFormData.ingredients"></textarea>
-                                    </label>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : createMealForm.mealDesc.$invalid && !createMealForm.mealDesc.$pristine }">
+                                        <label for="mealDesc">
+                                            Meal Description
+                                            <textarea name="mealDesc" id="mealDesc" cols="30" rows="8" placeholder="e.g. Soft glazed duck served on sizzling plate." class="ls-input-fields" ng-model="createMealFormData.description"></textarea>
+                                        </label>
+                                        <p ng-show="createMealForm.mealDesc.$invalid && !createMealForm.mealDesc.$pristine" class="ls-help-block">Enter a valid meal description.</p>
+                                    </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : createMealForm.mealIngredients.$invalid && !createMealForm.mealIngredients.$pristine }">
+                                        <label for="mealIngredients">
+                                            Meal Ingredients
+                                            <textarea name="mealIngredients" id="mealIngredients" cols="30" rows="8" placeholder="e.g. Cucumber, Avocado, Banana" class="ls-input-fields" ng-model="createMealFormData.ingredients" required></textarea>
+                                        </label>
+                                        <p ng-show="createMealForm.mealIngredients.$invalid && !createMealForm.mealIngredients.$pristine" class="ls-help-block">Enter a valid meal ingredients.</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="grid-block">
@@ -60,7 +81,7 @@ url: /create-meal/:res_id
 
                                 </div>
                                 <div class="small-6 grid-content text-right">
-                                    <input type="submit" class="button" value="Add Meal to Restaurant">
+                                    <input type="submit" class="button" value="Add Meal to Restaurant" ng-disabled="createMealForm.$invalid">
                                 </div>
                             </div>
                         </form>

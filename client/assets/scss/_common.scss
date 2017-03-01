@@ -125,6 +125,12 @@ select {
 }
 
 .ls-form {
+  .ng-invalid:not(.ng-pristine) {
+    border: 1px solid $alert-color;
+  }
+  .ls-help-block {
+    color: $alert-color;
+  }
   .button {
     margin: 0;
     &.secondary {
@@ -133,14 +139,15 @@ select {
       text-align: center;
     }
   }
-    &.ls-create-form, &.ls-edit-form {
-        padding-bottom: 30px;
-        img {
-            width:150px;
-            height: auto;
-            margin-top: 20px;
-        }
+  &.ls-create-form,
+  &.ls-edit-form {
+    padding-bottom: 30px;
+    img {
+      width: 150px;
+      height: auto;
+      margin-top: 20px;
     }
+  }
   &.ls-delete-form {
     text-align: right;
     .button {
@@ -165,25 +172,26 @@ select {
 }
 
 .ls-top-form-header {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
-.ls-create-button, .ls-export-button {
-    margin-top: 8px !important;
-    margin-right: 0 !important;
+.ls-create-button,
+.ls-export-button {
+  margin-top: 8px !important;
+  margin-right: 0 !important;
 }
 
 .ls-edit-form {
-    .grid-block + .grid-block {
-        margin-top: 20px;
-    }
+  .grid-block + .grid-block {
+    margin-top: 20px;
+  }
 }
 
 .ls-link {
-    margin-top: 20px;
-    display: block;
-    width: 100%;
-    &.ls-next-link {
-        text-align: right;
-    }
+  margin-top: 20px;
+  display: block;
+  width: 100%;
+  &.ls-next-link {
+    text-align: right;
+  }
 }

@@ -8,7 +8,7 @@ url: /create-account
     </div>
     <div ng-include="'/templates/partials/side_bar.html'"></div>
     <div class="ls-app-body">
-        <div class="grid-container ls-create-account">
+        <div class="grid-container ls-create-account" ng-controller="createAccountCtrl as register">
             <div class="grid-block ls-title-bar">
                 <div class="grid-block small-12 vertical">
                     <div class="grid-content">
@@ -18,31 +18,31 @@ url: /create-account
             </div>
             <div class="grid-block">
                <div class="grid-block small-12 vertical">
-                   <div class="grid-content" ng-controller="createAccountCtrl as register">
+                   <div class="grid-content">
                         <form class="ls-form ls-create-form" name="registerForm" ng-submit="submitForm(registerForm.$valid)" novalidate>
                             <div class="grid-block">
                                 <div class="small-12 medium-6 grid-content">
                                     <div class="ls-form-group" ng-class="{ 'ls-has-error' : registerForm.email.$invalid && !registerForm.email.$pristine }">
                                         <label>
                                             Email Address
-                                            <input type="email" placeholder="Email Address" class="ls-input-fields" ng-model="registerForm.email" required>
+                                            <input type="email" name="email" placeholder="Email Address" class="ls-input-fields" ng-model="registerFormData.email" required>
                                         </label>
                                         <p ng-show="registerForm.email.$invalid && !registerForm.email.$pristine" class="ls-help-block">Enter a valid email.</p>
                                     </div>
                                     <div class="ls-form-group" ng-class="{ 'ls-has-error' : registerForm.type.$invalid && !registerForm.type.$pristine }">
                                         <label>Type</label>
-                                        <select class="ls-input-fields" ng-model="registerForm.type" required>
+                                        <select class="ls-input-fields" name="type" ng-model="registerFormData.type" required>
                                             <option value="customer">Customer</option>
                                             <option value="owner">Restaurant Owner</option>
                                         </select>
-                                        <p ng-show="registerForm.type.$invalid && !registerForm.type.$pristine" class="ls-help-block">Enter a valid email.</p>
+                                        <p ng-show="registerForm.type.$invalid && !registerForm.type.$pristine" class="ls-help-block">Select a valid type.</p>
                                     </div>
                                 </div>
                                 <div class="small-12 medium-6 grid-content">
                                     <div class="ls-form-group" ng-class="{ 'ls-has-error' : registerForm.password.$invalid && !registerForm.password.$pristine }">
                                         <label>
                                             Password
-                                            <input type="text" placeholder="Password" class="ls-input-fields" ng-model="registerForm.password" required>
+                                            <input type="text" name="password" placeholder="Password" class="ls-input-fields" ng-model="registerFormData.password" required>
                                         </label>
                                         <p ng-show="registerForm.password.$invalid && !registerForm.password.$pristine" class="ls-help-block">Enter a valid password.</p>
                                     </div>

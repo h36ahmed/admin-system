@@ -8,7 +8,7 @@ url: /create-owner/:user_id
     </div>
     <div ng-include="'/templates/partials/side_bar.html'"></div>
     <div class="ls-app-body">
-        <div class="grid-container ls-create-account">
+        <div class="grid-container ls-create-account" ng-controller="createOwnerCtrl as createOwner">
             <div class="grid-block ls-title-bar">
                 <div class="grid-block small-12 vertical">
                     <div class="grid-content">
@@ -18,18 +18,21 @@ url: /create-owner/:user_id
             </div>
             <div class="grid-block">
                <div class="grid-block small-12 vertical">
-                   <div class="grid-content" ng-controller="createOwnerCtrl as createOwner">
-                        <form class="ls-form ls-create-form" name="createOwnerForm" ng-submit="submitForm(createOwnerForm.$valid)">
+                   <div class="grid-content">
+                        <form class="ls-form ls-create-form" name="createOwnerForm" ng-submit="submitForm(createOwnerForm.$valid)" novalidate>
                             <div class="grid-block ls-top-form-header">
                                 <div class="small-3 grid-content text-center">
 
                                 </div>
                                 <div class="small-6 grid-content text-center">
-                                    <label for="userEmail">
-                                       Owners
-                                    </label>
-                                    <select class="ls-input-fields" ng-options="owner as owner.email for owner in owners track by owner.id" ng-model="createOwnerFormData.user" name="userEmail" id="userEmail">
-                                    </select>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : createOwnerForm.userEmail.$invalid && !createOwnerForm.userEmail.$pristine }">
+                                        <label for="userEmail">
+                                           Owners
+                                        </label>
+                                        <select class="ls-input-fields" ng-options="owner as owner.email for owner in owners track by owner.id" ng-model="createOwnerFormData.user" name="userEmail" id="userEmail" required>
+                                        </select>
+                                        <p ng-show="createOwnerForm.userEmail.$invalid && !createOwnerForm.userEmail.$pristine" class="ls-help-block">Select the user to fill the details of owner.</p>
+                                    </div>
                                 </div>
                                 <div class="small-3 grid-content text-center">
 
@@ -37,24 +40,36 @@ url: /create-owner/:user_id
                             </div>
                             <div class="grid-block">
                                 <div class="small-12 medium-6 grid-content">
-                                    <label for="ownerFN">
-                                        First Name
-                                        <input type="text" placeholder="First Name" class="ls-input-fields" name="ownerFN" id="ownerFN" ng-model="createOwnerFormData.first_name">
-                                    </label>
-                                    <label for="proImage">
-                                        Profile Image <br>
-                                        <input type="file" class="ls-input-fields" name="proImage" id="proImage" ng-model="createOwnerFormData.profile_image">
-                                    </label>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : createOwnerForm.ownerFN.$invalid && !createOwnerForm.ownerFN.$pristine }">
+                                        <label for="ownerFN">
+                                            First Name
+                                            <input type="text" placeholder="First Name" class="ls-input-fields" name="ownerFN" id="ownerFN" ng-model="createOwnerFormData.first_name" required>
+                                        </label>
+                                        <p ng-show="createOwnerForm.ownerFN.$invalid && !createOwnerForm.ownerFN.$pristine" class="ls-help-block">Enter a valid first name.</p>
+                                    </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : createOwnerForm.proImage.$invalid && !createOwnerForm.proImage.$pristine }">
+                                        <label for="proImage">
+                                            Profile Image <br>
+                                            <input type="file" class="ls-input-fields" name="proImage" id="proImage" ng-model="createOwnerFormData.profile_image">
+                                        </label>
+                                        <p ng-show="createOwnerForm.proImage.$invalid && !createOwnerForm.proImage.$pristine" class="ls-help-block">Choose profile image file for the meal.</p>
+                                    </div>
                                 </div>
                                 <div class="small-12 medium-6 grid-content">
-                                    <label for="ownerLN">
-                                        Last Name
-                                        <input type="text" placeholder="Last Name" class="ls-input-fields" name="ownerLN" id="ownerLN" ng-model="createOwnerFormData.last_name"/>
-                                    </label>
-                                    <label for="ownerPN">
-                                        Phone Number
-                                        <input type="tel" placeholder="Phone Number" class="ls-input-fields" name="ownerPN" id="ownerPN" ng-model="createOwnerFormData.phone_number">
-                                    </label>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : createOwnerForm.ownerLN.$invalid && !createOwnerForm.ownerLN.$pristine }">
+                                        <label for="ownerLN">
+                                            Last Name
+                                            <input type="text" placeholder="Last Name" class="ls-input-fields" name="ownerLN" id="ownerLN" ng-model="createOwnerFormData.last_name" required/>
+                                        </label>
+                                        <p ng-show="createOwnerForm.ownerLN.$invalid && !createOwnerForm.ownerLN.$pristine" class="ls-help-block">Enter a valid last name.</p>
+                                    </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : createOwnerForm.ownerPN.$invalid && !createOwnerForm.ownerPN.$pristine }">
+                                        <label for="ownerPN">
+                                            Phone Number
+                                            <input type="number" placeholder="Phone Number" class="ls-input-fields" name="ownerPN" id="ownerPN" ng-model="createOwnerFormData.phone_number" required ng-minlength="10" ng-maxlength="10">
+                                        </label>
+                                        <p ng-show="createOwnerForm.ownerPN.$invalid && !createOwnerForm.ownerPN.$pristine" class="ls-help-block">Enter a valid phone number.</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="grid-block">
@@ -62,7 +77,7 @@ url: /create-owner/:user_id
 
                                 </div>
                                 <div class="small-6 grid-content text-right">
-                                    <input type="submit" class="button" value="Add Owner Info">
+                                    <input type="submit" class="button" value="Add Owner Info" ng-disabled="createOwnerForm.$invalid">
                                 </div>
                             </div>
                         </form>

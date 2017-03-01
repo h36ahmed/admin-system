@@ -8,7 +8,7 @@ url: /create-restaurant
     </div>
     <div ng-include="'/templates/partials/side_bar.html'"></div>
     <div class="ls-app-body">
-        <div class="grid-container ls-res-info">
+        <div class="grid-container" ng-controller="createRestaurantCtrl as createRestaurant">
             <div class="grid-block ls-title-bar">
                 <div class="grid-block small-12 vertical">
                     <div class="grid-content">
@@ -19,57 +19,83 @@ url: /create-restaurant
             <div class="grid-block">
                <div class="grid-block small-12 vertical">
                    <div class="grid-content">
-                        <form class="ls-form ls-create-form" ng-controller="createRestaurantCtrl as createRestaurant"
-                           name="createRestaurantForm" ng-submit="submitForm(createRestaurantForm.$valid)">
+                        <form class="ls-form ls-create-form" name="createRestaurantForm" ng-submit="submitForm(createRestaurantForm.$valid)" novalidate>
                             <div class="grid-block ls-top-form-header">
                                 <div class="small-3 grid-content text-center">
                                 </div>
                                 <div class="small-6 grid-content text-center">
-                                    <label for="ownerEmail">
-                                       Owners
-                                    </label>
-                                    <select class="ls-input-fields" ng-model="createRestaurantFormData.owner" ng-options="owner as owner.user.email for owner in owners track by owner.id" name="ownerEmail" id="ownerEmail">
-                                    </select>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : createRestaurantForm.ownerEmail.$invalid && !createRestaurantForm.ownerEmail.$pristine }">
+                                        <label for="ownerEmail">
+                                           Owners
+                                        </label>
+                                        <select class="ls-input-fields" ng-model="createRestaurantFormData.owner" ng-options="owner as owner.user.email for owner in owners track by owner.id" name="ownerEmail" id="ownerEmail" required>
+                                        </select>
+                                        <p ng-show="createRestaurantForm.ownerEmail.$invalid && !createRestaurantForm.ownerEmail.$pristine" class="ls-help-block">Select the owner for the restaurant.</p>
+                                    </div>
                                 </div>
                                 <div class="small-3 grid-content text-center">
                                 </div>
                             </div>
                             <div class="grid-block">
                                 <div class="small-12 medium-6 grid-content">
-                                    <label for="resName">
-                                        Restaurant Name
-                                        <input type="text" placeholder="Restaurant Name" class="ls-input-fields" name="resName" id="resName" ng-model="createRestaurantFormData.name">
-                                    </label>
-                                    <label for="resPN">
-                                        Phone Number
-                                        <input type="tel" placeholder="Phone Number" class="ls-input-fields" name="resPN" id="resPN" ng-model="createRestaurantFormData.phone_number">
-                                    </label>
-                                    <label for="resPC">
-                                        Postal Code
-                                        <input type="text" placeholder="e.g. M5V4B1" class="ls-input-fields" name="resPC" id="resPC" ng-model="createRestaurantFormData.postal_code">
-                                    </label>
-                                    <label for="resLogo">
-                                        Restaurant Logo <br>
-                                        <input type="file" placeholder="Restaurant Logo" class="ls-input-fields" name="resLogo" id="resLogo" ng-model="createRestaurantFormData.logo">
-                                    </label>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : createRestaurantForm.resName.$invalid && !createRestaurantForm.resName.$pristine }">
+                                        <label for="resName">
+                                            Restaurant Name
+                                            <input type="text" placeholder="Restaurant Name" class="ls-input-fields" name="resName" id="resName" ng-model="createRestaurantFormData.name" required>
+                                        </label>
+                                        <p ng-show="createRestaurantForm.resName.$invalid && !createRestaurantForm.resName.$pristine" class="ls-help-block">Enter a valid restaurant name.</p>
+                                    </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : createRestaurantForm.resPN.$invalid && !createRestaurantForm.resPN.$pristine }">
+                                        <label for="resPN">
+                                            Phone Number
+                                            <input type="number" placeholder="Phone Number" class="ls-input-fields" name="resPN" id="resPN" ng-model="createRestaurantFormData.phone_number" required ng-minlength="10" ng-maxlength="10">
+                                        </label>
+                                        <p ng-show="createRestaurantForm.resPN.$invalid && !createRestaurantForm.resPN.$pristine" class="ls-help-block">Enter a valid phone number.</p>
+                                    </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : createRestaurantForm.resPC.$invalid && !createRestaurantForm.resPC.$pristine }">
+                                        <label for="resPC">
+                                            Postal Code
+                                            <input type="text" placeholder="e.g. M5V4B1" class="ls-input-fields" name="resPC" id="resPC" ng-model="createRestaurantFormData.postal_code" ng-maxlength="6" required>
+                                        </label>
+                                        <p ng-show="createRestaurantForm.resPC.$invalid && !createRestaurantForm.resPC.$pristine" class="ls-help-block">Enter a valid postal code.</p>
+                                    </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : createRestaurantForm.resLogo.$invalid && !createRestaurantForm.resLogo.$pristine }">
+                                        <label for="resLogo">
+                                            Restaurant Logo <br>
+                                            <input type="file" placeholder="Restaurant Logo" class="ls-input-fields" name="resLogo" id="resLogo" ng-model="createRestaurantFormData.logo" required>
+                                        </label>
+                                        <p ng-show="createRestaurantForm.resLogo.$invalid && !createRestaurantForm.resLogo.$pristine" class="ls-help-block">Choose image file for the restaurant logo.</p>
+                                    </div>
                                 </div>
                                 <div class="small-12 medium-6 grid-content">
-                                    <label for="resSA">
-                                        Street Address
-                                        <input type="text" placeholder="e.g. 75 Queens Wharf" class="ls-input-fields" name="resSA" id="resSA" ng-model="createRestaurantFormData.street_address"/>
-                                    </label>
-                                    <label for="resCity">
-                                        City
-                                        <input type="text" placeholder="e.g. Toronto" class="ls-input-fields" name="resCity" id="resCity" ng-model="createRestaurantFormData.city">
-                                    </label>
-                                    <label for="resState">
-                                        State / Province
-                                        <input type="text" placeholder="e.g. Ontario" class="ls-input-fields" name="resState" id="resState" ng-model="createRestaurantFormData.state">
-                                    </label>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : createRestaurantForm.resSA.$invalid && !createRestaurantForm.resSA.$pristine }">
+                                        <label for="resSA">
+                                            Street Address
+                                            <input type="text" placeholder="e.g. 75 Queens Wharf" class="ls-input-fields" name="resSA" id="resSA" ng-model="createRestaurantFormData.street_address" required/>
+                                        </label>
+                                        <p ng-show="createRestaurantForm.resSA.$invalid && !createRestaurantForm.resSA.$pristine" class="ls-help-block">Enter a valid street address.</p>
+                                    </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : createRestaurantForm.resCity.$invalid && !createRestaurantForm.resCity.$pristine }">
+                                        <label for="resCity">
+                                            City
+                                            <input type="text" placeholder="e.g. Toronto" class="ls-input-fields" name="resCity" id="resCity" ng-model="createRestaurantFormData.city" required>
+                                        </label>
+                                        <p ng-show="createRestaurantForm.resCity.$invalid && !createRestaurantForm.resCity.$pristine" class="ls-help-block">Enter a valid city.</p>
+                                    </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : createRestaurantForm.resState.$invalid && !createRestaurantForm.resState.$pristine }">
+                                        <label for="resState">
+                                            State / Province
+                                            <input type="text" placeholder="e.g. Ontario" class="ls-input-fields" name="resState" id="resState" ng-model="createRestaurantFormData.state" required>
+                                        </label>
+                                        <p ng-show="createRestaurantForm.resState.$invalid && !createRestaurantForm.resState.$pristine" class="ls-help-block">Enter a valid state or province.</p>
+                                    </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : createRestaurantForm.resCountry.$invalid && !createRestaurantForm.resCountry.$pristine }">
                                     <label for="resCountry">
                                         Country
-                                        <input type="text" placeholder="e.g. Canada" class="ls-input-fields" name="resCountry" id="resCountry" ng-model="createRestaurantFormData.country">
+                                        <input type="text" placeholder="e.g. Canada" class="ls-input-fields" name="resCountry" id="resCountry" ng-model="createRestaurantFormData.country" required>
                                     </label>
+                                    <p ng-show="createRestaurantForm.resCountry.$invalid && !createRestaurantForm.resCountry.$pristine" class="ls-help-block">Enter a valid country.</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="grid-block">
@@ -77,10 +103,9 @@ url: /create-restaurant
 
                                 </div>
                                 <div class="small-6 grid-content text-right">
-                                    <input type="submit" class="button" value="Add Restaurant Info">
+                                    <input type="submit" class="button" value="Add Restaurant Info" ng-disabled="createRestaurantForm.$invalid">
                                 </div>
                             </div>
-
                         </form>
                     </div>
                 </div>

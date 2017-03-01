@@ -8,7 +8,7 @@ url: /create-payment-plan
     </div>
     <div ng-include="'/templates/partials/side_bar.html'"></div>
     <div class="ls-app-body">
-        <div class="grid-container ls-res-info">
+        <div class="grid-container" ng-controller="createPaymentPlanCtrl as createPaymentPlan">
             <div class="grid-block ls-title-bar">
                 <div class="grid-block small-12 vertical">
                     <div class="grid-content">
@@ -19,28 +19,39 @@ url: /create-payment-plan
             <div class="grid-block">
                <div class="grid-block small-12 vertical">
                    <div class="grid-content">
-                        <form class="ls-form ls-create-form" ng-controller="createPaymentPlanCtrl as createPaymentPlan"
-                           name="createPaymentPlanForm" ng-submit="submitForm(createPaymentPlanForm.$valid)">
+                        <form class="ls-form ls-create-form" name="createPaymentPlanForm" ng-submit="submitForm(createPaymentPlanForm.$valid)" novalidate>
                             <div class="grid-block">
                                 <div class="small-12 medium-6 grid-content">
-                                    <label for="planName">
-                                        Name
-                                        <input type="text" placeholder="Payment Plan Name" class="ls-input-fields" name="planName" id="planName" ng-model="paymentPlanFormData.name">
-                                    </label>
-                                    <label for="planDesc">
-                                        Description
-                                        <textarea name="planDesc" id="planDesc" cols="30" rows="8" placeholder="Description" class="ls-input-fields" ng-model="paymentPlanFormData.description"></textarea>
-                                    </label>
-                                    <label for="planPrice">
-                                        Price
-                                        <input type="number" placeholder="e.g. 9.99" class="ls-input-fields" name="planPrice" id="planPrice" ng-model="paymentPlanFormData.price" step="0.01">
-                                    </label>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : createPaymentPlanForm.planName.$invalid && !createPaymentPlanForm.planName.$pristine }">
+                                        <label for="planName">
+                                            Name
+                                            <input type="text" placeholder="Payment Plan Name" class="ls-input-fields" name="planName" id="planName" ng-model="paymentPlanFormData.name" required>
+                                        </label>
+                                        <p ng-show="createPaymentPlanForm.planName.$invalid && !createPaymentPlanForm.planName.$pristine" class="ls-help-block">Enter a valid payment plan name.</p>
+                                    </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : createPaymentPlanForm.planDesc.$invalid && !createPaymentPlanForm.planDesc.$pristine }">
+                                        <label for="planDesc">
+                                            Description
+                                            <textarea name="planDesc" id="planDesc" cols="30" rows="8" placeholder="Description" class="ls-input-fields" ng-model="paymentPlanFormData.description" required></textarea>
+                                        </label>
+                                        <p ng-show="createPaymentPlanForm.planDesc.$invalid && !createPaymentPlanForm.planDesc.$pristine" class="ls-help-block">Enter a valid payment plan description.</p>
+                                    </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : createPaymentPlanForm.planPrice.$invalid && !createPaymentPlanForm.planPrice.$pristine }">
+                                        <label for="planPrice">
+                                            Price
+                                            <input type="number" placeholder="e.g. 9.99" class="ls-input-fields" name="planPrice" id="planPrice" ng-model="paymentPlanFormData.price" step="0.01" required>
+                                        </label>
+                                        <p ng-show="createPaymentPlanForm.planPrice.$invalid && !createPaymentPlanForm.planPrice.$pristine" class="ls-help-block">Enter a valid payment plan price.</p>
+                                    </div>
                                 </div>
                                 <div class="small-12 medium-6 grid-content">
-                                    <label for="planImage">
-                                        Icon Image <br>
-                                        <input type="file" name="planImage" id="planImage" ng-model="paymentPlanFormData.image">
-                                    </label>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : createPaymentPlanForm.planImage.$invalid && !createPaymentPlanForm.planImage.$pristine }">
+                                        <label for="planImage">
+                                            Icon Image <br>
+                                            <input type="file" name="planImage" id="planImage" ng-model="paymentPlanFormData.image" required>
+                                        </label>
+                                        <p ng-show="createPaymentPlanForm.planImage.$invalid && !createPaymentPlanForm.planImage.$pristine" class="ls-help-block">Choose image file for the icon.</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="grid-block">
@@ -48,7 +59,7 @@ url: /create-payment-plan
 
                                 </div>
                                 <div class="small-6 grid-content text-right">
-                                    <input type="submit" class="button" value="Add Payment Plan">
+                                    <input type="submit" class="button" value="Add Payment Plan" ng-disabled="createPaymentPlanForm.$invalid">
                                 </div>
                             </div>
                         </form>
