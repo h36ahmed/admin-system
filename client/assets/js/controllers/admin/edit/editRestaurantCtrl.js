@@ -98,6 +98,7 @@ var editRestaurantCtrl = function($scope, $state, $location,
     $scope.editRestaurantFormData.city = $scope.restaurant.city;
     $scope.editRestaurantFormData.country = $scope.restaurant.country;
     $scope.editRestaurantFormData.state = $scope.restaurant.state;
+    $scope.editRestaurantFormData.visible = $scope.restaurant.visible;
   }
 
   // SUBMIT EDIT FORM

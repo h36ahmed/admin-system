@@ -93,7 +93,7 @@ url: /owner/:id
                             </div>
                             <div class="grid-block">
                                 <div class="small-6 grid-content">
-
+                                    <p><strong>Confirmed Email:</strong> <span ng-if="!editOwnerFormData.confirmed_email">No</span><span ng-if="editOwnerFormData.confirmed_email">Yes</span></p>
                                 </div>
                                 <div class="small-6 grid-content text-right">
                                     <input type="submit" class="button" name="update" value="Update Owner Information" ng-disabled="editOwnerForm.$invalid">
