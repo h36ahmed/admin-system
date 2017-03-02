@@ -23,6 +23,43 @@ url: /orders
                     </div>
                 </div>
             </div>
+            <div class="grid-block ls-nav-header">
+                <div class="grid-block medium-3 vertical">
+                   <div class="grid-content">
+                        <a ng-click="changeDate('prevDay')" class="ls-link ls-prev-link"><i class="fa fa-angle-left" aria-hidden="true"></i> Previous Day</a>
+                   </div>
+                </div>
+                <div class="grid-block medium-6 vertical">
+                   <div class="grid-content text-center">
+                        <h4>{{currentViewDate | date}}</h4>
+                   </div>
+                </div>
+                <div class="grid-block medium-3 vertical">
+                   <div class="grid-content">
+                        <a ng-click="changeDate('nextDay')" class="ls-link ls-next-link">Next Day <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                   </div>
+                </div>
+            </div>
+            <section class="grid-block ls-filter-section">
+                <div class="grid-block medium-6 vertical">
+                   <div class="grid-content">
+                        <label for="offerDate">
+                            Filter By Date
+                            <input type="date" placeholder="e.g. Select a Date" class="ls-input-fields" name="filterDate" id="filterDate" ng-model="filterDate">
+                        </label>
+                   </div>
+                </div>
+                <div class="grid-block medium-3 vertical">
+                   <div class="grid-content">
+                         <a ng-click="changeDate('custom')" class="button">Filter By Date</a>
+                   </div>
+                </div>
+                <div class="grid-block medium-3 vertical">
+                   <div class="grid-content">
+                         <a ng-click="changeDate('today')" class="button secondary">Today's Orders</a>
+                   </div>
+                </div>
+            </section>
             <div class="grid-block" ng-repeat="offer in offers">
                <div class="grid-block small-12 vertical">
                    <div class="grid-content">
@@ -51,6 +88,7 @@ url: /orders
                     </div>
                 </div>
            </div>
+
         </div>
     </div>
 </div>
