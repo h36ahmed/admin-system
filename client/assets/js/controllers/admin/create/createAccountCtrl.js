@@ -28,9 +28,7 @@ var createAccountCtrl = function($scope, $window, $location, userService, modalS
                 );
                 promise.then(function handleResolve(response) {
                   if (data.type == 'owner') {
-                    $location.path('create-owner').search({
-                      user_id: data.id
-                    });
+                    $location.path('create-owner');
                   }
                 },
                   function handleReject(error) {});

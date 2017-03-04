@@ -1,6 +1,6 @@
 var app = angular.module('lunchSociety');
 
-var createRestaurantCtrl = function($scope, $location, ownerService, restaurantService, modalService, _) {
+var createRestaurantCtrl = function($scope, $location, ownerService, restaurantService, modalService, awsService, Upload, $timeout, _) {
 
   $scope.createRestaurantFormData = {};
 
@@ -8,7 +8,7 @@ var createRestaurantCtrl = function($scope, $location, ownerService, restaurantS
 
   ownerService
     .getOwners({
-     no_restaurant_list: true
+      no_restaurant_list: true
     })
     .success(function(data, status, headers, config) {
       $scope.owners = data;
@@ -30,20 +30,21 @@ var createRestaurantCtrl = function($scope, $location, ownerService, restaurantS
   $scope.submitForm = function(isValid) {
     // check to make sure the form is completely valid
     if (isValid) {
-      var promise = modalService.open(
-        "status", {}
-      );
-      $scope.createRestaurantFormData.owner_id = $scope.createRestaurantFormData.owner.id;
-      $scope.createRestaurantFormData.phone_number = parseInt($scope.createRestaurantFormData.phone_number);
-      restaurantService
-        .createRestaurant($scope.createRestaurantFormData)
-        .success(function(data, status, headers, config) {
+      var filename = $scope.createRestaurantFormData.logo_image.name;
+      var type = $scope.createRestaurantFormData.logo_image.type;
+      var query = {
+        filename: filename,
+        type: type,
+        page: "restaurants"
+      };
+      var promise = modalService.open("status", {});
+      awsService
+        .signInAWS(query)
+        .success(function(result) {
           modalService.resolve();
           promise.then(
             function handleResolve(response) {
-              $location.path('create-meal').search({
-                id: data.id
-              });
+              createRestaurant(result);
             },
             function handleReject(error) {
               console.log('Why is it rejected?');
@@ -51,27 +52,81 @@ var createRestaurantCtrl = function($scope, $location, ownerService, restaurantS
           );
         })
         .error(function(data, status, headers, config) {
-         modalService.resolve();
-          promise.then(
-            function handleResolve(response) {
-              promise = modalService.open(
-                "alert", {
-                  message: 'Error: Something Went Wrong'
-                }
-              );
-              promise.then(function handleResolve(response) {},
-                           function handleReject(error) {});
-            },
-            function handleReject(error) {
-              console.log('Why is it rejected?');
-            }
-          );
+          error(promise, data, 'Error: Something Went Wrong With Signing on AWS');
         });
     }
   };
 
+  function createRestaurant(result) {
+    var promise = modalService.open(
+      "status", {}
+    );
+    $scope.createRestaurantFormData.owner_id = $scope.createRestaurantFormData.owner.id;
+    $scope.createRestaurantFormData.phone_number = parseInt($scope.createRestaurantFormData.phone_number);
+    $scope.createRestaurantFormData.logo = result.file_name;
+
+    restaurantService
+      .createRestaurant($scope.createRestaurantFormData)
+      .success(function(data, status, headers, config) {
+        var resData = data;
+        result.fields.file = $scope.createRestaurantFormData.logo_image;
+        Upload.upload({
+          url: result.url, //s3Url
+          data: result.fields,
+          method: 'POST'
+        }).progress(function(evt) {
+          console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total));
+        }).success(function(data, status, headers, config) {
+          console.log('file ' + $scope.createRestaurantFormData.logo_image.name + 'is uploaded successfully. Response: ' + data);
+          success(promise, resData);
+        }).error(function(data) {
+          error(promise, data, 'Error: Something Went Wrong With Uploading');
+        });
+      })
+      .error(function(data, status, headers, config) {
+        error(promise, data, 'Error: Something Went Wrong');
+      });
+  }
+
+  function success(promise, data) {
+    modalService.resolve();
+    promise.then(
+      function handleResolve(response) {
+        promise = modalService.open(
+          "alert", {
+            message: 'Restaurant Created'
+          }
+        );
+        promise.then(function handleResolve(response) {
+           $location.path('create-meal');
+        }, function handleReject(error) {});
+      },
+      function handleReject(error) {
+        console.log('Why is it rejected?');
+      }
+    );
+  }
+
+  function error(promise, data, message) {
+    modalService.resolve();
+    promise.then(
+      function handleResolve(response) {
+        promise = modalService.open(
+          "alert", {
+            message: message
+          }
+        );
+        promise.then(function handleResolve(response) {},
+          function handleReject(error) {});
+      },
+      function handleReject(error) {
+        console.log('Why is it rejected?');
+      }
+    );
+  }
+
 };
 
-createRestaurantCtrl.inject = ['$scope', '$location', 'ownerService', 'restaurantService', 'modalService'];
+createRestaurantCtrl.inject = ['$scope', '$location', 'ownerService', 'restaurantService', 'modalService', 'awsService', 'Upload', '$timeout'];
 
 app.controller('createRestaurantCtrl', createRestaurantCtrl);

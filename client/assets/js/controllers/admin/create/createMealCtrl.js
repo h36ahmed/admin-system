@@ -35,19 +35,23 @@ var createMealCtrl = function($scope, $location, restaurantService, mealService,
         page: "meals",
         file: $scope.createMealFormData.meal_file_image
       };
+
+      var promise = modalService.open("status", {});
       awsService
         .signInAWS(query)
         .success(function(result) {
-          createMeal(result);
-        })
-        .error(function(data, status, headers, config) {
-          promise = modalService.open(
-            "alert", {
-              message: 'Error: Something Went Wrong With Signing on AWS'
+          modalService.resolve();
+          promise.then(
+            function handleResolve(response) {
+              createMeal(result);
+            },
+            function handleReject(error) {
+              console.log('Why is it rejected?');
             }
           );
-          promise.then(function handleResolve(response) {},
-            function handleReject(error) {});
+        })
+        .error(function(data, status, headers, config) {
+          error(promise, data, 'Error: Something Went Wrong With Signing on AWS');
         });
     }
   };
@@ -78,48 +82,38 @@ var createMealCtrl = function($scope, $location, restaurantService, mealService,
                   message: 'Meal Created'
                 }
               );
-              promise.then(function handleResolve(response) {
-
-              }, function handleReject(error) {});
+              promise.then(function handleResolve(response) {}, function handleReject(error) {});
             },
             function handleReject(error) {
               console.log('Why is it rejected?');
             }
           );
         }).error(function() {
-          promise = modalService.open(
-            "alert", {
-              message: 'Error: Something Went Wrong With Uploading'
-            }
-          );
-          promise.then(function handleResolve(response) {},
-            function handleReject(error) {});
+          error(promise, data, 'Error: Something Went Wrong With Uploading');
         });
-
       })
       .error(function(data, status, headers, config) {
-        modalService.resolve();
-        promise.then(
-          function handleResolve(response) {
-            promise = modalService.open(
-              "alert", {
-                message: 'Error: Something Went Wrong With Creating Meal in Database'
-              }
-            );
-            promise.then(function handleResolve(response) {},
-              function handleReject(error) {});
-          },
-          function handleReject(error) {
-            console.log('Why is it rejected?');
-          }
-        );
+        error(promise, data, 'Error: Something Went Wrong With Creating Meal in Database');
       });
   }
 
-  function uploadFile(result) {
-
+  function error(promise, data, message) {
+    modalService.resolve();
+    promise.then(
+      function handleResolve(response) {
+        promise = modalService.open(
+          "alert", {
+            message: message
+          }
+        );
+        promise.then(function handleResolve(response) {},
+          function handleReject(error) {});
+      },
+      function handleReject(error) {
+        console.log('Why is it rejected?');
+      }
+    );
   }
-
 };
 
 createMealCtrl.inject = ['$scope', '$location', 'restaurantService', 'mealService', 'modalService', 'awsService', 'Upload', '$timeout'];

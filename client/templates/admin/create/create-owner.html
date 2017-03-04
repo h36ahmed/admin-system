@@ -1,6 +1,6 @@
 ---
 name: create-owner
-url: /create-owner/:user_id
+url: /create-owner
 ---
 <div class="vertical grid-frame">
     <div class="grid-content shrink" style="padding: 0;">
@@ -50,7 +50,7 @@ url: /create-owner/:user_id
                                     <div class="ls-form-group" ng-class="{ 'ls-has-error' : createOwnerForm.proImage.$invalid && !createOwnerForm.proImage.$pristine }">
                                         <label for="proImage">
                                             Profile Image <br>
-                                            <input type="file" ngf-select name="proImage" id="proImage" ng-model="createOwnerFormData.profile_image_file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" required>
+                                            <input type="file" ngf-select name="proImage" id="proImage" ng-model="createOwnerFormData.profile_image_file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB">
                                             <img ngf-src="createOwnerFormData.profile_image_file || '/assets/img/lunchsociety-thumb.png'">
                                         </label>
                                         <p ng-show="createOwnerForm.proImage.$invalid && !createOwnerForm.proImage.$pristine" class="ls-help-block">Choose profile image file for the owner.</p>
