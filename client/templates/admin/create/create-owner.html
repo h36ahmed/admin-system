@@ -50,7 +50,8 @@ url: /create-owner/:user_id
                                     <div class="ls-form-group" ng-class="{ 'ls-has-error' : createOwnerForm.proImage.$invalid && !createOwnerForm.proImage.$pristine }">
                                         <label for="proImage">
                                             Profile Image <br>
-                                            <input type="file" class="ls-input-fields" name="proImage" id="proImage" ng-model="createOwnerFormData.profile_image">
+                                            <input type="file" ngf-select name="proImage" id="proImage" ng-model="createOwnerFormData.profile_image_file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" required>
+                                            <img ngf-src="createOwnerFormData.profile_image_file || '/assets/img/lunchsociety-thumb.png'">
                                         </label>
                                         <p ng-show="createOwnerForm.proImage.$invalid && !createOwnerForm.proImage.$pristine" class="ls-help-block">Choose profile image file for the owner.</p>
                                     </div>

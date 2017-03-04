@@ -62,7 +62,8 @@ url: /create-restaurant
                                     <div class="ls-form-group" ng-class="{ 'ls-has-error' : createRestaurantForm.resLogo.$invalid && !createRestaurantForm.resLogo.$pristine }">
                                         <label for="resLogo">
                                             Restaurant Logo <br>
-                                            <input type="file" placeholder="Restaurant Logo" class="ls-input-fields" name="resLogo" id="resLogo" ng-model="createRestaurantFormData.logo" required>
+                                            <input type="file" ngf-select name="resLogo" id="resLogo" ng-model="createRestaurantFormData.logo_image" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" required>
+                                            <img ngf-src="createRestaurantFormData.logo_image || '/assets/img/lunchsociety-thumb.png'">
                                         </label>
                                         <p ng-show="createRestaurantForm.resLogo.$invalid && !createRestaurantForm.resLogo.$pristine" class="ls-help-block">Choose image file for the restaurant logo.</p>
                                     </div>

@@ -48,7 +48,8 @@ url: /create-payment-plan
                                     <div class="ls-form-group" ng-class="{ 'ls-has-error' : createPaymentPlanForm.planImage.$invalid && !createPaymentPlanForm.planImage.$pristine }">
                                         <label for="planImage">
                                             Icon Image <br>
-                                            <input type="file" name="planImage" id="planImage" ng-model="paymentPlanFormData.image" required>
+                                            <input type="file" ngf-select name="planImage" id="planImage" ng-model="paymentPlanFormData.image_file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" required>
+                                            <img ngf-src="paymentPlanFormData.image_file || '/assets/img/lunchsociety-thumb.png'">
                                         </label>
                                         <p ng-show="createPaymentPlanForm.planImage.$invalid && !createPaymentPlanForm.planImage.$pristine" class="ls-help-block">Choose image file for the icon.</p>
                                     </div>
