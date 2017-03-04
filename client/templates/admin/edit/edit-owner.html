@@ -63,7 +63,10 @@ url: /owner/:id
                                     <div class="ls-form-group" ng-class="{ 'ls-has-error' : editOwnerForm.proImage.$invalid && !editOwnerForm.proImage.$pristine }">
                                         <label for="proImage">
                                             Profile Image <br>
-                                            <input type="file" class="ls-input-fields" name="proImage" id="proImage" ng-model="editOwnerFormData.profile_image">
+                                            <input type="hidden" value="{{editOwnerFormData.profile_image}}" name="proImage" id="proImage" required/>
+                                            <input type="file" ngf-select  ng-model="editOwnerFormData.profile_image_file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB">
+                                            <img ngf-src="editOwnerFormData.profile_image_file || 'https://s3.ca-central-1.amazonaws.com/ls-frontend/users/' + editOwnerFormData.profile_image" ng-if="editOwnerFormData.profile_image != ''">
+                                            <img ngf-src="editOwnerFormData.profile_image_file || '/assets/img/lunchsociety-thumb.png'" ng-if="editOwnerFormData.profile_image == ''">
                                         </label>
                                         <p ng-show="editOwnerForm.proImage.$invalid && !editOwnerForm.proImage.$pristine" class="ls-help-block">Choose profile image file for the meal.</p>
                                     </div>
@@ -74,7 +77,8 @@ url: /owner/:id
                                         <li class="ls-card ls-restaurant-card">
                                             <a ui-sref="restaurant({id:owner.restaurant.id})"  class="ls-card-link">x</a>
                                                 <figure class="ls-restaurant-card-info">
-                                                    <img src="http://lorempixel.com/400/400/"/>
+                                                    <img ng-src="https://s3.ca-central-1.amazonaws.com/ls-frontend/restaurants/{{owner.restaurant.logo}}" alt="" ng-if="owner.restaurant.logo != ''">
+                                                    <img src="/assets/img/lunchsociety-thumb.png" ng-if="owner.restaurant.logo == ''"/>
                                                     <figcaption class="ls-restaurant-card-caption">
                                                         <div class="ls-left-card-info">
                                                             <h4>{{owner.restaurant.name}}</h4>

@@ -70,7 +70,10 @@ url: /restaurant-edit/:id
                                     <div class="ls-form-group" ng-class="{ 'ls-has-error' : editRestaurantForm.resLogo.$invalid && !editRestaurantForm.resLogo.$pristine }">
                                         <label for="resLogo">
                                             Restaurant Logo <br>
-                                            <input type="file" placeholder="Restaurant Logo" class="ls-input-fields" name="resLogo" id="resLogo" ng-model="editRestaurantFormData.logo">
+                                            <input type="hidden" value="{{editRestaurantFormData.logo}}" name="resLogo" id="resLogo" required/>
+                                            <input type="file" ngf-select  ng-model="editRestaurantFormData.logo_file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB">
+                                            <img ngf-src="editRestaurantFormData.logo_file || 'https://s3.ca-central-1.amazonaws.com/ls-frontend/restaurants/' + editRestaurantFormData.logo" ng-if="editRestaurantFormData.logo != ''">
+                                            <img ngf-src="editRestaurantFormData.logo_file || '/assets/img/lunchsociety-thumb.png'" ng-if="editRestaurantFormData.logo == ''">
                                         </label>
                                         <p ng-show="editRestaurantForm.resLogo.$invalid && !editRestaurantForm.resLogo.$pristine" class="ls-help-block">Choose image file for the restaurant logo.</p>
                                     </div>

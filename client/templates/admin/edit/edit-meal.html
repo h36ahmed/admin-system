@@ -59,8 +59,10 @@ url: /meal/:id
                                     <div class="ls-form-group" ng-class="{ 'ls-has-error' : editMealForm.mealImage.$invalid && !editMealForm.mealImage.$pristine }">
                                         <label for="mealImage">
                                             Meal Image <br>
-                                            <input type="file" ngf-select name="mealImage" id="mealImage" ng-model="editMealFormData.meal_image" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" required>
-                                            <img ngf-src="editMealFormData.meal_image || '/assets/img/lunchsociety-thumb.png'">
+                                            <input type="hidden" value="{{editMealFormData.meal_image}}" name="mealImage" id="mealImage" required/>
+                                            <input type="file" ngf-select  ng-model="editMealFormData.meal_file_image" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB">
+                                            <img ngf-src="editMealFormData.meal_file_image || 'https://s3.ca-central-1.amazonaws.com/ls-frontend/meals/' + editMealFormData.meal_image" ng-if="editMealFormData.meal_image != ''">
+                                            <img ngf-src="editMealFormData.meal_file_image || '/assets/img/lunchsociety-thumb.png'" ng-if="editMealFormData.meal_image == ''">
                                         </label>
                                         <p ng-show="editMealForm.mealImage.$invalid && !editMealForm.mealImage.$pristine" class="ls-help-block">Choose image file for the meal.</p>
                                     </div>

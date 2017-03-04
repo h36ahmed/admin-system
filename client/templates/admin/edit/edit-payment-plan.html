@@ -55,7 +55,10 @@ url: /plan/:id
                                     <div class="ls-form-group" ng-class="{ 'ls-has-error' : editPaymentPlanForm.planImage.$invalid && !editPaymentPlanForm.planImage.$pristine }">
                                         <label for="planImage">
                                             Icon Image <br>
-                                            <input type="file" name="planImage" id="planImage" ng-model="paymentPlanFormData.image" required>
+                                            <input type="hidden" value="{{paymentPlanFormData.image}}" name="planImage" id="planImage" required/>
+                                            <input type="file" ngf-select  ng-model="paymentPlanFormData.image_file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB">
+                                            <img ngf-src="paymentPlanFormData.image_file || 'https://s3.ca-central-1.amazonaws.com/ls-frontend/misc/' + paymentPlanFormData.image" ng-if="paymentPlanFormData.image != ''">
+                                            <img ngf-src="paymentPlanFormData.image_file || '/assets/img/lunchsociety-thumb.png'" ng-if="paymentPlanFormData.image == ''">
                                         </label>
                                         <p ng-show="editPaymentPlanForm.planImage.$invalid && !editPaymentPlanForm.planImage.$pristine" class="ls-help-block">Choose image file for the icon.</p>
                                     </div>
