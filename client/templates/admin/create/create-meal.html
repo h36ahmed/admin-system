@@ -53,8 +53,8 @@ url: /create-meal/:res_id
                                     <div class="ls-form-group" ng-class="{ 'ls-has-error' : createMealForm.mealImage.$invalid && !createMealForm.mealImage.$pristine }">
                                         <label for="mealImage">
                                             Meal Image <br>
-                                            <input type="file" ngf-select name="mealImage" id="mealImage" ng-model="createMealFormData.meal_image" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" required>
-                                            <img ngf-src="createMealFormData.meal_image || '/assets/img/lunchsociety-thumb.png'">
+                                            <input type="file" ngf-select name="mealImage" id="mealImage" ng-model="createMealFormData.meal_file_image" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" required>
+                                            <img ngf-src="createMealFormData.meal_file_image || '/assets/img/lunchsociety-thumb.png'">
                                         </label>
                                         <p ng-show="createMealForm.mealImage.$invalid && !createMealForm.mealImage.$pristine" class="ls-help-block">Choose image file for the meal.</p>
                                     </div>
