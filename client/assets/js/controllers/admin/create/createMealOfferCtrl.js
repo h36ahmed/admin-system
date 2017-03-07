@@ -47,9 +47,9 @@ var createMealOfferCtrl = function($scope, $location, restaurantService, mealOff
 
   var checkDate = function(date) {
       var today = new Date();
-      if (date < today) {
+      /*if (date < today) {
           return false;
-      }
+      }*/
       return true;
   }
 
@@ -89,7 +89,9 @@ var createMealOfferCtrl = function($scope, $location, restaurantService, mealOff
                       offer_date: null
                   };
               },
-                function handleReject(error) {});
+                function handleReject(error) {
+
+              });
             },
             function handleReject(error) {
               console.log('Why is it rejected?');
@@ -113,6 +115,8 @@ var createMealOfferCtrl = function($scope, $location, restaurantService, mealOff
             }
           );
         });
+    } else {
+        console.log('Check Date & Values');
     }
   };
 

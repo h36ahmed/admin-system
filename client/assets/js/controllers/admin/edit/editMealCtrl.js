@@ -119,12 +119,12 @@ var editMealCtrl = function($scope, $state, $location,
     $scope.editMealFormData.name = $scope.meal.name;
     $scope.editMealFormData.tagline = $scope.meal.tagline;
     $scope.editMealFormData.price = $scope.meal.price;
-    $scope.editMealFormData.restaurant = _.findWhere($scope.restaurants, {
-      id: $scope.meal.restaurant_id
-    });
     $scope.editMealFormData.description = $scope.meal.description;
     $scope.editMealFormData.ingredients = $scope.meal.ingredients;
     $scope.editMealFormData.meal_image = $scope.meal.meal_image;
+    $scope.editMealFormData.restaurant = _.findWhere($scope.restaurants, {
+      id: $scope.meal.restaurant_id
+    });
   }
 
   function editMeal(result) {

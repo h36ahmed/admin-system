@@ -43,18 +43,18 @@ var paths = {
     'bower_components/foundation-apps/js/vendor/**/*.js',
     'bower_components/foundation-apps/js/angular/**/*.js',
     '!bower_components/foundation-apps/js/angular/app.js',
-    'bower_components/underscore/underscore.js',
     'bower_components/jquery/dist/jquery.js',
     'bower_components/ng-file-upload/ng-file-upload.js',
-    'bower_components/angular-simple-logger/dist/angular-simple-logger.js',
-    'bower_components/angular-google-maps/dist/angular-google-maps.js',
     'bower_components/lodash/dist/lodash.js',
+    'bower_components/angular-simple-logger/dist/angular-simple-logger.js',
+
+    'bower_components/angular-google-maps/dist/angular-google-maps.js',
     'bower_components/markerclustererplus/dist/markerclusterer.min.js',
     'bower_components/google-maps-utility-library-v3-infobox/dist/infobox.js',
     'bower_components/google-maps-utility-library-v3-keydragzoom/dist/keydragzoom.js',
     'bower_components/google-maps-utility-library-v3-markerwithlabel/dist/markerwithlabel.js',
-    'bower_components/js-rich-marker/src/richmarker.js'
-
+    'bower_components/js-rich-marker/src/richmarker.js',
+    'bower_components/underscore/underscore.js'
   ],
   // These files are for your app's JavaScript
   appJS: [

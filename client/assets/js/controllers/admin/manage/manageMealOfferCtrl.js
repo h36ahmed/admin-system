@@ -1,6 +1,6 @@
 var app = angular.module('lunchSociety');
 
-var manageMealOfferCtrl = function($scope, mealOfferService, modalService) {
+var manageMealOfferCtrl = function($scope, mealOfferService, modalService, utilService) {
 
   $scope.offers = [];
 
@@ -44,7 +44,7 @@ var manageMealOfferCtrl = function($scope, mealOfferService, modalService) {
     );
     mealOfferService
       .getMealOffers({
-        offer_date: formatDate(date)
+        offer_date: utilService.formatDate(date)
       })
       .success(function(data, status, headers, config) {
         $scope.offers = data;
@@ -60,21 +60,8 @@ var manageMealOfferCtrl = function($scope, mealOfferService, modalService) {
       });
   }
 
-  function formatDate(date) {
-    var dd = date.getDate();
-    var mm = date.getMonth() + 1; //January is 0!
-
-    var yyyy = date.getFullYear();
-    if (dd < 10) {
-      dd = '0' + dd;
-    }
-    if (mm < 10) {
-      mm = '0' + mm;
-    }
-    return yyyy + "-" + mm + "-" + dd;
-  }
 };
 
-manageMealOfferCtrl.inject = ['$scope', 'mealOfferService', 'modalService'];
+manageMealOfferCtrl.inject = ['$scope', 'mealOfferService', 'modalService', 'utilService'];
 
 app.controller('manageMealOfferCtrl', manageMealOfferCtrl);
