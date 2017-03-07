@@ -102,6 +102,9 @@
   height: auto;
   padding-top: 30px;
   overflow: auto;
+  &.ls-customer {
+    left: 0;
+  }
 }
 
 input[type="text"],

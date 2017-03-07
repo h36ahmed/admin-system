@@ -1,0 +1,24 @@
+---
+name: kitchen-open
+url: /kitchen-open
+---
+<div class="vertical grid-frame">
+    <div class="ls-app-bg"></div>
+    <div ng-include="'/templates/partials/menu_bar.html'"></div>
+    <div class="ls-app-body ls-customer">
+        <div class="ls-customer-pages" ng-controller="openKitchenCtrl as kitchen">
+            <div class="grid-block">
+               <div class="grid-block small-12 medium-6 vertical">
+                    <div class="grid-content">
+
+                    </div>
+                </div>
+                <div class="grid-block medium-6 vertical">
+                    <div class="grid-content">
+                        <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+                    </div>
+                </div>
+           </div>
+        </div>
+    </div>
+</div>
