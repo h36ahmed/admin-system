@@ -32,7 +32,8 @@
     uiGmapGoogleMapApiProvider.configure({
         //    key: 'your api key',
         v: '3.20', //defaults to latest 3.X anyhow
-        libraries: 'weather,geometry,visualization'
+        libraries: 'weather,geometry,visualization',
+        key: 'AIzaSyD36yXcN829WP0wpCdiSiY_ZQ9VBlJK6iM'
     });
 
     $locationProvider.hashPrefix('!');
