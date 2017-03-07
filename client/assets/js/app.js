@@ -30,10 +30,9 @@
     });
 
     uiGmapGoogleMapApiProvider.configure({
-        //    key: 'your api key',
+        key: 'AIzaSyAcAZcWH9AoU5nsCHnHwFQPK4aBAoNHBSg',
         v: '3.20', //defaults to latest 3.X anyhow
-        libraries: 'weather,geometry,visualization',
-        key: 'AIzaSyD36yXcN829WP0wpCdiSiY_ZQ9VBlJK6iM'
+        libraries: 'weather,geometry,visualization'
     });
 
     $locationProvider.hashPrefix('!');
