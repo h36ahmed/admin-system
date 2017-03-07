@@ -1,6 +1,6 @@
 var app = angular.module('lunchSociety');
 
-var manageFeedbackCtrl = function($scope, feedbackService ) {
+var manageFeedbackCtrl = function($scope, feedbackService, modalService) {
 
   $scope.feedbacks = [];
 
@@ -15,8 +15,18 @@ var manageFeedbackCtrl = function($scope, feedbackService ) {
       $scope.message = 'Error: Something Went Wrong';
     });
 
+  $scope.openFeedbackModal = function(feedback) {
+    var promise = modalService.open(
+      "feedback", {
+        feedback: feedback
+      }
+    );
+    promise.then(
+      function handleResolve(response) {},
+      function handleReject(error) {});
+  }
 };
 
-manageFeedbackCtrl.inject = ['$scope', 'feedbackService'];
+manageFeedbackCtrl.inject = ['$scope', 'feedbackService', 'modalService'];
 
 app.controller('manageFeedbackCtrl', manageFeedbackCtrl);

@@ -56,6 +56,28 @@
         </div>
         <!-- END: Alert Modal. -->
 
+         <!-- BEGIN: Feeback Modal. -->
+        <div
+            ng-switch-when="feedback"
+            ng-controller="feedbackModalCtrl"
+            class="ls-modal">
+
+            <h2>Feedback #{{feedback.id}}</h2>
+            <p>{{feedback.order.order_date | date}}</p>
+            <a ui-sref="customer({id: {{feedback.order.customer.id}}})">{{feedback.order.customer.first_name | titleCase}} {{feedback.order.customer.last_name | titleCase}} </a>
+            <a ui-sref="offer({id: {{feedback.offer.id}}})">{{feedback.order.offer.meal.name | titleCase}}</a>
+            <a ui-sref="restaurant({id: feedback.offer.meal.restaurant.id })">{{feedback.order.offer.meal.restaurant.name | titleCase}}</a>
+            <p>Flavour: {{feedback.flavour}}</p>
+            <p>Portion Size: {{feedback.portion_size}}</p>
+            <p>Overall: {{feedback.overall}}</p>
+            <p>Comments: {{feedback.comments}}</p>
+            <p>
+                <a ng-click="close()" class="button">Ok, I got it!</a>
+            </p>
+
+        </div>
+        <!-- END: Alert Modal. -->
+
 
         <!-- BEGIN: Confirm Modal. -->
         <div
@@ -75,6 +97,8 @@
 
         </div>
         <!-- END: Confirm Modal. -->
+
+
 
 
         <!-- BEGIN: Prompt Modal. -->
@@ -98,12 +122,11 @@
 
             <p>
                 <a ng-click="submit()" class="button">Submit</a>
-                &mdash;
                 <a ng-click="cancel()" class="button">Cancel</a>
             </p>
 
         </form>
         <!-- END: Prompt Modal. -->
-        <!--<div class="ls-modal-background"></div>-->
+
     </ls-modal>
 </html>

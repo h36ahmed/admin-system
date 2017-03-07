@@ -41,7 +41,7 @@ url: /feedbacks
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr ng-repeat="feedback in feedbacks">
+                                <tr ng-repeat="feedback in feedbacks" ng-click="openFeedbackModal(feedback)">
                                   <td data-title="id">
                                       {{feedback.id}}
                                   </td>
