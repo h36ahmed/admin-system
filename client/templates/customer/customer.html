@@ -8,13 +8,13 @@ url: /kitchen-open
     <div class="ls-app-body ls-customer">
         <div class="ls-customer-pages" ng-controller="openKitchenCtrl as kitchen">
             <div class="grid-block ls-full-height">
-               <div class="grid-block small-12 medium-6 vertical">
+               <div class="grid-block small-8 vertical">
                     <div class="grid-content">
 
                     </div>
                 </div>
-                <div class="grid-block medium-6 vertical ls-map">
-                    <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+                <div class="grid-block small-4 vertical ls-map">
+                    <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options">
                         <ui-gmap-markers models="restaurants" coords="'self'" icon="'icon'" options="'options'" click="'onClick'">
                              <ui-gmap-windows show="show">
                                 <div ng-non-bindable>{{title}}</div>

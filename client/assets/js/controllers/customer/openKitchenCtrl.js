@@ -10,6 +10,21 @@ var openKitchenCtrl = function($scope, $state, $location, $stateParams, uiGmapGo
     zoom: 14
   };
 
+  $scope.options = {
+    styles: [{
+      featureType: 'poi',
+      stylers: [{
+        visibility: 'off'
+      }]
+    }, {
+      featureType: 'transit',
+      elementType: 'labels.icon',
+      stylers: [{
+        visibility: 'off'
+      }]
+    }]
+  };
+
   $scope.offers = [];
 
   var promise = modalService.open(
