@@ -152,7 +152,8 @@ var editMealCtrl = function($scope, $state, $location,
           }).success(function(data, status, headers, config) {
             console.log('file ' + $scope.editMealFormData.meal_file_image.name + 'is uploaded successfully. Response: ' + data);
             resolvePromise(promise, mealData, 'Meal Updated!', false);
-          }).error(function() {
+          }).error(function(data) {
+            console.log(data)
             resolvePromise(promise, mealData, 'Error: Something Went Wrong With Uploading', false);
           });
         } else {
