@@ -6,7 +6,8 @@ var editMealCtrl = function($scope, $state, $location,
 
   $scope.meal = {};
   $scope.editMealFormData = {
-    meal_file_image: null
+    meal_file_image: null,
+    meal_image: ''
   };
   $scope.restaurants = [];
 
