@@ -89,7 +89,7 @@ var createMealCtrl = function($scope, $location, restaurantService, mealService,
             }
           );
         }).error(function() {
-          error(promise, data, 'Error: Something Went Wrong With Uploading');
+          error(promise, data, 'Error: Meal Created But Something Went Wrong With Uploading Image');
         });
       })
       .error(function(data, status, headers, config) {

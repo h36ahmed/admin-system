@@ -85,7 +85,7 @@ var createOwnerCtrl = function($scope, $location, userService, ownerService, mod
             console.log('file ' + $scope.createOwnerFormData.profile_image_file.name + 'is uploaded successfully. Response: ' + data);
             success(promise, ownerData);
           }).error(function() {
-            error(promise, data, 'Error: Something Went Wrong With Uploading');
+            error(promise, data, 'Error: Owner Created But Something Went Wrong With Uploading Image');
           });
         } else {
           success(promise, ownerData);

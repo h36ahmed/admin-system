@@ -49,7 +49,6 @@ var editMealCtrl = function($scope, $state, $location,
   // Edit Form
 
   $scope.submitEditForm = function(isValid) {
-    // check to make sure the form is completely valid
     if (isValid) {
       if ($scope.editMealFormData.meal_file_image != null) {
         var filename = $scope.editMealFormData.meal_file_image.name;
@@ -83,36 +82,6 @@ var editMealCtrl = function($scope, $state, $location,
       }
     }
   };
-
-  // Delete Form
-
-  $scope.submitDeleteForm = function() {
-    var promise = modalService.open(
-      "confirm", {
-        message: 'Do you want to delete this meal?',
-        confirmButton: "Yes, Please Delete!",
-        denyButton: "No, wait!"
-      }
-    );
-    promise.then(
-      function handleResolve(response) {
-        promise = modalService.open(
-          "status", {}
-        );
-
-        mealService
-          .deleteMeal({
-            id: $stateParams.id
-          })
-          .success(function(data, status, headers, config) {
-            resolvePromise(promise, data, 'Meal Deleted!', true);
-          })
-          .error(function(data, status, headers, config) {
-            resolvePromise(promise, data, 'Error: Something Went Wrong', false);
-          });
-      },
-      function handleReject(error) {});
-  }
 
   // Functions
 
@@ -154,8 +123,8 @@ var editMealCtrl = function($scope, $state, $location,
             console.log('file ' + $scope.editMealFormData.meal_file_image.name + 'is uploaded successfully. Response: ' + data);
             resolvePromise(promise, mealData, 'Meal Updated!', false);
           }).error(function(data) {
-            console.log(data)
-            resolvePromise(promise, mealData, 'Error: Something Went Wrong With Uploading', false);
+            console.log(data);
+            resolvePromise(promise, mealData, 'Error: Meal Updated But Something Went Wrong With Uploading Image', false);
           });
         } else {
           resolvePromise(promise, mealData, 'Meal Updated!', false);

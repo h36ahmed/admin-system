@@ -80,7 +80,7 @@ var createRestaurantCtrl = function($scope, $location, ownerService, restaurantS
           console.log('file ' + $scope.createRestaurantFormData.logo_image.name + 'is uploaded successfully. Response: ' + data);
           success(promise, resData);
         }).error(function(data) {
-          error(promise, data, 'Error: Something Went Wrong With Uploading');
+          error(promise, data, 'Error: Restaurant Created But Something Went Wrong With Uploading Image');
         });
       })
       .error(function(data, status, headers, config) {

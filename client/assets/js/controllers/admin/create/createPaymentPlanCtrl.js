@@ -54,7 +54,7 @@ var createPaymentPlanCtrl = function($scope, $window, $location, paymentPlanServ
           console.log('file ' + $scope.paymentPlanFormData.image_file.name + 'is uploaded successfully. Response: ' + data);
           success(promise, planData);
         }).error(function(data) {
-          error(promise, data, 'Error: Something Went Wrong With Uploading');
+          error(promise, data, 'Error: Payment Plan Created But Something Went Wrong With Uploading Image');
         });
       })
       .error(function(data, status, headers, config) {

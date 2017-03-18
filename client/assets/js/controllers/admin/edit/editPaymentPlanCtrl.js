@@ -4,7 +4,8 @@ var editPaymentPlanCtrl = function($scope, $state, $location,
   $stateParams, paymentPlanService, modalService, awsService, Upload, $timeout) {
 
   $scope.paymentPlanFormData = {
-    image_file: null
+    image_file: null,
+    image: ''
   };
 
   if ($stateParams.id) {
@@ -34,34 +35,6 @@ var editPaymentPlanCtrl = function($scope, $state, $location,
     $location.path('payment-plans');
   }
 
-  // Delete Form
-
-  $scope.submitDeleteForm = function() {
-    var promise = modalService.open(
-      "confirm", {
-        message: 'Do you want to delete this payment plan?',
-        confirmButton: "Yes, Please Delete!",
-        denyButton: "No, wait!"
-      }
-    );
-    promise.then(
-      function handleResolve(response) {
-        promise = modalService.open(
-          "status", {}
-        );
-        paymentPlanService
-          .deletePaymentPlan({
-            id: $stateParams.id
-          })
-          .success(function(data, status, headers, config) {
-            resolvePromise(promise, data, 'Payment Plan Deleted!', true);
-          })
-          .error(function(data, status, headers, config) {
-            resolvePromise(promise, data, 'Error: Something Went Wrong', false);
-          });
-      },
-      function handleReject(error) {});
-  }
 
   // Edit Form
 
@@ -124,7 +97,7 @@ var editPaymentPlanCtrl = function($scope, $state, $location,
             console.log('file ' + $scope.paymentPlanFormData.image_file.name + 'is uploaded successfully. Response: ' + data);
             resolvePromise(promise, planData, 'Payment Plan Updated!', false);
           }).error(function() {
-            resolvePromise(promise, planData, 'Error: Something Went Wrong With Uploading', false);
+            resolvePromise(promise, planData, 'Error: Payment Plan Updated But Something Went Wrong With Uploading Image', false);
           });
         } else {
           resolvePromise(promise, planData, 'Payment Plan Updated!', false);

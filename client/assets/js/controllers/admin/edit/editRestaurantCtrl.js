@@ -7,7 +7,8 @@ var editRestaurantCtrl = function($scope, $state, $location,
   $scope.restaurant = {};
 
   $scope.editRestaurantFormData = {
-    logo_file: null
+    logo_file: null,
+    logo: ''
   };
 
   $scope.owners = [];
@@ -47,34 +48,7 @@ var editRestaurantCtrl = function($scope, $state, $location,
     $location.path('restaurants');
   }
 
-  // Delete Form
 
-  $scope.submitDeleteForm = function() {
-    var promise = modalService.open(
-      "confirm", {
-        message: 'Do you want to delete this restaurant?',
-        confirmButton: "Yes, Please Delete!",
-        denyButton: "No, wait!"
-      }
-    );
-    promise.then(
-      function handleResolve(response) {
-        promise = modalService.open(
-          "status", {}
-        );
-        restaurantService
-          .deleteRestaurant({
-            id: $stateParams.id
-          })
-          .success(function(data, status, headers, config) {
-            resolvePromise(promise, data, 'Restaurant Deleted!', true);
-          })
-          .error(function(data, status, headers, config) {
-            resolvePromise(promise, data, 'Error: Something Went Wrong', false);
-          });
-      },
-      function handleReject(error) {});
-  }
 
   // Edit Form
 
@@ -140,7 +114,7 @@ var editRestaurantCtrl = function($scope, $state, $location,
             console.log('file ' + $scope.editRestaurantFormData.logo_file.name + 'is uploaded successfully. Response: ' + data);
             resolvePromise(promise, resData, 'Restaurant Updated!', false);
           }).error(function() {
-            resolvePromise(promise, resData, 'Error: Something Went Wrong With Uploading', false);
+            resolvePromise(promise, resData, 'Error: Restaurant Updated But Something Went Wrong With Uploading Image', false);
           });
         } else {
           resolvePromise(promise, resData, 'Restaurant Updated!', false);

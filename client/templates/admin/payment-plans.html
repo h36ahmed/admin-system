@@ -33,8 +33,9 @@ url: /payment-plans
                                     <img src="/assets/img/lunchsociety-thumb.png" ng-if="plan.image == ''"/>
                                     <figcaption class="ls-plan-card-caption">
                                         <p>{{plan.description}}</p>
-                                        <h6>{{plan.price}}</h6>
-                                         <a ui-sref="plan({id:plan.id})" class="button">Edit</a>
+                                        <h6>{{plan.price | currency}}</h6>
+                                        <p>{{plan.meals}} Meals</p>
+                                        <a ui-sref="plan({id:plan.id})" class="button">Edit</a>
                                     </figcaption>
                                 </figure>
                             </li>

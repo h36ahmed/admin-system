@@ -6,7 +6,8 @@ var editOwnerCtrl = function($scope, $state, $location,
 
   $scope.owner = {};
   $scope.editOwnerFormData = {
-    profile_image_file: null
+    profile_image_file: null,
+    profile_image: ''
   };
   $scope.owners = [];
 
@@ -85,35 +86,6 @@ var editOwnerCtrl = function($scope, $state, $location,
     }
   };
 
-  // Delete Form
-
-  $scope.submitDeleteForm = function() {
-    var promise = modalService.open(
-      "confirm", {
-        message: 'Do you want to delete this owner?',
-        confirmButton: "Yes, Please Delete!",
-        denyButton: "No, wait!"
-      }
-    );
-    promise.then(
-      function handleResolve(response) {
-        promise = modalService.open(
-          "status", {}
-        );
-        ownerService
-          .deleteOwner({
-            id: $stateParams.id
-          })
-          .success(function(data, status, headers, config) {
-            resolvePromise(promise, data, 'Owner Deleted!', true);
-          })
-          .error(function(data, status, headers, config) {
-            resolvePromise(promise, data, 'Error: Something Went Wrong', false);
-          });
-      },
-      function handleReject(error) {});
-  }
-
   function fillFormData() {
     $scope.editOwnerFormData.first_name = $scope.owner.first_name;
     $scope.editOwnerFormData.last_name = $scope.owner.last_name;
@@ -151,7 +123,7 @@ var editOwnerCtrl = function($scope, $state, $location,
             console.log('file ' + $scope.editOwnerFormData.profile_image_file.name + 'is uploaded successfully. Response: ' + data);
             resolvePromise(promise, ownerData, 'Owner Updated!', false);
           }).error(function() {
-            resolvePromise(promise, ownerData, 'Error: Something Went Wrong With Uploading', false);
+            resolvePromise(promise, ownerData, 'Error: Owner Updated But Something Went Wrong With Uploading Image', false);
           });
         } else {
           resolvePromise(promise, ownerData, 'Owner Updated!', false);

@@ -18,10 +18,9 @@ var homeCtrl = function($scope, $location, commonService, modalService, $window)
           modalService.resolve();
           promise.then(
             function handleResolve(response) {
-
               commonService.setAuthToken(data.token);
               commonService.setUserID(data.id);
-              $location.path('admin-dashboard');
+              $location.path('meal-offers');
             },
             function handleReject(error) {
               console.log('Why is it rejected?');
