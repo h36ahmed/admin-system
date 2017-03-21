@@ -63,19 +63,36 @@
             ng-controller="feedbackModalCtrl"
             class="ls-modal">
 
-            <h2>Feedback #{{feedback.id}}</h2>
-            <p>{{feedback.order.order_date | date}}</p>
-            <a ui-sref="customer({id: {{feedback.order.customer.id}}})">{{feedback.order.customer.first_name | titleCase}} {{feedback.order.customer.last_name | titleCase}} </a>
-            <a ui-sref="offer({id: {{feedback.offer.id}}})">{{feedback.order.offer.meal.name | titleCase}}</a>
-            <a ui-sref="restaurant({id: feedback.offer.meal.restaurant.id })">{{feedback.order.offer.meal.restaurant.name | titleCase}}</a>
-            <p>Flavour: {{feedback.flavour}}</p>
-            <p>Portion Size: {{feedback.portion_size}}</p>
-            <p>Overall: {{feedback.overall}}</p>
-            <p>Comments: {{feedback.comments}}</p>
+            <div class="ls-feedback-id">
+                Feedback #{{feedback.id}}
+            </div>
+            <div class="ls-feedback-date">
+                {{feedback.order.order_date | date}}
+            </div>
+
+            <div class="ls-feedback-info">
+                <h3><a ui-sref="customer({id: feedback.order.customer.id})" class="ls-customer-link">{{feedback.order.customer.first_name | titleCase}} {{feedback.order.customer.last_name | titleCase}} </a></h3>
+                <div class="ls-meal-offer">
+                    <a ui-sref="offer({id: feedback.offer.id})" class="ls-offer-link">{{feedback.order.offer.meal.name | titleCase}}</a>
+                    <a ui-sref="restaurant({id: feedback.offer.meal.restaurant.id })" class="ls-offer-link">{{feedback.order.offer.meal.restaurant.name | titleCase}}</a>
+                </div>
+                <ul class="ls-ratings">
+                    <li><strong>Flavour</strong></li>
+                    <li><strong>Portion Size</strong></li>
+                    <li><strong>Overall</strong></li>
+                </ul>
+                <ul class="ls-ratings">
+                    <li>{{feedback.flavour}}</li>
+                    <li>{{feedback.portion_size}}</li>
+                    <li>{{feedback.overall}}</li>
+                </ul>
+                <p ng-if="feedback.comments != null" class="ls-comments">{{feedback.comments}}</p>
+                <p ng-if="feedback.comments == '' || feedback.comments == null">No Comments</p>
+            </div>
+
             <p>
                 <a ng-click="close()" class="button">Ok, I got it!</a>
             </p>
-
         </div>
         <!-- END: Alert Modal. -->
 
