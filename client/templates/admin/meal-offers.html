@@ -12,7 +12,7 @@ url: /meal-offers
             <div class="grid-block">
                 <div class="grid-block small-8 vertical">
                    <div class="grid-content">
-                       <h2>Meal Offers For {{today_date | date}}</h2>
+                       <h2>Meal Offers For {{currentViewDate | date}}</h2>
                    </div>
                 </div>
                 <div class="grid-block small-4 vertical">
@@ -46,8 +46,10 @@ url: /meal-offers
                    <div class="grid-content">
                         <label for="offerDate">
                             Filter By Date
-                            <input type="date" placeholder="e.g. Select a Date" class="ls-input-fields" name="filterDate" id="filterDate" ng-model="filterDate">
                         </label>
+                        <datepicker date-format="longDate">
+                          <input ng-model="filterDate" type="text" class="ls-input-fields" name="filterDate" id="filterDate" placeholder="Choose a date"/>
+                        </datepicker>
                    </div>
                 </div>
                 <div class="grid-block medium-3 vertical">

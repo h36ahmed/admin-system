@@ -99,8 +99,10 @@ url: /create-meal-offer
                                         <div class="ls-form-group" ng-class="{ 'ls-has-error' : createMealOfferForm.offerDate.$invalid && !createMealOfferForm.offerDate.$pristine }">
                                             <label for="offerDate">
                                                 Offer Date
-                                                <input type="date" placeholder="e.g. Select a Date" class="ls-input-fields" name="offerDate" id="offerDate" ng-model="createMealOfferFormData.offer_date" required>
                                             </label>
+                                            <datepicker date-format="longDate">
+                                              <input ng-model="createMealOfferFormData.offer_date" type="text" class="ls-input-fields" name="offerDate" id="offerDate" placeholder="Select a Date"/>
+                                            </datepicker>
                                             <p ng-show="createMealOfferForm.offerDate.$invalid && !createMealOfferForm.offerDate.$pristine" class="ls-help-block">Enter a valid offer date.</p>
                                         </div>
                                     </article>

@@ -54,7 +54,8 @@ var paths = {
     'bower_components/google-maps-utility-library-v3-keydragzoom/dist/keydragzoom.js',
     'bower_components/google-maps-utility-library-v3-markerwithlabel/dist/markerwithlabel.js',
     'bower_components/js-rich-marker/src/richmarker.js',
-    'bower_components/underscore/underscore.js'
+    'bower_components/underscore/underscore.js',
+    'bower_components/angularjs-datepicker/dist/angular-datepicker.js',
   ],
   // These files are for your app's JavaScript
   appJS: [

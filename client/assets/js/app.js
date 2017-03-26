@@ -14,7 +14,8 @@
       'underscore',
       'jquery',
       'ngFileUpload',
-      'uiGmapgoogle-maps'
+      'uiGmapgoogle-maps',
+      '720kb.datepicker'
     ])
     .config(config)
     .run(run);
