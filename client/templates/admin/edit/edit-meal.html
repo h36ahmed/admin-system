@@ -8,6 +8,13 @@ url: /meal/:id
     </div>
     <div ng-include="'/templates/partials/side_bar.html'"></div>
     <div class="ls-app-body">
+        <div class="grid-block ls-back-bar">
+            <div class="grid-block small-12 vertical">
+                <div class="grid-content">
+                    <p><a ui-sref="meals"><i class="fa fa-angle-left" aria-hidden="true"></i> Back to Meals</a></p>
+                </div>
+            </div>
+        </div>
         <div class="grid-container ls-meal-info" ng-controller="editMealCtrl as editMeal">
             <div class="grid-block ls-title-bar">
                 <div class="grid-block small-8 vertical">

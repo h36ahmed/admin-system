@@ -100,12 +100,14 @@
   width: auto;
   bottom: 0;
   height: auto;
-  padding-top: 30px;
   overflow: auto;
   &.ls-customer {
     left: 0;
       padding-top: 0;
   }
+    .grid-container {
+        padding-top: 20px;
+    }
 }
 
 input[type="text"],
@@ -161,7 +163,26 @@ select {
 }
 
 .ls-title-bar {
-  margin-bottom: 20px;
+    margin: 20px 0;
+}
+
+.ls-back-bar {
+    background-color: $primary-color;
+    padding: 5px;
+
+    a:link,
+    a:visited {
+        color:#fff;
+        font-weight: 700;
+        @include transition;
+    }
+    a:hover,
+    a:active {
+        color: $dark-color;
+    }
+    p{
+        margin-bottom: 0;
+    }
 }
 
 .ls-switch-container {

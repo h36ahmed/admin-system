@@ -8,8 +8,15 @@ url: /create-meal-offer
     </div>
     <div ng-include="'/templates/partials/side_bar.html'"></div>
     <div class="ls-app-body">
+        <div class="grid-block ls-back-bar">
+            <div class="grid-block small-12 vertical">
+                <div class="grid-content">
+                    <p><a ui-sref="meal-offers"><i class="fa fa-angle-left" aria-hidden="true"></i> Back to Meal Offers</a></p>
+                </div>
+            </div>
+        </div>
         <div class="grid-container ls-create-pages" ng-controller="createMealOfferCtrl as offerCtrl">
-           <div class="grid-block ls-title-bar">
+            <div class="grid-block ls-title-bar">
                 <div class="grid-block small-12 vertical">
                     <div class="grid-content">
                         <h2>Create Meal Offer</h2>

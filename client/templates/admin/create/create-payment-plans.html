@@ -8,6 +8,13 @@ url: /create-payment-plan
     </div>
     <div ng-include="'/templates/partials/side_bar.html'"></div>
     <div class="ls-app-body">
+        <div class="grid-block ls-back-bar">
+            <div class="grid-block small-12 vertical">
+                <div class="grid-content">
+                    <p><a ui-sref="payment-plans"><i class="fa fa-angle-left" aria-hidden="true"></i> Back to Payment Plans</a></p>
+                </div>
+            </div>
+        </div>
         <div class="grid-container" ng-controller="createPaymentPlanCtrl as createPaymentPlan">
             <div class="grid-block ls-title-bar">
                 <div class="grid-block small-12 vertical">
