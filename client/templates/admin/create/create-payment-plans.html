@@ -55,7 +55,7 @@ url: /create-payment-plan
                                     <div class="ls-form-group" ng-class="{ 'ls-has-error' : createPaymentPlanForm.numMeals.$invalid && !createPaymentPlanForm.numMeals.$pristine }">
                                         <label for="numMeals">
                                             Number of Meals
-                                            <input type="number" placeholder="e.g. 20" class="ls-input-fields" name="numMeals" id="numMeals" ng-model="createPaymentPlanForm.num_meals" step="1" required>
+                                            <input type="number" placeholder="e.g. 20" class="ls-input-fields" name="numMeals" id="numMeals" ng-model="paymentPlanFormData.num_meals" step="1" required>
                                         </label>
                                         <p ng-show="createPaymentPlanForm.numMeals.$invalid && !createPaymentPlanForm.numMeals.$pristine" class="ls-help-block">Enter a valid number of meals for the payment plan.</p>
                                     </div>
