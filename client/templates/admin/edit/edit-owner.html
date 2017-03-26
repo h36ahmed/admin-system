@@ -36,7 +36,7 @@ url: /owner/:id
                                     <h4>Owner Details</h4>
                                     <div class="ls-form-group" ng-class="{ 'ls-has-error' : editOwnerForm.userEmail.$invalid && !editOwnerForm.userEmail.$pristine }">
                                         <label for="userEmail">
-                                           Owners
+                                           Users
                                         </label>
                                         <select class="ls-input-fields" ng-model="editOwnerFormData.owner" ng-options="owner as owner.email for owner in owners track by owner.id" name="ownerEmail" id="ownerEmail" required>
                                         </select>

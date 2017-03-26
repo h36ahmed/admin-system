@@ -34,7 +34,7 @@ url: /create-owner
                                 <div class="small-6 grid-content text-center">
                                     <div class="ls-form-group" ng-class="{ 'ls-has-error' : createOwnerForm.userEmail.$invalid && !createOwnerForm.userEmail.$pristine }">
                                         <label for="userEmail">
-                                           Owners
+                                           Users
                                         </label>
                                         <select class="ls-input-fields" ng-options="owner as owner.email for owner in owners track by owner.id" ng-model="createOwnerFormData.user" name="userEmail" id="userEmail" required>
                                         </select>
