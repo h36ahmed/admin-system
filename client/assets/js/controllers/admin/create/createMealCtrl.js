@@ -10,13 +10,8 @@ var createMealCtrl = function($scope, $location, restaurantService, mealService,
     .getRestaurants()
     .success(function(data, status, headers, config) {
       $scope.restaurants = data;
-      if ($location.search().id) {
-        // Have option been selected to the restaurant who just got added
-        $scope.createMealFormData.restaurant = $scope.restaurants[0];
-      } else {
-        $scope.createMealFormData.restaurant = $scope.restaurants[0];
-      }
-
+      $scope.createMealFormData.restaurant = $scope.restaurants[0];
+      $scope.createMealFormData.price = $scope.restaurants[0].payout_rate;
     })
     .error(function(data, status, headers, config) {
       // Handle login errors here
