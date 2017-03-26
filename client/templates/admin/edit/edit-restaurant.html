@@ -81,6 +81,15 @@ url: /restaurant-edit/:id
                                         </label>
                                         <p ng-show="editRestaurantForm.resLogo.$invalid && !editRestaurantForm.resLogo.$pristine" class="ls-help-block">Choose image file for the restaurant logo.</p>
                                     </div>
+                                    <div class="small-6 grid-content text-right">
+                                        <div class="ls-switch-container">
+                                            <div class="large switch">
+                                                <input type="checkbox" id="resStatus" name="resStatus" ng-model="editRestaurantFormData.status">
+                                                <label for="resStatus"></label>
+                                            </div>
+                                            <p>Restaurant Status</p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="small-12 medium-6 grid-content">
                                     <div class="ls-form-group" ng-class="{ 'ls-has-error' : editRestaurantForm.resSA.$invalid && !editRestaurantForm.resSA.$pristine }">
@@ -111,18 +120,16 @@ url: /restaurant-edit/:id
                                         </label>
                                         <p ng-show="editRestaurantForm.resCountry.$invalid && !editRestaurantForm.resCountry.$pristine" class="ls-help-block">Enter a valid country.</p>
                                     </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : editRestaurantForm.payoutRate.$invalid && !editRestaurantForm.payoutRate.$pristine }">
+                                        <label for="payoutRate">
+                                            Restaurant Payout Rate
+                                            <input type="number" placeholder="e.g. 9.99" class="ls-input-fields" name="payoutRate" id="payoutRate" ng-model="editRestaurantForm.payoutRate" step="0.01" required>
+                                        </label>
+                                        <p ng-show="editRestaurantForm.payoutRate.$invalid && !editRestaurantForm.payoutRate.$pristine" class="ls-help-block">Enter a valid payout rate.</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="grid-block">
-                                <div class="small-6 grid-content text-right">
-                                    <div class="ls-switch-container">
-                                        <div class="large switch">
-                                            <input type="checkbox" id="resStatus" name="resStatus" ng-model="editRestaurantFormData.visible">
-                                            <label for="resStatus"></label>
-                                        </div>
-                                        <p>Restaurant Status</p>
-                                    </div>
-                                </div>
                                 <div class="small-6 grid-content text-right">
                                     <input type="submit" class="button" name="update" value="Update Restaurant Information" ng-disabled="editResForm.$invalid">
                                 </div>

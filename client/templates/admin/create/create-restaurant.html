@@ -104,6 +104,13 @@ url: /create-restaurant
                                         </label>
                                         <p ng-show="createRestaurantForm.resCountry.$invalid && !createRestaurantForm.resCountry.$pristine" class="ls-help-block">Enter a valid country.</p>
                                     </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : createRestaurantForm.payoutRate.$invalid && !createRestaurantForm.payoutRate.$pristine }">
+                                        <label for="payoutRate">
+                                            Restaurant Payout Rate
+                                            <input type="number" placeholder="e.g. 9.99" class="ls-input-fields" name="payoutRate" id="payoutRate" ng-model="createRestaurantForm.payoutRate" step="0.01" required>
+                                        </label>
+                                        <p ng-show="createRestaurantForm.payoutRate.$invalid && !createRestaurantForm.payoutRate.$pristine" class="ls-help-block">Enter a valid payout rate.</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="grid-block">

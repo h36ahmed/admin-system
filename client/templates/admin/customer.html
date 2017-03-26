@@ -23,19 +23,25 @@ url: /customer/:id
                 </div>
            </div>
            <div class="grid-block">
-                <div class="grid-block small-9 vertical">
+               <div class="grid-block small-12 vertical">
+                   <div class="grid-content">
+                       <h3>Account Information</h3>
+                   </div>
+               </div>
+           </div>
+           <div class="grid-block">
+                <div class="grid-block small-6 vertical">
                     <div class="grid-content">
-                        <h3>Account Information</h3>
                         <p><strong>Date Joined:</strong> {{customer.date_joined | date}}</p>
                         <p><strong>Email:</strong> {{customer.user.email}}</p>
-                        <p><strong>Status:</strong> {{customer.active}}</p>
                         <p><strong>Reminder Emails:</strong> {{customer.reminder_emails}}</p>
-                        <p><strong>Payment Plan:</strong> {{customer.payment_plan.name}}</p>
                         <p><strong>Referral Code:</strong> {{customer.user.referral_code.referral_code}}</p>
                     </div>
                 </div>
-                <div class="grid-block small-3 vertical">
+                <div class="grid-block small-6 vertical">
                     <div class="grid-content text-right">
+                        <p><strong>Status:</strong> {{customer.status | uppercase}}</p>
+                        <p><strong>Payment Plan:</strong> {{customer.payment_plan.name}}</p>
                         <p><strong>Meals Remaining:</strong> {{customer.meals_remaining}}</p>
                         <p><strong>Cycle Start Date:</strong> {{customer.cycle_start_date | date}}</p>
                         <p><strong>Cycle End Date:</strong> {{customer.cycle_end_date | date}}</p>

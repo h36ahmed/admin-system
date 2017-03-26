@@ -56,6 +56,13 @@ url: /plan/:id
                                     </div>
                                 </div>
                                 <div class="small-12 medium-6 grid-content">
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : editPaymentPlanForm.numMeals.$invalid && !editPaymentPlanForm.numMeals.$pristine }">
+                                        <label for="numMeals">
+                                            Number of Meals
+                                            <input type="number" placeholder="e.g. 20" class="ls-input-fields" name="numMeals" id="numMeals" ng-model="paymentPlanFormData.num_meals" step="1" required>
+                                        </label>
+                                        <p ng-show="editPaymentPlanForm.numMeals.$invalid && !editPaymentPlanForm.numMeals.$pristine" class="ls-help-block">Enter a valid number of meals for the payment plan.</p>
+                                    </div>
                                     <div class="ls-form-group" ng-class="{ 'ls-has-error' : editPaymentPlanForm.planImage.$invalid && !editPaymentPlanForm.planImage.$pristine }">
                                         <label for="planImage">
                                             Icon Image <br>

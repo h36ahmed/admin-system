@@ -113,6 +113,7 @@ var editPaymentPlanCtrl = function($scope, $state, $location,
     $scope.paymentPlanFormData.price = $scope.paymentPlan.price;
     $scope.paymentPlanFormData.description = $scope.paymentPlan.description;
     $scope.paymentPlanFormData.image = $scope.paymentPlan.image;
+    $scope.paymentPlanFormData.num_meals = $scope.paymentPlan.num_meals;
   }
 
   function resolvePromise(promise, data, message, redirect) {
