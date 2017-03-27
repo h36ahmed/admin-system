@@ -28,10 +28,10 @@ url: /restaurants
                             <li class="ls-card ls-restaurant-card" ng-repeat="restaurant in restaurants">
                                 <a ui-sref="restaurant({id:restaurant.id})"  class="ls-card-link">x</a>
                                 <figure class="ls-restaurant-card-info">
-                                    <img ng-src="https://s3.ca-central-1.amazonaws.com/ls-frontend/restaurants/{{restaurant.logo}}" alt="" ng-if="restaurant.logo != ''">
-                                    <img src="/assets/img/lunchsociety-thumb.png" ng-if="restaurant.logo == ''"/>
+                                    <img ng-src="https://s3.ca-central-1.amazonaws.com/ls-frontend/restaurants/{{restaurant.logo}}" alt="" ng-if="restaurant.logo != ''" ng-class="{'ls-inactive-card': restaurant.status == 'inactive'}">
+                                    <img src="/assets/img/lunchsociety-thumb.png" ng-if="restaurant.logo == ''" ng-class="{'ls-inactive-card': restaurant.status == 'inactive'}"/>
                                     <figcaption class="ls-restaurant-card-caption">
-                                        <div class="ls-left-card-info">
+                                        <div class="ls-left-card-info" ng-class="{'ls-inactive-card': restaurant.status == 'inactive'}">
                                             <h4>{{restaurant.name}}</h4>
                                             <p>{{restaurant.street_address}}</p>
                                         </div>

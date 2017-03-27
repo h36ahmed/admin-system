@@ -28,10 +28,10 @@ url: /owners
                             <li class="ls-card ls-users-card" ng-repeat="owner in owners">
                                 <a ui-sref="owner({id:owner.id})" class="ls-card-link"></a>
                                 <figure class="ls-user-card-info">
-                                    <img ng-src="https://s3.ca-central-1.amazonaws.com/ls-frontend/users/{{owner.profile_image}}" alt="" ng-if="owner.profile_image != ''">
-                                    <img src="/assets/img/lunchsociety-thumb.png" ng-if="owner.profile_image == ''"/>
+                                    <img ng-src="https://s3.ca-central-1.amazonaws.com/ls-frontend/users/{{owner.profile_image}}" alt="" ng-if="owner.profile_image != ''" ng-class="{'ls-inactive-card': owner.status == 'inactive'}">
+                                    <img src="/assets/img/lunchsociety-thumb.png" ng-if="owner.profile_image == ''" ng-class="{'ls-inactive-card': owner.status == 'inactive'}"/>
                                     <figcaption class="ls-user-card-caption">
-                                        <div class="ls-user-card-title">
+                                        <div class="ls-user-card-title" ng-class="{'ls-inactive-card': owner.status == 'inactive'}">
                                             <h4>{{owner.first_name}} {{owner.last_name}}</h4>
                                             <p>{{owner.phone_number}}</p>
                                         </div>
