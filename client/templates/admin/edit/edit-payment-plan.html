@@ -73,6 +73,13 @@ url: /plan/:id
                                         </label>
                                         <p ng-show="editPaymentPlanForm.planImage.$invalid && !editPaymentPlanForm.planImage.$pristine" class="ls-help-block">Choose image file for the icon.</p>
                                     </div>
+                                    <div class="ls-switch-container">
+                                        <div class="large switch">
+                                            <input type="checkbox" id="planStatus" name="planStatus" ng-model="paymentPlanFormData.status">
+                                            <label for="planStatus"></label>
+                                        </div>
+                                        <p>Payment Plan Status</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="grid-block">

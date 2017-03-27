@@ -114,6 +114,7 @@ var editPaymentPlanCtrl = function($scope, $state, $location,
     $scope.paymentPlanFormData.description = $scope.paymentPlan.description;
     $scope.paymentPlanFormData.image = $scope.paymentPlan.image;
     $scope.paymentPlanFormData.num_meals = $scope.paymentPlan.num_meals;
+    $scope.paymentPlanFormData.status = $scope.paymentPlan.status == 'active';
   }
 
   function resolvePromise(promise, data, message, redirect) {

@@ -74,6 +74,13 @@ url: /owner/:id
                                         </label>
                                         <p ng-show="editOwnerForm.proImage.$invalid && !editOwnerForm.proImage.$pristine" class="ls-help-block">Choose profile image file for the meal.</p>
                                     </div>
+                                    <div class="ls-switch-container">
+                                        <div class="large switch">
+                                            <input type="checkbox" id="ownerStatus" name="resStatus" ng-model="editOwnerFormData.status">
+                                            <label for="ownerStatus"></label>
+                                        </div>
+                                        <p>Owner Status</p>
+                                    </div>
                                 </div>
                                 <div class="small-12 medium-6 grid-content">
                                     <h4>Restaurant</h4>
