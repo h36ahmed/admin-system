@@ -118,6 +118,38 @@
         </div>
         <!-- END: Confirm Modal. -->
 
+        <!-- BEGIN: Payout Modal. -->
+        <form
+            ng-switch-when="payout"
+            ng-controller="payoutModalCtrl"
+            ng-submit="submit()"
+            class="ls-modal">
+
+            <h3> {{ header }}</h3>
+
+            <p>
+                {{ message }}
+            </p>
+
+            <p ng-if="errorMessage">
+                <strong>Sorry:</strong> {{ errorMessage }}
+            </p>
+
+            <p>
+                <label for="filterWeek">
+                    Select Week Period
+                </label>
+                <select name="filterWeek" id="filterWeek" class="ls-input-fields" ng-model="form.week" ng-options="week as week.name for week in weeks track by week.id" required>
+                </select>
+            </p>
+
+            <p>
+                <a ng-click="submit()" class="button success">Confirm</a>
+                <a ng-click="cancel()" class="button">Cancel</a>
+            </p>
+
+        </form>
+        <!-- END: Payout Modal. -->
 
 
 

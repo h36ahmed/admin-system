@@ -1,0 +1,129 @@
+---
+name: payouts
+url: /payouts
+---
+<div class="vertical grid-frame">
+    <div class="grid-content shrink" style="padding: 0;">
+        <div ng-include="'/templates/partials/menu_bar.html'"></div>
+    </div>
+    <div ng-include="'/templates/partials/side_bar.html'"></div>
+    <div class="ls-app-body">
+        <div class="grid-container ls-table-layout-pages ls-invoices" ng-controller="managePayoutCtrl as invoiceCtrl">
+            <div class="grid-block">
+                <div class="grid-block small-8 vertical">
+                   <div class="grid-content">
+                       <h2>Payouts</h2>
+                   </div>
+                </div>
+                <div class="grid-block small-4 vertical">
+                    <div class="grid-content text-right">
+                        <button class="success button ls-export-button" ng-click="confirmPayout()">
+                            Confirm Payout
+                        </button>
+                        <!--<form class="ls-form ls-email-form"  name="emailForm" ng-submit="payoutConfirm()">
+                            <input type="submit" class="success button ls-export-button" name="payoutConfirm" value="Confirm Payout">
+                        </form>-->
+                    </div>
+                </div>
+            </div>
+            <div class="grid-block ls-nav-header" ng-if="currentViewWeek != null">
+                <div class="grid-block medium-3 vertical">
+                   <div class="grid-content">
+                        <a ng-click="changeWeek('prevWeek')" class="ls-link ls-prev-link" ng-if="currentViewWeek.id != 1"><i class="fa fa-angle-left" aria-hidden="true"></i> Previous Week</a>
+                   </div>
+                </div>
+                <div class="grid-block medium-6 vertical">
+                   <div class="grid-content text-center">
+                        <h4>{{currentViewWeek.name}}</h4>
+                        <p>{{currentViewWeek.from_date | date}} - {{currentViewWeek.to_date | date}}</p>
+                   </div>
+                </div>
+                <div class="grid-block medium-3 vertical">
+                   <div class="grid-content">
+                        <a ng-click="changeWeek('nextWeek')" class="ls-link ls-next-link">Next Week <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                   </div>
+                </div>
+            </div>
+            <section class="grid-block ls-filter-section">
+                <div class="grid-block medium-6 vertical">
+                   <div class="grid-content">
+                        <label for="filterWeek">
+                            Filter By Week
+                        </label>
+                        <select name="filterWeek" id="filterWeek" class="ls-input-fields" ng-model="filterWeek" ng-options="week as week.name for week in weeks track by week.id" required>
+                        </select>
+                   </div>
+                </div>
+                <div class="grid-block medium-3 vertical">
+                   <div class="grid-content">
+                         <a ng-click="changeWeek('custom')" class="button">Filter By Week</a>
+                   </div>
+                </div>
+                <div class="grid-block medium-3 vertical">
+                   <div class="grid-content">
+                         <a ng-click="changeWeek('past')" class="button secondary">Past Payouts</a>
+                   </div>
+                </div>
+            </section>
+            <div class="grid-block">
+               <div class="grid-block small-12 vertical">
+                   <div class="grid-content">
+                        <div class="ls-no-payouts" ng-if="currentViewWeek == null">
+                            <p>Please select the week to generate payouts report.</p>
+                        </div>
+                        <div ng-show="tabview" ng-switch="tabview" ng-if="currentViewWeek != null">
+                            <div class="ls-table-responsive-vertical shadow-z-1" ng-switch-when="payouts">
+                               <table id="table" class="ls-table ls-table-hover">
+                                  <thead>
+                                    <tr>
+                                      <th>Restaurant Name</th>
+                                      <th>Total Meals</th>
+                                      <th>Total Payment (BT)</th>
+                                      <th>Tax Amount</th>
+                                      <th>Total Payment</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr ng-repeat="payout in payouts">
+                                        <td data-title="restaurant">{{payout.restaurant}}</td>
+                                        <td data-title="total meals">{{payout.total_meals}}</td>
+                                        <td data-title="total payment before tax">{{payout.total_payment_before_tax | currency}}</td>
+                                        <td data-title="tax amount">{{payout.tax_amount | currency}}</td>
+                                        <td data-title="total amount">{{payout.total_amount | currency}}</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                            </div>
+                            <div class="ls-table-responsive-vertical shadow-z-1" ng-switch-when="past-payouts">
+                               <table id="table" class="ls-table ls-table-hover">
+                                  <thead>
+                                    <tr>
+                                      <th>Payout Date</th>
+                                      <th>Week Period</th>
+                                      <th>Restaurant Name</th>
+                                      <th>Total Meals</th>
+                                      <th>Total Payment</th>
+                                      <th>Status</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr ng-repeat="payout in payouts">
+                                        <td data-title="payout date">{{payout.payout_date}}</td>
+                                        <td data-title="week period">{{payout.week.name}}</td>
+                                        <td data-title="restaurant">{{payout.restaurant.name}}</td>
+                                        <td data-title="total meals">{{payout.total_meals}}</td>
+                                        <td data-title="total amount">{{payout.total_amount | currency}}</td>
+                                        <td data-title="status">
+                                          {{payout.status | uppercase }}
+                                        </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                            </div>
+                       </div>
+                    </div>
+                </div>
+           </div>
+        </div>
+    </div>
+</div>
