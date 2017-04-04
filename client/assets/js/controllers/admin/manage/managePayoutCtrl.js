@@ -79,7 +79,27 @@ var managePayoutCtrl = function($scope, payoutService, weekService, modalService
       );
       promise.then(
         function handleResolve(response) {
-            console.log(response);
+          payoutService
+            .createPayout({week_id: response.id})
+            .success(function(data, status, headers, config) {
+              modalService.resolve();
+              promise.then(
+                function handleResolve(response) {
+                  promise = modalService.open(
+                    "alert", {
+                      message: 'Payout Confirmed.'
+                    }
+                  );
+                },
+                function handleReject(error) {});
+            })
+            .error(function(data, status, headers, config) {
+              promise = modalService.open(
+                "alert", {
+                  message: 'Error: Something Went Wrong!'
+                }
+              );
+            });
         },
         function handleReject(error) {});
     } else {
@@ -133,8 +153,6 @@ var managePayoutCtrl = function($scope, payoutService, weekService, modalService
         $scope.message = 'Error: Something Went Wrong';
       });
   }
-
-
 
 };
 
