@@ -68,8 +68,8 @@ url: /payouts
                         <div class="ls-no-payouts" ng-if="currentViewWeek == null">
                             <p>Please select the week to generate payouts report.</p>
                         </div>
-                        <div ng-show="tabview" ng-switch="tabview" ng-if="currentViewWeek != null">
-                            <div class="ls-table-responsive-vertical shadow-z-1" ng-switch-when="payouts">
+                        <div ng-show="tabview" ng-switch="tabview">
+                            <div class="ls-table-responsive-vertical shadow-z-1" ng-switch-when="payouts" ng-if="currentViewWeek != null">
                                <table id="table" class="ls-table ls-table-hover">
                                   <thead>
                                     <tr>
@@ -105,7 +105,7 @@ url: /payouts
                                   </thead>
                                   <tbody>
                                     <tr ng-repeat="payout in payouts">
-                                        <td data-title="payout date">{{payout.payout_date}}</td>
+                                        <td data-title="payout date">{{payout.payout_date | date}}</td>
                                         <td data-title="week period">{{payout.week.name}}</td>
                                         <td data-title="restaurant">{{payout.restaurant.name}}</td>
                                         <td data-title="total meals">{{payout.total_meals}}</td>
