@@ -12,8 +12,8 @@ app.factory(
     // ---
     utilService.getNextDate = function() {
       var tomorrow = new Date();
-      tomorrow.setDate(today.getUTCDate()+1);
-      return getNextDate;
+      tomorrow.setDate(tomorrow.getUTCDate()+1);
+      return tomorrow;
     };
 
     utilService.formatDate = function(date) {
@@ -43,7 +43,7 @@ app.factory(
       var monthIndex = date.getUTCMonth();
       var year = date.getUTCFullYear();
 
-      return day + ' ' + monthNames[monthIndex] + ', ' + year;
+      return monthNames[monthIndex] + ' ' + day + ', ' + year;
 
     }
 
