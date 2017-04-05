@@ -8,12 +8,13 @@ url: /customer/:id
     </div>
     <div ng-include="'/templates/partials/side_bar.html'"></div>
     <div class="ls-app-body">
-        <div class="grid-container ls-customer-details" ng-controller="customerInfoCtrl as resInfo">
+        <div class="grid-container ls-customer-details" ng-controller="customerInfoCtrl as cusInfo">
             <div class="grid-block">
                 <div class="grid-block small-9 vertical">
                     <div class="grid-content">
                         <h2>{{customer.first_name | titleCase}} {{customer.last_name | titleCase}}</h2>
                         <h4>{{customer.postal_code}}</h4>
+                        <a ui-sref="edit-customer({id: $stateParams.id})" class="button">Edit Customer</a>
                     </div>
                 </div>
                 <div class="grid-block small-3 vertical">

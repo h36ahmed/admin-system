@@ -10,16 +10,17 @@ app.factory(
     // ---
     // PUBLIC METHODS.
     // ---
-    utilService.getNextDate = function(date) {
-        var newDate = date;
-        return newDate;
+    utilService.getNextDate = function() {
+      var tomorrow = new Date();
+      tomorrow.setDate(today.getUTCDate()+1);
+      return getNextDate;
     };
 
     utilService.formatDate = function(date) {
-      var dd = date.getDate();
-      var mm = date.getMonth() + 1; //January is 0!
+      var dd = date.getUTCDate();
+      var mm = date.getUTCMonth() + 1; //January is 0!
 
-      var yyyy = date.getFullYear();
+      var yyyy = date.getUTCFullYear();
       if (dd < 10) {
         dd = '0' + dd;
       }
@@ -28,6 +29,23 @@ app.factory(
       }
       return yyyy + "-" + mm + "-" + dd;
     };
+
+    utilService.formatLongDate = function(date) {
+
+      var monthNames = [
+        "January", "February", "March",
+        "April", "May", "June", "July",
+        "August", "September", "October",
+        "November", "December"
+      ];
+
+      var day = date.getUTCDate();
+      var monthIndex = date.getUTCMonth();
+      var year = date.getUTCFullYear();
+
+      return day + ' ' + monthNames[monthIndex] + ', ' + year;
+
+    }
 
     return utilService;
 

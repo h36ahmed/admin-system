@@ -1,0 +1,149 @@
+---
+name: edit-customer
+url: /edit-customer/:id
+---
+<div class="vertical grid-frame">
+    <div class="grid-content shrink" style="padding: 0;">
+        <div ng-include="'/templates/partials/menu_bar.html'"></div>
+    </div>
+    <div ng-include="'/templates/partials/side_bar.html'"></div>
+    <div class="ls-app-body">
+        <div class="grid-block ls-back-bar">
+            <div class="grid-block small-12 vertical">
+                <div class="grid-content">
+                    <p><a ui-sref="customers"><i class="fa fa-angle-left" aria-hidden="true"></i> Back to Customers</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="grid-container ls-edit-customer ls-edit-pages" ng-controller="editCustomerCtrl as editCus">
+            <div class="grid-block ls-title-bar">
+                <div class="grid-block small-8 vertical">
+                    <div class="grid-content">
+                        <h2>Edit Customer Information</h2>
+                    </div>
+                </div>
+                <div class="grid-block small-4 vertical">
+                    <div class="grid-content text-right">
+                    </div>
+                </div>
+            </div>
+            <div class="grid-block">
+                <div class="grid-block small-12 vertical">
+                    <form class="ls-form ls-edit-form" name="editCustomerForm" ng-submit="submitEditForm(editCustomerForm.$valid)" novalidate>
+                        <ul class="ls-tabs">
+                            <li class="ls-tab" ng-class="{active: tabview == 'pinfo'}"><a ng-click="changeTabview('pinfo')" class="ls-tab-link">Personal Information</a></li>
+                            <li class="ls-tab" ng-class="{active: tabview == 'settings'}"><a ng-click="changeTabview('settings')" class="ls-tab-link">Account Settings</a></li>
+                        </ul>
+                        <div ng-show="tabview" ng-switch="tabview">
+                            <div class="ls-tab-content" ng-switch-when="pinfo">
+                                <div class="grid-content">
+                                    <div class="grid-block">
+                                        <div class="small-12 medium-6 grid-content">
+                                            <div class="ls-form-group" ng-class="{ 'ls-has-error' : editCustomerForm.firstName.$invalid && !editCustomerForm.firstName.$pristine }">
+                                                <label for="firstName">
+                                                    First Name
+                                                    <input type="text" class="ls-input-fields" name="firstName" id="firstName" ng-model="customerFormData.first_name" required>
+                                                </label>
+                                                <p ng-show="editCustomerForm.firstName.$invalid && !editCustomerForm.firstName.$pristine" class="ls-help-block">Enter a valid first name.</p>
+                                            </div>
+                                            <div class="ls-form-group" ng-class="{ 'ls-has-error' : editCustomerForm.lastName.$invalid && !editCustomerForm.lastName.$pristine }">
+                                                <label for="lastName">
+                                                    Last Name
+                                                    <input type="text" class="ls-input-fields" name="lastName" id="lastName" ng-model="customerFormData.last_name" required>
+                                                </label>
+                                                <p ng-show="editCustomerForm.lastName.$invalid && !editCustomerForm.lastName.$pristine" class="ls-help-block">Enter a valid last name.</p>
+                                            </div>
+                                            <div class="ls-form-group" ng-class="{ 'ls-has-error' : editCustomerForm.cusPC.$invalid && !editCustomerForm.cusPC.$pristine }">
+                                                <label for="cusPC">
+                                                    Postal Code
+                                                    <input type="text" placeholder="e.g. M5V4B1" class="ls-input-fields" name="cusPC" id="cusPC" ng-model="customerFormData.postal_code" ng-maxlength="6" required>
+                                                </label>
+                                                <p ng-show="editCustomerForm.cusPC.$invalid && !editCustomerForm.cusPC.$pristine" class="ls-help-block">Enter a valid postal code.</p>
+                                            </div>
+                                        </div>
+                                        <div class="small-12 medium-6 grid-content">
+                                            <div class="ls-form-group" ng-class="{ 'ls-has-error' : editCustomerForm.profileImage.$invalid && !editCustomerForm.profileImage.$pristine }">
+                                                <label for="profileImage">
+                                                    Customer Image <br>
+                                                    <input type="hidden" value="{{customerFormData.profile_image}}" name="profileImage" id="customerImage" required/>
+                                                    <input type="file" ngf-select  ng-model="customerFormData.image_file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB">
+                                                    <img ngf-src="customerFormData.image_file || 'https://s3.ca-central-1.amazonaws.com/ls-frontend/users/' + customerFormData.profile_image" ng-if="customerFormData.profile_image != ''">
+                                                    <img ngf-src="customerFormData.image_file || '/assets/img/lunchsociety-thumb.png'" ng-if="customerFormData.profile_image == ''">
+                                                </label>
+                                                <p ng-show="editCustomerForm.profileImage.$invalid && !editCustomerForm.profileImage.$pristine" class="ls-help-block">Choose image file for the customer.</p>
+                                            </div>
+                                            <div class="ls-switch-container">
+                                                <div class="large switch">
+                                                    <input type="checkbox" id="status" name="status" ng-model="customerFormData.status">
+                                                    <label for="status"></label>
+                                                </div>
+                                                <p>Status</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ls-tab-content" ng-switch-when="settings">
+                                <div class="grid-content">
+                                    <div class="grid-block">
+                                        <div class="small-12 medium-6 grid-content">
+                                            <div class="ls-form-group" ng-class="{ 'ls-has-error' : editCustomerForm.paymentPlanName.$invalid && !editCustomerForm.paymentPlanName.$pristine }">
+                                                <label for="resName">Payment Plan</label>
+                                                <select name="paymentPlanName" id="paymentPlanName" class="ls-input-fields" ng-model="customerFormData.payment_plan" ng-options="plan as plan.name for plan in plans track by plan.id" required ng-change="changePaymentPlan()">
+                                                </select>
+                                                <p ng-show="editCustomerForm.paymentPlanName.$invalid && !editCustomerForm.paymentPlanName.$pristine" class="ls-help-block">Select a valid payment plan name.</p>
+                                            </div>
+                                            <div class="ls-form-group" ng-class="{ 'ls-has-error' : editCustomerForm.mealsRemaining.$invalid && !editCustomerForm.mealsRemaining.$pristine }">
+                                                <label for="mealsRemaining">
+                                                    Meals Remaining
+                                                    <input type="number" placeholder="e.g. 50" class="ls-input-fields" name="mealsRemaining" id="mealsRemaining" ng-model="customerFormData.meals_remaining" step="1" min="0" required>
+                                                </label>
+                                                <p ng-show="editCustomerForm.mealsRemaining.$invalid && !editCustomerForm.mealsRemaining.$pristine" class="ls-help-block">Enter a valid number of meals remaining.</p>
+                                            </div>
+                                            <div class="ls-switch-container">
+                                                <div class="large switch">
+                                                    <input type="checkbox" id="remainderEmails" name="remainderEmails" ng-model="customerFormData.reminder_emails">
+                                                    <label for="remainderEmails"></label>
+                                                </div>
+                                                <p>Reminder Emails</p>
+                                            </div>
+                                        </div>
+                                        <div class="small-12 medium-6 grid-content">
+                                            <div class="ls-form-group ls-date-group" ng-class="{ 'ls-has-error' : editCustomerForm.startDate.$invalid && !editCustomerForm.startDate.$pristine }">
+                                                <label for="startDate">
+                                                    Cycle Start Date
+                                                </label>
+                                                <datepicker date-format="longDate">
+                                                  <input ng-model="customerFormData.cycle_start_date" type="text" class="ls-input-fields" name="startDate" id="startDate" placeholder="Select a Date"/>
+                                                </datepicker>
+                                                <p ng-show="editCustomerForm.startDate.$invalid && !editCustomerForm.startDate.$pristine" class="ls-help-block">Enter a valid cycle start date.</p>
+                                            </div>
+                                            <div class="ls-form-group ls-date-group" ng-class="{ 'ls-has-error' : editCustomerForm.endDate.$invalid && !editCustomerForm.endDate.$pristine }">
+                                                <label for="endDate">
+                                                    Cycle End Date
+                                                </label>
+                                                <datepicker date-format="longDate">
+                                                  <input ng-model="customerFormData.cycle_end_date" type="text" class="ls-input-fields" name="endDate" id="endDate" placeholder="Select a Date"/>
+                                                </datepicker>
+                                                <p ng-show="editCustomerForm.endDate.$invalid && !editCustomerForm.endDate.$pristine" class="ls-help-block">Enter a valid cycle end date.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-content">
+                            <div class="grid-block">
+                                <div class="small-6 grid-content text-right">
+                                </div>
+                                <div class="small-6 grid-content text-right">
+                                    <input type="submit" class="button" name="update" value="Update Customer Information" ng-disabled="editCustomerForm.$invalid">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+           </div>
+        </div>
+    </div>
+</div>
