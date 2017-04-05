@@ -107,6 +107,7 @@ var editCustomerCtrl = function($scope, $state, $location,
     $scope.customerFormData.profile_image = result.file_name;
     $scope.customerFormData.payment_plan_id = $scope.customerFormData.payment_plan.id;
     $scope.customerFormData.meals_remaining = parseInt($scope.customerFormData.meals_remaining);
+
     customerService
       .editCustomer($scope.customerFormData)
       .success(function(data, status, headers, config) {
