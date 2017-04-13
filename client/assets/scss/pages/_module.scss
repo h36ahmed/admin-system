@@ -1,10 +1,4 @@
 @import 'login';
 @import 'register';
-@import 'admin-dashboard';
-@import 'admin-res-details';
-@import 'admin-customer-details';
-@import 'admin-edit-pages';
-@import 'admin-manage-pages';
-@import 'admin-create-pages';
-@import 'customer-pages';
-
+@import 'admin/module';
+@import 'customer/module';

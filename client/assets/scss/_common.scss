@@ -1,19 +1,5 @@
-.ls-text-links {
-  &:link, &:visited {
-    color: $dark-color;
-  }
-  &:hover,
-  &:active {
-    color: $primary-color;
-  }
-}
-
 .ls-common-body {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
+  @include position(absolute, 0, 0, 0, 0);
   width: 100%;
   height: auto;
   color: #fff;
@@ -24,9 +10,7 @@
   background-position: center;
   background-size: cover;
   filter: brightness(70%);
-  position: absolute;
-  top: 0;
-  bottom: 0;
+  @include position(absolute, 0, 0, 0, 0);
   height: auto;
   width: 100%;
   display: block;
@@ -91,25 +75,6 @@
   }
 }
 
-.ls-app-body {
-  position: absolute;
-  top: 40px;
-  background-color: #fff;
-  left: 250px;
-  right: 0;
-  width: auto;
-  bottom: 0;
-  height: auto;
-  overflow: auto;
-  &.ls-customer {
-    left: 0;
-      padding-top: 0;
-  }
-    .grid-container {
-        padding-top: 20px;
-    }
-}
-
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -130,59 +95,25 @@ select {
   }
 }
 
-.ls-form {
-  .ng-invalid:not(.ng-pristine) {
-    border: 1px solid $alert-color;
-  }
-  .ls-help-block {
-    color: $alert-color;
-  }
-  .button {
-    margin: 0;
-    &.secondary {
-      margin-top: 21px;
-      width: 100%;
-      text-align: center;
-    }
-  }
-  &.ls-create-form,
-  &.ls-edit-form {
-    padding-bottom: 30px;
-    img {
-      width: 150px;
-      height: auto;
-      margin-top: 20px;
-    }
-  }
-  &.ls-delete-form {
-    text-align: right;
-    .button {
-      margin: 5px 0 0 0;
-    }
-  }
-}
-
 .ls-title-bar {
-    margin: 20px 0;
+  margin: 20px 0;
 }
 
 .ls-back-bar {
-    background-color: $primary-color;
-    padding: 5px;
-
-    a:link,
-    a:visited {
-        color:#fff;
-        font-weight: 700;
-        @include transition;
-    }
-    a:hover,
-    a:active {
-        color: $dark-color;
-    }
-    p{
-        margin-bottom: 0;
-    }
+  background-color: $primary-color;
+  padding: 5px;
+  a:link, a:visited {
+    color: #fff;
+    font-weight: 700;
+    @include transition;
+  }
+  a:hover,
+  a:active {
+    color: $dark-color;
+  }
+  p {
+    margin-bottom: 0;
+  }
 }
 
 .ls-switch-container {
@@ -206,17 +137,21 @@ select {
   margin-right: 0 !important;
 }
 
-.ls-edit-form {
-  .grid-block + .grid-block {
-    margin-top: 20px;
-  }
-}
-
 .ls-link {
   margin-top: 20px;
   display: block;
   width: 100%;
   &.ls-next-link {
     text-align: right;
+  }
+}
+
+.ls-text-links {
+  &:link, &:visited {
+    color: $dark-color;
+  }
+  &:hover,
+  &:active {
+    color: $primary-color;
   }
 }

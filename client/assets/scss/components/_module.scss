@@ -1,9 +1,16 @@
-@import 'side-navbar';
-@import 'top-navbar';
 @import 'modals';
 @import 'tables';
-@import 'table-layout-pages';
 @import 'cards';
 @import 'form-sections';
 @import 'tabs';
 @import 'date-picker';
+@import 'app-body';
+@import 'forms';
+
+//Admin
+@import 'menu-bar';
+@import 'side-bar';
+
+//Customers
+@import 'app-nav-bar';
+@import 'customer-cards';

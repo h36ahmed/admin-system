@@ -33,7 +33,7 @@ url: /customers
                                     <figcaption class="ls-user-card-caption">
                                         <div class="ls-user-card-title">
                                             <h4>{{customer.first_name}} {{customer.last_name}}</h4>
-                                            <p>STATUS: <span class="ls-status ls-active" ng-if="customer.active">ACTIVE</span><span class="ls-status ls-inactive" ng-if="!customer.active">INACTIVE</span></p>
+                                            <p>STATUS: <span class="ls-status ls-active" ng-if="customer.status == 'active'">ACTIVE</span><span class="ls-status ls-inactive" ng-if="customer.status == 'inactive'">INACTIVE</span></p>
                                         </div>
                                         <a ui-sref="customer({id:customer.id})"  class="button">
                                             More Info</a>

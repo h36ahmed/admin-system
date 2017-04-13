@@ -6,10 +6,15 @@
     }
   }
   .ls-filter-section {
-      margin-bottom: 20px;
+    margin-bottom: 20px;
     .button {
       margin-top: 22px;
       width: 100%;
+    }
+  }
+  &.ls-payouts {
+    .ls-filter-section {
+      margin-top: 20px;
     }
   }
 }

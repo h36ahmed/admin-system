@@ -1,12 +1,12 @@
 var app = angular.module('lunchSociety');
 
-var createMealOfferCtrl = function($scope, $location, restaurantService, mealOfferService, modalService) {
+var createMealOfferCtrl = function($scope, $location, restaurantService, mealOfferService, modalService, utilService) {
 
   $scope.createMealOfferFormData = {
       meal_id: null,
       plates_left: null,
       plates_assigned: null,
-      offer_date: null
+      offer_date: utilService.formatLongDate(utilService.getNextDate())
   };
 
   $scope.restaurants = [];
@@ -122,6 +122,6 @@ var createMealOfferCtrl = function($scope, $location, restaurantService, mealOff
 
 };
 
-createMealOfferCtrl.inject = ['$scope', '$location', 'restaurantService', 'mealOfferService', 'modalService'];
+createMealOfferCtrl.inject = ['$scope', '$location', 'restaurantService', 'mealOfferService', 'modalService', 'utilService'];
 
 app.controller('createMealOfferCtrl', createMealOfferCtrl);
