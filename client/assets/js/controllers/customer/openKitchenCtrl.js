@@ -22,7 +22,9 @@ var openKitchenCtrl = function($scope, $state, $location, $stateParams, uiGmapGo
       stylers: [{
         visibility: 'off'
       }]
-    }]
+    }],
+    disableDefaultUI: true,
+    minZoom: 12
   };
 
   $scope.offers = [];

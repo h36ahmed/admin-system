@@ -1,12 +1,18 @@
-.menu-bar.dark {
+.menu-bar {
+  &.dark {
     color: #fff;
     text-transform: uppercase;
     font-weight: bold;
     letter-spacing: 3px;
     text-align: center;
     padding: 10px 0 7px;
-
     li:first-child {
-        padding-left:20px;
+      padding-left: 20px;
     }
+  }
+  > li > a:hover {
+    background: inherit;
+    color: inherit;
+  }
 }
+

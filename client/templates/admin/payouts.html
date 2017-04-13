@@ -109,7 +109,7 @@ url: /payouts
                                         <td data-title="week period">{{payout.week.name}}</td>
                                         <td data-title="restaurant">{{payout.restaurant.name}}</td>
                                         <td data-title="total meals">{{payout.total_meals}}</td>
-                                        <td data-title="total amount">{{payout.total_amount | currency}}</td>
+                                        <td data-title="total amount">{{payout.total_payment_before_tax + payout.tax_amount | currency}}</td>
                                         <td data-title="status">
                                           {{payout.status | uppercase }}
                                         </td>

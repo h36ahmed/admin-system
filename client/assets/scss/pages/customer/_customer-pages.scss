@@ -1,0 +1,19 @@
+.ls-customer-pages {
+  @include position(absolute, 0, 0, 0, 0);
+  @include size(auto, auto);
+  .ls-full-height, .ls-map {
+    height: 100%;
+  }
+  .angular-google-map {
+    height: 100%;
+  }
+  .angular-google-map-container {
+    height: 100%;
+  }
+  .ls-meal-choices {
+    padding: 30px 0px;
+    width: 100%;
+    @extend %flexbox;
+    @include flex-flow(row wrap);
+  }
+}
