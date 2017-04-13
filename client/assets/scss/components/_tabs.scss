@@ -1,40 +1,40 @@
 .ls-tabs {
-  margin: 0 0 20px;
-  padding: 0;
-  width: 600px;
-  list-style: none;
-  @include clearfix;
-  .ls-tab {
-    float: left;
-    .ls-tab-link {
-      width: 100%;
-      display: block;
-      padding: 8px 30px;
-      background-color: #efefef;
-      opacity: 0.9;
-      border-bottom: none;
-      text-align: center;
-      text-lsansform: uppercase;
-      font-size: 0.9rem;
-      color: $dark-color;
-      @include border-radius-all(2px, 0, 0, 0);
-      @include transition;
+    margin: 0 0 20px;
+    padding: 0;
+    width: 600px;
+    list-style: none;
+    @include clearfix;
+    .ls-tab {
+        float: left;
+        .ls-tab-link {
+            width: 100%;
+            display: block;
+            padding: 8px 30px;
+            background-color: #efefef;
+            opacity: 0.9;
+            border-bottom: none;
+            text-align: center;
+            text-lsansform: uppercase;
+            font-size: 0.9rem;
+            color: $dark-color;
+            @include border-radius-all(2px, 0, 0, 0);
+            @include transition;
+        }
+        &:last-child {
+            .ls-tab-link {
+                @include border-radius-all(0, 2px, 0, 0);
+            }
+        }
+        &.active {
+            .ls-tab-link {
+                background-color: $dark-color;
+                color: #fff;
+            }
+        }
+        &:not(.active) {
+            .ls-tab-link:hover {
+                opacity: 1;
+            }
+        }
     }
-    &:last-child {
-      .ls-tab-link {
-        @include border-radius-all(0, 2px, 0, 0);
-      }
-    }
-    &.active {
-      .ls-tab-link {
-        background-color: $dark-color;
-          color: #fff;
-      }
-    }
-    &:not(.active) {
-      .ls-tab-link:hover {
-        opacity: 1;
-      }
-    }
-  }
 }

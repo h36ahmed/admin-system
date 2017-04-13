@@ -1,36 +1,36 @@
 .ls-form {
-  .ng-invalid:not(.ng-pristine) {
-    border: 1px solid $alert-color;
-  }
-  .ls-help-block {
-    color: $alert-color;
-  }
-  .button {
-    margin: 0;
-    &.secondary {
-      margin-top: 21px;
-      width: 100%;
-      text-align: center;
+    .ng-invalid:not(.ng-pristine) {
+        border: 1px solid $alert-color;
     }
-  }
-  &.ls-create-form,
-  &.ls-edit-form {
-    padding-bottom: 30px;
-    img {
-      width: 150px;
-      height: auto;
-      margin-top: 20px;
+    .ls-help-block {
+        color: $alert-color;
     }
-  }
-  &.ls-delete-form {
-    text-align: right;
     .button {
-      margin: 5px 0 0 0;
+        margin: 0;
+        &.secondary {
+            margin-top: 21px;
+            width: 100%;
+            text-align: center;
+        }
     }
-  }
-  &.ls-edit-form {
-    .grid-block + .grid-block {
-      margin-top: 20px;
+    &.ls-create-form,
+    &.ls-edit-form {
+        padding-bottom: 30px;
+        img {
+            width: 150px;
+            height: auto;
+            margin-top: 20px;
+        }
     }
-  }
+    &.ls-delete-form {
+        text-align: right;
+        .button {
+            margin: 5px 0 0 0;
+        }
+    }
+    &.ls-edit-form {
+        .grid-block+.grid-block {
+            margin-top: 20px;
+        }
+    }
 }

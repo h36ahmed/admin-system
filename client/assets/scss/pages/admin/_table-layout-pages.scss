@@ -1,20 +1,20 @@
 .ls-table-layout-pages {
-  .ls-nav-header {
-    margin-bottom: 20px;
-    h4 {
-      margin-top: 10px;
+    .ls-nav-header {
+        margin-bottom: 20px;
+        h4 {
+            margin-top: 10px;
+        }
     }
-  }
-  .ls-filter-section {
-    margin-bottom: 20px;
-    .button {
-      margin-top: 22px;
-      width: 100%;
-    }
-  }
-  &.ls-payouts {
     .ls-filter-section {
-      margin-top: 20px;
+        margin-bottom: 20px;
+        .button {
+            margin-top: 22px;
+            width: 100%;
+        }
     }
-  }
+    &.ls-payouts {
+        .ls-filter-section {
+            margin-top: 20px;
+        }
+    }
 }

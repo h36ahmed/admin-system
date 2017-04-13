@@ -1,28 +1,28 @@
 .ls-app-nav {
-  color: $dark-color;
-  background-color: $light-color;
-  height: $nav-bar-height;
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
-  @include position(absolute, 0, 0, auto, 0);
-  z-index: 2;
-  li {
-    a {
-      font-size: 1.1rem;
-      line-height: 0;
+    color: $dark-color;
+    background-color: $light-color;
+    height: $nav-bar-height;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+    @include position(absolute, 0, 0, auto, 0);
+    z-index: 2;
+    li {
+        a {
+            font-size: 1.1rem;
+            line-height: 0;
+        }
+        i {
+            margin-right: 10px;
+            color: $primary-color;
+        }
     }
-    i {
-      margin-right: 10px;
-      color: $primary-color;
+    .ls-logout-btn {
+        margin: 0;
+        margin-right: 10px;
+        height: $nav-bar-logout-btn-height;
+        margin-top: 3.5px;
+        color: $light-color;
+        &:hover {
+            background-color: darken($primary-color, $darken-primary-shade);
+        }
     }
-  }
-  .ls-logout-btn {
-    margin: 0;
-    margin-right: 10px;
-    height: $nav-bar-logout-btn-height;
-    margin-top: 3.5px;
-    color: $light-color;
-    &:hover {
-      background-color: darken($primary-color, $darken-primary-shade);
-    }
-  }
 }

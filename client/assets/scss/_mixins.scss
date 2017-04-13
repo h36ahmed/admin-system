@@ -1,11 +1,10 @@
 %clearfix {
     *zoom: 1;
-
-    &:before, &:after {
+    &:before,
+    &:after {
         content: ' ';
         display: table;
     }
-
     &:after {
         clear: both;
     }
@@ -13,169 +12,195 @@
 
 // Private
 @mixin prefix($property, $value, $prefixes: ()) {
-  @each $prefix in $prefixes {
-    -#{$prefix}-#{$property}: $value;
-  }
-
-  #{$property}: $value;
+    @each $prefix in $prefixes {
+        -#{$prefix}-#{$property}: $value;
+    }
+    #{$property}: $value;
 }
 
 // Private
 @function str-replace($string, $to-replace, $replacement:'') {
-  $target-location: str-index($string, $to-replace);
-  @if $target-location == null { @return $string; }
-  $string-without-target: str-slice($string, 1, $target-location - 1) + str-slice($string, $target-location + 1);
-  $string: str-insert($string-without-target, $replacement, $target-location);
-  @return $string;
+    $target-location: str-index($string, $to-replace);
+    @if $target-location==null {
+        @return $string;
+    }
+    $string-without-target: str-slice($string, 1, $target-location - 1)+str-slice($string, $target-location + 1);
+    $string: str-insert($string-without-target, $replacement, $target-location);
+    @return $string;
 }
 
-
 @mixin border-radius ($radius: 4px) {
-	border-radius			: $radius;
-	-moz-border-radius		: $radius;
-	-webkit-border-radius	: $radius;
+    border-radius: $radius;
+    -moz-border-radius: $radius;
+    -webkit-border-radius: $radius;
 }
 
 @mixin border-radius-all ($topleft: 4px, $topright: 4px, $bottomright: 4px, $bottomleft: 4px) {
-	border-radius			: $topleft $topright $bottomright $bottomleft;
-	-moz-border-radius		: $topleft $topright $bottomright $bottomleft;
-	-ms-border-radius		: $topleft $topright $bottomright $bottomleft;
-	-o-border-radius		: $topleft $topright $bottomright $bottomleft;
-	-webkit-border-radius	: $topleft $topright $bottomright $bottomleft;
+    border-radius: $topleft $topright $bottomright $bottomleft;
+    -moz-border-radius: $topleft $topright $bottomright $bottomleft;
+    -ms-border-radius: $topleft $topright $bottomright $bottomleft;
+    -o-border-radius: $topleft $topright $bottomright $bottomleft;
+    -webkit-border-radius: $topleft $topright $bottomright $bottomleft;
 }
 
 @mixin opacity ($opacity: 0.5) {
-	$ieOpacity			: $opacity * 100;
-	opacity				: $opacity;
-	-moz-opacity		: $opacity;
-	-webkit-opacity		: $opacity;
-	-ms-filter			: progid:DXImageTransform.Microsoft.Alpha(opacity=#{$ieOpacity}); /* IE 8 */
-	filter				: alpha(opacity = #{$ieOpacity}); /* IE 5-7 */
+    $ieOpacity: $opacity * 100;
+    opacity: $opacity;
+    -moz-opacity: $opacity;
+    -webkit-opacity: $opacity;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=#{$ieOpacity});
+    /* IE 8 */
+    filter: alpha(opacity=#{$ieOpacity});
+    /* IE 5-7 */
 }
 
 @mixin background-alpha($color, $alpha) {
-	$acolor			: hsla(hue($color), saturation($color), lightness($color), $alpha);
-	$iecolor 		: argb($acolor);
-
-	background-color	: $color; /* fallback color */
-	background-color	: $acolor;
-
-	/* IE */
-	background-color	: transparent\9;
-	filter				: progid:DXImageTransform.Microsoft.gradient(startColorstr= #{$iecolor}, endColorstr= #{$iecolor});
-	zoom:1;
+    $acolor: hsla(hue($color), saturation($color), lightness($color), $alpha);
+    $iecolor: argb($acolor);
+    background-color: $color;
+    /* fallback color */
+    background-color: $acolor;
+    /* IE */
+    background-color: transparent\9;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$iecolor}, endColorstr=#{$iecolor});
+    zoom: 1;
 }
 
 @mixin box-shadow ($x-size:10px, $y-size:10px, $blur:5px, $color: $black, $spread:0) {
-	box-shadow			: $x-size $y-size $blur $spread $color;
-	-moz-box-shadow		: $x-size $y-size $blur $spread $color;
-	-webkit-box-shadow	: $x-size $y-size $blur $spread $color;
+    box-shadow: $x-size $y-size $blur $spread $color;
+    -moz-box-shadow: $x-size $y-size $blur $spread $color;
+    -webkit-box-shadow: $x-size $y-size $blur $spread $color;
 }
+
 @mixin box-shadow-inset ($x-size: 10px, $y-size: 10px, $blur: 5px, $color: $black, $spread:0) {
-	box-shadow			: inset $x-size $y-size $blur $spread $color;
-	-moz-box-shadow		: inset $x-size $y-size $blur $spread $color;
-	-webkit-box-shadow	: inset $x-size $y-size $blur $spread $color;
+    box-shadow: inset $x-size $y-size $blur $spread $color;
+    -moz-box-shadow: inset $x-size $y-size $blur $spread $color;
+    -webkit-box-shadow: inset $x-size $y-size $blur $spread $color;
 }
 
 @mixin gradient-vertical ($firstColor: #FFF, $secondColor: #DDD) {
-	background	: $firstColor; /* Fallback solid color for old browsers */
-	background	: linear-gradient(to bottom, $firstColor 0%, $secondColor 100%); /* W3C */
-	background	: -moz-linear-gradient(top, $firstColor 0%, $secondColor 100%); /* FF 3.6+ */
-	background	: -ms-linear-gradient(top, $firstColor 0%, $secondColor 100%); /* IE 10+ */
-	background	: -o-linear-gradient(top, $firstColor 0%, $secondColor 100%); /* Opera 11.10+ */
-	background	: -webkit-linear-gradient(top, $firstColor 0%,$secondColor 100%); /* Chrome 10+, Safari 5.1+ */
-	background	: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$firstColor), color-stop(100%,$secondColor)); /* Chrome, Safari 4+ */
-	filter		: progid:DXImageTransform.Microsoft.gradient(startColorstr= '#{$firstColor}', endColorstr= '#{$secondColor}', GradientType=0); /* IE 6-9 */
+    background: $firstColor;
+    /* Fallback solid color for old browsers */
+    background: linear-gradient(to bottom, $firstColor 0%, $secondColor 100%);
+    /* W3C */
+    background: -moz-linear-gradient(top, $firstColor 0%, $secondColor 100%);
+    /* FF 3.6+ */
+    background: -ms-linear-gradient(top, $firstColor 0%, $secondColor 100%);
+    /* IE 10+ */
+    background: -o-linear-gradient(top, $firstColor 0%, $secondColor 100%);
+    /* Opera 11.10+ */
+    background: -webkit-linear-gradient(top, $firstColor 0%, $secondColor 100%);
+    /* Chrome 10+, Safari 5.1+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $firstColor), color-stop(100%, $secondColor));
+    /* Chrome, Safari 4+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$firstColor}', endColorstr='#{$secondColor}', GradientType=0);
+    /* IE 6-9 */
 }
 
 @mixin gradient-horizontal ($firstColor: #FFF, $secondColor: #DDD) {
-	background	: $firstColor; /* Fallback solid color for old browsers */
-	background	: linear-gradient(to right, $firstColor 0%, $secondColor 100%); /* W3C */
-	background	: -moz-linear-gradient(left,  $firstColor 0%, $secondColor 100%); /* FF 3.6+ */
-	background	: -ms-linear-gradient(left, $firstColor 0%, $secondColor 100%); /* IE 10+ */
-	background	: -o-linear-gradient(left, $firstColor 0%, $secondColor 100%); /* Opera 11.10+ */
-	background	: -webkit-linear-gradient(left,  $firstColor 0%,$secondColor 100%); /* Chrome 10+, Safari 5.1+ */
-	background	: -webkit-gradient(linear, left top, right top, color-stop(0%,$firstColor), color-stop(100%,$secondColor)); /* Chrome, Safari 4+ */
-	filter		: progid:DXImageTransform.Microsoft.gradient(startColorstr= '#{$firstColor}', endColorstr= '#{$secondColor}', GradientType=1); /* IE 6-9 */
+    background: $firstColor;
+    /* Fallback solid color for old browsers */
+    background: linear-gradient(to right, $firstColor 0%, $secondColor 100%);
+    /* W3C */
+    background: -moz-linear-gradient(left, $firstColor 0%, $secondColor 100%);
+    /* FF 3.6+ */
+    background: -ms-linear-gradient(left, $firstColor 0%, $secondColor 100%);
+    /* IE 10+ */
+    background: -o-linear-gradient(left, $firstColor 0%, $secondColor 100%);
+    /* Opera 11.10+ */
+    background: -webkit-linear-gradient(left, $firstColor 0%, $secondColor 100%);
+    /* Chrome 10+, Safari 5.1+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, $firstColor), color-stop(100%, $secondColor));
+    /* Chrome, Safari 4+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$firstColor}', endColorstr='#{$secondColor}', GradientType=1);
+    /* IE 6-9 */
 }
 
 @mixin transition ($type:all, $time:0.2s, $ease:ease) {
-    transition			: $type $time $ease;
-    -moz-transition		: $type $time $ease;
-    -webkit-transition	: $type $time $ease;
-    -o-transition		: $type $time $ease;
+    transition: $type $time $ease;
+    -moz-transition: $type $time $ease;
+    -webkit-transition: $type $time $ease;
+    -o-transition: $type $time $ease;
 }
 
 @mixin animation ($name, $duration: 300ms, $delay: 0, $ease: ease) {
-    animation	        : $name, $duration, $delay, $ease;
-	-moz-animation		: $name, $duration, $delay, $ease;
-	-ms-animation		: $name, $duration, $delay, $ease;
-	-webkit-animation	: $name, $duration, $delay, $ease;
+    animation: $name, $duration, $delay, $ease;
+    -moz-animation: $name, $duration, $delay, $ease;
+    -ms-animation: $name, $duration, $delay, $ease;
+    -webkit-animation: $name, $duration, $delay, $ease;
 }
 
 @mixin transform ($deg) {
-	transform			: $deg;
-	-moz-transform		: $deg;
-	-ms-transform		: $deg;
-	-o-transform		: $deg;
-	-webkit-transform	: $deg;
+    transform: $deg;
+    -moz-transform: $deg;
+    -ms-transform: $deg;
+    -o-transform: $deg;
+    -webkit-transform: $deg;
 }
 
 @mixin scale ($multiplier) {
-	transform			: scale($multiplier);
-	-moz-transform		: scale($multiplier);
-	-ms-transform		: scale($multiplier);
-	-o-transform		: scale($multiplier);
-	-webkit-transform	: scale($multiplier);
+    transform: scale($multiplier);
+    -moz-transform: scale($multiplier);
+    -ms-transform: scale($multiplier);
+    -o-transform: scale($multiplier);
+    -webkit-transform: scale($multiplier);
 }
 
 @mixin rotate ($deg) {
-	-moz-transform		: rotate($deg);
-	-ms-transform		: rotate($deg);
-	-o-transform		: rotate($deg);
-	-webkit-transform	: rotate($deg);
+    -moz-transform: rotate($deg);
+    -ms-transform: rotate($deg);
+    -o-transform: rotate($deg);
+    -webkit-transform: rotate($deg);
 }
 
 @mixin skew ($deg, $deg2) {
-	transform			: skew($deg, $deg2);
-	-moz-transform		: skew($deg, $deg2);
-	-ms-transform		: skew($deg, $deg2);
-	-o-transform		: skew($deg, $deg2);
-	-webkit-transform	: skew($deg, $deg2);
+    transform: skew($deg, $deg2);
+    -moz-transform: skew($deg, $deg2);
+    -ms-transform: skew($deg, $deg2);
+    -o-transform: skew($deg, $deg2);
+    -webkit-transform: skew($deg, $deg2);
 }
 
 @mixin font($fontName) {
-	@font-face	{
-	    font-family: "#{$fontName}";
-		src: url("fonts/#{$fontName}/#{$fontName}.eot");
-		src: url("fonts/#{$fontName}/#{$fontName}.eot?#iefix") format("embedded-opentype"),
-		     url("fonts/#{$fontName}/#{$fontName}.woff") format("woff"),
-		     url("fonts/#{$fontName}/#{$fontName}.ttf") format("truetype"),
-		     url("fonts/#{$fontName}/#{$fontName}.svg#svgFontName") format("svg");
-	}
-}
-
-@mixin background-gradient($start-color, $end-color, $orientation) {
-    background: $start-color;
-
-    @if $orientation == 'vertical' {
-      background: -webkit-linear-gradient(top, $start-color, $end-color);
-      background: linear-gradient(to bottom, $start-color, $end-color);
-    } @else if $orientation == 'horizontal' {
-      background: -webkit-linear-gradient(left, $start-color, $end-color);
-      background: linear-gradient(to right, $start-color, $end-color);
-    } @else {
-      background: -webkit-radial-gradient(center, ellipse cover, $start-color, $end-color);
-      background: radial-gradient(ellipse at center, $start-color, $end-color);
+    @font-face {
+        font-family: "#{$fontName}";
+        src: url("fonts/#{$fontName}/#{$fontName}.eot");
+        src: url("fonts/#{$fontName}/#{$fontName}.eot?#iefix") format("embedded-opentype"),
+        url("fonts/#{$fontName}/#{$fontName}.woff") format("woff"),
+        url("fonts/#{$fontName}/#{$fontName}.ttf") format("truetype"),
+        url("fonts/#{$fontName}/#{$fontName}.svg#svgFontName") format("svg");
     }
 }
 
-@mixin background-size($width, $height: $width) {
-    @include prefix(background-size, $width $height, 'webkit' 'moz');
+@mixin background-gradient($start-color,
+$end-color,
+$orientation) {
+    background: $start-color;
+    @if $orientation=='vertical' {
+        background: -webkit-linear-gradient(top, $start-color, $end-color);
+        background: linear-gradient(to bottom, $start-color, $end-color);
+    }
+    @else if $orientation=='horizontal' {
+        background: -webkit-linear-gradient(left, $start-color, $end-color);
+        background: linear-gradient(to right, $start-color, $end-color);
+    }
+    @else {
+        background: -webkit-radial-gradient(center, ellipse cover, $start-color, $end-color);
+        background: radial-gradient(ellipse at center, $start-color, $end-color);
+    }
+}
+
+@mixin background-size($width,
+$height: $width) {
+    @include prefix(background-size,
+    $width $height,
+    'webkit' 'moz');
 }
 
 @mixin box-sizing($type) {
-    @include prefix(box-sizing, $type, 'moz');
+    @include prefix(box-sizing,
+    $type,
+    'moz');
 }
 
 @mixin center-block {
@@ -188,7 +213,10 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    @include prefix(transform, translate(-50%, -50%), 'webkit' 'ms');
+    @include prefix(transform,
+    translate(-50%,
+    -50%),
+    'webkit' 'ms');
 }
 
 @mixin center-h($height) {
@@ -201,24 +229,30 @@
 @mixin center-h--unk {
     position: relative;
     top: 50%;
-    @include prefix(transform, translateY(-50%), 'webkit' 'ms');
+    @include prefix(transform,
+    translateY(-50%),
+    'webkit' 'ms');
 }
 
 @mixin outline {
     box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0, inset rgba(0, 0, 0, 0.75) 0 1px 0;
 }
 
-@mixin image-2x($image, $width, $height) {
-    @media (-webkit-min-device-pixel-ratio: 1.3),
-           (min-resolution: 124dpi),
-           (min-resolution: 1.3dppx) {
+@mixin image-2x($image,
+$width,
+$height) {
+    @media (-webkit-min-device-pixel-ratio: 1.3), (min-resolution: 124dpi), (min-resolution: 1.3dppx) {
         /* on retina, use image that's scaled by 2 */
         background-image: url($image);
         background-size: $width $height;
     }
 }
 
-@mixin position($type, $top: null, $right: null, $bottom: null, $left: null) {
+@mixin position($type,
+$top: null,
+$right: null,
+$bottom: null,
+$left: null) {
     position: $type;
     top: $top;
     right: $right;
@@ -226,8 +260,8 @@
     left: $left;
 }
 
-@mixin size($width, $height: $width) {
+@mixin size($width,
+$height: $width) {
     width: $width;
     height: $height;
 }
-

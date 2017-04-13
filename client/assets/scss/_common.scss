@@ -1,157 +1,160 @@
 .ls-common-body {
-  @include position(absolute, 0, 0, 0, 0);
-  width: 100%;
-  height: auto;
-  color: #fff;
-  padding: 15px;
+    @include position(absolute, 0, 0, 0, 0);
+    width: 100%;
+    height: auto;
+    color: #fff;
+    padding: 15px;
 }
 
 .ls-bg {
-  background-position: center;
-  background-size: cover;
-  filter: brightness(70%);
-  @include position(absolute, 0, 0, 0, 0);
-  height: auto;
-  width: 100%;
-  display: block;
-  min-height: 600px;
+    background-position: center;
+    background-size: cover;
+    filter: brightness(70%);
+    @include position(absolute, 0, 0, 0, 0);
+    height: auto;
+    width: 100%;
+    display: block;
+    min-height: 600px;
 }
 
 .ls-home-header {
-  h2 {
-    color: #fff;
-  }
-  .ls-main-nav {
-    @include clearfix;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    text-align: right;
-    width: 100%;
-    li {
-      display: inline-block;
-      padding: 0 10px;
-      a:link, a:visited {
+    h2 {
         color: #fff;
-      }
-      .button {
-        margin-top: 15px;
-        text-transform: uppercase;
-        @include border-radius(2px);
-      }
     }
-  }
+    .ls-main-nav {
+        @include clearfix;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        text-align: right;
+        width: 100%;
+        li {
+            display: inline-block;
+            padding: 0 10px;
+            a:link,
+            a:visited {
+                color: #fff;
+            }
+            .button {
+                margin-top: 15px;
+                text-transform: uppercase;
+                @include border-radius(2px);
+            }
+        }
+    }
 }
 
 .ls-inline-label {
-  margin-top: 10px;
+    margin-top: 10px;
 }
 
 .ls-home-footer {
-  position: absolute;
-  height: 30px;
-  width: 100%;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  padding: 0 20px;
-  text-align: left;
-  @include clearfix;
-  p {
-    font-size: 0.7rem;
-    margin-bottom: 0px;
-  }
-  small {
-    color: #fff;
-  }
-  .ls-left-text {
-    float: left;
-    width: 50%;
-  }
-  .ls-right-text {
-    float: left;
-    width: 50%;
-    text-align: right;
-  }
+    position: absolute;
+    height: 30px;
+    width: 100%;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    padding: 0 20px;
+    text-align: left;
+    @include clearfix;
+    p {
+        font-size: 0.7rem;
+        margin-bottom: 0px;
+    }
+    small {
+        color: #fff;
+    }
+    .ls-left-text {
+        float: left;
+        width: 50%;
+    }
+    .ls-right-text {
+        float: left;
+        width: 50%;
+        text-align: right;
+    }
 }
 
 input[type="text"],
 input[type="email"],
 input[type="password"],
 select {
-  &.ls-input-fields {
-    @include border-radius(2px);
-    font-size: 0.9rem;
-  }
+    &.ls-input-fields {
+        @include border-radius(2px);
+        font-size: 0.9rem;
+    }
 }
 
 .ls-status {
-  font-weight: 700;
-  &.ls-active {
-    color: $success-color;
-  }
-  &.ls-inactive {
-    color: $alert-color;
-  }
+    font-weight: 700;
+    &.ls-active {
+        color: $success-color;
+    }
+    &.ls-inactive {
+        color: $alert-color;
+    }
 }
 
 .ls-title-bar {
-  margin: 20px 0;
+    margin: 20px 0;
 }
 
 .ls-back-bar {
-  background-color: $primary-color;
-  padding: 5px;
-  a:link, a:visited {
-    color: #fff;
-    font-weight: 700;
-    @include transition;
-  }
-  a:hover,
-  a:active {
-    color: $dark-color;
-  }
-  p {
-    margin-bottom: 0;
-  }
+    background-color: $primary-color;
+    padding: 5px;
+    a:link,
+    a:visited {
+        color: #fff;
+        font-weight: 700;
+        @include transition;
+    }
+    a:hover,
+    a:active {
+        color: $dark-color;
+    }
+    p {
+        margin-bottom: 0;
+    }
 }
 
 .ls-switch-container {
-  @include clearfix;
-  > * {
-    float: left;
-  }
-  p {
-    margin-top: 7px;
-    margin-left: 10px;
-  }
+    @include clearfix;
+    >* {
+        float: left;
+    }
+    p {
+        margin-top: 7px;
+        margin-left: 10px;
+    }
 }
 
 .ls-top-form-header {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .ls-create-button,
 .ls-export-button {
-  margin-top: 8px !important;
-  margin-right: 0 !important;
+    margin-top: 8px !important;
+    margin-right: 0 !important;
 }
 
 .ls-link {
-  margin-top: 20px;
-  display: block;
-  width: 100%;
-  &.ls-next-link {
-    text-align: right;
-  }
+    margin-top: 20px;
+    display: block;
+    width: 100%;
+    &.ls-next-link {
+        text-align: right;
+    }
 }
 
 .ls-text-links {
-  &:link, &:visited {
-    color: $dark-color;
-  }
-  &:hover,
-  &:active {
-    color: $primary-color;
-  }
+    &:link,
+    &:visited {
+        color: $dark-color;
+    }
+    &:hover,
+    &:active {
+        color: $primary-color;
+    }
 }
