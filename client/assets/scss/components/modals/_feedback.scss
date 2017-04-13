@@ -1,0 +1,66 @@
+ls-modal {
+    .ls-feedback-modal {
+        .ls-feedback-id {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: $primary-color;
+            font-size: 1rem;
+            color: #fff;
+            padding: 10px;
+            @include border-radius-all(3px, 0, 3px, 0);
+        }
+        .ls-feedback-info {
+            margin-top: 40px;
+            .ls-customer-link {
+                color: $dark-color;
+                display: block;
+                margin-bottom: 10px;
+                @include transition;
+                &:hover {
+                    color: $primary-color;
+                }
+            }
+        }
+        .ls-meal-offer {
+            margin: 20px 0;
+            .ls-offer-link {
+                font-size: 1.2rem;
+                display: block;
+                margin-bottom: 10px;
+                @include transition;
+                &:first-child {
+                    text-transform: uppercase;
+                    font-weight: 700;
+                    letter-spacing: 1px;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+        .ls-feedback-date {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 1rem;
+            padding: 12px;
+        }
+        .ls-ratings {
+            width: 100%;
+            font-size: 1rem;
+            @include clearfix;
+            margin-bottom: 10px;
+            li {
+                float: left;
+                width: calc(96%/3);
+                margin-right: 2%;
+                text-align: center;
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+        .ls-comments {
+            margin-top: 20px;
+        }
+    }
+}

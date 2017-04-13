@@ -1,4 +1,3 @@
-@import 'modals';
 @import 'tables';
 @import 'cards';
 @import 'form-sections';
@@ -6,6 +5,9 @@
 @import 'date-picker';
 @import 'app-body';
 @import 'forms';
+
+@import 'modals/module';
+@import 'cards/module';
 
 //Admin
 @import 'menu-bar';

@@ -7,16 +7,16 @@
   <div class="menu-group-right">
     <ul class="icon-left menu-bar">
       <li>
-        <a href="#"><i class="fa fa-cutlery" aria-hidden="true"></i>Browse</a>
+        <a ui-sref="browse"><i class="fa fa-cutlery" aria-hidden="true"></i>Browse</a>
       </li>
       <li>
-        <a href="#"><i class="fa fa-user" aria-hidden="true"></i>Profile</a>
+        <a href="profile"><i class="fa fa-user" aria-hidden="true"></i>Profile</a>
       </li>
       <li>
-        <a href="#"><i class="fa fa-history" aria-hidden="true"></i>History</a>
+        <a href="history"><i class="fa fa-history" aria-hidden="true"></i>History</a>
       </li>
       <li>
-        <a href="#" class="button ls-logout-btn">Logout</a>
+        <a ng-click="logout()" class="button ls-logout-btn">Logout</a>
       </li>
     </ul>
   </div>
