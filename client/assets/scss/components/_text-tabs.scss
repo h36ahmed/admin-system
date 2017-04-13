@@ -1,0 +1,38 @@
+.ls-text-tabs {
+    margin: 0 0 20px;
+    padding: 0;
+    width: 200px;
+    list-style: none;
+    @include clearfix;
+    .ls-text-tab {
+        float: left;
+        @include transition;
+        .ls-tab-link {
+            display: block;
+            padding: 5px 0;
+            margin-right: 15px;
+            border-bottom: none;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #5d5d5d;
+            @include transition;
+        }
+        &:last-child {
+            .ls-tab-link {
+                padding-right: 0;
+            }
+        }
+        &:hover {
+            .ls-tab-link {
+                color: $dark-color;
+                border-bottom: 1px solid $dark-color;
+            }
+        }
+        &.active {
+            .ls-tab-link {
+                color: $dark-color;
+                border-bottom: 1px solid $dark-color;
+            }
+        }
+    }
+}

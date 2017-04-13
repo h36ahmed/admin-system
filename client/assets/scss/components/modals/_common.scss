@@ -5,6 +5,7 @@ ls-modal {
     position: fixed;
     right: 0px;
     top: 0px;
+    z-index:10;
     &.ng-hide {
         background-color: rgba( 0, 0, 0, 0);
     }
@@ -22,6 +23,7 @@ ls-modal {
         position: fixed;
         width: 400px;
         text-align: center;
+        z-index:11;
     }
     &.ng-hide>.modal.ng-enter {
         top: -200px;

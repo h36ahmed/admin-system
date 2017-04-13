@@ -34,7 +34,132 @@
     </div>
     <!-- END: Alert Modal. -->
 
-     <!-- BEGIN: Feeback Modal. -->
+    <!-- BEGIN: Confirm Modal. -->
+    <div
+        ng-switch-when="confirm"
+        ng-controller="confirmModalCtrl"
+        class="ls-modal">
+
+        <p>
+            {{ message }}
+        </p>
+
+        <p>
+            <a ng-click="confirm()" class="button">{{ confirmButton }}</a>
+            &mdash;
+            <a ng-click="deny()" class="button">{{ denyButton }}</a>
+        </p>
+
+    </div>
+    <!-- END: Confirm Modal. -->
+
+    <!-- BEGIN: Prompt Modal. -->
+    <form
+        ng-switch-when="prompt"
+        ng-controller="promptModalCtrl"
+        ng-submit="submit()"
+        class="ls-modal">
+
+        <p>
+            {{ message }}
+        </p>
+
+        <p ng-if="errorMessage">
+            <strong>Sorry:</strong> {{ errorMessage }}
+        </p>
+
+        <p>
+            <input type="text" ng-model="form.input" />
+        </p>
+
+        <p>
+            <a ng-click="submit()" class="button">Submit</a>
+            <a ng-click="cancel()" class="button">Cancel</a>
+        </p>
+
+    </form>
+    <!-- END: Prompt Modal. -->
+
+    <!-- BEGIN: Meal Choice Modal. -->
+    <form
+        ng-switch-when="meal-choice"
+        ng-controller="mealChoiceModalCtrl"
+        ng-submit="submit()"
+        class="ls-modal ls-meal-choice-modal">
+
+        <button type="button" ng-click="cancel()" class="ls-close-btn"><i class="fa fa-close"></i></button>
+
+        <div class="ls-meal-image">
+            <img src="http://lorempixel.com/400/300/food" alt="">
+        </div>
+
+        <div class="ls-meal-info">
+            <h2 class="ls-meal-name">Meal Name</h2>
+            <h4 class="ls-res-name">Restaurant Name</h4>
+            <ul class="ls-text-tabs">
+                <li class="ls-text-tab" ng-class="{active: tabview == 'description'}"><a ng-click="changeTabview('description')" class="ls-tab-link">Description</a></li>
+                <li class="ls-text-tab" ng-class="{active: tabview == 'ingredients'}"><a ng-click="changeTabview('ingredients')" class="ls-tab-link">Ingredients</a></li>
+            </ul>
+            <div ng-show="tabview" ng-switch="tabview">
+                <div class="ls-tab-content" ng-switch-when="description">
+                    <p class="ls-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error totam ratione adipisci placeat ex odit nobis quam minima expedita accusamus. Qui sequi, suscipit totam iste officiis commodi repudiandae quasi quas.</p>
+                </div>
+                <div class="ls-tab-content" ng-switch-when="ingredients">
+                    <p class="ls-ingredients">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error totam ratione adipisci.</p>
+                </div>
+            </div>
+        </div>
+
+        <h5>Pick Up Food At</h5>
+
+        <select name="pickUpTime" id="pickUpTime" class="ls-pick-up-times ls-input-fields" ng-model="form.pickup" ng-options="pickup as pickup.pickup_time for pickup in pickups track by pickup.id" required >
+        </select>
+
+        <h5>At Address</h5>
+
+        <p ng-if="errorMessage">
+            <strong>Sorry:</strong> {{ errorMessage }}
+        </p>
+
+        <input type="submit" ng-click="submit()" value="Order Food" class="button ls-order-button">
+
+    </form>
+    <!-- END: Prompt Modal. -->
+
+    <!-- BEGIN: Payout Modal. -->
+    <form
+        ng-switch-when="payout"
+        ng-controller="payoutModalCtrl"
+        ng-submit="submit()"
+        class="ls-modal">
+
+        <h3> {{ header }}</h3>
+
+        <p>
+            {{ message }}
+        </p>
+
+        <p ng-if="errorMessage">
+            <strong>Sorry:</strong> {{ errorMessage }}
+        </p>
+
+        <p>
+            <label for="filterWeek">
+                Select Week Period
+            </label>
+            <select name="filterWeek" id="filterWeek" class="ls-input-fields" ng-model="form.week" ng-options="week as week.name for week in weeks track by week.id" required>
+            </select>
+        </p>
+
+        <p>
+            <a ng-click="submit()" class="button success">Confirm</a>
+            <a ng-click="cancel()" class="button">Cancel</a>
+        </p>
+
+    </form>
+    <!-- END: Payout Modal. -->
+
+     <!-- BEGIN: Feedback Modal. -->
     <div
         ng-switch-when="feedback"
         ng-controller="feedbackModalCtrl"
@@ -71,88 +196,6 @@
             <a ng-click="close()" class="button">Ok, I got it!</a>
         </p>
     </div>
-    <!-- END: Alert Modal. -->
-
-
-    <!-- BEGIN: Confirm Modal. -->
-    <div
-        ng-switch-when="confirm"
-        ng-controller="confirmModalCtrl"
-        class="ls-modal">
-
-        <p>
-            {{ message }}
-        </p>
-
-        <p>
-            <a ng-click="confirm()" class="button">{{ confirmButton }}</a>
-            &mdash;
-            <a ng-click="deny()" class="button">{{ denyButton }}</a>
-        </p>
-
-    </div>
-    <!-- END: Confirm Modal. -->
-
-    <!-- BEGIN: Payout Modal. -->
-    <form
-        ng-switch-when="payout"
-        ng-controller="payoutModalCtrl"
-        ng-submit="submit()"
-        class="ls-modal">
-
-        <h3> {{ header }}</h3>
-
-        <p>
-            {{ message }}
-        </p>
-
-        <p ng-if="errorMessage">
-            <strong>Sorry:</strong> {{ errorMessage }}
-        </p>
-
-        <p>
-            <label for="filterWeek">
-                Select Week Period
-            </label>
-            <select name="filterWeek" id="filterWeek" class="ls-input-fields" ng-model="form.week" ng-options="week as week.name for week in weeks track by week.id" required>
-            </select>
-        </p>
-
-        <p>
-            <a ng-click="submit()" class="button success">Confirm</a>
-            <a ng-click="cancel()" class="button">Cancel</a>
-        </p>
-
-    </form>
-    <!-- END: Payout Modal. -->
-
-
-
-    <!-- BEGIN: Prompt Modal. -->
-    <form
-        ng-switch-when="prompt"
-        ng-controller="promptModalCtrl"
-        ng-submit="submit()"
-        class="ls-modal">
-
-        <p>
-            {{ message }}
-        </p>
-
-        <p ng-if="errorMessage">
-            <strong>Sorry:</strong> {{ errorMessage }}
-        </p>
-
-        <p>
-            <input type="text" ng-model="form.input" />
-        </p>
-
-        <p>
-            <a ng-click="submit()" class="button">Submit</a>
-            <a ng-click="cancel()" class="button">Cancel</a>
-        </p>
-
-    </form>
-    <!-- END: Prompt Modal. -->
+    <!-- END: Feedback Modal. -->
 
 </ls-modal>
