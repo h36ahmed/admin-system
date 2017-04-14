@@ -52,4 +52,15 @@
             }
         }
     }
+    &.ls-feedback-page {
+        .ls-order-date {
+            margin-top: 15px;
+        }
+        .ls-create-form {
+            margin-top: 30px;
+        }
+        .ls-form-group {
+            margin-bottom: 15px;
+        }
+    }
 }
