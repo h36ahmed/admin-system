@@ -6,7 +6,7 @@ url: /order
     <div class="ls-app-bg"></div>
     <div ng-include="'/templates/customer/partials/menu-bar.html'"></div>
     <div class="ls-app-body ls-customer">
-        <div class="grid-container ls-customer-pages ls-order-page" ng-controller="createFeedbackCtrl as createFeedback">
+        <div class="grid-container ls-customer-pages ls-order-page" ng-controller="orderCtrl as order">
             <div class="grid-block">
                 <div class="grid-block small-9 vertical">
                     <div class="grid-content">
@@ -55,8 +55,14 @@ url: /order
                         <p></p>
                     </div>
                 </div>
-                <div class="grid-block small-4 vertical">
-                    <!--Google Map Zooming Into the Address-->
+                <div class="grid-block small-4 vertical ls-map">
+                    <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options">
+                        <ui-gmap-markers models="restaurants" coords="'self'" icon="'icon'" options="'options'" click="'onClick'">
+                             <ui-gmap-windows show="show">
+                                <div ng-non-bindable>{{title}}</div>
+                             </ui-gmap-windows>
+                        </ui-gmap-markers>
+                    </ui-gmap-google-map>
                 </div>
             </div>
         </div>

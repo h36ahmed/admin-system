@@ -64,6 +64,9 @@
         }
     }
     &.ls-order-page {
+        .ls-map {
+            height: 200px;
+        }
         .ls-order-date {
             margin-top: 15px;
         }
