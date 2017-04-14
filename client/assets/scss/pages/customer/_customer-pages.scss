@@ -17,4 +17,7 @@
         @extend %flexbox;
         @include flex-flow(row wrap);
     }
+    &.ls-history-page {
+        padding: 20px 50px;
+    }
 }
