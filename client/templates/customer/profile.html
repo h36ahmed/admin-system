@@ -48,7 +48,7 @@ url: /profile
                             <h5>Meals Remaining</h5>
                             <p>{{customer.meals_remaining}} Meals</p>
                             <round-progress
-                                max="40"
+                                max="customer.payment_plan.num_meals"
                                 current="customer.meals_remaining"
                                 color="#f1c40f"
                                 bgcolor="#eaeaea"
