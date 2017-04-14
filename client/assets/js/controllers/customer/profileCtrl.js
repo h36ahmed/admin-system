@@ -1,6 +1,6 @@
 var app = angular.module('lunchSociety');
 
-var profileCtrl = function ($scope, orderService) {
+var profileCtrl = function ($scope, customerService) {
 
     $scope.customer = {};
 
@@ -17,6 +17,6 @@ var profileCtrl = function ($scope, orderService) {
         });
 };
 
-profileCtrl.inject = ['$scope', 'orderService'];
+profileCtrl.inject = ['$scope', 'customerService'];
 
 app.controller('profileCtrl', profileCtrl);

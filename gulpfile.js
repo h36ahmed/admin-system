@@ -56,6 +56,7 @@ var paths = {
     'bower_components/js-rich-marker/src/richmarker.js',
     'bower_components/underscore/underscore.js',
     'bower_components/angularjs-datepicker/dist/angular-datepicker.js',
+    'bower_components/angular-svg-round-progressbar/build/roundProgress.js'
   ],
   // These files are for your app's JavaScript
   appJS: [

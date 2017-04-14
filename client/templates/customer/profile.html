@@ -5,15 +5,84 @@ url: /profile
 <div class="vertical grid-frame">
     <div class="ls-app-bg"></div>
     <div ng-include="'/templates/customer/partials/menu-bar.html'"></div>
-    <div class="ls-app-body customer">
-        <div class="ls-customer-pages" ng-controller="profileCtrl as profile">
-            <div class="grid-block ls-full-height">
-               <div class="grid-block small-12 vertical">
+    <div class="ls-app-body ls-customer customer">
+        <div class="grid-container ls-customer-pages ls-profile-page" ng-controller="profileCtrl as profile">
+            <div class="grid-block">
+                <div class="grid-block small-6 vertical">
                     <div class="grid-content">
-
+                        <h2>My Profile</h2>
                     </div>
                 </div>
-           </div>
+                <div class="grid-block small-6 vertical">
+                    <div class="grid-content text-right">
+                        <p class="ls-status">STATUS: <span class="ls-status ls-active" ng-if="customer.status == 'active'">ACTIVE</span><span class="ls-status ls-inactive" ng-if="customer.status == 'inactive'">INACTIVE</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-block">
+                <div class="grid-block small-6 vertical">
+                    <div class="grid-content">
+                        <div class="ls-profile-card">
+                            <div class="ls-profile-item">
+                                <h5>Name</h5>
+                                <p>{{customer.first_name}} {{customer.last_name}}</p>
+                            </div>
+                            <div class="ls-profile-item">
+                                <h5>Plan Name</h5>
+                                <p>{{customer.payment_plan.name}}</p>
+                            </div>
+                            <div class="ls-profile-item">
+                                <h5>Cycle Start Date</h5>
+                                <p>{{customer.cycle_start_date | date}}</p>
+                            </div>
+                            <div class="ls-profile-item">
+                                <h5>Cycle End Date</h5>
+                                <p>{{customer.cycle_end_date | date}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-block small-6 vertical">
+                    <div class="grid-content text-center">
+                        <div class="ls-meals-remaining">
+                            <h5>Meals Remaining</h5>
+                            <p>{{customer.meals_remaining}} Meals</p>
+                            <round-progress
+                                max="40"
+                                current="customer.meals_remaining"
+                                color="#f1c40f"
+                                bgcolor="#eaeaea"
+                                radius="100"
+                                stroke="20"
+                                semi="true"
+                                rounded="false"
+                                clockwise="false"
+                                responsive="false"
+                                duration="800"
+                                animation="easeInOutQuart"
+                                animation-delay="0">
+                                </round-progress>
+                        </div>
+                        <form class="ls-form ls-edit-form" name="editCustomerForm" novalidate>
+                            <h5>Reminder Emails</h5>
+                            <div class="ls-switch-container">
+                                <div class="large switch">
+                                    <input type="checkbox" id="planStatus" name="planStatus" ng-model="customer.reminder_emails" ng-change="submitEditForm(editCustomerForm.$valid)">
+                                    <label for="planStatus"></label>
+                                </div>
+                                <p>Send Me Reminder Emails</p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-block">
+                <div class="grid-block small-12 vertical">
+                    <div class="grid-content text-center">
+                        <p>Need to make changes to your account? Please email <a href="mailto:support@lunchsociety.ca">support@lunchsociety.ca</a>.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

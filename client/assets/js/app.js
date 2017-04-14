@@ -15,7 +15,8 @@
       'jquery',
       'ngFileUpload',
       'uiGmapgoogle-maps',
-      '720kb.datepicker'
+      '720kb.datepicker',
+      'angular-svg-round-progressbar'
     ])
     .config(config)
     .run(run);
