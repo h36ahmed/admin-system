@@ -5,7 +5,7 @@ url: /create-feedback/:id
 <div class="vertical grid-frame">
     <div class="ls-app-bg"></div>
     <div ng-include="'/templates/customer/partials/menu-bar.html'"></div>
-    <div class="ls-app-body ls-customer customer">
+    <div class="ls-app-body ls-customer">
         <div class="grid-container ls-customer-pages ls-feedback-page" ng-controller="createFeedbackCtrl as createFeedback">
             <div class="grid-block">
                 <div class="grid-block small-9 vertical">
@@ -16,11 +16,6 @@ url: /create-feedback/:id
                 <div class="grid-block small-3 vertical">
                     <div class="grid-content text-right">
                         <p class="ls-order-date">Order Date: {{order.order_date | date}}</p>
-                    </div>
-                </div>
-                <div class="grid-block small-12 vertical">
-                    <div class="grid-content">
-
                     </div>
                 </div>
             </div>

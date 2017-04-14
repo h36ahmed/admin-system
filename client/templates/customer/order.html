@@ -5,15 +5,60 @@ url: /order
 <div class="vertical grid-frame">
     <div class="ls-app-bg"></div>
     <div ng-include="'/templates/customer/partials/menu-bar.html'"></div>
-    <div class="ls-app-body customer">
-        <div class="ls-customer-pages" ng-controller="createProfileCtrl as createProfile">
-            <div class="grid-block ls-full-height">
-               <div class="grid-block small-12 vertical">
+    <div class="ls-app-body ls-customer">
+        <div class="grid-container ls-customer-pages ls-order-page" ng-controller="createFeedbackCtrl as createFeedback">
+            <div class="grid-block">
+                <div class="grid-block small-9 vertical">
                     <div class="grid-content">
-
+                        <h2>Order #1</h2>
                     </div>
                 </div>
-           </div>
+                <div class="grid-block small-3 vertical">
+                    <div class="grid-content text-right">
+                        <p class="ls-order-date">Order Date: {{order.order_date | date}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-block">
+                <div class="grid-block small-8 vertical">
+                    <div class="grid-content">
+                        <div class="ls-meal-offer-details">
+                            <h3>Meal Name</h3>
+                            <h5>Restaurant Name</h5>
+                            <ul class="ls-text-tabs">
+                                <li class="ls-text-tab" ng-class="{active: tabview == 'description'}"><a ng-click="changeTabview('description')" class="ls-tab-link">Description</a></li>
+                                <li class="ls-text-tab" ng-class="{active: tabview == 'ingredients'}"><a ng-click="changeTabview('ingredients')" class="ls-tab-link">Ingredients</a></li>
+                            </ul>
+                            <div ng-show="tabview" ng-switch="tabview">
+                                <div class="ls-tab-content" ng-switch-when="description">
+                                    <p class="ls-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error totam ratione adipisci placeat ex odit nobis quam minima expedita accusamus. Qui sequi, suscipit totam iste officiis commodi repudiandae quasi quas.</p>
+                                </div>
+                                <div class="ls-tab-content" ng-switch-when="ingredients">
+                                    <p class="ls-ingredients">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error totam ratione adipisci.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-block small-4 vertical">
+                    <div class="grid-content text-right">
+                        <img src="http://lorempixel.com/400/300/" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="grid-block">
+                <div class="grid-block small-8 vertical">
+                    <div class="grid-content">
+                        <h4>Pickup Time</h4>
+                        <p></p>
+                        <h4>Address</h4>
+                        <p></p>
+                    </div>
+                </div>
+                <div class="grid-block small-4 vertical">
+                    <!--Google Map Zooming Into the Address-->
+                </div>
+            </div>
         </div>
     </div>
 </div>
