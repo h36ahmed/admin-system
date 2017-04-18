@@ -15,6 +15,9 @@
     width: 100%;
     display: block;
     min-height: 600px;
+    &.ls-register-bg {
+         background-image: url('../img/lunchsociety-login-page.jpg');
+    }
 }
 
 .ls-home-header {

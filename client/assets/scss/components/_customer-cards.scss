@@ -1,3 +1,84 @@
+.ls-plan-choice-card {
+    width: 40%;
+    min-width: 250px;
+    min-height: 200px;
+    @extend %flexbox;
+    @include flex-direction(column);
+    @include transition(all, 0.4s, ease);
+    background-color: $light-color;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    &:first-child {
+        margin-right: 20px;
+    }
+    &__front {
+        padding: $card-padding;
+        position: relative;
+        @include transition(all, 0.4s, ease);
+    }
+    .ls-plan-images {
+        display: block;
+    }
+    img {
+        margin-bottom: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 60px !important;
+        width: auto !important;
+        margin-top: 0 !important;
+    }
+    i.fa {
+        @include position(absolute,10px,15px,auto,auto);
+        @include transition(all, 0.4s, ease);
+        opacity: 0;
+        font-size: 2rem;
+        color: $primary-color;
+    }
+
+    p {
+        margin-bottom: 5px;
+    }
+    .ls-plan-name {
+        margin-bottom: 10px;
+    }
+    .ls-plan-meals {
+        font-size: 1.1rem;
+    }
+    .ls-plan-price {
+        font-weight: 700;
+        font-size: 1.2rem;
+        color: $primary-color;
+        letter-spacing: 1px;
+    }
+    .ls-select-button {
+        position: absolute;
+        bottom: 0px;
+        height: 40px;
+        line-height: 40px;
+        text-transform: uppercase;
+        background-color: $primary-color;
+        transform: translateY(40px);
+        width: 100%;
+        @include transition(all, 0.4s, ease);
+    }
+    &:hover {
+        box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        .ls-plan-choice-card__front {
+            transform: translateY(-45px);
+        }
+        .ls-select-button {
+            transform: translateY(0px);
+        }
+    }
+    &.selected {
+        i.fa {
+            opacity: 1;
+        }
+    }
+}
+
 .ls-meal-choice-card {
     width: calc(100%/3);
     @extend %flexbox;
@@ -5,7 +86,7 @@
     @include flex-direction(column);
     @include transition(box-shadow, 0.4s, ease);
     &:hover {
-        box-shadow: 0 3px 9px 0 rgba(0,0,0, 0.1);
+        box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.1);
         cursor: pointer;
     }
     img {
