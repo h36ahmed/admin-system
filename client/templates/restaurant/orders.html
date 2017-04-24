@@ -1,0 +1,19 @@
+---
+name: res-orders
+url: /restaurant/orders
+---
+<div class="vertical grid-frame">
+    <div class="ls-app-bg"></div>
+    <div ng-include="'/templates/restaurant/partials/menu-bar.html'"></div>
+    <div class="ls-app-body ls-restaurant">
+        <div class="grid-container ls-restaurant-pages" ng-controller="ordersCtrl as orders">
+            <div class="grid-block">
+                <div class="grid-block small-12 vertical">
+                    <div class="grid-content">
+                        <h2>Orders</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

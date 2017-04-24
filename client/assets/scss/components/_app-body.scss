@@ -8,7 +8,8 @@
     bottom: 0;
     height: auto;
     overflow: auto;
-    &.ls-customer {
+    &.ls-customer,
+    &.ls-restaurant {
         left: 0;
         top: $nav-bar-height;
         padding-top: 0;
