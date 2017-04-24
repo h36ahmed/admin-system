@@ -5,16 +5,16 @@ url: /browse
 <div class="vertical grid-frame">
     <div class="ls-app-bg"></div>
     <div ng-include="'/templates/customer/partials/menu-bar.html'"></div>
-    <div class="ls-app-body ls-customer customer">
+    <div class="ls-app-body ls-customer">
         <div class="ls-customer-pages" ng-controller="browseCtrl as browse">
             <div class="grid-block ls-full-height">
                <div class="grid-block small-8 vertical">
                     <div class="grid-content">
                         <ul class="ls-meal-choices">
-                            <li class="ls-meal-choice-card" ng-click="getDetails({id: meal_offer.id})">
+                            <li class="ls-meal-choice-card" ng-click="getMealDetails({id: meal_offer.id})">
                                 <img src="http://lorempixel.com/400/300/"/>
                                 <h3 class="ls-meal-name">Meal Name</h3>
-                                <p>Restaurant Name</p>
+                                <p class="ls-res-name">Restaurant Name</p>
                                 <p class="ls-address">Address</p>
                             </li>
                         </ul>

@@ -12,6 +12,7 @@ app.service(
             createOrder: createOrder,
             editOrder: editOrder,
             getOrders: getOrders,
+            getOrder: getOrder,
             deleteOrder: deleteOrder
         });
 
@@ -44,6 +45,18 @@ app.service(
             return request;
         }
 
+        function getOrder(data) {
+            var request = $http({
+                method: "get",
+                url: baseUrl + baseApi + "order" + "/" + data.id,
+                params: data,
+                headers : {
+                    'Content-Type': 'application/json'
+                }
+            });
+            return request;
+        }
+
         function editOrder(data) {
             var request = $http({
                 method: "put",
@@ -55,6 +68,8 @@ app.service(
             });
             return request;
         }
+
+
 
         function deleteOrder(data) {
             var request = $http({

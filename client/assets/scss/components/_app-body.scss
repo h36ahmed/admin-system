@@ -8,14 +8,13 @@
     bottom: 0;
     height: auto;
     overflow: auto;
-    &.ls-customer {
+    &.ls-customer,
+    &.ls-restaurant {
         left: 0;
+        top: $nav-bar-height;
         padding-top: 0;
     }
     .grid-container {
         padding-top: 20px;
-    }
-    &.customer {
-        top: $nav-bar-height;
     }
 }

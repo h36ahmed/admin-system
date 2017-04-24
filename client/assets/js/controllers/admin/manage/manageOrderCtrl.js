@@ -1,6 +1,6 @@
 var app = angular.module('lunchSociety');
 
-var manageOrderCtrl = function($scope, orderService, modalService, utilService) {
+var manageOrderCtrl = function($scope, mealOfferService, modalService, utilService) {
 
   $scope.offers = [];
 
@@ -12,6 +12,7 @@ var manageOrderCtrl = function($scope, orderService, modalService, utilService) 
 
   var options = {
     order_date: $scope.currentViewDate,
+    getOrders: true,
     status: 'active'
   }
 
@@ -56,8 +57,8 @@ var manageOrderCtrl = function($scope, orderService, modalService, utilService) 
     var promise = modalService.open(
       "status", {}
     );
-    orderService
-      .getOrders(options)
+    mealOfferService
+      .getMealOffers(options)
       .success(function(data, status, headers, config) {
         $scope.offers = data;
         modalService.resolve();
@@ -72,6 +73,6 @@ var manageOrderCtrl = function($scope, orderService, modalService, utilService) 
   }
 };
 
-manageOrderCtrl.inject = ['$scope', 'orderService', 'modalService', 'utilService'];
+manageOrderCtrl.inject = ['$scope', 'mealOfferService', 'modalService', 'utilService'];
 
 app.controller('manageOrderCtrl', manageOrderCtrl);

@@ -1,0 +1,19 @@
+.ls-rating {
+    font-size: 175%;
+    padding: 0 0.5em;
+    >a {
+        text-decoration: none;
+    }
+    .ls-rating-highlight {
+        color: $primary-color;
+        &:hover {
+            color: $primary-color;
+        }
+    }
+    .ls-rating-normal {
+        color: $dark-color;
+        &:hover {
+            color: $dark-color;
+        }
+    }
+}

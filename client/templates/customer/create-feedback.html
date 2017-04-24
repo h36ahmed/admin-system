@@ -1,0 +1,80 @@
+---
+name: create-feedback
+url: /create-feedback/:id
+---
+<div class="vertical grid-frame">
+    <div class="ls-app-bg"></div>
+    <div ng-include="'/templates/customer/partials/menu-bar.html'"></div>
+    <div class="ls-app-body ls-customer">
+        <div class="grid-container ls-customer-pages ls-feedback-page" ng-controller="createFeedbackCtrl as createFeedback">
+            <div class="grid-block">
+                <div class="grid-block small-9 vertical">
+                    <div class="grid-content">
+                        <h2>Feedback Form For Order #1</h2>
+                    </div>
+                </div>
+                <div class="grid-block small-3 vertical">
+                    <div class="grid-content text-right">
+                        <p class="ls-order-date">Order Date: {{order.order_date | date}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-block">
+                <div class="grid-block small-8 vertical">
+                    <div class="grid-content">
+                        <div class="ls-meal-offer-details">
+                            <h3>Meal Name</h3>
+                            <h5>Restaurant Name</h5>
+                            <ul class="ls-text-tabs">
+                                <li class="ls-text-tab" ng-class="{active: tabview == 'description'}"><a ng-click="changeTabview('description')" class="ls-tab-link">Description</a></li>
+                                <li class="ls-text-tab" ng-class="{active: tabview == 'ingredients'}"><a ng-click="changeTabview('ingredients')" class="ls-tab-link">Ingredients</a></li>
+                            </ul>
+                            <div ng-show="tabview" ng-switch="tabview">
+                                <div class="ls-tab-content" ng-switch-when="description">
+                                    <p class="ls-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error totam ratione adipisci placeat ex odit nobis quam minima expedita accusamus. Qui sequi, suscipit totam iste officiis commodi repudiandae quasi quas.</p>
+                                </div>
+                                <div class="ls-tab-content" ng-switch-when="ingredients">
+                                    <p class="ls-ingredients">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error totam ratione adipisci.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-block small-4 vertical">
+                    <div class="grid-content text-right">
+                        <img src="http://lorempixel.com/400/300/" alt="">
+                    </div>
+                </div>
+            </div>
+            <form class="ls-form ls-create-form" name="feedbackForm" novalidate>
+                <div class="grid-block">
+                    <div class="grid-block small-12 medium-6 vertical">
+                        <div class="grid-content text-center">
+                            <div class="ls-form-group">
+                                <label>Portion</label>
+                                <ls-rating value="feedbackFormData.portion" max="5"></ls-rating>
+                            </div>
+                            <div class="ls-form-group">
+                                <label>Flavour</label>
+                                <ls-rating value="feedbackFormData.flavour" max="5"></ls-rating>
+                            </div>
+                            <div class="ls-form-group">
+                                <label>Overall</label>
+                                <ls-rating value="feedbackFormData.overall" max="5"></ls-rating>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-block small-12 medium-6 vertical">
+                        <div class="grid-content text-center">
+                            <label for="mealDesc">
+                                Comments
+                                <textarea name="mealDesc" id="mealDesc" cols="30" rows="8" placeholder="e.g. Soft glazed duck served on sizzling plate." class="ls-input-fields" ng-model="createMealFormData.description"></textarea>
+                            </label>
+                            <input type="submit" class="button" value="Send Feedback" ng-disabled="createMealForm.$invalid">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

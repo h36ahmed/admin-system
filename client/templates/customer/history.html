@@ -5,15 +5,51 @@ url: /history
 <div class="vertical grid-frame">
     <div class="ls-app-bg"></div>
     <div ng-include="'/templates/customer/partials/menu-bar.html'"></div>
-    <div class="ls-app-body customer">
-        <div class="ls-customer-pages" ng-controller="historyCtrl as history">
+    <div class="ls-app-body ls-customer">
+        <div class="ls-customer-pages ls-history-page" ng-controller="historyCtrl as history">
             <div class="grid-block ls-full-height">
-               <div class="grid-block small-12 vertical">
+                <div class="grid-block small-12 vertical">
                     <div class="grid-content">
-
+                        <div class="ls-table-responsive-vertical shadow-z-1">
+                            <table id="table" class="ls-table ls-table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Order Date</th>
+                                        <th>Meal</th>
+                                        <th>Restaurant</th>
+                                        <th>Ingredients</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="order in orders">
+                                        <td data-title="id">
+                                            {{order.id}}
+                                        </td>
+                                        <td data-title="feedback date">
+                                            {{order.order_date | date}}
+                                        </td>
+                                        <td data-title="meal">
+                                            {{order.offer.meal.name | titleCase}}
+                                        </td>
+                                        <td data-title="restaurant">
+                                            {{order.offer.meal.restaurant.name | titleCase}}
+                                        </td>
+                                        <td data-title="meal">
+                                            {{order.offer.meal.ingredients | titleCase}}
+                                        </td>
+                                        <td data-title="actions">
+                                            <a ng-click="giveFeedback()" class="ls-text-link" ng-if="order.feedbacks.length == 0">Provide Feedback</a>
+                                            <a ng-click="openFeedbackModal(order.feedbacks[0])" class="ls-text-link" ng-if="order.feedbacks.length != 0">View Feedback</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-           </div>
+            </div>
         </div>
     </div>
 </div>

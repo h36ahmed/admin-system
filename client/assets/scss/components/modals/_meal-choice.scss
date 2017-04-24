@@ -1,0 +1,60 @@
+ls-modal {
+    .ls-meal-choice-modal {
+        width: 600px;
+        .ls-meal-image {
+            @include position(absolute, 20px, auto, auto, -250px);
+            img {
+                width: 320px;
+                @include border-radius(3px);
+            }
+        }
+        .ls-meal-info {
+            margin-left: 60px;
+            text-align: left;
+            padding-left: 20px;
+            padding-right: 10px;
+            min-height: 230px;
+            .ls-res-name {
+                text-transform: uppercase;
+                font-size: 1.2rem;
+            }
+            .ls-ingredients,
+            .ls-description {
+                color: #5d5d5d;
+                font-size: 0.9rem;
+            }
+        }
+        .ls-order-button {
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 15px 30px;
+        }
+        h5 {
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        .ls-close-btn {
+            box-shadow: none;
+            border: none;
+            background: $dark-color;
+            padding: 10px;
+            @include border-radius(3px);
+            @include position(absolute, -20px, -20px, auto, auto);
+            i {
+                color:$light-color;
+                font-size: 1.5rem;
+            }
+        }
+        .ls-pick-up-times {
+            width:250px;
+            text-align: center;
+            margin-left:auto;
+            margin-right: auto;
+
+            option {
+                text-align: center;
+            }
+        }
+    }
+}

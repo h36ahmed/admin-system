@@ -1,0 +1,4 @@
+.ls-restaurant-pages {
+    @include position(absolute, 0, 0, 0, 0);
+    @include size(auto, auto);
+}
