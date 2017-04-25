@@ -50,7 +50,6 @@ var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogle
         })
         .success(function (data, status, headers, config) {
             $scope.offers = data;
-            console.log($scope.offers);
             modalService.resolve();
             promise.then(
                 function handleResolve(response) {
