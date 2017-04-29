@@ -127,7 +127,7 @@ url: /create-profile/:id
 
                 <!-- Payment -->
                 <div ng-switch-when="payment">
-                    <form class="ls-form ls-create-form" ng-submit="submitPaymentForm(paymentForm.$valid)" name="paymentForm">
+                    <form class="ls-form ls-create-form" ng-submit="submitPaymentForm(paymentForm.$valid)" name="paymentForm" stripe-form="stripeCallback">
                         <div class="grid-block align-center">
                             <div class="grid-block small-10 vertical text-center">
                                 <h2 class="ls-header">Enter Your Billing Information</h2>

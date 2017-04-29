@@ -16,14 +16,15 @@
       'ngFileUpload',
       'uiGmapgoogle-maps',
       '720kb.datepicker',
-      'angular-svg-round-progressbar'
+      'angular-svg-round-progressbar',
+      'angularPayments'
     ])
     .config(config)
     .run(run);
 
   config.$inject = ['$urlRouterProvider', '$locationProvider', '$stateProvider', 'uiGmapGoogleMapApiProvider'];
 
-  function config($urlProvider, $locationProvider, $stateProvider, uiGmapGoogleMapApiProvider) {
+  function config($urlProvider, $locationProvider, $stateProvider, uiGmapGoogleMapApiProvider, $window) {
     $urlProvider.otherwise('/');
 
     $locationProvider.html5Mode({

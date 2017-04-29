@@ -11,8 +11,8 @@ url: /browse
                <div class="grid-block small-8 vertical">
                     <div class="grid-content">
                         <ul class="ls-meal-choices">
-                            <li class="ls-meal-choice-card" ng-click="getMealDetails({id: offer.id})" ng-repeat="offer in offers">
-                                <img ng-src="https://s3.ca-central-1.amazonaws.com/ls-frontend/meals/{{offer.meal.meal_image}}" alt="" ng-if="meal.meal_image != ''">
+                            <li class="ls-meal-choice-card" ng-click="getMealDetails(offer)" ng-repeat="offer in offers">
+                                <img ng-src="https://s3.ca-central-1.amazonaws.com/ls-frontend/meals/{{offer.meal.meal_image}}" alt="" ng-if="offer.meal.meal_image != ''">
                                 <img src="/assets/img/lunchsociety-thumb.png" ng-if="offer.meal.meal_image == ''"/>
                                 <h3 class="ls-meal-name">{{offer.meal.name}}</h3>
                                 <p class="ls-res-name">{{offer.meal.restaurant.name}}</p>

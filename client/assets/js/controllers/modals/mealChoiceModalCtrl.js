@@ -17,6 +17,9 @@ var mealChoiceModalCtrl = function ($scope, modalService) {
     $scope.form = {
         pickup: ($scope.pickups[0] || "")
     };
+
+    $scope.meal = (modalService.params().meal || {});
+
     $scope.errorMessage = null;
 
     // ---
@@ -27,10 +30,10 @@ var mealChoiceModalCtrl = function ($scope, modalService) {
 
     $scope.submit = function () {
 
-        if (!$scope.form.week) {
+        if (!$scope.form.pickup) {
             return ($scope.errorMessage = "Please provide something!");
         }
-        modalService.resolve($scope.form.week);
+        modalService.resolve($scope.form.pickup);
     };
 
 };
