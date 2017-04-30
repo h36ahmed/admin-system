@@ -17,7 +17,8 @@
       'uiGmapgoogle-maps',
       '720kb.datepicker',
       'angular-svg-round-progressbar',
-      'angularPayments'
+      'angularPayments',
+      'angularLoad'
     ])
     .config(config)
     .run(run);
@@ -26,6 +27,7 @@
 
   function config($urlProvider, $locationProvider, $stateProvider, uiGmapGoogleMapApiProvider, $window) {
     $urlProvider.otherwise('/');
+
 
     $locationProvider.html5Mode({
       enabled: false,
@@ -41,8 +43,15 @@
     $locationProvider.hashPrefix('!');
   }
 
-  function run($rootScope, $urlRouter, $window, $location) {
+  function run($rootScope, $urlRouter, $window, $location, angularLoad) {
     FastClick.attach(document.body);
+
+    angularLoad.loadScript('https://js.stripe.com/v2/').then(function() {
+         $window.Stripe.setPublishableKey('pk_test_UnmAg8y934vAlD1EXAMsYC3V');
+    }).catch(function() {
+        console.log("can't load");
+    });
+
     $rootScope.$on('$stateChangeSuccess', function(evt) {
       // Halt state change from even starting
       evt.preventDefault();

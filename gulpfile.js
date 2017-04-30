@@ -57,7 +57,8 @@ var paths = {
     'bower_components/underscore/underscore.js',
     'bower_components/angularjs-datepicker/dist/angular-datepicker.js',
     'bower_components/angular-svg-round-progressbar/build/roundProgress.js',
-    'bower_components/angular-payments/lib/angular-payments.js'
+    'bower_components/angular-payments/lib/angular-payments.js',
+    'bower_components/angular-load/angular-load.js'
   ],
   // These files are for your app's JavaScript
   appJS: [
