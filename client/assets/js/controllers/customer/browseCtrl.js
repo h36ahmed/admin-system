@@ -2,6 +2,7 @@ var app = angular.module('lunchSociety');
 
 var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogleMapApi, modalService, mealOfferService, utilService, orderService, pickUpService, _) {
 
+    $scope.customer_id = 1;
     $scope.map = {
         center: {
             latitude: 43.6532,
@@ -39,6 +40,7 @@ var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogle
         });
 
     $scope.offers = [];
+    $scope.restaurants = [];
 
     var promise = modalService.open(
         "status", {}
@@ -68,7 +70,8 @@ var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogle
                         };
                     });
                 },
-                function handleReject(error) {});
+                function handleReject(error) {
+                });
         })
         .error(function (data, status, headers, config) {
             modalService.resolve();
@@ -87,16 +90,60 @@ var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogle
             );
         });
 
-    $scope.getMealDetails = function (meal) {
+    $scope.getMealDetails = function (offer) {
         var promise = modalService.open(
             "meal-choice", {
                 pickups: $scope.pickups,
                 message: 'Click CONFIRM only after you have selected the correct week period that you have paid restaurants for.',
+                meal: offer.meal
             }
         );
         promise.then(
             function handleResolve(response) {
-
+                var order = {
+                    order_date: utilService.formatDate(new Date()),
+                    offer_id: offer.id,
+                    pickup_time_id: response.id,
+                    customer_id: $scope.customer_id
+                };
+                promise = modalService.open(
+                    "status", {}
+                );
+                console.log(order);
+                orderService
+                    .createOrder(order)
+                    .success(function (data, status, headers, config) {
+                        modalService.resolve();
+                        promise.then(
+                            function handleResolve(response) {
+                                promise = modalService.open(
+                                    "alert", {
+                                        message: 'Order Successfully Placed!'
+                                    }
+                                );
+                                promise.then(function handleResolve(response) {
+                                    $location.path('order');
+                                }, function handleReject(error) {});
+                            },
+                            function handleReject(error) {
+                            });
+                    })
+                    .error(function (data, status, headers, config) {
+                        modalService.resolve();
+                        promise.then(
+                            function handleResolve(response) {
+                                promise = modalService.open(
+                                    "alert", {
+                                        message: 'Error: Something Went Wrong'
+                                    }
+                                );
+                                promise.then(function handleResolve(response) {}, function handleReject(error) {});
+                            },
+                            function handleReject(error) {
+                                console.log('Why is it rejected?');
+                            }
+                        );
+                    });
             },
             function handleReject(error) {});
     };

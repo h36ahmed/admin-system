@@ -32,8 +32,7 @@ url: /create-profile/:id
                 </div>
             </div>
             <div ng-show="screenview" ng-switch="screenview">
-                <form class="ls-form ls-create-form"  ng-submit="submitProfileForm(profileForm.$valid)" name="profileForm">
-
+                <form class="ls-form ls-create-form" name="profileForm">
                     <!-- Personal Details -->
                     <div ng-switch-when="details">
                         <div class="grid-block align-center">
@@ -81,6 +80,7 @@ url: /create-profile/:id
                             </div>
                         </div>
                     </div>
+
                     <!-- Meal Plans -->
                     <div ng-switch-when="plans">
                         <div class="grid-block align-center">
@@ -92,29 +92,16 @@ url: /create-profile/:id
                         <div class="grid-block align-center">
                             <div class="grid-block small-10 vertical">
                                 <div class="grid-content">
-                                    <ul class="ls-plan-choices">
-                                        <li class="ls-plan-choice-card" ng-click="planSelect(plan.id)">
+                                    <ul class="ls-plan-choices" >
+                                        <li class="ls-plan-choice-card" ng-click="planSelect(plan.id,plan.name, plan.price, plan.num_meals)" ng-class="{'selected': profileFormData.plan.id == plan.id}" ng-repeat="plan in plans">
                                             <i class="fa fa-check-circle" aria-hidden="true"></i>
                                             <div class="ls-plan-choice-card__front">
-                                                <h4 class="ls-plan-name">Plan Name</h4>
+                                                <h4 class="ls-plan-name">{{plan.name}}</h4>
                                                 <figure class="ls-plan-images">
                                                     <img src="assets/img/food-icon.png"/>
                                                 </figure>
-                                                <p class="ls-plan-meals">12 Meals For</p>
-                                                <p class="ls-plan-price">$7 Per Meal</p>
-                                            </div>
-                                            <div class="ls-select-button">Select Plan</div>
-                                        </li>
-                                        <li class="ls-plan-choice-card" ng-click="planSelect(plan.id)">
-                                            <i class="fa fa-check-circle" aria-hidden="true"></i>
-                                            <div class="ls-plan-choice-card__front">
-                                                <h4 class="ls-plan-name">Plan Name</h4>
-                                                <figure class="ls-plan-images">
-                                                    <img src="assets/img/food-icon.png"/>
-                                                    <img src="assets/img/food-icon.png"/>
-                                                </figure>
-                                                <p class="ls-plan-meals">12 Meals For</p>
-                                                <p class="ls-plan-price">$7 Per Meal</p>
+                                                <p class="ls-plan-meals">{{plan.num_meals}} Meals For</p>
+                                                <p class="ls-plan-price">{{plan.price | currency}} Per Meal</p>
                                             </div>
                                             <div class="ls-select-button">Select Plan</div>
                                         </li>
@@ -127,7 +114,7 @@ url: /create-profile/:id
 
                 <!-- Payment -->
                 <div ng-switch-when="payment">
-                    <form class="ls-form ls-create-form" ng-submit="submitPaymentForm(paymentForm.$valid)" name="paymentForm">
+                    <form class="ls-form ls-create-form" ng-submit="submitPaymentForm(paymentForm.$valid)" name="paymentForm" stripe-form="stripeCallback">
                         <div class="grid-block align-center">
                             <div class="grid-block small-10 vertical text-center">
                                 <h2 class="ls-header">Enter Your Billing Information</h2>
@@ -140,21 +127,21 @@ url: /create-profile/:id
                                     <div class="ls-form-group" ng-class="{ 'ls-has-error' : paymentForm.cardNumber.$invalid && !paymentForm.cardNumber.$pristine }">
                                         <label for="cardNumber">
                                             Card Number
-                                            <input type="text" name="cardNumber" id="cardNumber" placeholder="XXXX-XXXX-XXXX-XXXX" class="ls-input-fields" ng-model="paymentFormData.card_number" required>
+                                            <input type="text" name="cardNumber" id="cardNumber" placeholder="XXXX-XXXX-XXXX-XXXX" class="ls-input-fields" ng-model="number" payments-format="card" payments-validate="card" >
                                         </label>
                                         <p ng-show="paymentForm.cardNumber.$invalid && !paymentForm.cardNumber.$pristine" class="ls-help-block">Enter a valid card number.</p>
                                     </div>
                                     <div class="ls-form-group" ng-class="{ 'ls-has-error' : paymentForm.expiryDate.$invalid && !paymentForm.expiryDate.$pristine }">
                                         <label for="expiryDate">
                                             Expiry Date
-                                            <input type="text" name="expiryDate" id="expiryDate" placeholder="MMYY" class="ls-input-fields" ng-model="paymentFormData.expiry_date" required>
+                                            <input type="text" name="expiryDate" id="expiryDate" placeholder="MM/YYYY" class="ls-input-fields" ng-model="expiry" payments-format="expiry" payments-validate="expiry" required>
                                         </label>
                                         <p ng-show="paymentForm.expiryDate.$invalid && !paymentForm.expiryDate.$pristine" class="ls-help-block">Enter a valid expiry date.</p>
                                     </div>
                                     <div class="ls-form-group" ng-class="{ 'ls-has-error' : paymentForm.cvc.$invalid && !paymentForm.cvc.$pristine }">
                                         <label for="cvc">
                                             CVC
-                                            <input type="text" name="cvc" id="cvc" placeholder="XXX" class="ls-input-fields" ng-model="paymentFormData.cvc" required>
+                                            <input type="text" name="cvc" id="cvc" placeholder="XXX" class="ls-input-fields" ng-model="cvc" payments-format="cvc" payments-validate="cvc" required>
                                         </label>
                                         <p ng-show="paymentForm.cvc.$invalid && !paymentForm.cvc.$pristine" class="ls-help-block">Enter a valid CVC.</p>
                                     </div>
@@ -164,9 +151,9 @@ url: /create-profile/:id
                                 <div class="grid-content">
                                     <div class="grid-content text-center ls-summary">
                                         <h5>Summary</h5>
-                                        <p>Plan Name: <span class="ls-summary-details"></span></p>
-                                        <p>Amount To Pay: <span class="ls-summary-details">$120 CAD ($6 / Meal)</span> For Today's Date to 30 Days</p>
-                                        <input type="submit" value="Verify Payment" class="large button ls-pay-button">
+                                        <p>Plan Name: <span class="ls-summary-details">{{profileFormData.plan.name}}</span></p>
+                                        <p>Amount To Pay: <span class="ls-summary-details">{{profileFormData.plan.price * profileFormData.plan.num_meals }} CAD ({profileFormData.plan.price}} / Meal)</span> For Today's Date to 30 Days</p>
+                                        <input type="submit" value="Verify Payment" class="large button ls-pay-button" ng-disabled="paymentForm.$invalid">
                                         <small class="ls-terms">By verifying payment, you are agreeing to our <a ui-sref="terms">Terms of Use</a> &amp; <a ui-sref="policy">Privacy Policy</a>.</small>
                                     </div>
                                 </div>
