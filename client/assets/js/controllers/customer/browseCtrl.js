@@ -2,6 +2,18 @@ var app = angular.module('lunchSociety');
 
 var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogleMapApi, modalService, mealOfferService, utilService, orderService, pickUpService, _) {
 
+    // checks the current hour only and will redirect depending on the hour
+    const isKitchenOpen = () => {
+      const hour = new Date(1495062343414).getHours()
+
+      if (hour > 9 && hour < 17) {
+        $location.path('kitchen-closed')
+      } else {
+        $location.path('browse')
+      }
+    }
+    isKitchenOpen()
+
     $scope.customer_id = 1;
     $scope.map = {
         center: {

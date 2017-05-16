@@ -48,7 +48,7 @@ app.service(
         function getOrder(data) {
             var request = $http({
                 method: "get",
-                url: baseUrl + baseApi + "order" + "/" + data.id,
+                url: baseUrl + baseApi + "orders" + "/" + data.id,
                 params: data,
                 headers : {
                     'Content-Type': 'application/json'
