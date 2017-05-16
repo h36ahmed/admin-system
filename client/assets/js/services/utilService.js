@@ -16,7 +16,7 @@ app.factory(
       return tomorrow;
     };
 
-    utilService.formatDate = function(date) {
+    utilService.formatDate = function(date, type = null) {
       var dd = date.getUTCDate();
       var mm = date.getUTCMonth() + 1; //January is 0!
 
@@ -27,7 +27,8 @@ app.factory(
       if (mm < 10) {
         mm = '0' + mm;
       }
-      return yyyy + "-" + mm + "-" + dd;
+      return type === 'browse' ? yyyy + "-" + mm + "-" + parseInt(dd+1) : yyyy + "-" + mm + "-" + dd;
+      // return yyyy + "-" + mm + "-" + dd;
     };
 
     utilService.formatLongDate = function(date) {
