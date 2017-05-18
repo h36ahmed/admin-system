@@ -1,7 +1,6 @@
 var app = angular.module('lunchSociety');
 
 var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogleMapApi, modalService, mealOfferService, utilService, orderService, pickUpService, _) {
-
     // checks the current hour only and will redirect depending on the hour
     const isKitchenOpen = () => {
       const hour = new Date(1495062343414).getHours()
@@ -122,7 +121,7 @@ var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogle
                 promise = modalService.open(
                     "status", {}
                 );
-                console.log(order);
+                // console.log(order);
                 orderService
                     .createOrder(order)
                     .success(function (data, status, headers, config) {
@@ -159,6 +158,7 @@ var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogle
                     });
             },
             function handleReject(error) {});
+
     };
 };
 
