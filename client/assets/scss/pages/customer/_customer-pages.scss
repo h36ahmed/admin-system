@@ -70,6 +70,20 @@
         .ls-order-date {
             margin-top: 15px;
         }
+        .ls-logout-wrapper {
+            padding-right: 0;
+        }
+        .ls-logout-btn {
+            margin-right: 0;
+            width:100px;
+            margin-bottom: 0;
+            margin-top: 10px;
+            position: relative;
+            right:0;
+        }
+        .grid-block + .grid-block {
+            margin-bottom: 20px;
+        }
     }
     &.ls-kitchen-closed {
         .ls-info {
