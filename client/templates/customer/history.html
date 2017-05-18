@@ -40,7 +40,7 @@ url: /history
                                             {{order.offer.meal.ingredients | titleCase}}
                                         </td>
                                         <td data-title="actions">
-                                            <a ng-click="giveFeedback()" class="ls-text-link" ng-if="order.feedbacks.length == 0">Provide Feedback</a>
+                                            <a ng-click="giveFeedback(order.id)" class="ls-text-link" ng-if="order.feedbacks.length == 0">Provide Feedback</a>
                                             <a ng-click="openFeedbackModal(order.feedbacks[0])" class="ls-text-link" ng-if="order.feedbacks.length != 0">View Feedback</a>
                                         </td>
                                     </tr>

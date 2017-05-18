@@ -1,13 +1,13 @@
 var app = angular.module('lunchSociety');
 
-var historyCtrl = function ($scope, orderService, modalService) {
+var historyCtrl = function ($scope, $location, orderService, modalService) {
 
     // custom function that sorts the order_date
     const sortByOrderDate = (a,b) => {
-      if (a["order_date"] > b["order_date"]) {
+      if (a['order_date'] > b['order_date']) {
         return -1
       }
-      if (a["order_date"] < b["order_date"]) {
+      if (a['order_date'] < b['order_date']) {
         return 1
       }
       return 0
@@ -39,9 +39,13 @@ var historyCtrl = function ($scope, orderService, modalService) {
             function handleResolve(response) {},
             function handleReject(error) {});
     }
+
+    $scope.giveFeedback = (orderId) => {
+      $location.path(`create-feedback/${orderId}`)
+    }
 };
 
 
-historyCtrl.inject = ['$scope', 'orderService', 'modalService'];
+historyCtrl.inject = ['$scope', '$location', 'orderService', 'modalService'];
 
 app.controller('historyCtrl', historyCtrl);
