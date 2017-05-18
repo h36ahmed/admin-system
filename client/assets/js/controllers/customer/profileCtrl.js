@@ -15,6 +15,20 @@ var profileCtrl = function ($scope, customerService) {
             // Handle login errors here
             $scope.message = 'Error: Something Went Wrong';
         });
+
+    $scope.submitEditForm = function (change) {
+      customerService
+        .editCustomer({
+          id: 1,
+          reminder_emails: change,
+        })
+        .then(customer => {
+          $scope.customer = customer.data
+        })
+        .error(e => {
+          $scope.message = 'Error: Something Went Wrong'
+        })
+    }
 };
 
 profileCtrl.inject = ['$scope', 'customerService'];

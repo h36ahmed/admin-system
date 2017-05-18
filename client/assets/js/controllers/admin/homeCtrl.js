@@ -20,7 +20,8 @@ var homeCtrl = function($scope, $location, commonService, modalService, $window)
             function handleResolve(response) {
               commonService.setAuthToken(data.token);
               commonService.setUserID(data.id);
-              $location.path('meal-offers');
+              // $location.path('meal-offers');
+              $location.path('browse')
             },
             function handleReject(error) {
               console.log('Why is it rejected?');

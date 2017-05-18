@@ -2,6 +2,8 @@ var app = angular.module('lunchSociety');
 
 var createFeedbackCtrl = function ($scope, orderService, feedbackService) {
 
+    $scope.feedbackFormData = {}
+
     $scope.tabview = "description";
 
     $scope.changeTabview = function (tabview) {
@@ -27,6 +29,11 @@ var createFeedbackCtrl = function ($scope, orderService, feedbackService) {
             // Handle login errors here
             $scope.message = 'Error: Something Went Wrong';
         });
+
+      $scope.submit = () => {
+        console.log('submit form')
+        console.log()
+      }
 };
 
 createFeedbackCtrl.inject = ['$scope', 'orderService', 'feedbackService'];
