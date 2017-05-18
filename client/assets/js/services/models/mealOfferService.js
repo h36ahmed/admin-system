@@ -11,7 +11,8 @@ app.service(
         return({
             createMealOffer: createMealOffer,
             getMealOffers: getMealOffers,
-            deleteMealOffer: deleteMealOffer
+            deleteMealOffer: deleteMealOffer,
+            editMealOffer: editMealOffer,
         });
 
         // ---
@@ -47,6 +48,18 @@ app.service(
             var request = $http({
                 method: "delete",
                 url: baseUrl + baseApi + "offer" + "/" + data.id,
+                headers : {
+                    'Content-Type': 'application/json'
+                }
+            });
+            return request;
+        }
+
+        function editMealOffer(data) {
+            var request = $http({
+                method: "put",
+                url: baseUrl + baseApi + "offer" + "/" + data.id,
+                data: data,
                 headers : {
                     'Content-Type': 'application/json'
                 }

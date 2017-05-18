@@ -10,12 +10,12 @@ url: /order
             <div class="grid-block">
                 <div class="grid-block small-9 vertical">
                     <div class="grid-content">
-                        <h2>Order #{{order.id}} - May 15, 2017{{order.order_date}}</h2>
+                        <h2>Order #{{order.id}} - {{order.order_date}}</h2>
                     </div>
                 </div>
                 <div class="grid-block small-3 vertical">
                     <div class="grid-content text-right">
-                        <p class="button ls-logout-btn">Cancel</p>
+                        <p class="button ls-logout-btn" ng-click="cancelOrder()">Cancel</p>
                     </div>
                 </div>
             </div>
@@ -49,7 +49,7 @@ url: /order
             <div class="grid-block">
                 <div class="grid-block small-8 vertical">
                     <div class="grid-content">
-                        <h4>Pickup Time: {{order.pickup_time.pickup_time}}</h4>
+                        <h4>Pickup Time: <strong>{{order.pickup_time.pickup_time}}</strong></h4>
                         <p></p>
                         <h4>{{order.offer.meal.restaurant.street_address}}</h4>
                         <h4>{{order.offer.meal.restaurant.city}}, {{order.offer.meal.restaurant.state}}, {{order.offer.meal.restaurant.country}}</h4>

@@ -69,8 +69,6 @@ app.service(
             return request;
         }
 
-
-
         function deleteOrder(data) {
             var request = $http({
                 method: "delete",
