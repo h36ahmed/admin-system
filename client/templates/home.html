@@ -3,12 +3,12 @@ name: home
 url: /
 ---
 
-<section class="ls-login-page">
+<article class="ls-login-page">
+    <header class="ls-home-header">
+        <div ng-include="'/templates/partials/home_bar.html'"></div>
+    </header>
     <div class="ls-bg ls-login-bg"></div>
-    <article class="ls-common-body">
-        <header class="ls-home-header">
-            <div ng-include="'/templates/partials/home_bar.html'"></div>
-        </header>
+    <section class="ls-common-body">
         <div class="ls-form-container" ng-controller="homeCtrl as home">
             <h3>Welcome to Lunch Society!</h3>
             <p>Awesome Food!</p>
@@ -31,5 +31,5 @@ url: /
         <footer class="ls-home-footer">
              <div ng-include="'/templates/partials/home_footer.html'"></div>
         </footer>
-    </article>
-</section>
+    </section>
+</article>

@@ -2,7 +2,7 @@ body {
    min-width: 900px;
 }
 .ls-common-body {
-    @include position(absolute, 0, 0, 0, 0);
+    @include position(absolute, 70px, 0, 0, 0);
     width: 100%;
     height: auto;
     color: #fff;
@@ -13,7 +13,7 @@ body {
     background-position: center;
     background-size: cover;
     filter: brightness(70%);
-    @include position(absolute, 0, 0, 0, 0);
+    @include position(absolute, auto, 0, 0, 0);
     height: auto;
     width: 100%;
     display: block;
@@ -24,8 +24,14 @@ body {
 }
 
 .ls-home-header {
+    height: 70px;
+    padding: 5px 10px;
     h2 {
         color: #fff;
+    }
+    img {
+        width:200px;
+        margin-bottom: 0;
     }
     .ls-main-nav {
         @include clearfix;
@@ -42,7 +48,6 @@ body {
                 color: #fff;
             }
             .button {
-                margin-top: 15px;
                 text-transform: uppercase;
                 @include border-radius(2px);
             }

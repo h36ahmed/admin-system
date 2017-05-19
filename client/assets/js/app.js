@@ -36,7 +36,7 @@
 
     uiGmapGoogleMapApiProvider.configure({
         key: 'AIzaSyAcAZcWH9AoU5nsCHnHwFQPK4aBAoNHBSg',
-        v: '3.20', //defaults to latest 3.X anyhow
+        v: '3.20',
         libraries: 'weather,geometry,visualization'
     });
 
@@ -51,6 +51,7 @@
     }).catch(function() {
         console.log("can't load");
     });
+
 
     $rootScope.$on('$stateChangeSuccess', function(evt) {
       // Halt state change from even starting

@@ -10,12 +10,12 @@ url: /order
             <div class="grid-block">
                 <div class="grid-block small-9 vertical">
                     <div class="grid-content">
-                        <h2>Order #{{order.id}} - {{order.order_date}}</h2>
+                        <h2>Order #{{order.id}} - {{order.order_date | date}}</h2>
                     </div>
                 </div>
-                <div class="grid-block small-3 vertical">
-                    <div class="grid-content text-right">
-                        <p class="button ls-logout-btn" ng-click="cancelOrder()">Cancel</p>
+                <div class="grid-block small-3 vertical text-right">
+                    <div class="grid-content ls-logout-wrapper">
+                        <a class="button ls-logout-btn" ng-click="cancelOrder()">Cancel</a>
                     </div>
                 </div>
             </div>
@@ -40,21 +40,17 @@ url: /order
                         </div>
                     </div>
                 </div>
-                <div class="grid-block small-4 vertical">
-                    <div class="grid-content text-right">
+                <div class="grid-block small-4 vertical text-right">
                         <img src="http://lorempixel.com/400/300/" alt="">
-                    </div>
                 </div>
             </div>
             <div class="grid-block">
                 <div class="grid-block small-8 vertical">
                     <div class="grid-content">
-                        <h4>Pickup Time: <strong>{{order.pickup_time.pickup_time}}</strong></h4>
-                        <p></p>
-                        <h4>{{order.offer.meal.restaurant.street_address}}</h4>
-                        <h4>{{order.offer.meal.restaurant.city}}, {{order.offer.meal.restaurant.state}}, {{order.offer.meal.restaurant.country}}</h4>
-                        <h4>{{order.offer.meal.restaurant.postal_code}}</h4>
-                        <p></p>
+                        <h5>Pickup Time: <strong>{{order.pickup_time.pickup_time}}</strong></h5>
+                        <h5>{{order.offer.meal.restaurant.street_address}}</h5>
+                        <h5>{{order.offer.meal.restaurant.city}}, {{order.offer.meal.restaurant.state}}, {{order.offer.meal.restaurant.country}}</h5>
+                        <h5>{{order.offer.meal.restaurant.postal_code}}</h5>
                     </div>
                 </div>
                 <div class="grid-block small-4 vertical ls-map">
