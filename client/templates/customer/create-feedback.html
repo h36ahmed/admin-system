@@ -46,7 +46,7 @@ url: /create-feedback/:id
                     </div>
                 </div>
             </div>
-            <form class="ls-form ls-create-form" name="feedbackForm" ng-submit="submit()" novalidate>
+            <form class="ls-form ls-create-form" name="feedbackForm" ng-submit="submit(feedbackForm.$valid)" novalidate>
                 <div class="grid-block">
                     <div class="grid-block small-12 medium-6 vertical">
                         <div class="grid-content text-center">
@@ -68,9 +68,9 @@ url: /create-feedback/:id
                         <div class="grid-content text-center">
                             <label for="mealDesc">
                                 Comments
-                                <textarea name="mealDesc" id="mealDesc" cols="30" rows="8" placeholder="e.g. Soft glazed duck served on sizzling plate." class="ls-input-fields" ng-model="feedbackFormData.description"></textarea>
+                                <textarea name="mealDesc" id="mealDesc" cols="30" rows="8" placeholder="e.g. Soft glazed duck served on sizzling plate." class="ls-input-fields" ng-model="feedbackFormData.comments"></textarea>
                             </label>
-                            <input type="submit" class="button" value="Send Feedback" ng-disabled="createMealForm.$invalid">
+                            <input type="submit" class="button" value="Send Feedback" ng-disabled="feedbackForm.$invalid">
                         </div>
                     </div>
                 </div>

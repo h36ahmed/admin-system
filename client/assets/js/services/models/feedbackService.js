@@ -9,7 +9,8 @@ app.service(
     function( $http, $q ) {
         // Return public API.
         return({
-            getFeedbacks: getFeedbacks
+            getFeedbacks: getFeedbacks,
+            createFeedback: createFeedback
         });
 
         // ---
@@ -21,6 +22,18 @@ app.service(
                 method: "get",
                 url: baseUrl + baseApi + "feedbacks",
                 params: data,
+                headers : {
+                    'Content-Type': 'application/json'
+                }
+            });
+            return request;
+        }
+
+        function createFeedback(data) {
+            var request = $http({
+                method: "post",
+                url: baseUrl + baseApi + 'feedback',
+                data: data,
                 headers : {
                     'Content-Type': 'application/json'
                 }
