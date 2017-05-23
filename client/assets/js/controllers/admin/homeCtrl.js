@@ -1,6 +1,6 @@
 var app = angular.module('lunchSociety');
 
-var homeCtrl = function($scope, $location, commonService, modalService, $window) {
+var homeCtrl = function($scope, $location, commonService, modalService, utilService, $window) {
 
   $window.sessionStorage.loginPage = true;
   $scope.userFormData = {};
@@ -20,8 +20,9 @@ var homeCtrl = function($scope, $location, commonService, modalService, $window)
             function handleResolve(response) {
               commonService.setAuthToken(data.token);
               commonService.setUserID(data.id);
-              // $location.path('meal-offers');
-              $location.path('browse')
+              utilService.isKitchenOpen() === true ?
+                $location.path('browse') :
+                $location.path('kitchen-closed')
             },
             function handleReject(error) {
               console.log('Why is it rejected?');
@@ -56,6 +57,6 @@ var homeCtrl = function($scope, $location, commonService, modalService, $window)
 
 };
 
-homeCtrl.inject = ['$scope', '$location', 'commonService', 'modalService', '$window'];
+homeCtrl.inject = ['$scope', '$location', 'commonService', 'modalService', 'utilService', '$window'];
 
 app.controller('homeCtrl', homeCtrl);

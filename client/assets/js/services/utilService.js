@@ -28,7 +28,6 @@ app.factory(
         mm = '0' + mm;
       }
       return type === 'browse' ? yyyy + "-" + mm + "-" + parseInt(dd+1) : yyyy + "-" + mm + "-" + dd;
-      // return yyyy + "-" + mm + "-" + dd;
     };
 
     utilService.formatLongDate = function(date) {
@@ -46,6 +45,19 @@ app.factory(
 
       return monthNames[monthIndex] + ' ' + day + ', ' + year;
 
+    }
+
+    utilService.isKitchenOpen = () => {
+      // checks the current hour only and will redirect depending on the hour
+      // const hour = new Date(1495051243414).getHours() // this is for dev purpose to keep kitchen closed
+      const hour = new Date(1495062343414).getHours() // this is for dev purpose to keep kitchen open
+      // const hour = new Date().getHours() // this is current hour
+
+      if (hour > 9 && hour < 17) {
+        return false
+      }
+
+      return true
     }
 
     return utilService;

@@ -24,13 +24,7 @@ var createFeedbackCtrl = function ($scope, $location, $stateParams, orderService
         .success((data, status, headers, config) => {
             $scope.order = data;
             $scope.feedbackFormData.order_id = data.id
-            customerService
-              .getCustomer({
-                id: data.customer_id
-              })
-              .then(customerData => {
-                $scope.feedbackFormData.email = customerData.data.user.email
-              })
+            $scope.feedbackFormData.email = data.customer.user.email
         })
         .error(function (data, status, headers, config) {
             // Handle login errors here
