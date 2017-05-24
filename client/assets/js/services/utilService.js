@@ -3,7 +3,7 @@ var app = angular.module('lunchSociety');
 
 app.factory(
   "utilService",
-  function() {
+  function($http, $q) {
 
     var utilService = {};
 
@@ -45,6 +45,26 @@ app.factory(
       var year = date.getUTCFullYear();
 
       return monthNames[monthIndex] + ' ' + day + ', ' + year;
+
+    }
+
+    utilService.checkFeedbackProvided = function(data) {
+        var request = $http({
+            method: "post",
+            url: baseUrl + baseApi + 'customer',
+            data: data,
+            headers : {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        request.success(function (data, status, headers, config) {
+            return true;
+        })
+        .error(function (data, status, headers, config) {
+            console.log()'Error: Something Went Wrong');
+            return false;
+        });
 
     }
 
