@@ -1,15 +1,13 @@
 ---
-name: meals
-url: /meals
+name: res-meals
+url: /restaurant/meals
 ---
 <div class="vertical grid-frame">
-    <div class="grid-content shrink" style="padding: 0;">
-        <div ng-include="'/templates/partials/menu_bar.html'"></div>
-    </div>
-    <div ng-include="'/templates/partials/side_bar.html'"></div>
-    <div class="ls-app-body">
-        <div class="grid-container ls-manage-pages"  ng-controller="manageMealCtrl as manageMeal">
-            <div class="grid-block">
+    <div class="ls-app-bg"></div>
+    <div ng-include="'/templates/restaurant/partials/menu-bar.html'"></div>
+    <div class="ls-app-body ls-restaurant">
+        <div class="grid-container ls-restaurant-pages" ng-controller="resMealsCtrl as mealsCtrl">
+            <div class="grid-block ls-title-bar">
                 <div class="grid-block small-8 vertical">
                    <div class="grid-content">
                         <h2>Manage Meals</h2>
@@ -17,7 +15,7 @@ url: /meals
                 </div>
                 <div class="grid-block small-4 vertical">
                    <div class="grid-content text-right">
-                       <a ui-sref="create-meal" class="button success ls-create-button">Create Meal</a>
+                       <a ui-sref="res-create-meal" class="button success ls-create-button">Create Meal</a>
                    </div>
                 </div>
             </div>
@@ -26,16 +24,16 @@ url: /meals
                    <div class="grid-content">
                         <ul>
                             <li class="ls-card ls-meal-card" ng-repeat="meal in meals">
-                                <a ui-sref="meal({id:meal.id})" class="ls-card-link">x</a>
+                                <a ui-sref="res-meal({id:meal.id})" class="ls-card-link">x</a>
                                 <figure class="ls-meal-card-info">
                                     <img ng-src="https://s3.ca-central-1.amazonaws.com/ls-frontend/meals/{{meal.meal_image}}" alt="" ng-if="meal.meal_image != ''">
                                     <img src="/assets/img/lunchsociety-thumb.png" ng-if="meal.meal_image == ''"/>
                                     <figcaption class="ls-meal-card-caption">
                                         <div class="ls-meal-card-title">
                                             <h4>{{meal.name}}</h4>
-                                            <p>{{meal.restaurant.name}}</p>
+                                            <p>{{meal.ingredients}}</p>
                                         </div>
-                                        <a ui-sref="meal({id:meal.id})" class="button">Edit </a>
+                                        <a ui-sref="res-meal({id:meal.id})" class="button">Edit</a>
                                     </figcaption>
                                 </figure>
                             </li>
