@@ -2,8 +2,8 @@ var app = angular.module('lunchSociety');
 
 
 app.factory(
-  "utilService",
-  function() {
+  "utilService", ['feedbackService',
+  function($rootScope, feedbackService) {
 
     var utilService = {};
 
@@ -60,7 +60,17 @@ app.factory(
       return true
     }
 
+    utilService.checkFeedbacks = () => {
+      console.log('checkFeedbacks')
+      console.log(feedbackService)
+      console.log($rootScope.getFeedbacks)
+      // feedbackService.getfeedbacks()
+      //   .success((data, status, header, config) => {
+      //     console.log('data', data)
+      //   })
+    }
+
     return utilService;
 
   }
-);
+]);

@@ -2,6 +2,8 @@ var app = angular.module('lunchSociety');
 
 var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogleMapApi, modalService, mealOfferService, utilService, orderService, pickUpService, _) {
 
+    console.log(utilService.checkFeedbacks())
+
     $scope.customer_id = 1;
     $scope.map = {
         center: {
