@@ -38,6 +38,6 @@ var mealChoiceModalCtrl = function ($scope, modalService) {
 
 };
 
-mealChoiceModalCtrl.inject = ['$scope', 'modalService', 'pickUpService'];
+mealChoiceModalCtrl.inject = ['$scope', 'modalService'];
 
 app.controller('mealChoiceModalCtrl', mealChoiceModalCtrl);
