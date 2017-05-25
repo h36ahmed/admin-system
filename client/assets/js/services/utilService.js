@@ -62,7 +62,7 @@ app.factory(
             return true;
         })
         .error(function (data, status, headers, config) {
-            console.log()'Error: Something Went Wrong');
+            console.log('Error: Something Went Wrong');
             return false;
         });
 
