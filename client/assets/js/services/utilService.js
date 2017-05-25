@@ -2,8 +2,8 @@ var app = angular.module('lunchSociety');
 
 
 app.factory(
-  "utilService", ['feedbackService',
-  function($rootScope, feedbackService) {
+  "utilService",
+  function($http, $q, $window, $location) {
 
     var utilService = {};
 
@@ -60,17 +60,31 @@ app.factory(
       return true
     }
 
-    utilService.checkFeedbacks = () => {
-      console.log('checkFeedbacks')
-      console.log(feedbackService)
-      console.log($rootScope.getFeedbacks)
-      // feedbackService.getfeedbacks()
-      //   .success((data, status, header, config) => {
-      //     console.log('data', data)
-      //   })
+    utilService.checkFeedbackProvided = function (data) {
+      const baseUrl = 'https://ls-backend.herokuapp.com';
+      const baseApi = '/api/v1/';
+      const deferred = $q.defer()
+
+        const request = $http({
+            method: "get",
+            url: baseUrl + baseApi + 'feedbacks',
+            params: data,
+            headers : {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        request.success((data, status, headers, config) => {
+          deferred.resolve(data)
+        })
+        .error((data, status, headers, config) => {
+          deferred.reject(data)
+          console.log('Error: Something Went Wrong');
+        });
+        return deferred.promise
     }
 
     return utilService;
 
   }
-]);
+);

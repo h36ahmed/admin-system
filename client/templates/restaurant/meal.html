@@ -1,0 +1,78 @@
+---
+name: res-meal
+url: /restaurant/meal/:id
+---
+<div class="vertical grid-frame">
+    <div class="ls-app-bg"></div>
+    <div ng-include="'/templates/restaurant/partials/menu-bar.html'"></div>
+    <div class="ls-app-body ls-restaurant">
+        <div class="grid-container ls-restaurant-pages" ng-controller="resMealCtrl as mealCtrl">
+            <div class="grid-block">
+                <div class="grid-block small-12 vertical">
+                    <div class="grid-content">
+                        <h2>Edit Meal Information</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-block">
+                <div class="grid-block small-12 vertical">
+                    <div class="grid-content">
+                        <form class="ls-form ls-edit-form" name="editMealForm" ng-submit="submitEditForm(editMealForm.$valid)" novalidate>
+                            <div class="grid-block">
+                                <div class="small-12 medium-6 grid-content">
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : editMealForm.mealName.$invalid && !editMealForm.mealName.$pristine }">
+                                        <label for="mealName">
+                                            Meal Name
+                                            <input type="text" placeholder="e.g. Soft Glazed Duck" class="ls-input-fields" name="mealName" id="mealName" ng-model="editMealFormData.name" required>
+                                        </label>
+                                        <p ng-show="editMealForm.mealName.$invalid && !editMealForm.mealName.$pristine" class="ls-help-block">Enter a valid meal name.</p>
+                                    </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : editMealForm.mealPrice.$invalid && !editMealForm.mealPrice.$pristine }">
+                                        <label for="mealPrice">
+                                            Meal Price
+                                            <input type="number" placeholder="e.g. 9.99" class="ls-input-fields" name="mealPrice" id="mealPrice" ng-model="editMealFormData.price" step="0.01" required>
+                                        </label>
+                                        <p ng-show="editMealForm.mealPrice.$invalid && !editMealForm.mealPrice.$pristine" class="ls-help-block">Enter a valid meal price.</p>
+                                    </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : editMealForm.mealImage.$invalid && !editMealForm.mealImage.$pristine }">
+                                        <label for="mealImage">
+                                            Meal Image <br>
+                                            <input type="hidden" value="{{editMealFormData.meal_image}}" name="mealImage" id="mealImage" required/>
+                                            <input type="file" ngf-select  ng-model="editMealFormData.meal_file_image" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB">
+                                            <img ngf-src="editMealFormData.meal_file_image || 'https://s3.ca-central-1.amazonaws.com/ls-frontend/meals/' + editMealFormData.meal_image" ng-if="editMealFormData.meal_image != ''">
+                                            <img ngf-src="editMealFormData.meal_file_image || '/assets/img/lunchsociety-thumb.png'" ng-if="editMealFormData.meal_image == ''">
+                                        </label>
+                                        <p ng-show="editMealForm.mealImage.$invalid && !editMealForm.mealImage.$pristine" class="ls-help-block">Choose image file for the meal.</p>
+                                    </div>
+                                </div>
+                                <div class="small-12 medium-6 grid-content">
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : editMealForm.mealDesc.$invalid && !editMealForm.mealDesc.$pristine }">
+                                        <label for="mealDesc">
+                                            Meal Description
+                                            <textarea name="mealDesc" id="mealDesc" cols="30" rows="8" placeholder="e.g. Soft glazed duck served on sizzling plate." class="ls-input-fields" ng-model="editMealFormData.description"></textarea>
+                                        </label>
+                                        <p ng-show="editMealForm.mealDesc.$invalid && !editMealForm.mealDesc.$pristine" class="ls-help-block">Enter a valid meal description.</p>
+                                    </div>
+                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : editMealForm.mealIngredients.$invalid && !editMealForm.mealIngredients.$pristine }">
+                                        <label for="mealIngredients">
+                                            Meal Ingredients
+                                            <textarea name="mealIngredients" id="mealIngredients" cols="30" rows="8" placeholder="e.g. Cucumber, Avocado, Banana" class="ls-input-fields" ng-model="editMealFormData.ingredients" required></textarea>
+                                        </label>
+                                        <p ng-show="editMealForm.mealIngredients.$invalid && !editMealForm.mealIngredients.$pristine" class="ls-help-block">Enter a valid meal ingredients.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid-block">
+                                <div class="small-6 grid-content text-right">
+                                </div>
+                                <div class="small-6 grid-content text-right">
+                                    <input type="submit" class="button" name="update" value="Update Meal Information" ng-disabled="editMealForm.$invalid">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+           </div>
+        </div>
+    </div>
+</div>

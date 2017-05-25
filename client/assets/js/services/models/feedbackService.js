@@ -1,6 +1,7 @@
 var app = angular.module('lunchSociety');
 
 var baseUrl = 'https://ls-backend.herokuapp.com';
+// var baseUrl = 'localhost:3000'
 
 var baseApi = '/api/v1/';
 
@@ -40,6 +41,6 @@ app.service(
             });
             return request;
         }
-
+        return feedbackService
     }
 );

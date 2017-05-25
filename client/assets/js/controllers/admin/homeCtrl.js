@@ -20,7 +20,7 @@ var homeCtrl = function($scope, $location, commonService, modalService, utilServ
             function handleResolve(response) {
               commonService.setAuthToken(data.token);
               commonService.setUserID(data.id);
-              utilService.isKitchenOpen() === true ?
+              utilService.isKitchenOpen() ?
                 $location.path('browse') :
                 $location.path('kitchen-closed')
             },

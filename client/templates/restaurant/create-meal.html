@@ -1,21 +1,12 @@
 ---
-name: create-meal
-url: /create-meal
+name: res-create-meal
+url: /restaurant/create-meal
 ---
 <div class="vertical grid-frame">
-    <div class="grid-content shrink" style="padding: 0;">
-        <div ng-include="'/templates/partials/menu_bar.html'"></div>
-    </div>
-    <div ng-include="'/templates/partials/side_bar.html'"></div>
-    <div class="ls-app-body">
-        <div class="grid-block ls-back-bar">
-            <div class="grid-block small-12 vertical">
-                <div class="grid-content">
-                    <p><a ui-sref="meals"><i class="fa fa-angle-left" aria-hidden="true"></i> Back to Meals</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="grid-container ls-meal-info" ng-controller="createMealCtrl as createMeal">
+    <div class="ls-app-bg"></div>
+    <div ng-include="'/templates/restaurant/partials/menu-bar.html'"></div>
+    <div class="ls-app-body ls-restaurant">
+        <div class="grid-container ls-restaurant-pages" ng-controller="resCreateMealCtrl as createMeal">
             <div class="grid-block ls-title-bar">
                 <div class="grid-block small-12 vertical">
                     <div class="grid-content">
@@ -30,25 +21,12 @@ url: /create-meal
                            name="createMealForm" ng-submit="submitForm(createMealForm.$valid)">
                             <div class="grid-block">
                                 <div class="small-12 medium-6 grid-content">
-                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : createMealForm.resName.$invalid && !createMealForm.resName.$pristine }">
-                                        <label for="resName">Restaurant Name</label>
-                                        <select name="resName" id="resName" class="ls-input-fields" ng-model="createMealFormData.restaurant" ng-options="restaurant as restaurant.name for restaurant in restaurants track by restaurant.id" required>
-                                        </select>
-                                        <p ng-show="createMealForm.resName.$invalid && !createMealForm.resName.$pristine" class="ls-help-block">Select a valid restaurant name.</p>
-                                    </div>
                                     <div class="ls-form-group" ng-class="{ 'ls-has-error' : createMealForm.mealName.$invalid && !createMealForm.mealName.$pristine }">
                                         <label for="mealName">
                                             Meal Name
                                             <input type="text" placeholder="e.g. Soft Glazed Duck" class="ls-input-fields" name="mealName" id="mealName" ng-model="createMealFormData.name" required>
                                         </label>
                                         <p ng-show="createMealForm.mealName.$invalid && !createMealForm.mealName.$pristine" class="ls-help-block">Enter a valid meal name.</p>
-                                    </div>
-                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : createMealForm.mealTag.$invalid && !createMealForm.mealTag.$pristine }">
-                                        <label for="mealTag">
-                                            Meal Tagline
-                                            <input type="text" placeholder="e.g. Finger Lickin' Good" class="ls-input-fields" name="mealTag" id="mealTag" ng-model="createMealFormData.tagline" required>
-                                        </label>
-                                        <p ng-show="createMealForm.mealTag.$invalid && !createMealForm.mealTag.$pristine" class="ls-help-block">Enter a valid meal tag line.</p>
                                     </div>
                                     <div class="ls-form-group" ng-class="{ 'ls-has-error' : createMealForm.mealPrice.$invalid && !createMealForm.mealPrice.$pristine }">
                                         <label for="mealPrice">
@@ -88,7 +66,7 @@ url: /create-meal
 
                                 </div>
                                 <div class="small-6 grid-content text-right">
-                                    <input type="submit" class="button" value="Add Meal to Restaurant" ng-disabled="createMealForm.$invalid">
+                                    <input type="submit" class="button" value="Add Meal" ng-disabled="createMealForm.$invalid">
                                 </div>
                             </div>
                         </form>

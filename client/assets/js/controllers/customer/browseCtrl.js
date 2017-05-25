@@ -2,8 +2,10 @@ var app = angular.module('lunchSociety');
 
 var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogleMapApi, modalService, mealOfferService, utilService, orderService, pickUpService, _) {
 
-    console.log(utilService.checkFeedbacks())
-
+    utilService.checkFeedbackProvided({user_id: 6, status: 'active'})
+      .then(data => {
+        data.length > 0 ? $location.path(`create-feedback/${data[0].order_id}`) : $location.path('browse')
+      })
     $scope.customer_id = 1;
     $scope.map = {
         center: {
