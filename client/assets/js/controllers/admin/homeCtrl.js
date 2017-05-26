@@ -21,7 +21,7 @@ var homeCtrl = function($scope, $location, commonService, modalService, utilServ
               commonService.setAuthToken(data.token);
               commonService.setUserID(data.id);
               utilService.isKitchenOpen() ?
-                $location.path('browse') :
+                $location.path('restaurant/meal-offers') :
                 $location.path('kitchen-closed')
             },
             function handleReject(error) {

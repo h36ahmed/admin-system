@@ -2,26 +2,17 @@ var app = angular.module('lunchSociety');
 
 var resMealsCtrl = function ($scope, mealService, modalService) {
 
-    function resolvePromise(promise, data, message, redirect) {
-        modalService.resolve();
-        promise.then(
-            function handleResolve(response) {
-                promise = modalService.open(
-                    "alert", {
-                        message: message
-                    }
-                );
-                promise.then(function handleResolve(response) {
-                    if (redirect) {
-                        $location.path('/');
-                    }
-                }, function handleReject(error) {});
-            },
-            function handleReject(error) {
-                console.log('Why is it rejected?');
-            }
-        );
-    }
+  $scope.meals = [];
+
+  mealService
+    .getMeals({ restaurant_id: 1 })
+    .success(function(data, status, headers, config) {
+      $scope.meals = data;
+    })
+    .error(function(data, status, headers, config) {
+      // Handle login errors here
+      $scope.message = 'Error: Something Went Wrong';
+    });
 
 };
 

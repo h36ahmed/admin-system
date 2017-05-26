@@ -1,28 +1,8 @@
 var app = angular.module('lunchSociety');
 
-var resCreateMealCtrl = function ($scope, mealService, modalService, restaurantService, awsService, Upload) {
+var resCreateMealCtrl = function ($scope, mealService, modalService, awsService, Upload) {
 
   $scope.createMealFormData = {};
-
-  // restaurantService
-  //   .getRestaurants()
-  //   .success(function(data, status, headers, config) {
-  //     $scope.restaurants = data;
-  //     $scope.createMealFormData.restaurant = $scope.restaurants[0];
-  //     $scope.createMealFormData.price = $scope.restaurants[0].payout_rate;
-  //   })
-  //   .error(function(data, status, headers, config) {
-  //     // Handle login errors here
-  //     $scope.message = 'Error: Something Went Wrong';
-  //   });
-
-  restaurantService
-    .getRestaurant({
-      id: 1
-    })
-    .success((data, status, headers, config) => {
-      $scope.createMealFormData.restaurant = data
-    })
 
   $scope.submitForm = function(isValid) {
     // check to make sure the form is completely valid
@@ -59,7 +39,7 @@ var resCreateMealCtrl = function ($scope, mealService, modalService, restaurantS
   function createMeal(result) {
     var promise = modalService.open(
       "status", {});
-    $scope.createMealFormData.restaurant_id = $scope.createMealFormData.restaurant.id;
+    $scope.createMealFormData.restaurant_id = 1
     $scope.createMealFormData.tagline = ''
     $scope.createMealFormData.meal_image = result.file_name;
     mealService
@@ -117,6 +97,6 @@ var resCreateMealCtrl = function ($scope, mealService, modalService, restaurantS
   }
 };
 
-resCreateMealCtrl.inject = ['$scope', 'mealService', 'modalService', 'restaurantService', 'awsService', 'Upload'];
+resCreateMealCtrl.inject = ['$scope', 'mealService', 'modalService', 'awsService', 'Upload'];
 
 app.controller('resCreateMealCtrl', resCreateMealCtrl);

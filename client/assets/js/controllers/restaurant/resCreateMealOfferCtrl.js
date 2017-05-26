@@ -9,14 +9,11 @@ var resCreateMealOfferCtrl = function ($scope, mealService, modalService, utilSe
       offer_date: utilService.formatLongDate(utilService.getNextDate())
   };
 
-  $scope.restaurants = [];
-
   $scope.meals = [];
 
   restaurantService
     .getRestaurant({id: 1})
     .success(function(data, status, headers, config) {
-      $scope.restaurants = data;
       $scope.meals = data.meals
     })
     .error(function(data, status, headers, config) {

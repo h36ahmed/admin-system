@@ -49,6 +49,7 @@ app.factory(
 
     utilService.isKitchenOpen = () => {
       // checks the current hour only and will redirect depending on the hour
+
       // const hour = new Date(1495051243414).getHours() // this is for dev purpose to keep kitchen closed
       const hour = new Date(1495062343414).getHours() // this is for dev purpose to keep kitchen open
       // const hour = new Date().getHours() // this is current hour
@@ -60,7 +61,7 @@ app.factory(
       return true
     }
 
-    utilService.checkFeedbackProvided = function (data) {
+    utilService.checkFeedbackProvided = (data) => {
       const baseUrl = 'https://ls-backend.herokuapp.com';
       const baseApi = '/api/v1/';
       const deferred = $q.defer()
