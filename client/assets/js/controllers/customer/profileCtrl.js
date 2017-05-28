@@ -1,12 +1,12 @@
 var app = angular.module('lunchSociety');
 
-var profileCtrl = function ($scope, customerService) {
+var profileCtrl = function ($scope,commonService, customerService) {
 
     $scope.customer = {};
 
     customerService
         .getCustomer({
-            id: 1
+            id: commonService.getCustomerID()
         })
         .success(function (data, status, headers, config) {
             $scope.customer = data;
@@ -19,7 +19,7 @@ var profileCtrl = function ($scope, customerService) {
     $scope.submitEditForm = function (change) {
       customerService
         .editCustomer({
-          id: 1,
+          id: commonService.getCustomerID(),
           reminder_emails: change,
         })
         .then(customer => {
@@ -31,6 +31,6 @@ var profileCtrl = function ($scope, customerService) {
     }
 };
 
-profileCtrl.inject = ['$scope', 'customerService'];
+profileCtrl.inject = ['$scope','commonService', 'customerService'];
 
 app.controller('profileCtrl', profileCtrl);

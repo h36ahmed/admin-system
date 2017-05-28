@@ -1,6 +1,6 @@
 var app = angular.module('lunchSociety');
 
-var historyCtrl = function ($scope, $location, orderService, modalService) {
+var historyCtrl = function ($scope, $location,commonService, orderService, modalService) {
 
     // custom function that sorts the order_date
     const sortByOrderDate = (a,b) => {
@@ -17,7 +17,7 @@ var historyCtrl = function ($scope, $location, orderService, modalService) {
 
     orderService
         .getOrders({
-            customer_id: 1
+            customer_id: commonService.getCustomerID()
         })
         .success(function (data, status, headers, config) {
             const sortedData = data.sort(sortByOrderDate)
@@ -46,6 +46,6 @@ var historyCtrl = function ($scope, $location, orderService, modalService) {
 };
 
 
-historyCtrl.inject = ['$scope', '$location', 'orderService', 'modalService'];
+historyCtrl.inject = ['$scope', '$location','commonService', 'orderService', 'modalService'];
 
 app.controller('historyCtrl', historyCtrl);

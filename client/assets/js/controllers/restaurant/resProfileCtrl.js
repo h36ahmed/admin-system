@@ -1,8 +1,9 @@
 var app = angular.module('lunchSociety');
 
-var resProfileCtrl = function ($scope, mealService, modalService) {
+var resProfileCtrl = function ($scope, commonService,mealService, modalService) {
 
-
+    var restaurant = commonService.getRestaurantID();
+    var owner = commonService.getOwnerID();
 
     function resolvePromise(promise, data, message, redirect) {
         modalService.resolve();
@@ -27,6 +28,6 @@ var resProfileCtrl = function ($scope, mealService, modalService) {
 
 };
 
-resProfileCtrl.inject = ['$scope', 'mealService', 'modalService'];
+resProfileCtrl.inject = ['$scope','commonService', 'mealService', 'modalService'];
 
 app.controller('resProfileCtrl', resProfileCtrl);

@@ -1,6 +1,9 @@
 var app = angular.module('lunchSociety');
 
-var orderCtrl = function ($scope, orderService, uiGmapGoogleMapApi) {
+var orderCtrl = function ($scope, commonService, orderService, uiGmapGoogleMapApi) {
+
+    var customerID = commonService.getCustomerID();
+
     $scope.map = {
         center: {
             latitude: 43.6532,
@@ -42,45 +45,50 @@ var orderCtrl = function ($scope, orderService, uiGmapGoogleMapApi) {
             id: 1,
         })
         .success(function (data, status, headers, config) {
-          const { latitude, longitude, name, address } = data.offer.meal.restaurant
-          const restaurantData = {
-            latitude: latitude,
-            longitude: longitude,
-            title: name,
-            id: data.id,
-            options: {
-              labelClass: 'mapLabel',
-              title: name,
+            const {
+                latitude,
+                longitude,
+                name,
+                address
+            } = data.offer.meal.restaurant
+            const restaurantData = {
+                latitude: latitude,
+                longitude: longitude,
+                title: name,
+                id: data.id,
+                options: {
+                    labelClass: 'mapLabel',
+                    title: name,
+                }
             }
-          }
 
-          $scope.restaurants.push(restaurantData)
-          $scope.map = {
-            center: {
-              latitude: latitude,
-              longitude: longitude,
-            },
-            zoom: 14
-          }
-          $scope.order = data;
+            $scope.restaurants.push(restaurantData)
+            $scope.map = {
+                center: {
+                    latitude: latitude,
+                    longitude: longitude,
+                },
+                zoom: 14
+            }
+            $scope.order = data;
         })
         .error(function (data, status, headers, config) {
             // Handle login errors here
             $scope.message = 'Error: Something Went Wrong';
         });
 
-  $scope.cancelOrder = () => {
-    orderService
-      .editOrder({
-        id: 1
-      })
-      .then(data => {
-        console.log('successfully cancelled')
-        console.log('cancel order', data)
-      })
-  }
+    $scope.cancelOrder = () => {
+        orderService
+            .editOrder({
+                id: 1
+            })
+            .then(data => {
+                console.log('successfully cancelled')
+                console.log('cancel order', data)
+            })
+    }
 };
 
-createFeedbackCtrl.inject = ['$scope', 'orderService', 'uiGmapGoogleMapApi'];
+createFeedbackCtrl.inject = ['$scope', 'commonService', 'orderService', 'uiGmapGoogleMapApi'];
 
 app.controller('orderCtrl', orderCtrl);

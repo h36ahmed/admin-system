@@ -1,6 +1,6 @@
 var app = angular.module('lunchSociety');
 
-var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogleMapApi, modalService, mealOfferService, utilService, orderService, pickUpService, _) {
+var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogleMapApi, commonService, modalService, mealOfferService, utilService, orderService, pickUpService, _) {
     // checks the current hour only and will redirect depending on the hour
     const isKitchenOpen = () => {
       const hour = new Date(1495062343414).getHours()
@@ -14,7 +14,8 @@ var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogle
     }
     isKitchenOpen()
 
-    $scope.customer_id = 1;
+    $scope.customer_id = commonService.getCustomerID();
+
     $scope.map = {
         center: {
             latitude: 43.6532,
@@ -162,6 +163,6 @@ var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogle
     };
 };
 
-browseCtrl.inject = ['$scope', '$state', '$location', '$stateParams', 'uiGmapGoogleMapApi', 'modalService', 'mealOfferService', 'utilService', 'orderService', 'pickUpService'];
+browseCtrl.inject = ['$scope', '$state', '$location', '$stateParams', 'uiGmapGoogleMapApi', 'commonService', 'modalService', 'mealOfferService', 'utilService', 'orderService', 'pickUpService'];
 
 app.controller('browseCtrl', browseCtrl);

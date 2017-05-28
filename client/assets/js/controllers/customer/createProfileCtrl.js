@@ -1,6 +1,6 @@
 var app = angular.module('lunchSociety');
 
-var createProfileCtrl = function ($scope, $stateParams, paymentPlanService, paymentService, customerService, userService, modalService) {
+var createProfileCtrl = function ($scope, $stateParams, commonService, paymentPlanService, paymentService, customerService, userService, modalService) {
 
     $scope.screenview = "details";
 
@@ -131,7 +131,7 @@ var createProfileCtrl = function ($scope, $stateParams, paymentPlanService, paym
                 );
             } else {
                 formData.stripe_token = result.id;
-                formData.customer_id = $stateParams.id;
+                formData.user_id = $stateParams.id;
                 var promise = modalService.open(
                     "status", {}
                 );
@@ -149,6 +149,7 @@ var createProfileCtrl = function ($scope, $stateParams, paymentPlanService, paym
                                 );
                                 promise.then(function handleResolve(response) {
                                     if (data.routeToCreateProfile == false) {
+                                        commonService.setCustomerID(data.id);
                                         $location.path('browse');
                                     } else {
                                         promise = modalService.open(
@@ -198,6 +199,6 @@ var createProfileCtrl = function ($scope, $stateParams, paymentPlanService, paym
 
 };
 
-createProfileCtrl.inject = ['$scope', '$stateParams', 'paymentPlanService', 'paymentService', 'customerService', 'modalService'];
+createProfileCtrl.inject = ['$scope', '$stateParams', 'commonService', 'paymentPlanService', 'paymentService', 'customerService', 'modalService'];
 
 app.controller('createProfileCtrl', createProfileCtrl);
