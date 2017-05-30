@@ -1,6 +1,7 @@
 var app = angular.module('lunchSociety');
 
-var baseUrl = 'https://ls-backend.herokuapp.com';
+// var baseUrl = 'https://ls-backend.herokuapp.com';
+var baseUrl = 'localhost:3000'
 
 var baseApi = '/api/v1/';
 

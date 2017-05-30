@@ -47,6 +47,17 @@ app.factory(
 
     }
 
+    utilService.formatShortDate = (date) => {
+      return date.split('T')[0]
+
+      // const day = splitDate[2]
+      // console.log(splitDate)
+      // const month = monthNames[parseInt(splitDate[1] - 1)]
+      // const year = splitDate[0].slice(2, 4)
+
+      // return `${year}-${month}-${day}`
+    }
+
     utilService.isKitchenOpen = () => {
       // checks the current hour only and will redirect depending on the hour
 

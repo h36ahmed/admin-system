@@ -2,10 +2,13 @@ var app = angular.module('lunchSociety');
 
 var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogleMapApi, modalService, mealOfferService, utilService, orderService, pickUpService, _) {
 
-    utilService.checkFeedbackProvided({user_id: 6, status: 'active'})
-      .then(data => {
-        data.length > 0 ? $location.path(`create-feedback/${data[0].order_id}`) : $location.path('browse')
-      })
+
+    // utilService.checkFeedbackProvided({user_id: 6, status: 'active'})
+    //   .then(data => {
+    //     console.log(data)
+    //     data.length > 0 ? $location.path(`create-feedback/${data[0].order_id}`) : $location.path('browse')
+    //   })
+
     $scope.customer_id = 1;
     $scope.map = {
         center: {
@@ -113,7 +116,6 @@ var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogle
                 promise = modalService.open(
                     "status", {}
                 );
-                // console.log(order);
                 orderService
                     .createOrder(order)
                     .success(function (data, status, headers, config) {
@@ -126,11 +128,12 @@ var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogle
                                     }
                                 );
                                 promise.then(function handleResolve(response) {
-                                    $location.path('order');
+                                    $location.path(`order/${data.id}`);
                                 }, function handleReject(error) {});
                             },
                             function handleReject(error) {
                             });
+                      // need to make the offer plates left - 1
                     })
                     .error(function (data, status, headers, config) {
                         modalService.resolve();
@@ -150,7 +153,6 @@ var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogle
                     });
             },
             function handleReject(error) {});
-
     };
 };
 
