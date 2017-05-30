@@ -22,11 +22,7 @@ var homeCtrl = function ($scope, $location, commonService, modalService, $window
                             commonService.setUserID(data.user_id);
                             if (data.type == "customer") {
                                 commonService.setCustomerID(data.customer_id);
-                                if (data.routeToCreateProfile == true) {
-                                    $location.path('create-profile/' + data.customer_id);
-                                } else {
-                                    $location.path('browse');
-                                }
+                                $location.path('browse');
                             }
                             if (data.type == "restaurant") {
                                 commonService.setOwnerID(data.owner_id);
