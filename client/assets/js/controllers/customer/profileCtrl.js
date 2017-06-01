@@ -1,12 +1,12 @@
 var app = angular.module('lunchSociety');
 
-var profileCtrl = function ($scope, customerService, modalService) {
+var profileCtrl = function ($scope, commonService, customerService, modalService) {
 
     $scope.customer = {};
 
     customerService
         .getCustomer({
-            id: 2
+            id: commonService.getCustomerID()
         })
         .success(function (data, status, headers, config) {
             console.log('get customer data', data)
@@ -23,10 +23,10 @@ var profileCtrl = function ($scope, customerService, modalService) {
       );
       customerService
         .editCustomer({
-          id: 2,
           // i'm confused as to how this part actually works
           // reminder_emails: !$scope.customer.reminder_emails,
-          reminder_emails: $scope.customer.reminder_emails === false ? false : true
+          reminder_emails: $scope.customer.reminder_emails === false ? false : true,
+          id: commonService.getCustomerID(),
         })
         .success(function (data, status, headers, config) {
           $scope.customer = data
@@ -41,7 +41,7 @@ var profileCtrl = function ($scope, customerService, modalService) {
                   }
                 );
                 promise.then(function handleResolve(response) {
-                  setTimeout
+                  // setTimeout
                 },
                   function handleReject(error){});
             },
@@ -49,7 +49,7 @@ var profileCtrl = function ($scope, customerService, modalService) {
               console.log('Why is it rejected?');
             }
           );
-          console.log('data', data)
+          // console.log('data', data)
         })
         .error(function (data, status, headers, config) {
           modalService.resolve();
@@ -68,9 +68,9 @@ var profileCtrl = function ($scope, customerService, modalService) {
             }
           );
         })
-    }
+      }
 };
 
-profileCtrl.inject = ['$scope', 'customerService', 'modalService'];
+profileCtrl.inject = ['$scope', 'commonService', 'customerService', 'modalService'];
 
 app.controller('profileCtrl', profileCtrl);

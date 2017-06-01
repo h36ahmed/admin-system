@@ -80,7 +80,7 @@ url: /restaurant/meal-offers
                                         <td data-title="total payment before tax">{{offer.meal.ingredients}}</td>
                                         <td data-title="tax amount">{{offer.plates_assigned}}</td>
                                         <td data-title="tax amount">{{offer.plates_left}}</td>
-                                        <td data-title="offer date">{{formatDate(offer.offer_date)}}</td>
+                                        <td data-title="offer date">{{offer.offer_date | date:'MMMM dd, yyyy'}}</td>
                                     </tr>
                                 </tbody>
                             </table>

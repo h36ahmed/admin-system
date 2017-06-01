@@ -17,6 +17,8 @@ app.service(
             getCustomerID: getCustomerID,
             setOwnerID: setOwnerID,
             getOwnerID: getOwnerID,
+            setRestaurantID: setRestaurantID,
+            getRestaurantID: getRestaurantID,
             setAuthToken: setAuthToken,
             deleteAuthToken: deleteAuthToken,
             logoutUser: logoutUser
@@ -34,6 +36,9 @@ app.service(
         function deleteAuthToken() {
             delete $window.sessionStorage.token;
             delete $window.sessionStorage.userID;
+            delete $window.sessionStorage.customerID;
+            delete $window.sessionStorage.ownerID;
+            delete $window.sessionStorage.restaurantID;
         }
 
         function setUserID(id) {
@@ -58,6 +63,14 @@ app.service(
 
         function getOwnerID() {
             return $window.sessionStorage.ownerID;
+        }
+        
+        function setRestaurantID(id) {
+            $window.sessionStorage.restaurantID = id;
+        }
+
+        function getRestaurantID() {
+            return $window.sessionStorage.restaurantID;
         }
 
         function loginUser(data) {

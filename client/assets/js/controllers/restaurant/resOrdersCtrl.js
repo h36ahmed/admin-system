@@ -1,8 +1,10 @@
 var app = angular.module('lunchSociety');
 
-var resOrdersCtrl = function ($scope, $location, mealOfferService, modalService, utilService) {
+var resOrdersCtrl = function ($scope, $location, orderService, modalService, utilService, commonService) {
 
-  $scope.offers = [];
+  var restaurant = commonService.getRestaurantID()
+
+  $scope.orders = [];
 
   $scope.today_date = new Date();
 
@@ -53,49 +55,13 @@ var resOrdersCtrl = function ($scope, $location, mealOfferService, modalService,
   getOffers(options);
 
   function getOffers(options) {
-    options.order_date = utilService.formatDate(options.order_date);
-    var promise = modalService.open(
-      "status", {}
-    );
-    mealOfferService
-      .getMealOffers(options)
-      .success(function(data, status, headers, config) {
-        console.log(data)
-        $scope.offers = data;
-        modalService.resolve();
-        promise.then(
-          function handleResolve(response) {},
-          function handleReject(error) {});
+    orderService
+      .getOrders({'order_date': utilService.formatDateWithTimezone(options.order_date)})
+      .success((data, status, headers, config) => {
+        $scope.orders = data
       })
-      .error(function(data, status, headers, config) {
-        // Handle login errors here
-        $scope.message = 'Error: Something Went Wrong';
-      });
   }
-
-    function resolvePromise(promise, data, message, redirect) {
-        modalService.resolve();
-        promise.then(
-            function handleResolve(response) {
-                promise = modalService.open(
-                    "alert", {
-                        message: message
-                    }
-                );
-                promise.then(function handleResolve(response) {
-                    if (redirect) {
-                        $location.path('/');
-                    }
-                }, function handleReject(error) {});
-            },
-            function handleReject(error) {
-                console.log('Why is it rejected?');
-            }
-        );
-    }
-
-};
-
-resOrdersCtrl.inject = ['$scope', '$location', 'mealOfferService', 'modalService', 'utilService'];
+}
+resOrdersCtrl.inject = ['$scope', '$location', 'orderService', 'modalService', 'utilService', 'commonService'];
 
 app.controller('resOrdersCtrl', resOrdersCtrl);

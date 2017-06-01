@@ -1,7 +1,6 @@
 var app = angular.module('lunchSociety');
 
-var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogleMapApi, modalService, mealOfferService, utilService, orderService, pickUpService, _) {
-
+var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogleMapApi, commonService, modalService, mealOfferService, utilService, orderService, pickUpService, _) {
 
     // utilService.checkFeedbackProvided({user_id: 6, status: 'active'})
     //   .then(data => {
@@ -9,7 +8,8 @@ var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogle
     //     data.length > 0 ? $location.path(`create-feedback/${data[0].order_id}`) : $location.path('browse')
     //   })
 
-    $scope.customer_id = 1;
+    $scope.customer_id = commonService.getCustomerID();
+
     $scope.map = {
         center: {
             latitude: 43.6532,
@@ -153,9 +153,9 @@ var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogle
                     });
             },
             function handleReject(error) {});
-    };
+    }; //closes getmeal details
 };
 
-browseCtrl.inject = ['$scope', '$state', '$location', '$stateParams', 'uiGmapGoogleMapApi', 'modalService', 'mealOfferService', 'utilService', 'orderService', 'pickUpService'];
+browseCtrl.inject = ['$scope', '$state', '$location', '$stateParams', 'uiGmapGoogleMapApi', 'commonService', 'modalService', 'mealOfferService', 'utilService', 'orderService', 'pickUpService', '_'];
 
 app.controller('browseCtrl', browseCtrl);

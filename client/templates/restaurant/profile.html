@@ -6,11 +6,62 @@ url: /restaurant/profile
     <div class="ls-app-bg"></div>
     <div ng-include="'/templates/restaurant/partials/menu-bar.html'"></div>
     <div class="ls-app-body ls-restaurant">
-        <div class="grid-container ls-restaurant-pages" ng-controller="">
+        <div class="grid-container ls-restaurant-pages" ng-controller="resProfileCtrl as profile">
             <div class="grid-block ls-title-bar">
-                <div class="grid-block small-12 vertical">
+                <div class="grid-block small-6 vertical">
                     <div class="grid-content">
                         <h2>My Profile</h2>
+                    </div>
+                </div>
+                <div class="grid-block small-6 vertical">
+                    <div class="grid-content text-right">
+                        <p class="ls-status">STATUS: <span class="ls-status ls-active" ng-if="owner.status == 'active'">ACTIVE</span><span class="ls-status ls-inactive" ng-if="owner.status == 'inactive'">INACTIVE</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-block">
+                <div class="grid-block small-6 vertical">
+                    <div class="grid-content">
+                        <div class="ls-profile-card">
+                            <div class="ls-profile-item">
+                                <h5>Owner's Name</h5>
+                                <p>{{customer.first_name}} {{customer.last_name}}</p>
+                            </div>
+                            <div class="ls-profile-item">
+                                <h5>Owner's Phone Number</h5>
+                                <p>{{customer.phone_number}}</p>
+                            </div>
+                            <div class="ls-profile-item">
+                                <h5>Owner's Email Information</h5>
+                                <p>{{customer.user.email}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-block small-6 vertical">
+                    <div class="grid-content">
+                        <div class="ls-profile-card">
+                            <div class="ls-profile-item">
+                                <h5>Restaurant's Name</h5>
+                                <p>{{customer.restaurant.name}}</p>
+                            </div>
+                            <div class="ls-profile-item">
+                                <h5>Restaurant's Phone Number</h5>
+                                <p>{{customer.restaurant.phone_number}}</p>
+                            </div>
+                            <div class="ls-profile-item">
+                                <h5>Restaurant's Address</h5>
+                                <p>{{customer.restaurant.street_address}}, {{customer.restaurant.city}}, {{customer.restaurant.state}}
+                                {{customer.restaurant.postal_code}} {{customer.restaurant.country}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-block">
+                <div class="grid-block small-12 vertical">
+                    <div class="grid-content text-center">
+                        <p>Need to make changes to your account? Please email <a href="mailto:support@lunchsociety.ca">support@lunchsociety.ca</a>.</p>
                     </div>
                 </div>
             </div>

@@ -19,7 +19,8 @@ app.factory(
     utilService.formatDate = function(date, type = null) {
       var dd = date.getUTCDate();
       var mm = date.getUTCMonth() + 1; //January is 0!
-
+      console.log(dd)
+      console.log(mm)
       var yyyy = date.getUTCFullYear();
       if (dd < 10) {
         dd = '0' + dd;
@@ -49,13 +50,39 @@ app.factory(
 
     utilService.formatShortDate = (date) => {
       return date.split('T')[0]
+    }
 
-      // const day = splitDate[2]
-      // console.log(splitDate)
-      // const month = monthNames[parseInt(splitDate[1] - 1)]
-      // const year = splitDate[0].slice(2, 4)
+    utilService.formatDateWithTimezone = (date) => {
+      let day = date.getUTCDate()
+      let month = date.getUTCMonth() + 1
+      const year = date.getUTCFullYear()
 
-      // return `${year}-${month}-${day}`
+      if (day < 10) {
+        day = `0${day}`
+      }
+
+      if (month < 10) {
+        month = `0${month}`
+      }
+
+      return `${year}-${month}-${day}T00:00:00.000Z`
+    }
+
+    utilService.sortByDate = (a,b) => {
+      let type = ''
+      if (a.hasOwnProperty('order_date') || b.hasOwnProperty('order_date')) {
+        type = 'order_date'
+      } else {
+        type = 'offer_date'
+      }
+
+      if (a[type] > b[type]) {
+        return -1
+      }
+      if (a[type] < b[type]) {
+        return 1
+      }
+      return 0
     }
 
     utilService.isKitchenOpen = () => {

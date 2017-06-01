@@ -1,38 +1,34 @@
 var app = angular.module('lunchSociety');
 
-var resMealOffersCtrl = function ($scope, $filter, mealService, modalService, weekService, mealOfferService, payoutService, utilService) {
+var resMealOffersCtrl = function ($scope, $filter, commonService, mealService, modalService, weekService, mealOfferService, payoutService, utilService) {
+
+  var restaurant = commonService.getRestaurantID();
 
   $scope.offers = [];
-
-  $scope.payouts = [];
 
   $scope.weeks = [];
 
   $scope.today_date = new Date();
 
-  $scope.filterDate = null;
-
   $scope.currentViewWeek = null;
 
   $scope.filterWeek = null;
 
-  const currentWeek = Math.ceil($filter('date')($scope.today_date, 'ww')/2) - 1
+  const currentWeek = Math.ceil($filter('date')($scope.today_date, 'ww')/2)
 
   const year = $scope.today_date.getFullYear();
 
   function offerService(date) {
-    console.log(date)
-    let promise = modalService.open(
-      "status", {}
-    );
+    console.log('trigger')
     mealOfferService
       .getMealOffers({
         from: utilService.formatShortDate(date.from_date),
         to: utilService.formatShortDate(date.to_date)
       })
       .success(function(data, status, headers, config) {
-        $scope.offers = data;
-        modalService.resolve();
+        console.log('trigger1')
+        const sortedData = data.sort(utilService.sortByDate)
+        $scope.offers = sortedData;
       })
       .error(function(data, status, headers, config) {
         // Handle login errors here
@@ -40,14 +36,16 @@ var resMealOffersCtrl = function ($scope, $filter, mealService, modalService, we
       });
   }
 
-  weekService
+ weekService
     .getWeeks({
-      year: year
+      id: currentWeek,
     })
     .success(function(data, status, headers, config) {
+      console.log(data)
+      console.log('trigger2')
       $scope.weeks = data;
-      $scope.currentViewWeek = data[currentWeek]
-      offerService(data[currentWeek]);
+      $scope.currentViewWeek = data[currentWeek - 1]
+      // offerService(data[currentWeek]);
     })
     .error(function(data, status, headers, config) {
       $scope.message = 'Error: Something Went Wrong';
@@ -57,22 +55,16 @@ var resMealOffersCtrl = function ($scope, $filter, mealService, modalService, we
     switch (action) {
       case 'nextWeek':
         const nextWeekSet = $scope.currentViewWeek.id + 1;
-        generatePayouts({ id: nextWeekSet });
         changeCurrentWeek(nextWeekSet)
         break;
       case 'prevWeek':
         const previousWeekSet = $scope.currentViewWeek.id - 1;
-        generatePayouts({ id: previousWeekSet });
         changeCurrentWeek(previousWeekSet)
         break;
       case 'current':
-        generatePayouts({
-          id: currentWeek
-        })
         changeCurrentWeek(currentWeek)
         break
       case 'custom':
-        generatePayouts({ id: $scope.filterWeek.id });
         $scope.currentViewWeek = $scope.filterWeek;
         break;
       default:
@@ -80,39 +72,10 @@ var resMealOffersCtrl = function ($scope, $filter, mealService, modalService, we
     }
   };
 
-  $scope.formatDate = (date) => {
-      const monthNames = [
-        'January', 'February', 'March', 'April',
-        'May', 'June', 'July', 'August',
-        'September', 'October', 'November', 'December'
-      ]
-      const splitDate = date.split('T')[0].split('-')
-      const day = splitDate[1]
-      const month = monthNames[parseInt(splitDate[1] - 1)]
-      const year = splitDate[0]
-
-      return `${month} ${day}, ${year}`
-  }
-
   const changeCurrentWeek = (id) => {
     const weeks = _.where($scope.weeks, { id });
     $scope.currentViewWeek = weeks[0];
-  }
-
-  const generatePayouts = (options) => {
-    let promise = modalService.open(
-      "status", {}
-    );
-    weekService
-      .getWeek(options)
-      .success((data, status, headers, config) => {
-        console.log(data)
-        $scope.payouts = data;
-        modalService.resolve();
-      })
-      .error((data, status, headers, config) => {
-        $scope.message = 'Error: Something Went Wrong';
-      });
+    offerService(weeks[0])
   }
 
   const resolvePromise = (promise, data, message, redirect) => {
@@ -137,6 +100,6 @@ var resMealOffersCtrl = function ($scope, $filter, mealService, modalService, we
   }
 };
 
-resMealOffersCtrl.inject = ['$scope', 'mealService', 'modalService', 'weekService', 'mealOfferService', 'payoutService', 'utilService'];
+resMealOffersCtrl.inject = ['$scope','$filter', 'commonService', 'mealService', 'modalService', 'weekService', 'mealOfferService', 'payoutService', 'utilService'];
 
 app.controller('resMealOffersCtrl', resMealOffersCtrl);

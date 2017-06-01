@@ -1,6 +1,8 @@
 var app = angular.module('lunchSociety');
 
-var resCreateMealOfferCtrl = function ($scope, mealService, modalService, utilService, restaurantService, mealOfferService) {
+var resCreateMealOfferCtrl = function ($scope, commonService, mealService, modalService, utilService, restaurantService, mealOfferService) {
+
+  var restaurant = commonService.getRestaurantID();
 
   $scope.createMealOfferFormData = {
       meal_id: null,
@@ -119,6 +121,6 @@ var resCreateMealOfferCtrl = function ($scope, mealService, modalService, utilSe
   };
 };
 
-resCreateMealOfferCtrl.inject = ['$scope', 'mealService', 'modalService', 'utilService', 'restaurantService', 'mealOfferService'];
+resCreateMealOfferCtrl.inject = ['$scope', 'commonService', 'mealService', 'modalService', 'utilService', 'restaurantService', 'mealOfferService'];
 
 app.controller('resCreateMealOfferCtrl', resCreateMealOfferCtrl);

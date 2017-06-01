@@ -71,10 +71,10 @@ url: /restaurant/orders
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="payout in payouts">
+                                    <tr ng-repeat="order in orders">
                                         <td data-title="order id">{{order.id}}</td>
                                         <td data-title="customer name">{{order.customer.first_name}} {{order.customer.last_name}}</td>
-                                        <td data-title="pickup time">{{order.pickup_time}}</td>
+                                        <td data-title="pickup time">{{order.pickup_time.pickup_time}}</td>
                                     </tr>
                                 </tbody>
                             </table>

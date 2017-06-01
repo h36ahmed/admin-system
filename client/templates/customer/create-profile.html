@@ -3,11 +3,11 @@ name: create-profile
 url: /create-profile/:id
 ---
 <div class="vertical grid-frame">
+    <header class="ls-home-header">
+        <div ng-include="'/templates/partials/home_bar.html'"></div>
+    </header>
     <div class="ls-bg ls-register-bg"></div>
     <article class="ls-common-body">
-        <header class="ls-home-header">
-            <div ng-include="'/templates/partials/home_bar.html'"></div>
-        </header>
         <section class="ls-create-profile" ng-controller="createProfileCtrl as createProfile">
             <div class="grid-block">
                 <div class="grid-block small-12 vertical">
@@ -54,7 +54,7 @@ url: /create-profile/:id
                                     <div class="ls-form-group" ng-class="{ 'ls-has-error' : profileForm.email.$invalid && !profileForm.email.$pristine }">
                                         <label>
                                             Email Address
-                                            <input type="email" name="email" placeholder="Email Address" class="ls-input-fields" ng-model="profileFormData.email" required>
+                                            <input type="email" name="email" placeholder="Email Address" class="ls-input-fields" ng-model="profileFormData.email" required disabled>
                                         </label>
                                         <p ng-show="profileForm.email.$invalid && !profileForm.email.$pristine" class="ls-help-block">Enter a valid email.</p>
                                     </div>
@@ -93,7 +93,7 @@ url: /create-profile/:id
                             <div class="grid-block small-10 vertical">
                                 <div class="grid-content">
                                     <ul class="ls-plan-choices" >
-                                        <li class="ls-plan-choice-card" ng-click="planSelect(plan.id,plan.name, plan.price, plan.num_meals)" ng-class="{'selected': profileFormData.plan.id == plan.id}" ng-repeat="plan in plans">
+                                        <li class="ls-plan-choice-card" ng-click="planSelect(plan)" ng-class="{'selected': profileFormData.plan.id == plan.id}" ng-repeat="plan in plans">
                                             <i class="fa fa-check-circle" aria-hidden="true"></i>
                                             <div class="ls-plan-choice-card__front">
                                                 <h4 class="ls-plan-name">{{plan.name}}</h4>
@@ -149,10 +149,10 @@ url: /create-profile/:id
                             </div>
                             <div class="grid-block small-5 vertical">
                                 <div class="grid-content">
-                                    <div class="grid-content text-center ls-summary">
+                                    <div class="grid-content text-center ls-summary" ng-if="profileFormData.plan != ''">
                                         <h5>Summary</h5>
                                         <p>Plan Name: <span class="ls-summary-details">{{profileFormData.plan.name}}</span></p>
-                                        <p>Amount To Pay: <span class="ls-summary-details">{{profileFormData.plan.price * profileFormData.plan.num_meals }} CAD ({profileFormData.plan.price}} / Meal)</span> For Today's Date to 30 Days</p>
+                                        <p>Amount To Pay: <span class="ls-summary-details">{{profileFormData.plan.total_price}} CAD ({{profileFormData.plan.price | currency}} / Meal)</span> For Today's Date to 30 Days</p>
                                         <input type="submit" value="Verify Payment" class="large button ls-pay-button" ng-disabled="paymentForm.$invalid">
                                         <small class="ls-terms">By verifying payment, you are agreeing to our <a ui-sref="terms">Terms of Use</a> &amp; <a ui-sref="policy">Privacy Policy</a>.</small>
                                     </div>

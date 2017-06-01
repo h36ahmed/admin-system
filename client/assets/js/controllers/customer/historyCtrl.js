@@ -1,30 +1,19 @@
 var app = angular.module('lunchSociety');
 
-var historyCtrl = function ($scope, $location, orderService, modalService) {
-
-    // custom function that sorts the order_date
-    const sortByOrderDate = (a,b) => {
-      if (a['order_date'] > b['order_date']) {
-        return -1
-      }
-      if (a['order_date'] < b['order_date']) {
-        return 1
-      }
-      return 0
-    }
+var historyCtrl = function ($scope, $location,commonService, orderService, modalService, utilService) {
 
     $scope.orders = [];
 
     orderService
         .getOrders({
-            customer_id: 1
+            customer_id: commonService.getCustomerID()
         })
         .success(function (data, status, headers, config) {
-            const sortedData = data.sort(sortByOrderDate)
+            console.log(data)
+            const sortedData = data.sort(utilService.sortByDate)
             $scope.orders = sortedData;
         })
         .error(function (data, status, headers, config) {
-          const sortedData =
             // Handle login errors here
             $scope.message = 'Error: Something Went Wrong';
         });
@@ -46,6 +35,6 @@ var historyCtrl = function ($scope, $location, orderService, modalService) {
 };
 
 
-historyCtrl.inject = ['$scope', '$location', 'orderService', 'modalService'];
+historyCtrl.inject = ['$scope', '$location','commonService', 'orderService', 'modalService', 'utilService'];
 
 app.controller('historyCtrl', historyCtrl);

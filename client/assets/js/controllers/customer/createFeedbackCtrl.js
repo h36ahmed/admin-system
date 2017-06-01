@@ -1,6 +1,6 @@
 var app = angular.module('lunchSociety');
 
-var createFeedbackCtrl = function ($scope, $location, $stateParams, orderService, feedbackService, customerService, userService, modalService) {
+var createFeedbackCtrl = function ($scope, $location, $stateParams, orderService,commonService, feedbackService, customerService, userService, modalService) {
 
     $scope.tabview = "description";
 
@@ -77,6 +77,6 @@ var createFeedbackCtrl = function ($scope, $location, $stateParams, orderService
     }
 };
 
-createFeedbackCtrl.inject = ['$scope', '$location', '$stateParams', 'orderService', 'feedbackService', 'customerService', 'userService', 'modalService'];
+createFeedbackCtrl.inject = ['$scope', '$location', '$stateParams', 'orderService',  'commonService', 'feedbackService', 'customerService', 'userService', 'modalService'];
 
 app.controller('createFeedbackCtrl', createFeedbackCtrl);

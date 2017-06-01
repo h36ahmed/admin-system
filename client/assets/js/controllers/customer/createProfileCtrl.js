@@ -1,8 +1,18 @@
 var app = angular.module('lunchSociety');
 
-var createProfileCtrl = function ($scope, paymentPlanService, customerService, modalService) {
+var createProfileCtrl = function ($scope, $stateParams, commonService, paymentPlanService, paymentService, customerService, userService, modalService) {
 
     $scope.screenview = "details";
+
+    $scope.customer = {};
+
+    $scope.profileFormData = {
+        first_name: '',
+        last_name: '',
+        email: '',
+        postal_code: '',
+        plan: ''
+    };
 
     $scope.screens = [{
         name: "details",
@@ -38,11 +48,32 @@ var createProfileCtrl = function ($scope, paymentPlanService, customerService, m
             $scope.plans = data;
         })
         .error(function (data, status, headers, config) {
-            var promise =  modalService.open(
+            var promise = modalService.open(
                 "status", {}
             );
             resolvePromise(promise, data, 'Error: Something Went Wrong With Getting Plans', false);
         });
+
+    if ($stateParams.id) {
+        userService
+            .getUser({
+                id: $stateParams.id
+            })
+            .success(function (data, status, headers, config) {
+                $scope.user = data;
+                $scope.profileFormData.email = $scope.user.email;
+                if (user.confirmed_email == true) {
+                    $location.path('browse');
+                }
+                console.log($scope.customer);
+            })
+            .error(function (data, status, headers, config) {
+                // Handle login errors here
+                $scope.message = 'Error: Something Went Wrong';
+            });
+    } else {
+        $location.path('/');
+    }
 
     $scope.changeScreenView = function (screenview) {
         $scope.screenview = screenview;
@@ -70,12 +101,15 @@ var createProfileCtrl = function ($scope, paymentPlanService, customerService, m
 
     $scope.activeScreen = $scope.screens[0].name;
 
-    $scope.profileFormData = {
-        first_name: '',
-        last_name: '',
-        email: '',
-        postal_code: '',
-        plan: ''
+    $scope.planSelect = function (plan) {
+        $scope.profileFormData.plan = {
+            name: plan.name,
+            id: plan.id,
+            price: plan.price,
+            meals: plan.num_meals,
+            total_price: plan.price * plan.num_meals * 1.13,
+            stripe_id: plan.stripe_id
+        };
     };
 
     $scope.stripeCallback = function (code, result) {
@@ -97,26 +131,37 @@ var createProfileCtrl = function ($scope, paymentPlanService, customerService, m
                 );
             } else {
                 formData.stripe_token = result.id;
+                formData.user_id = $stateParams.id;
                 var promise = modalService.open(
                     "status", {}
                 );
+                console.log(JSON.stringify(formData));
                 paymentService
-                    .createProfile(formData)
+                    .createPayment(formData)
                     .success(function (data, status, headers, config) {
                         modalService.resolve();
                         promise.then(
                             function handleResolve(response) {
                                 promise = modalService.open(
                                     "alert", {
-                                        message: 'Customer Profile Created. Please Login!'
+                                        message: 'Customer Profile Created and Payment Details Recorded!'
                                     }
                                 );
                                 promise.then(function handleResolve(response) {
+                                    if (data.routeToCreateProfile == false) {
+                                        commonService.setCustomerID(data.id);
+                                        $location.path('browse');
+                                    } else {
+                                        promise = modalService.open(
+                                            "alert", {
+                                                message: 'Customer Profile Was Not Created. Please contact daniel@lunchsociety.ca'
+                                            }
+                                        );
+                                    }
+                                },
+                                function handleReject(error) {
 
-                                    },
-                                    function handleReject(error) {
-
-                                    });
+                                });
                             },
                             function handleReject(error) {
                                 console.log('Why is it rejected?');
@@ -129,15 +174,6 @@ var createProfileCtrl = function ($scope, paymentPlanService, customerService, m
             }
         }
 
-    };
-
-    $scope.planSelect = function (id, name, price, meals) {
-        $scope.profileFormData.plan = {
-            name: name,
-            id: id,
-            price: price,
-            meals: meals
-        };
     };
 
     function resolvePromise(promise, data, message, redirect) {
@@ -163,6 +199,6 @@ var createProfileCtrl = function ($scope, paymentPlanService, customerService, m
 
 };
 
-createProfileCtrl.inject = ['$scope', 'paymentPlanService', 'customerService', 'modalService'];
+createProfileCtrl.inject = ['$scope', '$stateParams', 'commonService', 'paymentPlanService', 'paymentService', 'customerService', 'modalService'];
 
 app.controller('createProfileCtrl', createProfileCtrl);

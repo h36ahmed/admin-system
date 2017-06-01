@@ -76,7 +76,7 @@ url: /owner/:id
                                     </div>
                                     <div class="ls-switch-container">
                                         <div class="large switch">
-                                            <input type="checkbox" id="ownerStatus" name="resStatus" ng-model="editOwnerFormData.status">
+                                            <input type="checkbox" id="ownerStatus" name="ownerStatus" ng-model="editOwnerFormData.status">
                                             <label for="ownerStatus"></label>
                                         </div>
                                         <p>Owner Status</p>
@@ -87,19 +87,18 @@ url: /owner/:id
                                     <ul ng-if="owner.restaurant != null">
                                         <li class="ls-card ls-restaurant-card">
                                             <a ui-sref="restaurant({id:owner.restaurant.id})"  class="ls-card-link">x</a>
-                                                <figure class="ls-restaurant-card-info">
-                                                    <img ng-src="https://s3.ca-central-1.amazonaws.com/ls-frontend/restaurants/{{owner.restaurant.logo}}" alt="" ng-if="owner.restaurant.logo != ''">
-                                                    <img src="/assets/img/lunchsociety-thumb.png" ng-if="owner.restaurant.logo == ''"/>
-                                                    <figcaption class="ls-restaurant-card-caption">
-                                                        <div class="ls-left-card-info">
-                                                            <h4>{{owner.restaurant.name}}</h4>
-                                                            <p>{{owner.restaurant.phone_number}}</p>
-                                                        </div>
-                                                        <div class="ls-right-card-info">
-                                                            <a ui-sref="restaurant-edit({id:owner.restaurant.id})" class="button">Edit</a>
-                                                        </div>
-                                                    </figcaption>
-                                                </figure>
+                                            <figure class="ls-restaurant-card-info">
+                                                <img ng-src="https://s3.ca-central-1.amazonaws.com/ls-frontend/restaurants/{{owner.restaurant.logo}}" alt="" ng-if="owner.restaurant.logo != ''">
+                                                <img src="/assets/img/lunchsociety-thumb.png" ng-if="owner.restaurant.logo == ''"/>
+                                                <figcaption class="ls-restaurant-card-caption">
+                                                    <div class="ls-left-card-info">
+                                                        <h4>{{owner.restaurant.name}}</h4>
+                                                        <p>{{owner.restaurant.phone_number}}</p>
+                                                    </div>
+                                                    <div class="ls-right-card-info">
+                                                        <a ui-sref="restaurant-edit({id:owner.restaurant.id})" class="button">Edit</a>
+                                                    </div>
+                                                </figcaption>
                                             </figure>
                                         </li>
                                     </ul>

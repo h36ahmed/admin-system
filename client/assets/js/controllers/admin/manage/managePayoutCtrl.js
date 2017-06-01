@@ -46,7 +46,7 @@ var managePayoutCtrl = function($scope, payoutService, weekService, modalService
       case 'prevWeek':
         var previousWeekSet = $scope.currentViewWeek.id - 1;
         generatePayouts({
-          id: previousWeekSet
+          id: previousWeekSet,
         });
         var weeks = _.where($scope.weeks, {
           id: previousWeekSet
@@ -58,7 +58,7 @@ var managePayoutCtrl = function($scope, payoutService, weekService, modalService
         break;
       case 'custom':
         generatePayouts({
-          id: $scope.filterWeek.id
+          id: $scope.filterWeek.id,
         });
         $scope.currentViewWeek = $scope.filterWeek;
         break;
@@ -134,6 +134,7 @@ var managePayoutCtrl = function($scope, payoutService, weekService, modalService
   }
 
   function generatePayouts(options) {
+    options.type = 'admin-payout'
     var promise = modalService.open(
       "status", {}
     );
