@@ -87,7 +87,6 @@ var editMealCtrl = function($scope, $state, $location,
 
   function fillFormData() {
     $scope.editMealFormData.name = $scope.meal.name;
-    $scope.editMealFormData.tagline = $scope.meal.tagline;
     $scope.editMealFormData.price = $scope.meal.price;
     $scope.editMealFormData.description = $scope.meal.description;
     $scope.editMealFormData.ingredients = $scope.meal.ingredients;
