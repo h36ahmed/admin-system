@@ -46,13 +46,6 @@ url: /meal/:id
                                         </label>
                                         <p ng-show="editMealForm.mealName.$invalid && !editMealForm.mealName.$pristine" class="ls-help-block">Enter a valid meal name.</p>
                                     </div>
-                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : editMealForm.mealTag.$invalid && !editMealForm.mealTag.$pristine }">
-                                        <label for="mealTag">
-                                            Meal Tagline
-                                            <input type="text" placeholder="e.g. Finger Lickin' Good" class="ls-input-fields" name="mealTag" id="mealTag" ng-model="editMealFormData.tagline" required>
-                                        </label>
-                                        <p ng-show="editMealForm.mealTag.$invalid && !editMealForm.mealTag.$pristine" class="ls-help-block">Enter a valid meal tag line.</p>
-                                    </div>
                                     <div class="ls-form-group" ng-class="{ 'ls-has-error' : editMealForm.mealPrice.$invalid && !editMealForm.mealPrice.$pristine }">
                                         <label for="mealPrice">
                                             Meal Price
