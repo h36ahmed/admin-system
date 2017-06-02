@@ -2,12 +2,6 @@ var app = angular.module('lunchSociety');
 
 var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogleMapApi, commonService, modalService, mealOfferService, utilService, orderService, pickUpService, _) {
 
-    // utilService.checkFeedbackProvided({user_id: 6, status: 'active'})
-    //   .then(data => {
-    //     console.log(data)
-    //     data.length > 0 ? $location.path(`create-feedback/${data[0].order_id}`) : $location.path('browse')
-    //   })
-
     $scope.customer_id = commonService.getCustomerID();
 
     $scope.map = {
@@ -52,12 +46,13 @@ var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogle
     var promise = modalService.open(
         "status", {}
     );
-
+    console.log(utilService.formatDate(new Date()))
     mealOfferService
         .getMealOffers({
-            offer_date: utilService.formatDate(new Date(), 'browse')
+            offer_date: utilService.formatDateWithTimezone(new Date())
         })
         .success(function (data, status, headers, config) {
+            console.log(data)
             $scope.offers = data;
             modalService.resolve();
             promise.then(
@@ -133,7 +128,6 @@ var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogle
                             },
                             function handleReject(error) {
                             });
-                      // need to make the offer plates left - 1
                     })
                     .error(function (data, status, headers, config) {
                         modalService.resolve();

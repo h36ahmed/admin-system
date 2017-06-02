@@ -15,7 +15,7 @@ url: /restaurant/profile
                 </div>
                 <div class="grid-block small-6 vertical">
                     <div class="grid-content text-right">
-                        <p class="ls-status">STATUS: <span class="ls-status ls-active" ng-if="owner.status == 'active'">ACTIVE</span><span class="ls-status ls-inactive" ng-if="owner.status == 'inactive'">INACTIVE</span></p>
+                        <p class="ls-status">STATUS: <span class="ls-status ls-active" ng-if="customer.status == 'active'">ACTIVE</span><span class="ls-status ls-inactive" ng-if="customer.status == 'inactive'">INACTIVE</span></p>
                     </div>
                 </div>
             </div>
@@ -51,8 +51,9 @@ url: /restaurant/profile
                             </div>
                             <div class="ls-profile-item">
                                 <h5>Restaurant's Address</h5>
-                                <p>{{customer.restaurant.street_address}}, {{customer.restaurant.city}}, {{customer.restaurant.state}}
-                                {{customer.restaurant.postal_code}} {{customer.restaurant.country}}</p>
+                                <p>{{customer.restaurant.street_address}}<br>
+                                {{customer.restaurant.city}}, {{customer.restaurant.state}}, {{customer.restaurant.postal_code}}<br>
+                                {{customer.restaurant.country}}</p>
                             </div>
                         </div>
                     </div>

@@ -1,6 +1,6 @@
 var app = angular.module('lunchSociety');
 
-var resMealOffersCtrl = function ($scope, $filter, commonService, mealService, modalService, weekService, mealOfferService, payoutService, utilService) {
+var resMealOffersCtrl = function ($scope, $filter, commonService, mealService, modalService, weekService, mealOfferService, payoutService, utilService, moment) {
 
   var restaurant = commonService.getRestaurantID();
 
@@ -19,11 +19,13 @@ var resMealOffersCtrl = function ($scope, $filter, commonService, mealService, m
   const year = $scope.today_date.getFullYear();
 
   function offerService(date) {
+    mealOfferService
       .getMealOffers({
         from: utilService.formatShortDate(date.from_date),
         to: utilService.formatShortDate(date.to_date)
       })
       .success(function(data, status, headers, config) {
+        // sort on backend
         const sortedData = data.sort(utilService.sortByDate)
         $scope.offers = sortedData;
       })
@@ -33,17 +35,25 @@ var resMealOffersCtrl = function ($scope, $filter, commonService, mealService, m
       });
   }
 
- weekService
-    .getWeeks({
-      id: currentWeek,
-    })
-    .success(function(data, status, headers, config) {
-      $scope.currentViewWeek = data[currentWeek - 1]
-      // offerService(data[currentWeek]);
-    })
-    .error(function(data, status, headers, config) {
-      $scope.message = 'Error: Something Went Wrong';
-    });
+ // weekService
+ //    .getWeeks({
+ //      id: currentWeek,
+ //    })
+ //    .success(function(data, status, headers, config) {
+ //      $scope.currentViewWeek = data[currentWeek - 1]
+ //      offerService(data[currentWeek]);
+ //    })
+ //    .error(function(data, status, headers, config) {
+ //      $scope.message = 'Error: Something Went Wrong';
+ //    });
+
+    weekService
+      .getWeek({id: 11, type: 'resMealOffer'})
+      .success((data, status, headers, config) => {
+        console.log('trigger')
+        console.log(data)
+        $scope.offers = data
+      })
 
   $scope.changeWeek = function(action) {
     switch (action) {
@@ -94,6 +104,6 @@ var resMealOffersCtrl = function ($scope, $filter, commonService, mealService, m
   }
 };
 
-resMealOffersCtrl.inject = ['$scope','$filter', 'commonService', 'mealService', 'modalService', 'weekService', 'mealOfferService', 'payoutService', 'utilService'];
+resMealOffersCtrl.inject = ['$scope','$filter', 'commonService', 'mealService', 'modalService', 'weekService', 'mealOfferService', 'payoutService', 'utilService', 'moment'];
 
 app.controller('resMealOffersCtrl', resMealOffersCtrl);

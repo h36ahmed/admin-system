@@ -18,7 +18,8 @@
       '720kb.datepicker',
       'angular-svg-round-progressbar',
       'angularPayments',
-      'angularLoad'
+      'angularLoad',
+      'angularMoment'
     ])
     .config(config)
     .run(run);
@@ -51,7 +52,6 @@
     }).catch(function() {
         console.log("can't load");
     });
-
 
     $rootScope.$on('$stateChangeSuccess', function(evt) {
       // Halt state change from even starting

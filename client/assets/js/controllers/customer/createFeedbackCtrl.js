@@ -23,7 +23,7 @@ var createFeedbackCtrl = function ($scope, $location, $stateParams, orderService
         })
         .success((data, status, headers, config) => {
             $scope.order = data;
-            $scope.feedbackFormData.order_id = data.id
+            $scope.feedbackFormData.order_id = parseInt($stateParams.id, 10)
             $scope.feedbackFormData.email = data.customer.user.email
         })
         .error(function (data, status, headers, config) {
@@ -32,6 +32,7 @@ var createFeedbackCtrl = function ($scope, $location, $stateParams, orderService
         });
 
     $scope.submit = () => {
+      console.log($scope.feedbackFormData)
       let promise = modalService.open(
         "status", {}
       );

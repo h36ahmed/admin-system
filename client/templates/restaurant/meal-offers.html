@@ -75,11 +75,11 @@ url: /restaurant/meal-offers
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="offer in offers">
-                                        <td data-title="restaurant">{{offer.id}}</td>
-                                        <td data-title="total meals">{{offer.meal.name}}</td>
-                                        <td data-title="total payment before tax">{{offer.meal.ingredients}}</td>
-                                        <td data-title="tax amount">{{offer.plates_assigned}}</td>
-                                        <td data-title="tax amount">{{offer.plates_left}}</td>
+                                        <td data-title="offer id">{{offer.id}}</td>
+                                        <td data-title="meal name">{{offer.meal.name}}</td>
+                                        <td data-title="meal ingredients">{{offer.meal.ingredients}}</td>
+                                        <td data-title="plates assigned">{{offer.plates_assigned}}</td>
+                                        <td data-title="plates left">{{offer.plates_left}}</td>
                                         <td data-title="offer date">{{offer.offer_date | date:'MMMM dd, yyyy'}}</td>
                                     </tr>
                                 </tbody>

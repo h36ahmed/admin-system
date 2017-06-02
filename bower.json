@@ -32,6 +32,7 @@
     "angularjs-datepicker": "^2.1.15",
     "angular-svg-round-progressbar": "0.4.8",
     "angular-payments": "*",
-    "angular-load": "^0.4.1"
+    "angular-load": "^0.4.1",
+    "angular-moment": "^1.0.1"
   }
 }
