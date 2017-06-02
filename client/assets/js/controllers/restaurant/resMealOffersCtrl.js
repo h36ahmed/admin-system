@@ -19,14 +19,11 @@ var resMealOffersCtrl = function ($scope, $filter, commonService, mealService, m
   const year = $scope.today_date.getFullYear();
 
   function offerService(date) {
-    console.log('trigger')
-    mealOfferService
       .getMealOffers({
         from: utilService.formatShortDate(date.from_date),
         to: utilService.formatShortDate(date.to_date)
       })
       .success(function(data, status, headers, config) {
-        console.log('trigger1')
         const sortedData = data.sort(utilService.sortByDate)
         $scope.offers = sortedData;
       })
@@ -41,9 +38,6 @@ var resMealOffersCtrl = function ($scope, $filter, commonService, mealService, m
       id: currentWeek,
     })
     .success(function(data, status, headers, config) {
-      console.log(data)
-      console.log('trigger2')
-      $scope.weeks = data;
       $scope.currentViewWeek = data[currentWeek - 1]
       // offerService(data[currentWeek]);
     })

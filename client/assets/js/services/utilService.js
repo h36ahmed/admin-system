@@ -19,8 +19,6 @@ app.factory(
     utilService.formatDate = function(date, type = null) {
       var dd = date.getUTCDate();
       var mm = date.getUTCMonth() + 1; //January is 0!
-      console.log(dd)
-      console.log(mm)
       var yyyy = date.getUTCFullYear();
       if (dd < 10) {
         dd = '0' + dd;

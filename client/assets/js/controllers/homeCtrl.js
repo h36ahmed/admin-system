@@ -21,6 +21,7 @@ var homeCtrl = function ($scope, $location, commonService, modalService, $window
                             commonService.setAuthToken(data.token);
                             commonService.setUserID(data.user_id);
                             if (data.type == "customer") {
+                                console.log(data)
                                 commonService.setCustomerID(data.customer_id);
                                 $location.path('browse');
                             }
