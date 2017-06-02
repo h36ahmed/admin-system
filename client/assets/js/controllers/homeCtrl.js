@@ -25,13 +25,13 @@ var homeCtrl = function ($scope, $location, commonService, modalService, $window
                                 commonService.setCustomerID(data.customer_id);
                                 $location.path('browse');
                             }
-                            if (data.type == "restaurant") {
+                            if (data.type == "owner") {
                                 commonService.setOwnerID(data.owner_id);
                                 commonService.setRestaurantID(data.restaurant_id);
                                 $location.path('/restaurant/orders');
                             }
                             if (data.type == "admin") {
-                                $location.path('/restaurant/meal-offers');
+                                $location.path('/meal-offers');
                             }
                         },
                         function handleReject(error) {
