@@ -43,13 +43,6 @@ url: /create-meal
                                         </label>
                                         <p ng-show="createMealForm.mealName.$invalid && !createMealForm.mealName.$pristine" class="ls-help-block">Enter a valid meal name.</p>
                                     </div>
-                                    <div class="ls-form-group" ng-class="{ 'ls-has-error' : createMealForm.mealTag.$invalid && !createMealForm.mealTag.$pristine }">
-                                        <label for="mealTag">
-                                            Meal Tagline
-                                            <input type="text" placeholder="e.g. Finger Lickin' Good" class="ls-input-fields" name="mealTag" id="mealTag" ng-model="createMealFormData.tagline" required>
-                                        </label>
-                                        <p ng-show="createMealForm.mealTag.$invalid && !createMealForm.mealTag.$pristine" class="ls-help-block">Enter a valid meal tag line.</p>
-                                    </div>
                                     <div class="ls-form-group" ng-class="{ 'ls-has-error' : createMealForm.mealPrice.$invalid && !createMealForm.mealPrice.$pristine }">
                                         <label for="mealPrice">
                                             Meal Price
