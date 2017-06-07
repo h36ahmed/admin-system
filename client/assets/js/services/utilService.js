@@ -51,7 +51,7 @@ app.factory(
     }
 
     utilService.formatDateWithTimezone = (date) => {
-      let day = date.getUTCDate()
+      let day = date.getUTCDate() + 1
       let month = date.getUTCMonth() + 1
       const year = date.getUTCFullYear()
 
