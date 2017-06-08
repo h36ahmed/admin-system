@@ -40,10 +40,10 @@ url: /restaurant/meal-offers
                     </div>
                 </div>
             </section>
-            <div class="ls-no-offers" ng-if="offers.length == 0">
+            <div class="ls-no-offers" ng-if="offers.length == 0 && !reportGenerated">
                 <p>Please select the week to generate meal offers report.</p>
             </div>
-            <div class="grid-block ls-nav-header" ng-if="offers.length != 0">
+            <div class="grid-block ls-nav-header" ng-if="offers.length != 0 || reportGenerated">
                 <div class="grid-block medium-3 vertical">
                     <div class="grid-content">
                         <a ng-click="changeWeek('prevWeek')" class="ls-link ls-prev-link" ng-if="currentViewWeek.id != 1"><i class="fa fa-angle-left" aria-hidden="true"></i> Previous Week</a>
@@ -60,6 +60,9 @@ url: /restaurant/meal-offers
                         <a ng-click="changeWeek('nextWeek')" class="ls-link ls-next-link">Next Week <i class="fa fa-angle-right" aria-hidden="true"></i></a>
                     </div>
                 </div>
+            </div>
+            <div class="ls-no-offers" ng-if="offers.length == 0 && reportGenerated">
+                <p>No meal offers during this week.</p>
             </div>
             <div class="grid-block" ng-if="offers.length != 0">
                 <div class="grid-block small-12 vertical">

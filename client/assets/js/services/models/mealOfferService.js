@@ -12,6 +12,7 @@ app.service(
         return({
             createMealOffer: createMealOffer,
             getMealOffers: getMealOffers,
+            getMealOfferReport: getMealOfferReport,
             deleteMealOffer: deleteMealOffer,
             editMealOffer: editMealOffer,
         });
@@ -37,6 +38,18 @@ app.service(
             var request = $http({
                 method: "get",
                 url: baseUrl + baseApi + "offers",
+                params: data,
+                headers : {
+                    'Content-Type': 'application/json'
+                }
+            });
+            return request;
+        }
+
+        function getMealOfferReport(data) {
+            var request = $http({
+                method: "get",
+                url: baseUrl + baseApi + "offers-report",
                 params: data,
                 headers : {
                     'Content-Type': 'application/json'

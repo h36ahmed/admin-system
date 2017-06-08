@@ -15,15 +15,18 @@ var resMealOffersCtrl = function ($scope, $filter, commonService, mealService, m
 
   $scope.filterWeek = null;
 
+  $scope.reportGenerated = false;
+
   // Use Angular Moment to figure out week
     
   var currentWeek = "";
 
   function offerService(week_id) {
     mealOfferService
-      .getMealOffers({week_id: week_id})
+      .getMealOfferReport({week_id: week_id, restaurant_id: restaurant})
       .success(function(data, status, headers, config) {
         $scope.offers = data;
+        $scope.reportGenerated = true;
       })
       .error(function(data, status, headers, config) {
         $scope.message = 'Error: Something Went Wrong';
@@ -38,7 +41,7 @@ var resMealOffersCtrl = function ($scope, $filter, commonService, mealService, m
       $scope.weeks = data;
       $scope.filterWeek = $scope.weeks[0]
       
-      currentWeek = weeks[6] // Need to fix
+      currentWeek = $scope.weeks[6] // Need to fix
       
     })
     .error(function(data, status, headers, config) {
