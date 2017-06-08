@@ -2,85 +2,78 @@ var app = angular.module('lunchSociety');
 
 var resMealOffersCtrl = function ($scope, $filter, commonService, mealService, modalService, weekService, mealOfferService, payoutService, utilService, moment) {
 
+  var today_date = new Date();
+  var year = today_date.getYear();
+  
   var restaurant = commonService.getRestaurantID();
 
   $scope.offers = [];
 
   $scope.weeks = [];
 
-  $scope.today_date = new Date();
-
   $scope.currentViewWeek = null;
 
   $scope.filterWeek = null;
 
-  const currentWeek = Math.ceil($filter('date')($scope.today_date, 'ww')/2)
+  // Use Angular Moment to figure out week
+    
+  var currentWeek = "";
 
-  const year = $scope.today_date.getFullYear();
-
-  function offerService(date) {
+  function offerService(week_id) {
     mealOfferService
-      .getMealOffers({
-        from: utilService.formatShortDate(date.from_date),
-        to: utilService.formatShortDate(date.to_date)
-      })
+      .getMealOffers({week_id: week_id})
       .success(function(data, status, headers, config) {
-        // sort on backend
-        const sortedData = data.sort(utilService.sortByDate)
-        $scope.offers = sortedData;
+        $scope.offers = data;
       })
       .error(function(data, status, headers, config) {
-        // Handle login errors here
         $scope.message = 'Error: Something Went Wrong';
       });
   }
 
- // weekService
- //    .getWeeks({
- //      id: currentWeek,
- //    })
- //    .success(function(data, status, headers, config) {
- //      $scope.currentViewWeek = data[currentWeek - 1]
- //      offerService(data[currentWeek]);
- //    })
- //    .error(function(data, status, headers, config) {
- //      $scope.message = 'Error: Something Went Wrong';
- //    });
-
-    weekService
-      .getWeek({id: 11, type: 'resMealOffer'})
-      .success((data, status, headers, config) => {
-        console.log('trigger')
-        console.log(data)
-        $scope.offers = data
-      })
+  weekService
+    .getWeeks({
+      year: year
+    })
+    .success(function(data, status, headers, config) {
+      $scope.weeks = data;
+      $scope.filterWeek = $scope.weeks[0]
+      
+      currentWeek = weeks[6] // Need to fix
+      
+    })
+    .error(function(data, status, headers, config) {
+      $scope.message = 'Error: Something Went Wrong';
+    });
 
   $scope.changeWeek = function(action) {
     switch (action) {
       case 'nextWeek':
         const nextWeekSet = $scope.currentViewWeek.id + 1;
-        changeCurrentWeek(nextWeekSet)
+        offerService(nextWeekSet)
+        var weeks = _.where($scope.weeks, {
+          id: nextWeekSet
+        });
+        $scope.currentViewWeek = weeks[0];
         break;
       case 'prevWeek':
         const previousWeekSet = $scope.currentViewWeek.id - 1;
-        changeCurrentWeek(previousWeekSet)
+        offerService(previousWeekSet)
+        var weeks = _.where($scope.weeks, {
+          id: previousWeekSet
+        });
+        $scope.currentViewWeek = weeks[0];
         break;
       case 'current':
-        changeCurrentWeek(currentWeek)
+        // TO DO
         break
       case 'custom':
         $scope.currentViewWeek = $scope.filterWeek;
+        offerService($scope.currentViewWeek.id);
         break;
       default:
         return true;
     }
   };
-
-  const changeCurrentWeek = (id) => {
-    const weeks = _.where($scope.weeks, { id });
-    $scope.currentViewWeek = weeks[0];
-    offerService(weeks[0])
-  }
 
   const resolvePromise = (promise, data, message, redirect) => {
     modalService.resolve();

@@ -40,7 +40,10 @@ url: /restaurant/meal-offers
                     </div>
                 </div>
             </section>
-            <div class="grid-block ls-nav-header">
+            <div class="ls-no-offers" ng-if="offers.length == 0">
+                <p>Please select the week to generate meal offers report.</p>
+            </div>
+            <div class="grid-block ls-nav-header" ng-if="offers.length != 0">
                 <div class="grid-block medium-3 vertical">
                     <div class="grid-content">
                         <a ng-click="changeWeek('prevWeek')" class="ls-link ls-prev-link" ng-if="currentViewWeek.id != 1"><i class="fa fa-angle-left" aria-hidden="true"></i> Previous Week</a>
@@ -58,7 +61,7 @@ url: /restaurant/meal-offers
                     </div>
                 </div>
             </div>
-            <div class="grid-block">
+            <div class="grid-block" ng-if="offers.length != 0">
                 <div class="grid-block small-12 vertical">
                     <div class="grid-content">
                         <div class="ls-table-responsive-vertical shadow-z-1">
@@ -66,21 +69,22 @@ url: /restaurant/meal-offers
                                 <thead>
                                     <tr>
                                         <th>Offer ID</th>
+                                        <th>Offer date</th>
                                         <th>Meal Name</th>
                                         <th>Meal Ingredients</th>
                                         <th>Number of Plates Offered</th>
                                         <th>Number of Plates Left</th>
-                                        <th>Offer date</th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="offer in offers">
                                         <td data-title="offer id">{{offer.id}}</td>
+                                        <td data-title="offer date">{{offer.offer_date | date:'MMMM dd, yyyy'}}</td>
                                         <td data-title="meal name">{{offer.meal.name}}</td>
                                         <td data-title="meal ingredients">{{offer.meal.ingredients}}</td>
                                         <td data-title="plates assigned">{{offer.plates_assigned}}</td>
                                         <td data-title="plates left">{{offer.plates_left}}</td>
-                                        <td data-title="offer date">{{offer.offer_date | date:'MMMM dd, yyyy'}}</td>
                                     </tr>
                                 </tbody>
                             </table>
