@@ -2,9 +2,8 @@ var app = angular.module('lunchSociety');
 
 var resMealOffersCtrl = function ($scope, $filter, commonService, mealService, modalService, weekService, mealOfferService, payoutService, utilService, moment) {
 
-  var today_date = new Date();
-  var year = today_date.getYear();
-  
+  var year = moment().year();
+
   var restaurant = commonService.getRestaurantID();
 
   $scope.offers = [];
@@ -17,9 +16,7 @@ var resMealOffersCtrl = function ($scope, $filter, commonService, mealService, m
 
   $scope.reportGenerated = false;
 
-  // Use Angular Moment to figure out week
-    
-  var currentWeek = "";
+  const currentWeek = Math.ceil(moment().week() / 2)
 
   function offerService(week_id) {
     mealOfferService
@@ -39,10 +36,10 @@ var resMealOffersCtrl = function ($scope, $filter, commonService, mealService, m
     })
     .success(function(data, status, headers, config) {
       $scope.weeks = data;
-      $scope.filterWeek = $scope.weeks[0]
-      
-      currentWeek = $scope.weeks[6] // Need to fix
-      
+      $scope.filterWeek = $scope.weeks[currentWeek - 1]
+      $scope.currentViewWeek = $scope.weeks[currentWeek - 1]
+
+      offerService(data[currentWeek - 1].id)
     })
     .error(function(data, status, headers, config) {
       $scope.message = 'Error: Something Went Wrong';
@@ -67,7 +64,11 @@ var resMealOffersCtrl = function ($scope, $filter, commonService, mealService, m
         $scope.currentViewWeek = weeks[0];
         break;
       case 'current':
-        // TO DO
+        offerService(currentWeek)
+        var weeks = _.where($scope.weeks, {
+          id: currentWeek
+        })
+        $scope.currentViewWeek = weeks[0]
         break
       case 'custom':
         $scope.currentViewWeek = $scope.filterWeek;

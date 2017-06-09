@@ -46,13 +46,11 @@ var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogle
     var promise = modalService.open(
         "status", {}
     );
-    console.log(utilService.formatDate(new Date()))
     mealOfferService
         .getMealOffers({
-            offer_date: utilService.formatDateWithTimezone(new Date())
+            offer_date: moment().add(1, 'd').format('YYYY-MM-DDT00:00:00.000[Z]')
         })
         .success(function (data, status, headers, config) {
-            console.log(data)
             $scope.offers = data;
             modalService.resolve();
             promise.then(
@@ -147,7 +145,7 @@ var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogle
                     });
             },
             function handleReject(error) {});
-    }; //closes getmeal details
+    };
 };
 
 browseCtrl.inject = ['$scope', '$state', '$location', '$stateParams', 'uiGmapGoogleMapApi', 'commonService', 'modalService', 'mealOfferService', 'utilService', 'orderService', 'pickUpService', '_'];

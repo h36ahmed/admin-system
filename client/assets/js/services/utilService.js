@@ -86,9 +86,9 @@ app.factory(
     utilService.isKitchenOpen = () => {
       // checks the current hour only and will redirect depending on the hour
 
-      // const hour = new Date(1495051243414).getHours() // this is for dev purpose to keep kitchen closed
+      // const hour = moment(1495051243414).hour() // this is for dev purpose to keep kitchen closed
       const hour = new Date(1495062343414).getHours() // this is for dev purpose to keep kitchen open
-      const hours = moment().hour() // this is the current hour
+      // const hour = moment().hour() // this is the current hour
 
       if (hour > 9 && hour < 17) {
         return false

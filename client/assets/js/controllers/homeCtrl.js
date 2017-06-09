@@ -1,6 +1,6 @@
 var app = angular.module('lunchSociety');
 
-var homeCtrl = function ($scope, $location, commonService, modalService, $window) {
+var homeCtrl = function ($scope, $location, commonService, modalService, $window, utilService) {
 
     $window.sessionStorage.loginPage = true;
     $scope.userFormData = {};
@@ -22,7 +22,13 @@ var homeCtrl = function ($scope, $location, commonService, modalService, $window
                             commonService.setUserID(data.user_id);
                             if (data.type == "customer") {
                                 commonService.setCustomerID(data.customer_id);
-                                data.needOrderFeedback ? $location.path(`create-feedback/${data.needOrderFeedback}`) : $location.path('browse');
+                                if (data.needOrderFeedback) {
+                                  $location.path(`create-feedback/${data.needOrderFeedback}`)
+                                } else if (utilService.isKitchenOpen()) {
+                                  $location.path('browse')
+                                } else {
+                                  $location.path('/kitchen-closed')
+                                }
                             }
                             if (data.type == "owner") {
                                 commonService.setOwnerID(data.owner_id);
@@ -66,6 +72,6 @@ var homeCtrl = function ($scope, $location, commonService, modalService, $window
 
 };
 
-homeCtrl.inject = ['$scope', '$location', 'commonService', 'modalService', '$window'];
+homeCtrl.inject = ['$scope', '$location', 'commonService', 'modalService', '$window', 'utilService'];
 
 app.controller('homeCtrl', homeCtrl);
