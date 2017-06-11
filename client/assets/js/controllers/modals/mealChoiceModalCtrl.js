@@ -19,7 +19,7 @@ var mealChoiceModalCtrl = function ($scope, modalService) {
     };
 
     $scope.meal = (modalService.params().meal || {});
-
+    
     $scope.errorMessage = null;
 
     // ---
