@@ -10,6 +10,7 @@ var historyCtrl = function ($scope, $location,commonService, orderService, modal
         })
         .success(function (data, status, headers, config) {
             console.log(data)
+            // need to sort on backend
             const sortedData = data.sort(utilService.sortByDate)
             $scope.orders = sortedData;
         })

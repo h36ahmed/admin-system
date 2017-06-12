@@ -50,20 +50,24 @@ app.factory(
       return date.split('T')[0]
     }
 
-    utilService.formatDateWithTimezone = (date) => {
-      let day = date.getUTCDate() + 1
-      let month = date.getUTCMonth() + 1
-      const year = date.getUTCFullYear()
+    utilService.formatMonthToNum = (date) => {
+      const monthNames = [
+        'January', 'February', 'March', 'April',
+        'May', 'June', 'July', 'August',
+        'September', 'October', 'November', 'December'
+      ];
+      let day = date.split(' ')[1].split(',')[0]
+      let month = monthNames.indexOf(date.split(' ')[0]) + 1
+      const year = date.split(' ')[2]
 
       if (day < 10) {
         day = `0${day}`
       }
-
       if (month < 10) {
         month = `0${month}`
       }
 
-      return `${year}-${month}-${day}T00:00:00.000Z`
+      return `${year}-${month}-${day}`
     }
 
     utilService.sortByDate = (a,b) => {
@@ -87,7 +91,7 @@ app.factory(
       // checks the current hour only and will redirect depending on the hour
 
       // const hour = moment(1495051243414).hour() // this is for dev purpose to keep kitchen closed
-      const hour = new Date(1495062343414).getHours() // this is for dev purpose to keep kitchen open
+      const hour = moment(1495062343414).hour() // this is for dev purpose to keep kitchen open
       // const hour = moment().hour() // this is the current hour
 
       if (hour > 9 && hour < 17) {
