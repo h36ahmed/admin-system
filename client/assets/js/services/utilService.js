@@ -101,28 +101,21 @@ app.factory(
       return true
     }
 
-    utilService.checkFeedbackProvided = (data) => {
+    utilService.checkRestaurantDailyOffer = (data) => {
       const baseUrl = 'https://ls-backend.herokuapp.com';
       const baseApi = '/api/v1/';
-      const deferred = $q.defer()
+      let offer = {}
 
-        const request = $http({
-            method: "get",
-            url: baseUrl + baseApi + 'feedbacks',
-            params: data,
-            headers : {
-                'Content-Type': 'application/json',
-            }
-        });
+      const request = $http({
+        method: 'get',
+        url: `${baseUrl}${baseApi}offers`,
+        params: data,
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
 
-        request.success((data, status, headers, config) => {
-          deferred.resolve(data)
-        })
-        .error((data, status, headers, config) => {
-          deferred.reject(data)
-          console.log('Error: Something Went Wrong');
-        });
-        return deferred.promise
+      return request
     }
 
     return utilService;

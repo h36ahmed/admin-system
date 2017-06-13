@@ -1,8 +1,15 @@
 var app = angular.module('lunchSociety');
 
-var resCreateMealOfferCtrl = function ($scope, commonService, mealService, modalService, utilService, restaurantService, mealOfferService) {
+var resCreateMealOfferCtrl = function ($scope, $location, commonService, mealService, modalService, utilService, restaurantService, mealOfferService) {
 
   var restaurant = commonService.getRestaurantID();
+
+  utilService.checkRestaurantDailyOffer({ restaurant: restaurant, offer_date: moment().add(1, 'd').format('YYYY-MM-DD') })
+    .then(data => {
+      if (data.data.length > 0) {
+        $location.path('restaurant/meal-offers')
+      }
+    })
 
   $scope.createMealOfferFormData = {
       meal_id: null,
@@ -121,6 +128,6 @@ var resCreateMealOfferCtrl = function ($scope, commonService, mealService, modal
   };
 };
 
-resCreateMealOfferCtrl.inject = ['$scope', 'commonService', 'mealService', 'modalService', 'utilService', 'restaurantService', 'mealOfferService'];
+resCreateMealOfferCtrl.inject = ['$scope', '$location', 'commonService', 'mealService', 'modalService', 'utilService', 'restaurantService', 'mealOfferService'];
 
 app.controller('resCreateMealOfferCtrl', resCreateMealOfferCtrl);
