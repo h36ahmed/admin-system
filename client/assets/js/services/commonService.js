@@ -21,7 +21,9 @@ app.service(
             getRestaurantID: getRestaurantID,
             setAuthToken: setAuthToken,
             deleteAuthToken: deleteAuthToken,
-            logoutUser: logoutUser
+            logoutUser: logoutUser,
+            setFeedbackID: setFeedbackID,
+            deleteFeedbackID: deleteFeedbackID,
         });
 
         // ---
@@ -64,13 +66,21 @@ app.service(
         function getOwnerID() {
             return $window.sessionStorage.ownerID;
         }
-        
+
         function setRestaurantID(id) {
             $window.sessionStorage.restaurantID = id;
         }
 
         function getRestaurantID() {
             return $window.sessionStorage.restaurantID;
+        }
+
+        function setFeedbackID(id) {
+          $window.sessionStorage.feedbackID = id
+        }
+
+        function deleteFeedbackID() {
+          delete $window.sessionStorage.feedbackID
         }
 
         function loginUser(data) {

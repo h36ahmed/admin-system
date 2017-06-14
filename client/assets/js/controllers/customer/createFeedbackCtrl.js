@@ -49,6 +49,7 @@ var createFeedbackCtrl = function ($scope, $location, $stateParams, orderService
                     }
                   );
                   promise.then(function handleResolve(response) {
+                    commonService.deleteFeedbackID()
                     $location.path('history')
                   },
                     function handleReject(error){});

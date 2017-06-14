@@ -23,6 +23,7 @@ var homeCtrl = function ($scope, $location, commonService, modalService, $window
                             if (data.type == "customer") {
                                 commonService.setCustomerID(data.customer_id);
                                 if (data.needOrderFeedback) {
+                                  commonService.setFeedbackID(data.needOrderFeedback)
                                   $location.path(`create-feedback/${data.needOrderFeedback}`)
                                 } else if (utilService.isKitchenOpen()) {
                                   $location.path('browse')
