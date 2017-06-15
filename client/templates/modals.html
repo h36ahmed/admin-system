@@ -125,7 +125,7 @@
         <input type="submit" value="Order Food" class="button ls-order-button">
 
     </form>
-    <!-- END: Prompt Modal. -->
+    <!-- END: Meal Choice Modal. -->
 
     <!-- BEGIN: Payout Modal. -->
     <form
@@ -199,7 +199,7 @@
     </div>
     <!-- END: Feedback Modal. -->
 
-    <!-- BEGIN: Feedback Modal. -->
+    <!-- BEGIN: Meal Offer Modal. -->
     <div
         ng-switch-when="meal-offer"
         ng-controller="mealOfferModalCtrl"
@@ -232,15 +232,15 @@
         <ul class="ls-meal-offer-details">
             <li>
                 <p>Plates Assigned</p>
-                <p>100</p>
+                <p>{{offer.plates_assigned}}</p>
             </li>
             <li>
                 <p>Plates Served</p>
-                <p>60</p>
+                <p>{{offer.plates_assigned - offer.plates_left}}</p>
             </li>
             <li>
                 <p>Plates Left</p>
-                <p>40</p>
+                <p>{{offer.plates_left}}</p>
             </li>
         </ul>
 
@@ -248,6 +248,24 @@
             <a ng-click="close()" class="button">Ok, I got it!</a>
         </p>
     </div>
-    <!-- END: Feedback Modal. -->
+    <!-- END: Meal Offer Modal. -->
+
+    <!-- BEGIN: Alert Edit Offer Modal. -->
+    <div
+        ng-switch-when="alert-edit"
+        ng-controller="alertEditOfferModalCtrl"
+        class="ls-modal">
+
+        <p>
+            {{ message }}
+        </p>
+
+        <p>
+            <a ng-click="close()" class="button">Ok, I got it!</a>
+            <a ng-click="viewMealOffer()" class="button">View meal offer</a>
+        </p>
+
+    </div>
+    <!-- END: Alert Edit Offer Modal. -->
 
 </ls-modal>

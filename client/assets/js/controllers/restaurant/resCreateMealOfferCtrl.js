@@ -4,13 +4,6 @@ var resCreateMealOfferCtrl = function ($scope, $location, commonService, mealSer
 
   var restaurant = commonService.getRestaurantID();
 
-  utilService.checkRestaurantDailyOffer({ restaurant: restaurant, offer_date: moment().add(1, 'd').format('YYYY-MM-DD') })
-    .then(data => {
-      if (data.data.length > 0) {
-        $location.path('restaurant/meal-offers')
-      }
-    })
-
   $scope.createMealOfferFormData = {
       meal_id: null,
       plates_left: null,
@@ -77,51 +70,72 @@ var resCreateMealOfferCtrl = function ($scope, $location, commonService, mealSer
         "status", {}
       );
 
-      mealOfferService
-        .createMealOffer($scope.createMealOfferFormData)
-        .success(function(data, status, headers, config) {
-          modalService.resolve();
-          promise.then(
-            function handleResolve(response) {
-              promise = modalService.open(
-                "alert", {
-                  message: 'Offer Created'
-                }
-              );
-              promise.then(function handleResolve(response) {
-                  $scope.createMealOfferFormData = {
-                      meal_id: null,
-                      plates_left: null,
-                      plates_assigned: null,
-                      offer_date: null
-                  };
-              },
-                function handleReject(error) {
+      utilService.checkRestaurantOffers({ restaurant: restaurant, offer_date: utilService.formatMonthToNum($scope.createMealOfferFormData.offer_date) })
+        .then(data => {
+          if (data.data.length > 0) {
+            // need to give them option to edit the meal offer if they want to
+            // need to pop as modal
 
+            console.log('pop edit modal')
+            modalService.resolve()
+            promise.then(
+              function handleResolve(response) {
+                promise = modalService.open(
+                  'alert', {
+                    message: 'You can only make 1 offer per day'
+                  }
+                )
+              }, function handleReject(error) {
+                console.log('Why is it rejected?')
+              })
+          } else {
+            mealOfferService
+              .createMealOffer($scope.createMealOfferFormData)
+              .success(function(data, status, headers, config) {
+                modalService.resolve();
+                promise.then(
+                  function handleResolve(response) {
+                    promise = modalService.open(
+                      "alert", {
+                        message: 'Offer Created'
+                      }
+                    );
+                    promise.then(function handleResolve(response) {
+                        $scope.createMealOfferFormData = {
+                            meal_id: null,
+                            plates_left: null,
+                            plates_assigned: null,
+                            offer_date: null
+                        };
+                    },
+                      function handleReject(error) {
+
+                    });
+                  },
+                  function handleReject(error) {
+                    console.log('Why is it rejected?');
+                  }
+                );
+              })
+              .error(function(data, status, headers, config) {
+                modalService.resolve();
+                promise.then(
+                  function handleResolve(response) {
+                    promise = modalService.open(
+                      "alert", {
+                        message: 'Error: Something Went Wrong'
+                      }
+                    );
+                    promise.then(function handleResolve(response) {},
+                      function handleReject(error) {});
+                  },
+                  function handleReject(error) {
+                    console.log('Why is it rejected?');
+                  }
+                );
               });
-            },
-            function handleReject(error) {
-              console.log('Why is it rejected?');
-            }
-          );
+          }
         })
-        .error(function(data, status, headers, config) {
-          modalService.resolve();
-          promise.then(
-            function handleResolve(response) {
-              promise = modalService.open(
-                "alert", {
-                  message: 'Error: Something Went Wrong'
-                }
-              );
-              promise.then(function handleResolve(response) {},
-                function handleReject(error) {});
-            },
-            function handleReject(error) {
-              console.log('Why is it rejected?');
-            }
-          );
-        });
     } else {
         console.log('Check Date & Values');
     }
