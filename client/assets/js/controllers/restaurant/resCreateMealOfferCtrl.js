@@ -14,7 +14,7 @@ var resCreateMealOfferCtrl = function ($scope, $location, commonService, mealSer
   $scope.meals = [];
 
   restaurantService
-    .getRestaurant({id: 1})
+    .getRestaurant({id: restaurant})
     .success(function(data, status, headers, config) {
       $scope.meals = data.meals
     })
@@ -73,17 +73,19 @@ var resCreateMealOfferCtrl = function ($scope, $location, commonService, mealSer
       utilService.checkRestaurantOffers({ restaurant: restaurant, offer_date: utilService.formatMonthToNum($scope.createMealOfferFormData.offer_date) })
         .then(data => {
           if (data.data.length > 0) {
-            // need to give them option to edit the meal offer if they want to
-            // need to pop as modal
-
-            console.log('pop edit modal')
             modalService.resolve()
             promise.then(
               function handleResolve(response) {
                 promise = modalService.open(
-                  'alert', {
-                    message: 'You can only make 1 offer per day'
+                  'alert-edit', {
+                    message: 'You can only make 1 offer for that day'
                   }
+                )
+                promise.then(
+                  function handleResolve(response) {
+                    $location.path(`restaurant/edit-meal-offer/${data.data[0].id}`)
+                  },
+                  function handleReject(error) {}
                 )
               }, function handleReject(error) {
                 console.log('Why is it rejected?')

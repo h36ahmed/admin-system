@@ -104,7 +104,7 @@ var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogle
                     order_date: utilService.formatDate(new Date()),
                     offer_id: offer.id,
                     pickup_time_id: response.id,
-                    customer_id: $scope.customer_id
+                    customer_id: $scope.customer_id,
                 };
                 promise = modalService.open(
                     "status", {}

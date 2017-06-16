@@ -32,7 +32,6 @@ var createFeedbackCtrl = function ($scope, $location, $stateParams, orderService
         });
 
     $scope.submit = () => {
-      console.log($scope.feedbackFormData)
       let promise = modalService.open(
         "status", {}
       );

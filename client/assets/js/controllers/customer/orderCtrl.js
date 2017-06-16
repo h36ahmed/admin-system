@@ -1,6 +1,6 @@
 var app = angular.module('lunchSociety');
 
-var orderCtrl = function ($scope, commonService, orderService, modalService, uiGmapGoogleMapApi) {
+var orderCtrl = function ($scope, $location, commonService, orderService, modalService, uiGmapGoogleMapApi) {
 
     var customerID = commonService.getCustomerID();
 
@@ -126,6 +126,6 @@ var orderCtrl = function ($scope, commonService, orderService, modalService, uiG
   }
 };
 
-createFeedbackCtrl.inject = ['$scope', 'commonService', 'orderService', 'modalService', 'uiGmapGoogleMapApi'];
+createFeedbackCtrl.inject = ['$scope', '$location', 'commonService', 'orderService', 'modalService', 'uiGmapGoogleMapApi'];
 
 app.controller('orderCtrl', orderCtrl);
