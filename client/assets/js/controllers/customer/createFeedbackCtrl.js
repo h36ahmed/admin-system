@@ -32,7 +32,6 @@ var createFeedbackCtrl = function ($scope, $location, $stateParams, orderService
         });
 
     $scope.submit = () => {
-      console.log($scope.feedbackFormData)
       let promise = modalService.open(
         "status", {}
       );
@@ -49,6 +48,7 @@ var createFeedbackCtrl = function ($scope, $location, $stateParams, orderService
                     }
                   );
                   promise.then(function handleResolve(response) {
+                    commonService.deleteFeedbackID()
                     $location.path('history')
                   },
                     function handleReject(error){});

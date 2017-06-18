@@ -9,10 +9,7 @@ var historyCtrl = function ($scope, $location,commonService, orderService, modal
             customer_id: commonService.getCustomerID()
         })
         .success(function (data, status, headers, config) {
-            console.log(data)
-            // need to sort on backend
-            const sortedData = data.sort(utilService.sortByDate)
-            $scope.orders = sortedData;
+            $scope.orders = data
         })
         .error(function (data, status, headers, config) {
             // Handle login errors here

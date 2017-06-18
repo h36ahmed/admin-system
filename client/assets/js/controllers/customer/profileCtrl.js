@@ -9,7 +9,6 @@ var profileCtrl = function ($scope, commonService, customerService, modalService
             id: commonService.getCustomerID()
         })
         .success(function (data, status, headers, config) {
-            console.log('get customer data', data)
             $scope.customer = data;
         })
         .error(function (data, status, headers, config) {
@@ -23,8 +22,6 @@ var profileCtrl = function ($scope, commonService, customerService, modalService
       );
       customerService
         .editCustomer({
-          // i'm confused as to how this part actually works
-          // reminder_emails: !$scope.customer.reminder_emails,
           reminder_emails: $scope.customer.reminder_emails === false ? false : true,
           id: commonService.getCustomerID(),
         })

@@ -1,7 +1,6 @@
 var app = angular.module('lunchSociety');
 
-// var baseUrl = 'https://ls-backend.herokuapp.com';
-var baseUrl = 'localhost:3000'
+var baseUrl = 'https://ls-backend.herokuapp.com';
 
 var baseApi = '/api/v1/';
 
@@ -12,6 +11,7 @@ app.service(
         return({
             createMealOffer: createMealOffer,
             getMealOffers: getMealOffers,
+            getMealOffer: getMealOffer,
             getMealOfferReport: getMealOfferReport,
             deleteMealOffer: deleteMealOffer,
             editMealOffer: editMealOffer,
@@ -38,6 +38,18 @@ app.service(
             var request = $http({
                 method: "get",
                 url: baseUrl + baseApi + "offers",
+                params: data,
+                headers : {
+                    'Content-Type': 'application/json'
+                }
+            });
+            return request;
+        }
+
+        function getMealOffer(data) {
+            var request = $http({
+                method: "get",
+                url: baseUrl + baseApi + "offers" + "/" + data.id,
                 params: data,
                 headers : {
                     'Content-Type': 'application/json'

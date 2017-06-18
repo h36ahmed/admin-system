@@ -101,10 +101,9 @@ app.factory(
       return true
     }
 
-    utilService.checkRestaurantDailyOffer = (data) => {
+    utilService.checkRestaurantOffers = (data) => {
       const baseUrl = 'https://ls-backend.herokuapp.com';
       const baseApi = '/api/v1/';
-      let offer = {}
 
       const request = $http({
         method: 'get',

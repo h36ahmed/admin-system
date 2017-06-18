@@ -57,7 +57,7 @@ url: /restaurant/meal-offers
                 </div>
                 <div class="grid-block medium-3 vertical">
                     <div class="grid-content">
-                        <a ng-click="changeWeek('nextWeek')" class="ls-link ls-next-link">Next Week <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                        <a ng-click="changeWeek('nextWeek')" class="ls-link ls-next-link" ng-if="currentViewWeek.id != 26">Next Week <i class="fa fa-angle-right" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
@@ -77,7 +77,6 @@ url: /restaurant/meal-offers
                                         <th>Meal Ingredients</th>
                                         <th>Number of Plates Offered</th>
                                         <th>Number of Plates Left</th>
-                                        
                                     </tr>
                                 </thead>
                                 <tbody>
