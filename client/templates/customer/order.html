@@ -19,8 +19,8 @@ url: /order/:id
                     </div>
                 </div>
             </div>
-            <div class="grid-block">
-                <div class="grid-block small-8 vertical">
+            <div class="grid-block ls-vertical">
+                <div class="grid-block medium-8 vertical">
                     <div class="grid-content">
                         <div class="ls-meal-offer-details">
                             <h3>{{order.offer.meal.name}}</h3>
@@ -40,12 +40,12 @@ url: /order/:id
                         </div>
                     </div>
                 </div>
-                <div class="grid-block small-4 vertical text-right">
+                <div class="grid-block medium-4 vertical text-right">
                         <img src="http://lorempixel.com/400/300/" alt="">
                 </div>
             </div>
-            <div class="grid-block">
-                <div class="grid-block small-8 vertical">
+            <div class="grid-block ls-vertical">
+                <div class="grid-block medium-8 vertical">
                     <div class="grid-content">
                         <h5>Pickup Time: <strong>{{order.pickup_time.pickup_time}}</strong></h5>
                         <h5>{{order.offer.meal.restaurant.street_address}}</h5>
@@ -53,7 +53,7 @@ url: /order/:id
                         <h5>{{order.offer.meal.restaurant.postal_code}}</h5>
                     </div>
                 </div>
-                <div class="grid-block small-4 vertical ls-map">
+                <div class="grid-block medium-4 vertical ls-map">
                     <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options">
                         <ui-gmap-markers models="restaurants" coords="'self'" icon="'icon'" options="'options'" click="'onClick'">
                              <ui-gmap-windows show="show">

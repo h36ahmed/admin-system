@@ -7,20 +7,20 @@ url: /create-feedback/:id
     <div ng-include="'/templates/customer/partials/menu-bar.html'"></div>
     <div class="ls-app-body ls-customer">
         <div class="grid-container ls-customer-pages ls-feedback-page" ng-controller="createFeedbackCtrl as createFeedback">
-            <div class="grid-block">
-                <div class="grid-block small-9 vertical">
+            <div class="grid-block ls-vertical">
+                <div class="grid-block medium-9 vertical">
                     <div class="grid-content">
                         <h2>Feedback Form For Order #{{order.id}}</h2>
                     </div>
                 </div>
-                <div class="grid-block small-3 vertical">
+                <div class="grid-block medium-3 vertical">
                     <div class="grid-content text-right">
                         <p class="ls-order-date">Order Date: {{order.order_date | date}}</p>
                     </div>
                 </div>
             </div>
-            <div class="grid-block">
-                <div class="grid-block small-8 vertical">
+            <div class="grid-block ls-vertical">
+                <div class="grid-block medium-8 vertical">
                     <div class="grid-content">
                         <div class="ls-meal-offer-details">
                             <h3>{{order.offer.meal.name}}</h3>
@@ -40,14 +40,14 @@ url: /create-feedback/:id
                         </div>
                     </div>
                 </div>
-                <div class="grid-block small-4 vertical">
+                <div class="grid-block medium-4 vertical">
                     <div class="grid-content text-right">
                         <img src="http://lorempixel.com/400/300/" alt="">
                     </div>
                 </div>
             </div>
             <form class="ls-form ls-create-form" name="feedbackForm" ng-submit="submit(feedbackForm.$valid)" novalidate>
-                <div class="grid-block">
+                <div class="grid-block ls-vertical">
                     <div class="grid-block small-12 medium-6 vertical">
                         <div class="grid-content text-center">
                             <div class="ls-form-group">

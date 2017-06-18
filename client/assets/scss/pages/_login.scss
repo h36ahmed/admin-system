@@ -13,6 +13,10 @@
         height: 400px;
         text-align: center;
         @include center-both;
+        @include breakpoint(medium down) {
+            width: 90%;
+            height: auto;
+        }
         form {
             text-align: left;
         }

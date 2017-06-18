@@ -29,13 +29,12 @@
         margin-top: 0 !important;
     }
     i.fa {
-        @include position(absolute,10px,15px,auto,auto);
+        @include position(absolute, 10px, 15px, auto, auto);
         @include transition(all, 0.4s, ease);
         opacity: 0;
         font-size: 2rem;
         color: $primary-color;
     }
-
     p {
         margin-bottom: 5px;
     }
@@ -85,6 +84,9 @@
     padding: $card-padding;
     @include flex-direction(column);
     @include transition(box-shadow, 0.4s, ease);
+    @include breakpoint(medium down) {
+        width: calc(100%/2);
+    }
     &:hover {
         box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.1);
         cursor: pointer;

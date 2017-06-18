@@ -13,6 +13,9 @@
         i {
             margin-right: 10px;
             color: $primary-color;
+            @include breakpoint(medium down) {
+                margin-right: 0;
+            }
         }
     }
     .ls-img-logo {
@@ -22,7 +25,6 @@
             margin-bottom: 0;
         }
     }
-
     .ls-cta-btn {
         margin: 0;
         margin-right: 10px;
@@ -31,6 +33,41 @@
         color: $light-color;
         &:hover {
             background-color: darken($primary-color, $darken-primary-shade);
+        }
+    }
+    .ls-mobile {
+        display: none;
+        font-size: 1.75rem;
+    }
+    @include breakpoint(medium down) {
+        .menu-group-left {
+            flex: 1 1 60%;
+        }
+        .menu-group-right {
+            flex: 1 1 40%;
+        }
+        .ls-desktop {
+            display: none;
+        }
+        .ls-mobile {
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+    &.ls-customer {
+        @include breakpoint(medium down) {
+            .menu-group-left {
+                flex: 1 1 35%;
+            }
+            .menu-group-right {
+                flex: 1 1 60%;
+                justify-content: flex-end;
+            }
+            .ls-img-logo {
+                img {
+                    width: 110px;
+                }
+            }
         }
     }
 }

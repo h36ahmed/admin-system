@@ -1,26 +1,45 @@
-<nav class="menu-group ls-app-nav" ng-controller="menuCtrl as menu">
-  <div class="menu-group-left">
-    <ul class="menu-bar ls-img-logo">
-      <li><a ng-click="redirect('/#!/browse')"><img src="assets/img/lunch-society-logo.png" alt="Lunch Society Logo"></a></li>
-    </ul>
-  </div>
-  <div class="menu-group-right">
-    <ul class="icon-left menu-bar">
-      <li>
-        <a ng-click="redirect('/#!/browse')"><i class="fa fa-cutlery" aria-hidden="true"></i>Browse</a>
-      </li>
-      <li>
-        <a ui-sref="order"><i class="fa fa-cutlery" aria-hidden="true"></i>Order</a>
-      </li>
-      <li>
-        <a ui-sref="profile"><i class="fa fa-user" aria-hidden="true"></i>Profile</a>
-      </li>
-      <li>
-        <a ui-sref="history"><i class="fa fa-history" aria-hidden="true"></i>History</a>
-      </li>
-      <li>
-        <a ng-click="logout()" class="button ls-cta-btn">Logout</a>
-      </li>
-    </ul>
-  </div>
+<nav class="menu-group ls-app-nav ls-customer" ng-controller="menuCtrl as menu">
+    <div class="menu-group-left">
+        <ul class="menu-bar ls-img-logo">
+            <li>
+                <a ng-click="redirect('/#!/browse')"><img src="assets/img/lunch-society-logo.png" alt="Lunch Society Logo"></a>
+            </li>
+        </ul>
+    </div>
+    <div class="menu-group-right">
+        <ul class="icon-left menu-bar ls-desktop">
+            <li>
+                <a ng-click="redirect('/#!/browse')"><i class="fa fa-list" aria-hidden="true"></i>Browse</a>
+            </li>
+            <li>
+                <a ui-sref="order"><i class="fa fa-cutlery" aria-hidden="true"></i>Order</a>
+            </li>
+            <li>
+                <a ui-sref="profile"><i class="fa fa-user" aria-hidden="true"></i>Profile</a>
+            </li>
+            <li>
+                <a ui-sref="history"><i class="fa fa-history" aria-hidden="true"></i>History</a>
+            </li>
+            <li>
+                <a ng-click="logout()" class="button ls-cta-btn">Logout</a>
+            </li>
+        </ul>
+        <ul class="menu-bar ls-mobile">
+            <li>
+                <a ng-click="redirect('/#!/browse')"><i class="fa fa-list" aria-hidden="true"></i></a>
+            </li>
+            <li>
+                <a ui-sref="order"><i class="fa fa-cutlery" aria-hidden="true"></i></a>
+            </li>
+            <li>
+                <a ui-sref="profile"><i class="fa fa-user" aria-hidden="true"></i></a>
+            </li>
+            <li>
+                <a ui-sref="history"><i class="fa fa-history" aria-hidden="true"></i></a>
+            </li>
+            <li>
+                <a ng-click="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+            </li>
+        </ul>
+    </div>
 </nav>
