@@ -1,7 +1,9 @@
 ls-modal {
     .ls-meal-choice-modal {
         width: 600px;
-
+        @include breakpoint(medium down) {
+            width: 85%;
+        }
         .ls-meal-image {
             @include position(absolute, 20px, auto, auto, -250px);
             img {
