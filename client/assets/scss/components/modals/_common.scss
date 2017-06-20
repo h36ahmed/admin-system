@@ -24,6 +24,9 @@ ls-modal {
         width: 400px;
         text-align: center;
         z-index:11;
+        @include breakpoint(medium down) {
+            width: 85%;
+        }
     }
     &.ng-hide>.modal.ng-enter {
         top: -200px;

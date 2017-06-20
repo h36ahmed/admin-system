@@ -1,11 +1,19 @@
 ls-modal {
     .ls-meal-choice-modal {
         width: 600px;
+
         .ls-meal-image {
             @include position(absolute, 20px, auto, auto, -250px);
             img {
                 width: 320px;
                 @include border-radius(3px);
+                @include breakpoint(medium down) {
+                   width: 100%;
+                }
+            }
+
+            @include breakpoint(medium down) {
+                @include position(relative, 0, auto, auto, 0);
             }
         }
         .ls-meal-info {
@@ -14,6 +22,11 @@ ls-modal {
             padding-left: 20px;
             padding-right: 10px;
             min-height: 230px;
+            @include breakpoint(medium down) {
+               margin-left: 0;
+                padding-left: 0px;
+                min-height: 180px;
+            }
             .ls-res-name {
                 text-transform: uppercase;
                 font-size: 1.2rem;
