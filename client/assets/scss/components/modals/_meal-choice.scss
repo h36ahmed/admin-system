@@ -10,12 +10,26 @@ ls-modal {
                 width: 320px;
                 @include border-radius(3px);
                 @include breakpoint(medium down) {
-                   width: 100%;
+                    width: 100%;
                 }
             }
-
             @include breakpoint(medium down) {
                 @include position(relative, 0, auto, auto, 0);
+                width: 70%;
+                margin-right: auto;
+                margin-left: auto;
+            }
+        }
+        .ls-text-tabs {
+            @include breakpoint(medium down) {
+                width: 100%;
+                text-align: center;
+            }
+            >* {
+                @include breakpoint(medium down) {
+                    float: none;
+                    display: inline-block;
+                }
             }
         }
         .ls-meal-info {
@@ -25,9 +39,10 @@ ls-modal {
             padding-right: 10px;
             min-height: 230px;
             @include breakpoint(medium down) {
-               margin-left: 0;
+                margin-left: 0;
                 padding-left: 0px;
                 min-height: 180px;
+                text-align: center;
             }
             .ls-res-name {
                 text-transform: uppercase;
@@ -57,16 +72,15 @@ ls-modal {
             @include border-radius(3px);
             @include position(absolute, -20px, -20px, auto, auto);
             i {
-                color:$light-color;
+                color: $light-color;
                 font-size: 1.5rem;
             }
         }
         .ls-pick-up-times {
-            width:250px;
+            width: 250px;
             text-align: center;
-            margin-left:auto;
+            margin-left: auto;
             margin-right: auto;
-
             option {
                 text-align: center;
             }
