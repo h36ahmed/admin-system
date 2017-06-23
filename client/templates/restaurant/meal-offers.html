@@ -82,7 +82,7 @@ url: /restaurant/meal-offers
                                 <tbody>
                                     <tr ng-repeat="offer in offers">
                                         <td data-title="offer id">{{offer.id}}</td>
-                                        <td data-title="offer date">{{offer.offer_date | date:'MMMM dd, yyyy'}}</td>
+                                        <td data-title="offer date">{{offer.offer_date | amAdd: '1' : 'days' | amDateFormat:'MMMM DD, YYYY'}}</td>
                                         <td data-title="meal name">{{offer.meal.name}}</td>
                                         <td data-title="meal ingredients">{{offer.meal.ingredients}}</td>
                                         <td data-title="plates assigned">{{offer.plates_assigned}}</td>

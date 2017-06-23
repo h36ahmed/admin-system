@@ -85,7 +85,6 @@ var menuCtrl = function ($scope, $location, $window, utilService, modalService, 
               )
               promise.then(function handleResolve(response) {
                 $location.path('/browse')
-                console.log('Alert resolved.')
               }, function handleReject(error) {
                 console.warn('Alert rejected!')
               })
