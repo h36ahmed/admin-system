@@ -268,4 +268,22 @@
     </div>
     <!-- END: Alert Edit Offer Modal. -->
 
+        <!-- BEGIN: Alert Edit Offer Modal. -->
+    <div
+        ng-switch-when="alert-create"
+        ng-controller="alertCreateOfferModalCtrl"
+        class="ls-modal">
+
+        <p>
+            {{ message }}
+        </p>
+
+        <p>
+            <a ng-click="close()" class="button">Ok, I got it!</a>
+            <a ng-click="goToCreateMealOffer()" class="button">Create meal offer</a>
+        </p>
+
+    </div>
+    <!-- END: Alert Edit Offer Modal. -->
+
 </ls-modal>

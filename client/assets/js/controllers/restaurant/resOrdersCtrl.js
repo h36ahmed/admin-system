@@ -67,23 +67,43 @@ var resOrdersCtrl = function ($scope, $location, orderService, modalService, mea
     mealOfferService
       .getMealOffers({ restaurant: restaurant, offer_date: moment(currentViewDate).format('YYYY-MM-DD') })
       .success((data, status, headers, config) => {
-        modalService.resolve()
-        promise.then(function handleResolve(response) {
-          promise = modalService.open(
-            'meal-offer', {
-              message: 'test message',
-              offer: data[0]
+        if (data.length > 0) {
+          modalService.resolve()
+          promise.then(function handleResolve(response) {
+            promise = modalService.open(
+              'meal-offer', {
+                offer: data[0]
+              }
+            )
+            promise.then(
+              function handleResolve(response){},
+              function handleReject(error){}
+            )
+          },
+            function handleReject(error) {
+              console.log('Why is it rejected?')
             }
           )
-          promise.then(
-            function handleResolve(response){},
-            function handleReject(error){}
+        } else {
+          modalService.resolve()
+          promise.then(function handleResolve(response) {
+            promise = modalService.open(
+              'alert-create', {
+                message: 'You have no offers for this day.'
+              }
+            )
+            promise.then(
+              function handleResolve(response) {
+                $location.path('restaurant/create-meal-offer')
+              },
+              function handleReject(error) {}
+            )
+          },
+            function handleReject(error) {
+              console.log('Why is it rejected?')
+            }
           )
-        },
-          function handleReject(error) {
-            console.log('Why is it rejected?')
-          }
-        )
+        }
       })
   }
 
