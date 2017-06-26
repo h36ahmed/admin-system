@@ -18,6 +18,14 @@ var resOrdersCtrl = function ($scope, $location, orderService, modalService, mea
     status: 'active'
   }
 
+  function getOrders(options) {
+    orderService
+      .getOrders({'order_date': moment(options.order_date).format('YYYY-MM-DDT00:00:00.000[Z]')})
+      .success((data, status, headers, config) => {
+        $scope.orders = data
+      })
+  }
+
   $scope.changeDate = function(action) {
     switch (action) {
       case 'nextDay':
@@ -57,98 +65,49 @@ var resOrdersCtrl = function ($scope, $location, orderService, modalService, mea
         "status", {}
     );
     mealOfferService
-      .getMealOffers({ restaurant: restaurant, offer_date: moment(currentViewDate).format('YYYY-MM-DDT00:00:00.000[Z]') })
+      .getMealOffers({ restaurant: restaurant, offer_date: moment(currentViewDate).format('YYYY-MM-DD') })
       .success((data, status, headers, config) => {
-        modalService.resolve()
-        promise.then(function handleResolve(response) {
-          promise = modalService.open(
-            'meal-offer', {
-              message: 'test message',
-              offer: data[0]
+        if (data.length > 0) {
+          modalService.resolve()
+          promise.then(function handleResolve(response) {
+            promise = modalService.open(
+              'meal-offer', {
+                offer: data[0]
+              }
+            )
+            promise.then(
+              function handleResolve(response){},
+              function handleReject(error){}
+            )
+          },
+            function handleReject(error) {
+              console.log('Why is it rejected?')
             }
           )
-          promise.then(
-            function handleResolve(response){},
-            function handleReject(error){}
+        } else {
+          modalService.resolve()
+          promise.then(function handleResolve(response) {
+            promise = modalService.open(
+              'alert-create', {
+                message: 'You have no offers for this day.'
+              }
+            )
+            promise.then(
+              function handleResolve(response) {
+                $location.path('restaurant/create-meal-offer')
+              },
+              function handleReject(error) {}
+            )
+          },
+            function handleReject(error) {
+              console.log('Why is it rejected?')
+            }
           )
-        },
-          function handleReject(error) {
-            console.log('Why is it rejected?')
-          }
-        )
+        }
       })
   }
 
   getOrders(options);
-
-  function getOrders(options) {
-    orderService
-      .getOrders({'order_date': moment(options.order_date).format('YYYY-MM-DDT00:00:00.000[Z]')})
-      .success((data, status, headers, config) => {
-        $scope.orders = data
-      })
-  }
-
-  // console.log('orders', $scope.orders)
-  // $scope.getMealDetails = function (offer) {
-  //   console.log(offer)
-  //       var promise = modalService.open(
-  //           "meal-choice", {
-  //               pickups: $scope.pickups,
-  //               message: 'Click CONFIRM only after you have selected the correct week period that you have paid restaurants for.',
-  //               meal: offer.meal
-  //           }
-  //       );
-  //       promise.then(
-  //           function handleResolve(response) {
-  //               var order = {
-  //                   order_date: utilService.formatDate(new Date()),
-  //                   offer_id: offer.id,
-  //                   pickup_time_id: response.id,
-  //                   customer_id: $scope.customer_id,
-  //               };
-  //               promise = modalService.open(
-  //                   "status", {}
-  //               );
-  //               orderService
-  //                   .createOrder(order)
-  //                   .success(function (data, status, headers, config) {
-  //                     console.log('trigger')
-  //                     console.log('data', data)
-  //                       modalService.resolve();
-  //                       promise.then(
-  //                           function handleResolve(response) {
-  //                               promise = modalService.open(
-  //                                   "alert", {
-  //                                       message: 'Order Successfully Placed!'
-  //                                   }
-  //                               );
-  //                               promise.then(function handleResolve(response) {
-  //                                   $location.path(`order/${data.id}`);
-  //                               }, function handleReject(error) {});
-  //                           },
-  //                           function handleReject(error) {
-  //                           });
-  //                   })
-  //                   .error(function (data, status, headers, config) {
-  //                       modalService.resolve();
-  //                       promise.then(
-  //                           function handleResolve(response) {
-  //                               promise = modalService.open(
-  //                                   "alert", {
-  //                                       message: 'Error: Something Went Wrong'
-  //                                   }
-  //                               );
-  //                               promise.then(function handleResolve(response) {}, function handleReject(error) {});
-  //                           },
-  //                           function handleReject(error) {
-  //                               console.log('Why is it rejected?');
-  //                           }
-  //                       );
-  //                   });
-  //           },
-  //           function handleReject(error) {});
-  //   };
 }
 resOrdersCtrl.inject = ['$scope', '$location', 'orderService', 'modalService', 'mealOfferService', 'utilService', 'commonService', 'moment'];
 

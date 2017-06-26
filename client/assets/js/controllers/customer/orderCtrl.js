@@ -77,7 +77,6 @@ var orderCtrl = function ($scope, $stateParams, $location, commonService, orderS
             $scope.message = 'Error: Something Went Wrong';
         });
 
-  // status 503, does not work properly
   $scope.cancelOrder = () => {
     let promise = modalService.open(
       "status", {}
