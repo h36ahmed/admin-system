@@ -41,7 +41,7 @@ var resCreateMealCtrl = function ($scope, commonService, mealService, modalServi
   function createMeal(result) {
     var promise = modalService.open(
       "status", {});
-    $scope.createMealFormData.restaurant_id = 1
+    $scope.createMealFormData.restaurant_id = restaurant
     $scope.createMealFormData.tagline = ''
     $scope.createMealFormData.meal_image = result.file_name;
     mealService
