@@ -29,8 +29,8 @@ url: /restaurant/meal/:id
                                     </div>
                                     <div class="ls-form-group" ng-class="{ 'ls-has-error' : editMealForm.mealPrice.$invalid && !editMealForm.mealPrice.$pristine }">
                                         <label for="mealPrice">
-                                            Meal Price
-                                            <input type="number" placeholder="e.g. 9.99" class="ls-input-fields" name="mealPrice" id="mealPrice" ng-model="editMealFormData.price" step="0.01" required>
+                                            Meal Payout Price
+                                            <input type="number" placeholder="e.g. 9.99" class="ls-input-fields" name="mealPrice" id="mealPrice" ng-model="editMealFormData.price" step="0.01" disabled required>
                                         </label>
                                         <p ng-show="editMealForm.mealPrice.$invalid && !editMealForm.mealPrice.$pristine" class="ls-help-block">Enter a valid meal price.</p>
                                     </div>
