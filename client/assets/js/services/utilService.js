@@ -117,6 +117,22 @@ app.factory(
       return request
     }
 
+    utilService.checkCustomerOrdered = (data) => {
+      const baseUrl = 'https://ls-backend.herokuapp.com';
+      const baseApi = '/api/v1/';
+
+      const request = $http({
+        method: 'get',
+        url: `${baseUrl}${baseApi}orders`,
+        params: data,
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+
+      return request
+    }
+
     return utilService;
 
   }

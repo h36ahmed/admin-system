@@ -28,7 +28,7 @@ var homeCtrl = function ($scope, $location, commonService, modalService, $window
                                 } else if (utilService.isKitchenOpen()) {
                                   $location.path('browse')
                                 } else {
-                                  $location.path('/kitchen-closed')
+                                  $location.path('kitchen-closed')
                                 }
                             }
                             if (data.type == "owner") {

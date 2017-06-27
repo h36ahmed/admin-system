@@ -84,7 +84,7 @@ var menuCtrl = function ($scope, $location, $window, utilService, modalService, 
                 }
               )
               promise.then(function handleResolve(response) {
-                $location.path('/browse')
+                utilService.isKitchenOpen() ? $location.path('/browse') : $location.path('/kitchen-closed')
               }, function handleReject(error) {
                 console.warn('Alert rejected!')
               })
