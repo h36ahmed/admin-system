@@ -65,12 +65,14 @@ var resCreateMealOfferCtrl = function ($scope, $location, commonService, mealSer
 
     if (isValid && isDateValid && isComplete) {
 
+      const offer_date = utilService.formatMonthToNum($scope.createMealOfferFormData.offer_date)
+
       $scope.createMealOfferFormData.plates_left = $scope.createMealOfferFormData.plates_assigned;
       var promise = modalService.open(
         "status", {}
       );
 
-      utilService.checkRestaurantOffers({ restaurant: restaurant, offer_date: utilService.formatMonthToNum($scope.createMealOfferFormData.offer_date) })
+      utilService.checkRestaurantOffers({ restaurant: restaurant, offer_date: offer_date })
         .then(data => {
           if (data.data.length > 0) {
             modalService.resolve()
