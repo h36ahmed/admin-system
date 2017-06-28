@@ -20,7 +20,7 @@ var resOrdersCtrl = function ($scope, $location, orderService, modalService, mea
 
   function getOrders(options) {
     orderService
-      .getOrders({'order_date': moment(options.order_date).format('YYYY-MM-DDT00:00:00.000[Z]')})
+      .getOrders({order_date: moment(options.order_date).format('YYYY-MM-DDT00:00:00.000[Z]'), restaurant: restaurant})
       .success((data, status, headers, config) => {
         $scope.orders = data
       })
