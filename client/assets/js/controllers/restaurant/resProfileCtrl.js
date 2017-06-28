@@ -1,6 +1,6 @@
 var app = angular.module('lunchSociety');
 
-var resProfileCtrl = function ($scope, ownerService, commonService, mealService, modalService) {
+var resProfileCtrl = function ($scope, ownerService, commonService, mealService, modalService, passwordService) {
 
     var restaurant = commonService.getRestaurantID();
     var owner = commonService.getOwnerID();
@@ -59,8 +59,28 @@ var resProfileCtrl = function ($scope, ownerService, commonService, mealService,
       })
     }
 
+    $scope.resetPassword = () => {
+      let promise = modalService.open(
+        'status', {}
+      )
+      modalService.resolve()
+      promise.then(function handleResolve(response) {
+        userService
+          .editUser({ password: passwordService.generatePassword(), user_reset: true})
+        promise = modalService.open(
+          'alert', {
+            message: 'Your password has been reset. You will receive an email shortly with the new password'
+          }
+        )
+        promise.then(function handleResolve(response){}, function handleReject(error){})
+      }, function handleReject(error) {
+        console.log('Why is it rejected?')
+      })
+      console.log('reset password')
+      console.log('password service', passwordService.generatePassword())
+    }
 };
 
-resProfileCtrl.inject = ['$scope', 'ownerService', 'commonService', 'mealService', 'modalService'];
+resProfileCtrl.inject = ['$scope', 'ownerService', 'commonService', 'mealService', 'modalService', 'passwordService'];
 
 app.controller('resProfileCtrl', resProfileCtrl);
