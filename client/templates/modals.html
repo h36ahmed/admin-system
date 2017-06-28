@@ -268,7 +268,7 @@
     </div>
     <!-- END: Alert Edit Offer Modal. -->
 
-        <!-- BEGIN: Alert Edit Offer Modal. -->
+    <!-- BEGIN: Alert Edit Offer Modal. -->
     <div
         ng-switch-when="alert-create"
         ng-controller="alertCreateOfferModalCtrl"
@@ -285,5 +285,43 @@
 
     </div>
     <!-- END: Alert Edit Offer Modal. -->
+
+    <!-- BEGIN: Password Change Modal. -->
+    <form
+        ng-switch-when="password-change"
+        ng-controller="passwordChangeModalCtrl"
+        ng-submit="submit()"
+        class="ls-modal ls-password-change-modal"
+        name="passwordChangeForm">
+
+        <p>
+            {{ message }}
+        </p>
+
+        <label>
+            Old Password
+            <input type="text" placeholder="Old Password" ng-model="passwordChangeFormData.old_password" class="ls-input-fields">
+        </label>
+
+        <label>
+            New Password
+            <input type="password" placeholder="New Password" ng-model="passwordChangeFormData.new_password" class="ls-input-fields">
+        </label>
+
+        <label>
+            Confirm Password
+            <input type="password" placeholder="Confirm Password" ng-model="passwordChangeFormData.confirm_password" class="ls-input-fields">
+        </label>
+
+        <p ng-if="errorMessage" class="ls-help-block">{{errorMessage}}</p>
+
+        <p>
+            <input type="submit" value="Change password" class="button ls-order-button">
+            <a ng-click="cancel()" class="button">Cancel</a>
+        </p>
+
+
+    </form>
+    <!-- END: Password Change Modal. -->
 
 </ls-modal>

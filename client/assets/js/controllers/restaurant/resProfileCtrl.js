@@ -34,6 +34,31 @@ var resProfileCtrl = function ($scope, ownerService, commonService, mealService,
         );
     }
 
+    $scope.passwordChangeModal = () => {
+      let promise = modalService.open(
+        'status', {}
+      )
+
+      modalService.resolve()
+      promise.then(function handleResolve(response) {
+        promise = modalService.open(
+          "password-change", {
+            message: 'Change your password'
+          }
+        )
+        promise.then(function handleResolve(response) {
+          promise = modalService.open(
+            'alert', {
+              message: 'Your password has been updated!'
+            }
+          )
+          promise.then(function handleResolve(response){}, function handleReject(error){})
+        }, function handleReject(error){})
+      }, function handleReject(error) {
+        console.log('Why is it rejected?')
+      })
+    }
+
 };
 
 resProfileCtrl.inject = ['$scope', 'ownerService', 'commonService', 'mealService', 'modalService'];
