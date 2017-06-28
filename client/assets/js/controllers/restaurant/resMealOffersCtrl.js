@@ -46,6 +46,7 @@ var resMealOffersCtrl = function ($scope, $filter, commonService, mealService, m
     });
 
   $scope.changeWeek = function(action) {
+    $scope.offers = []
     switch (action) {
       case 'nextWeek':
         const nextWeekSet = $scope.currentViewWeek.id + 1;
