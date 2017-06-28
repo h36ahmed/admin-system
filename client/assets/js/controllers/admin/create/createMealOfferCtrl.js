@@ -14,7 +14,7 @@ var createMealOfferCtrl = function($scope, $location, restaurantService, mealOff
   $scope.meals = [];
 
   restaurantService
-    .getRestaurants()
+    .getRestaurants({ status: 'active' })
     .success(function(data, status, headers, config) {
       $scope.restaurants = data;
     })

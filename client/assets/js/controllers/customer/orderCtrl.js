@@ -71,6 +71,7 @@ var orderCtrl = function ($scope, $stateParams, $location, commonService, orderS
                 zoom: 14
             }
             $scope.order = data;
+            $scope.order.order_date = moment(data.order_date).format('MMMM DD, YYYY')
         })
         .error(function (data, status, headers, config) {
             // Handle login errors here

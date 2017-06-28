@@ -4,7 +4,7 @@ var resCreateMealCtrl = function ($scope, commonService, mealService, modalServi
 
   var restaurant = commonService.getRestaurantID();
 
-  $scope.createMealFormData = {};
+  $scope.createMealFormData = { price: 7 };
 
   $scope.submitForm = function(isValid) {
     // check to make sure the form is completely valid

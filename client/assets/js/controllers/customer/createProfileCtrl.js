@@ -1,6 +1,6 @@
 var app = angular.module('lunchSociety');
 
-var createProfileCtrl = function ($scope, $stateParams, commonService, paymentPlanService, paymentService, customerService, userService, modalService) {
+var createProfileCtrl = function ($scope, $stateParams, $location, commonService, paymentPlanService, paymentService, customerService, userService, modalService, utilService) {
 
     $scope.screenview = "details";
 
@@ -199,6 +199,6 @@ var createProfileCtrl = function ($scope, $stateParams, commonService, paymentPl
 
 };
 
-createProfileCtrl.inject = ['$scope', '$stateParams', 'commonService', 'paymentPlanService', 'paymentService', 'customerService', 'modalService'];
+createProfileCtrl.inject = ['$scope', '$stateParams', '$location', 'commonService', 'paymentPlanService', 'paymentService', 'customerService', 'modalService', 'utilService'];
 
 app.controller('createProfileCtrl', createProfileCtrl);

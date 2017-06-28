@@ -2,6 +2,12 @@ var app = angular.module('lunchSociety');
 
 var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogleMapApi, commonService, modalService, mealOfferService, utilService, orderService, pickUpService, _) {
 
+    if (utilService.isKitchenOpen()) {
+      $location.path('browse')
+    } else {
+      $location.path('kitchen-closed')
+    }
+
     $scope.customer_id = commonService.getCustomerID();
 
     $scope.map = {
@@ -109,40 +115,55 @@ var browseCtrl = function ($scope, $state, $location, $stateParams, uiGmapGoogle
                 promise = modalService.open(
                     "status", {}
                 );
-                orderService
-                    .createOrder(order)
-                    .success(function (data, status, headers, config) {
-                        modalService.resolve();
-                        promise.then(
-                            function handleResolve(response) {
-                                promise = modalService.open(
-                                    "alert", {
-                                        message: 'Order Successfully Placed!'
-                                    }
-                                );
-                                promise.then(function handleResolve(response) {
-                                    $location.path(`order/${data.id}`);
-                                }, function handleReject(error) {});
-                            },
-                            function handleReject(error) {
-                            });
-                    })
-                    .error(function (data, status, headers, config) {
-                        modalService.resolve();
-                        promise.then(
-                            function handleResolve(response) {
-                                promise = modalService.open(
-                                    "alert", {
-                                        message: 'Error: Something Went Wrong'
-                                    }
-                                );
-                                promise.then(function handleResolve(response) {}, function handleReject(error) {});
-                            },
-                            function handleReject(error) {
-                                console.log('Why is it rejected?');
-                            }
-                        );
-                    });
+
+                if (utilService.isKitchenOpen()) {
+                  orderService
+                      .createOrder(order)
+                      .success(function (data, status, headers, config) {
+                          modalService.resolve();
+                          promise.then(
+                              function handleResolve(response) {
+                                  promise = modalService.open(
+                                      "alert", {
+                                          message: 'Order Successfully Placed!'
+                                      }
+                                  );
+                                  promise.then(function handleResolve(response) {
+                                      $location.path(`order/${data.id}`);
+                                  }, function handleReject(error) {});
+                              },
+                              function handleReject(error) {
+                              });
+                      })
+                      .error(function (data, status, headers, config) {
+                          modalService.resolve();
+                          promise.then(
+                              function handleResolve(response) {
+                                  promise = modalService.open(
+                                      "alert", {
+                                          message: 'Error: Something Went Wrong'
+                                      }
+                                  );
+                                  promise.then(function handleResolve(response) {}, function handleReject(error) {});
+                              },
+                              function handleReject(error) {
+                                  console.log('Why is it rejected?');
+                              }
+                          );
+                      }); //
+                  } else {
+                    modalService.resolve()
+                    promise.then(function handleResolve(response) {
+                      promise = modalService.open(
+                        'alert', {
+                          message: 'Sorry the kitchen is closed'
+                        }
+                      )
+                      promise.then(function handleResolve(response) {
+                        $location.path('/kitchen-closed')
+                      }, function handleReject(error){})
+                    }, function handleReject(error){})
+                  }
             },
             function handleReject(error) {});
     };

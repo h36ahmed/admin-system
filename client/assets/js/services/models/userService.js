@@ -13,7 +13,8 @@ app.service(
       getUsers: getUsers,
       getUser: getUser,
       editUser: editUser,
-      deleteUser: deleteUser
+      deleteUser: deleteUser,
+      authenticateUser: authenticateUser
     });
 
     // ---
@@ -87,6 +88,18 @@ app.service(
         }
       });
       return request;
+    }
+
+    function authenticateUser(data) {
+      var request = $http({
+        method: "post",
+        url: baseUrl +  baseApi + "user" + "/" + "authenticate",
+        data: data,
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+      return request
     }
   }
 );

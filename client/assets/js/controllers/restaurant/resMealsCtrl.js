@@ -7,7 +7,7 @@ var resMealsCtrl = function ($scope,commonService, mealService, modalService) {
   $scope.meals = [];
 
   mealService
-    .getMeals({ restaurant_id: 1 })
+    .getMeals({ restaurant_id: restaurant })
     .success(function(data, status, headers, config) {
       $scope.meals = data;
     })
