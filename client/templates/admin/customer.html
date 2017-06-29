@@ -33,7 +33,7 @@ url: /customer/:id
            <div class="grid-block">
                 <div class="grid-block small-6 vertical">
                     <div class="grid-content">
-                        <p><strong>Date Joined:</strong> {{customer.date_joined | date}}</p>
+                        <p><strong>Date Joined:</strong> {{customer.date_joined | amDateFormat:'MMMM DD, YYYY'}}</p>
                         <p><strong>Email:</strong> {{customer.user.email}}</p>
                         <p><strong>Reminder Emails:</strong> {{customer.reminder_emails}}</p>
                         <p><strong>Referral Code:</strong> {{customer.user.referral_code.referral_code}}</p>
@@ -44,8 +44,8 @@ url: /customer/:id
                         <p><strong>Status:</strong> {{customer.status | uppercase}}</p>
                         <p><strong>Payment Plan:</strong> {{customer.payment_plan.name}}</p>
                         <p><strong>Meals Remaining:</strong> {{customer.meals_remaining}}</p>
-                        <p><strong>Cycle Start Date:</strong> {{customer.cycle_start_date | date}}</p>
-                        <p><strong>Cycle End Date:</strong> {{customer.cycle_end_date | date}}</p>
+                        <p><strong>Cycle Start Date:</strong> {{customer.cycle_start_date | amDateFormat:'MMMM DD, YYYY'}}</p>
+                        <p><strong>Cycle End Date:</strong> {{customer.cycle_end_date | amDateFormat:'MMMM DD, YYYY'}}</p>
                     </div>
                 </div>
            </div>
@@ -73,7 +73,7 @@ url: /customer/:id
                                       <tbody>
                                         <tr ng-repeat="order in customer.orders">
                                             <td>{{order.id}}</td>
-                                            <td>{{order.order_date | date}}</td>
+                                            <td>{{order.order_date | amDateFormat:'MMMM DD, YYYY'}}</td>
                                             <td>{{order.offer.meal.name}}</td>
                                             <td>{{order.offer.meal.restaurant.name}}</td>
                                             <td>{{order.pickup_time.pickup_time}}</td>
@@ -103,7 +103,7 @@ url: /customer/:id
                                               {{invoice.id}}
                                           </td>
                                           <td data-title="invoice date">
-                                              {{invoice.invoice_date | date}}
+                                              {{invoice.invoice_date | amDateFormat:'MMMM DD, YYYY'}}
                                           </td>
                                           <td data-title="total payment before tax">
                                               {{invoice.total_payment_before_tax | currency}}

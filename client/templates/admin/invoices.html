@@ -41,7 +41,7 @@ url: /invoices
                                       {{invoice.id}}
                                   </td>
                                   <td data-title="invoice date">
-                                      {{invoice.invoice_date | date}}
+                                      {{invoice.invoice_date | amDateFormat:'MMMM DD, YYYY'}}
                                   </td>
                                   <td data-title="customer name">
                                       <a ui-sref="customer({id: {{invoice.customer.id}}})">{{invoice.customer.first_name | titleCase}} {{invoice.customer.last_name | titleCase}} </a>

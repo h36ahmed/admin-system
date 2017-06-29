@@ -43,7 +43,7 @@ url: /feedbacks
                                       {{feedback.id}}
                                   </td>
                                   <td data-title="feedback date">
-                                      {{feedback.order.order_date | date}}
+                                      {{feedback.order.order_date | amDateFormat:'MMMM DD, YYYY'}}
                                   </td>
                                   <td data-title="customer name">
                                       <a ui-sref="customer({id: feedback.order.customer.id})">{{feedback.order.customer.first_name | titleCase}} {{feedback.order.customer.last_name | titleCase}} </a>

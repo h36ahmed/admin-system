@@ -33,11 +33,11 @@ url: /profile
                             </div>
                             <div class="ls-profile-item">
                                 <h5>Cycle Start Date</h5>
-                                <p>{{customer.cycle_start_date | date}}</p>
+                                <p>{{customer.cycle_start_date | amDateFormat:'MMMM DD, YYYY'}}</p>
                             </div>
                             <div class="ls-profile-item">
                                 <h5>Cycle End Date</h5>
-                                <p>{{customer.cycle_end_date | date}}</p>
+                                <p>{{customer.cycle_end_date | amDateFormat:'MMMM DD, YYYY'}}</p>
                             </div>
                         </div>
                     </div>

@@ -28,7 +28,7 @@ url: /history
                                             {{order.id}}
                                         </td>
                                         <td data-title="feedback date">
-                                            {{order.order_date | date}}
+                                            {{order.order_date | amDateFormat:'MMMM DD, YYYY'}}
                                         </td>
                                         <td data-title="meal">
                                             {{order.offer.meal.name | titleCase}}

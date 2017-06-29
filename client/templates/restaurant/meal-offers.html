@@ -52,7 +52,7 @@ url: /restaurant/meal-offers
                 <div class="grid-block medium-6 vertical">
                     <div class="grid-content text-center">
                         <h4>{{currentViewWeek.name}}</h4>
-                        <p>{{currentViewWeek.from_date | date}} - {{currentViewWeek.to_date | date}}</p>
+                        <p>{{currentViewWeek.from_date | amDateFormat:'MMMM DD, YYYY'}} - {{currentViewWeek.to_date | amDateFormat:'MMMM DD, YYYY'}}</p>
                     </div>
                 </div>
                 <div class="grid-block medium-3 vertical">
