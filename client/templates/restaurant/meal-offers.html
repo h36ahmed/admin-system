@@ -77,6 +77,7 @@ url: /restaurant/meal-offers
                                         <th>Meal Ingredients</th>
                                         <th>Number of Plates Offered</th>
                                         <th>Number of Plates Left</th>
+                                        <th>Edit your meal</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -87,6 +88,7 @@ url: /restaurant/meal-offers
                                         <td data-title="meal ingredients">{{offer.meal.ingredients}}</td>
                                         <td data-title="plates assigned">{{offer.plates_assigned}}</td>
                                         <td data-title="plates left">{{offer.plates_left}}</td>
+                                        <td><a ng-click="editMealOffer(offer.id)"><i class="fa fa-pencil-square-o"></i>Edit</a></td>
                                     </tr>
                                 </tbody>
                             </table>

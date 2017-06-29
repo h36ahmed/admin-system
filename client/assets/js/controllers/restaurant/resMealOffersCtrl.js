@@ -1,6 +1,6 @@
 var app = angular.module('lunchSociety');
 
-var resMealOffersCtrl = function ($scope, $filter, commonService, mealService, modalService, weekService, mealOfferService, payoutService, utilService, moment) {
+var resMealOffersCtrl = function ($scope, $filter, $location, commonService, mealService, modalService, weekService, mealOfferService, payoutService, utilService, moment) {
 
   var year = moment().year();
 
@@ -44,6 +44,10 @@ var resMealOffersCtrl = function ($scope, $filter, commonService, mealService, m
     .error(function(data, status, headers, config) {
       $scope.message = 'Error: Something Went Wrong';
     });
+
+  $scope.editMealOffer = (id) => {
+    $location.path(`/restaurant/edit-meal-offer/${id}`)
+  }
 
   $scope.changeWeek = function(action) {
     $scope.offers = []
@@ -102,6 +106,6 @@ var resMealOffersCtrl = function ($scope, $filter, commonService, mealService, m
   }
 };
 
-resMealOffersCtrl.inject = ['$scope','$filter', 'commonService', 'mealService', 'modalService', 'weekService', 'mealOfferService', 'payoutService', 'utilService', 'moment'];
+resMealOffersCtrl.inject = ['$scope','$filter', '$location', 'commonService', 'mealService', 'modalService', 'weekService', 'mealOfferService', 'payoutService', 'utilService', 'moment'];
 
 app.controller('resMealOffersCtrl', resMealOffersCtrl);
