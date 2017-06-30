@@ -4,7 +4,7 @@ var resOrdersCtrl = function ($scope, $location, orderService, modalService, mea
 
   var restaurant = commonService.getRestaurantID()
 
-  $scope.orders = [];
+  $scope.pickupTimes = [];
 
   $scope.today_date = moment().format();
 
@@ -22,10 +22,12 @@ var resOrdersCtrl = function ($scope, $location, orderService, modalService, mea
     orderService
       .getOrders({
         restaurant: restaurant,
-        offer_date: moment(options.order_date).format('YYYY-MM-DD')
+        order_date: moment(options.order_date).format('YYYY-MM-DD'),
+        groupedByPickups: true
       })
       .success((data, status, headers, config) => {
-        $scope.orders = data
+        $scope.pickupTimes = data
+        console.log($scope.pickupTimes)
       })
   }
 
