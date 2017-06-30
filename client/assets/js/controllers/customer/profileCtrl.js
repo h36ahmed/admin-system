@@ -2,11 +2,13 @@ var app = angular.module('lunchSociety');
 
 var profileCtrl = function ($scope, commonService, customerService, modalService) {
 
+    const customer = commonService.getCustomerID()
+
     $scope.customer = {};
 
     customerService
         .getCustomer({
-            id: commonService.getCustomerID()
+            id: customer
         })
         .success(function (data, status, headers, config) {
             $scope.customer = data;
@@ -23,7 +25,7 @@ var profileCtrl = function ($scope, commonService, customerService, modalService
       customerService
         .editCustomer({
           reminder_emails: $scope.customer.reminder_emails === false ? false : true,
-          id: commonService.getCustomerID(),
+          id: customer,
         })
         .success(function (data, status, headers, config) {
           $scope.customer = data
