@@ -2,7 +2,7 @@ var app = angular.module('lunchSociety');
 
 var createMealCtrl = function($scope, $location, restaurantService, mealService, modalService, awsService, Upload, $timeout, _) {
 
-  $scope.createMealFormData = {};
+  $scope.createMealFormData = {price: 7};
 
   $scope.restaurants = [];
 
@@ -11,7 +11,6 @@ var createMealCtrl = function($scope, $location, restaurantService, mealService,
     .success(function(data, status, headers, config) {
       $scope.restaurants = data;
       $scope.createMealFormData.restaurant = $scope.restaurants[0];
-      $scope.createMealFormData.price = $scope.restaurants[0].payout_rate;
     })
     .error(function(data, status, headers, config) {
       // Handle login errors here
