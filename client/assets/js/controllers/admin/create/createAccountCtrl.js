@@ -22,7 +22,7 @@ var createAccountCtrl = function($scope, $window, $location, userService, modalS
             function handleResolve(response) {
                 $scope.registerFormData = {};
                 promise = modalService.open(
-                  "alert", {
+                  "create-account", {
                     message: 'User Added & Email Sent!'
                   }
                 );

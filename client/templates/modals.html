@@ -34,6 +34,23 @@
     </div>
     <!-- END: Alert Modal. -->
 
+    <!-- BEGIN: Create Account Modal. -->
+    <div
+        ng-switch-when="create-account"
+        ng-controller="createAccountModalCtrl"
+        class="ls-modal">
+
+        <p>
+            {{ message }}
+        </p>
+
+        <p>
+            <a ng-click="close()" class="button">Go to Add Owner Information</a>
+        </p>
+
+    </div>
+    <!-- END: Create Account Modal. -->
+
     <!-- BEGIN: Confirm Modal. -->
     <div
         ng-switch-when="confirm"
