@@ -97,12 +97,14 @@ url: /meal-offers
                                       {{offer.plates_left}}
                                   </td>
                                   <td>
-                                  <form class="ls-form ls-edit-form" name="editOfferForm" novalidate>
+                                    <form class="ls-form ls-edit-form" name="editOfferForm" novalidate>
                                       <div class="ls-switch-container">
-                                              <input type="checkbox" id={{offer.id}} name="editOfferStatus" ng-model="offer.status" ng-change="submitEditForm(offer.status, offer.id)">
-                                              <label for={{offer.id}}></label>
+                                        <div class="small switch">
+                                          <input type="checkbox" id={{offer.id}} name="editOfferStatus" ng-model="offer.status" ng-change="submitEditForm(offer.status, offer.id)" ng-true-value="'inactive'" ng-false-value="'active'">
+                                          <label for={{offer.id}}></label>
+                                        </div>
                                       </div>
-                                  </form>
+                                    </form>
                                   </td>
                                 </tr>
                               </tbody>

@@ -42,11 +42,12 @@ var manageMealOfferCtrl = function($scope, mealOfferService, modalService, utilS
 
   $scope.submitEditForm = (offer, offer_id) => {
     console.log('offer', offer)
-    // mealOfferService
-    //   .editMealOffer({ status: offer === true ? 'inactive' : 'active', id: offer_id })
-    //   .success((data, status, headers, config) => {
-    //     console.log('data', data)
-    //   })
+    // console.log('$scope.editOfferForm', $scope.editOfferForm)
+    mealOfferService
+      .editMealOffer({ status: offer, id: offer_id})
+      .success((data, status, headers, config) => {
+        console.log('data', data)
+      })
   }
 
   function offerService(date) {
