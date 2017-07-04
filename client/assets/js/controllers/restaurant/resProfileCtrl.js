@@ -79,8 +79,6 @@ var resProfileCtrl = function ($scope, userService, ownerService, commonService,
       }, function handleReject(error) {
         console.log('Why is it rejected?')
       })
-      console.log('reset password')
-      console.log('password service', passwordService.generatePassword())
     }
 };
 
