@@ -32,9 +32,18 @@ var homeCtrl = function ($scope, $location, commonService, modalService, $window
                                 }
                             }
                             if (data.type == "owner") {
-                                commonService.setOwnerID(data.owner_id);
-                                commonService.setRestaurantID(data.restaurant_id);
-                                $location.path('/restaurant/orders');
+                                if (data.status === 'active') {
+                                  commonService.setOwnerID(data.owner_id);
+                                  commonService.setRestaurantID(data.restaurant_id);
+                                  $location.path('/restaurant/orders');
+                                } else {
+                                  promise = modalService.open(
+                                    'alert', {
+                                      message: 'Error: Invalid user or password'
+                                    }
+                                  )
+                                  promise.then(function handleResolve(response){}, function handleReject(error){})
+                                }
                             }
                             if (data.type == "admin") {
                                 $location.path('/meal-offers');
