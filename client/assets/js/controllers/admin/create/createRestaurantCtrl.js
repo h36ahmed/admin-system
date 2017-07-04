@@ -92,13 +92,15 @@ var createRestaurantCtrl = function($scope, $location, ownerService, restaurantS
     modalService.resolve();
     promise.then(
       function handleResolve(response) {
+        $scope.createRestaurantFormData = {};
+        $scope.createRestaurantForm.$setPristine()
         promise = modalService.open(
           "alert", {
             message: 'Restaurant Created'
           }
         );
         promise.then(function handleResolve(response) {
-           $location.path('create-meal');
+          $location.path('create-meal');
         }, function handleReject(error) {});
       },
       function handleReject(error) {
@@ -111,6 +113,8 @@ var createRestaurantCtrl = function($scope, $location, ownerService, restaurantS
     modalService.resolve();
     promise.then(
       function handleResolve(response) {
+        $scope.createRestaurantFormData = {};
+        $scope.createRestaurantForm.$setPristine()
         promise = modalService.open(
           "alert", {
             message: message
