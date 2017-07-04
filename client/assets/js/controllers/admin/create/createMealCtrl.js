@@ -76,7 +76,11 @@ var createMealCtrl = function($scope, $location, restaurantService, mealService,
                   message: 'Meal Created'
                 }
               );
-              promise.then(function handleResolve(response) {}, function handleReject(error) {});
+              promise.then(function handleResolve(response) {
+                $scope.createMealFormData = {price: 7};
+
+                $scope.createMealForm.$setPristine()
+              }, function handleReject(error) {});
             },
             function handleReject(error) {
               console.log('Why is it rejected?');
@@ -100,7 +104,11 @@ var createMealCtrl = function($scope, $location, restaurantService, mealService,
             message: message
           }
         );
-        promise.then(function handleResolve(response) {},
+        promise.then(function handleResolve(response) {
+          $scope.createMealFormData = {price: 7};
+
+          $scope.createMealForm.$setPristine()
+        },
           function handleReject(error) {});
       },
       function handleReject(error) {
