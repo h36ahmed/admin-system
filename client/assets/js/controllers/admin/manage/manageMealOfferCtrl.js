@@ -41,12 +41,22 @@ var manageMealOfferCtrl = function($scope, mealOfferService, modalService, utilS
   };
 
   $scope.submitEditForm = (offer, offer_id) => {
-    console.log('offer', offer)
-    // console.log('$scope.editOfferForm', $scope.editOfferForm)
+    let promise = modalService.open('status', {})
     mealOfferService
       .editMealOffer({ status: offer, id: offer_id})
       .success((data, status, headers, config) => {
         console.log('data', data)
+        modalService.resolve()
+        promise.then(function handleResolve(response) {
+          promise = modalService.open(
+            'alert', {
+              message: `Meal ID #${offer_id} is now ${offer === 'inactive' ? 'inactive' : 'active'}`
+            }
+          )
+          promise.then(function handleResolve(response){}, function handleReject(error){})
+        }, function handleReject(error){
+          console.log('Why is it rejected?')
+        })
       })
   }
 
@@ -60,7 +70,6 @@ var manageMealOfferCtrl = function($scope, mealOfferService, modalService, utilS
       })
       .success(function(data, status, headers, config) {
         $scope.offers = data;
-        console.log('data', data)
         modalService.resolve();
         promise.then(
           function handleResolve(response) {},
