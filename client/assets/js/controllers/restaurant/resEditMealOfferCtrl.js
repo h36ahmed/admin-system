@@ -4,12 +4,7 @@ var resEditMealOfferCtrl = function ($scope, $stateParams, $location, commonServ
 
   const restaurant = commonService.getRestaurantID();
 
-  $scope.editMealOfferFormData = {
-      meal_id: null,
-      plates_left: null,
-      plates_assigned: null,
-      offer_date: utilService.formatLongDate(utilService.getNextDate())
-  };
+  $scope.editMealOfferFormData = {};
 
   $scope.meals = [];
 
@@ -26,11 +21,10 @@ var resEditMealOfferCtrl = function ($scope, $stateParams, $location, commonServ
   mealOfferService
     .getMealOffer({ id: $stateParams.id })
     .success((data, status, headers, config) => {
-
       $scope.editMealOfferFormData.meal_id = data.meal_id
       $scope.editMealOfferFormData.plates_left = data.plates_left
       $scope.editMealOfferFormData.plates_assigned = data.plates_assigned
-      $scope.editMealOfferFormData.offer_date = moment(data.offer_date).format('MMMM DD, YYYY')
+      $scope.editMealOfferFormData.offer_date = moment(data.offer_date).add(1, 'd').format('MMMM DD, YYYY')
     })
     .error((data, status, headers, config) => {
       $scope.message = 'Error: Something Went Wrong'

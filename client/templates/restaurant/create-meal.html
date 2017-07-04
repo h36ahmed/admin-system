@@ -63,7 +63,13 @@ url: /restaurant/create-meal
                             </div>
                             <div class="grid-block">
                                 <div class="small-6 grid-content text-right">
-
+                            <div class="ls-switch-container">
+                                <div class="large switch">
+                                    <input type="checkbox" id="defaultMeal" name="defaultMeal" ng-model="createMealForm.defaultMeal">
+                                    <label for="defaultMeal"></label>
+                                </div>
+                                <p>Default Meal</p>
+                            </div>
                                 </div>
                                 <div class="small-6 grid-content text-right">
                                     <input type="submit" class="button" value="Add Meal" ng-disabled="createMealForm.$invalid">

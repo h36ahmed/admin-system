@@ -10,6 +10,8 @@ var manageMealOfferCtrl = function($scope, mealOfferService, modalService, utilS
 
   $scope.currentViewDate = new Date();
 
+  $scope.offerStatus = { inactive: false }
+
   offerService($scope.currentViewDate);
 
   $scope.changeDate = function(action) {
@@ -38,6 +40,15 @@ var manageMealOfferCtrl = function($scope, mealOfferService, modalService, utilS
     }
   };
 
+  $scope.submitEditForm = (offer, offer_id) => {
+    console.log('offer', offer)
+    // mealOfferService
+    //   .editMealOffer({ status: offer === true ? 'inactive' : 'active', id: offer_id })
+    //   .success((data, status, headers, config) => {
+    //     console.log('data', data)
+    //   })
+  }
+
   function offerService(date) {
     var promise = modalService.open(
       "status", {}
@@ -48,6 +59,7 @@ var manageMealOfferCtrl = function($scope, mealOfferService, modalService, utilS
       })
       .success(function(data, status, headers, config) {
         $scope.offers = data;
+        console.log('data', data)
         modalService.resolve();
         promise.then(
           function handleResolve(response) {},
