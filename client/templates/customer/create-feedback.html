@@ -15,7 +15,7 @@ url: /create-feedback/:id
                 </div>
                 <div class="grid-block medium-3 vertical">
                     <div class="grid-content text-right">
-                        <p class="ls-order-date">Order Date: {{order.order_date | date}}</p>
+                        <p class="ls-order-date">Order Date: {{order.order_date | amAdd: '1' : 'd' | amDateFormat:'MMMM DD, YYYY'}}</p>
                     </div>
                 </div>
             </div>

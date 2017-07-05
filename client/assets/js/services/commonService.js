@@ -23,7 +23,6 @@ app.service(
             deleteAuthToken: deleteAuthToken,
             logoutUser: logoutUser,
             setFeedbackID: setFeedbackID,
-            deleteFeedbackID: deleteFeedbackID,
         });
 
         // ---
@@ -41,6 +40,7 @@ app.service(
             delete $window.sessionStorage.customerID;
             delete $window.sessionStorage.ownerID;
             delete $window.sessionStorage.restaurantID;
+            delete $window.sessionStorage.feedbackID
         }
 
         function setUserID(id) {
@@ -77,10 +77,6 @@ app.service(
 
         function setFeedbackID(id) {
           $window.sessionStorage.feedbackID = id
-        }
-
-        function deleteFeedbackID() {
-          delete $window.sessionStorage.feedbackID
         }
 
         function loginUser(data) {
