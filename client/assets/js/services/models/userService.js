@@ -14,7 +14,8 @@ app.service(
       getUser: getUser,
       editUser: editUser,
       deleteUser: deleteUser,
-      authenticateUser: authenticateUser
+      authenticateUser: authenticateUser,
+      forgotPassword: forgotPassword
     });
 
     // ---
@@ -93,7 +94,19 @@ app.service(
     function authenticateUser(data) {
       var request = $http({
         method: "post",
-        url: baseUrl +  baseApi + "user" + "/" + "authenticate",
+        url: baseUrl + baseApi + "user" + "/" + "authenticate",
+        data: data,
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+      return request
+    }
+
+    function forgotPassword(data) {
+      var request = $http({
+        method: "post",
+        url: baseUrl + baseApi + "user" + "/" + "forgotPassword",
         data: data,
         headers: {
           'Content-Type': 'application/json',

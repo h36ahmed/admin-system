@@ -80,6 +80,53 @@ var homeCtrl = function ($scope, $location, commonService, modalService, $window
         }
     };
 
+    // $scope.resetPassword = () => {
+    //   let promise = modalService.open(
+    //     'status', {}
+    //   )
+    //   modalService.resolve()
+    //   promise.then(function handleResolve(response) {
+    //     userService
+    //       .editUser({ password: passwordService.generatePassword(), user_reset: true, id: user})
+    //       .success((data, headers, status, config) => {
+    //         promise = modalService.open(
+    //           'alert', {
+    //             message: 'Your password has been reset. You will receive an email shortly with the new password'
+    //           }
+    //         )
+    //         promise.then(function handleResolve(response){}, function handleReject(error){})
+    //       })
+    //   }, function handleReject(error) {
+    //     console.log('Why is it rejected?')
+    //   })
+    // }
+
+    $scope.passwordChangeModal = () => {
+      delete $window.sessionStorage.loginPage;
+
+      let promise = modalService.open(
+        'status', {}
+      )
+
+      modalService.resolve()
+      promise.then(function handleResolve(response) {
+        promise = modalService.open(
+          "forgot-password", {
+            message: 'Forgot password'
+          }
+        )
+        promise.then(function handleResolve(response) {
+          promise = modalService.open(
+            'alert', {
+              message: 'Your password has been updated!'
+            }
+          )
+          promise.then(function handleResolve(response){}, function handleReject(error){})
+        }, function handleReject(error){})
+      }, function handleReject(error) {
+        console.log('Why is it rejected?')
+      })
+    }
 };
 
 homeCtrl.inject = ['$scope', '$location', 'commonService', 'modalService', '$window', 'utilService'];

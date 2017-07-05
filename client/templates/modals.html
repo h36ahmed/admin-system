@@ -16,7 +16,6 @@
     </div>
     <!-- END: Status Modal. -->
 
-
     <!-- BEGIN: Alert Modal. -->
     <div
         ng-switch-when="alert"
@@ -337,8 +336,34 @@
             <a ng-click="cancel()" class="button">Cancel</a>
         </p>
 
-
     </form>
     <!-- END: Password Change Modal. -->
+
+    <!-- BEGIN: Forgot Password Modal. -->
+    <form
+        ng-switch-when="forgot-password"
+        ng-controller="forgotPasswordModalCtrl"
+        ng-submit="submit()"
+        class="ls-modal ls-forgot-password-modal"
+        name="forgotPasswordForm">
+
+        <p>
+            {{ message }}
+        </p>
+
+        <label>
+            Enter Email
+            <input type="email" placeholder="Enter email" ng-model="forgotPasswordFormData.email" class="ls-input-fields">
+        </label>
+
+        <p ng-if="errorMessage" class="ls-help-block">{{errorMessage}}</p>
+
+        <p>
+            <input type="submit" value="Reset password" class="button ls-order-button">
+            <a ng-click="cancel()" class="button">Cancel</a>
+        </p>
+
+    </form>
+    <!-- END: Forgot Password Modal. -->
 
 </ls-modal>
