@@ -56,8 +56,8 @@ app.factory(
         'May', 'June', 'July', 'August',
         'September', 'October', 'November', 'December'
       ];
-      let day = date.split(' ')[1].split(',')[0]
-      let month = monthNames.indexOf(date.split(' ')[0]) + 1
+      let day = parseInt(date.split(' ')[1].split(',')[0])
+      let month = parseInt(monthNames.indexOf(date.split(' ')[0]) + 1)
       const year = date.split(' ')[2]
 
       if (day < 10) {

@@ -16,7 +16,6 @@ var forgotPasswordModalCtrl = function ($scope, modalService, commonService, use
           userService
             .forgotPassword({ email: $scope.forgotPasswordFormData.email, password: passwordService.generatePassword()})
             .success((data, headers, status, config) => {
-              console.log('data', data)
               modalService.resolve()
               promise = modalService.open(
                 'alert', {
