@@ -10,6 +10,8 @@ var manageMealOfferCtrl = function($scope, mealOfferService, modalService, utilS
 
   $scope.currentViewDate = new Date();
 
+  $scope.offerStatus = { inactive: false }
+
   offerService($scope.currentViewDate);
 
   $scope.changeDate = function(action) {
@@ -37,6 +39,26 @@ var manageMealOfferCtrl = function($scope, mealOfferService, modalService, utilS
         return true;
     }
   };
+
+  $scope.submitEditForm = (offer, offer_id) => {
+    let promise = modalService.open('status', {})
+    mealOfferService
+      .editMealOffer({ status: offer, id: offer_id})
+      .success((data, status, headers, config) => {
+        console.log('data', data)
+        modalService.resolve()
+        promise.then(function handleResolve(response) {
+          promise = modalService.open(
+            'alert', {
+              message: `Meal ID #${offer_id} is now ${offer === 'inactive' ? 'inactive' : 'active'}`
+            }
+          )
+          promise.then(function handleResolve(response){}, function handleReject(error){})
+        }, function handleReject(error){
+          console.log('Why is it rejected?')
+        })
+      })
+  }
 
   function offerService(date) {
     var promise = modalService.open(

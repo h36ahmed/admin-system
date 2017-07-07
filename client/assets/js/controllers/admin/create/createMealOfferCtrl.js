@@ -104,8 +104,10 @@ var createMealOfferCtrl = function($scope, $location, restaurantService, mealOff
                             meal_id: null,
                             plates_left: null,
                             plates_assigned: null,
-                            offer_date: null
+                            offer_date: utilService.formatLongDate(utilService.getNextDate())
                         };
+
+                        $scope.createMealOfferForm.$setPristine()
                     },
                       function handleReject(error) {
 

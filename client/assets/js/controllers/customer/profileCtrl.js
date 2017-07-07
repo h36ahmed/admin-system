@@ -2,11 +2,13 @@ var app = angular.module('lunchSociety');
 
 var profileCtrl = function ($scope, commonService, customerService, modalService) {
 
+    const customer = commonService.getCustomerID()
+
     $scope.customer = {};
 
     customerService
         .getCustomer({
-            id: commonService.getCustomerID()
+            id: customer
         })
         .success(function (data, status, headers, config) {
             $scope.customer = data;
@@ -16,56 +18,81 @@ var profileCtrl = function ($scope, commonService, customerService, modalService
             $scope.message = 'Error: Something Went Wrong';
         });
 
-      $scope.submitEditForm = () => {
-      let promise = modalService.open(
-        "status", {}
-      );
-      customerService
-        .editCustomer({
-          reminder_emails: $scope.customer.reminder_emails === false ? false : true,
-          id: commonService.getCustomerID(),
-        })
-        .success(function (data, status, headers, config) {
-          $scope.customer = data
-          modalService.resolve();
-          promise.then(
-            function handleResolve(response){
-                promise = modalService.open(
-                  "alert", {
-                    message: $scope.customer.reminder_emails === false ?
-                              'You will not be sent a reminder email!' :
-                              'You will be sent a reminder email!'
-                  }
-                );
-                promise.then(function handleResolve(response) {
-                  // setTimeout
-                },
-                  function handleReject(error){});
-            },
-            function handleReject(error){
-              console.log('Why is it rejected?');
-            }
-          );
-          // console.log('data', data)
-        })
-        .error(function (data, status, headers, config) {
-          modalService.resolve();
-          promise.then(
-            function handleResolve(response){
+    $scope.submitEditForm = () => {
+    let promise = modalService.open(
+      "status", {}
+    );
+    customerService
+      .editCustomer({
+        reminder_emails: $scope.customer.reminder_emails === false ? false : true,
+        id: customer,
+      })
+      .success(function (data, status, headers, config) {
+        $scope.customer = data
+        modalService.resolve();
+        promise.then(
+          function handleResolve(response){
               promise = modalService.open(
                 "alert", {
-                  message: 'Error: Something Went Wrong'
+                  message: $scope.customer.reminder_emails === false ?
+                            'You will not be sent a reminder email!' :
+                            'You will be sent a reminder email!'
                 }
               );
-              promise.then(function handleResolve(response){},
-                function handleReject (error){});
-            },
-            function handleReject(error){
-              console.log('Why is it rejected?');
-            }
-          );
-        })
-      }
+              promise.then(function handleResolve(response) {
+                // setTimeout
+              },
+                function handleReject(error){});
+          },
+          function handleReject(error){
+            console.log('Why is it rejected?');
+          }
+        );
+        // console.log('data', data)
+      })
+      .error(function (data, status, headers, config) {
+        modalService.resolve();
+        promise.then(
+          function handleResolve(response){
+            promise = modalService.open(
+              "alert", {
+                message: 'Error: Something Went Wrong'
+              }
+            );
+            promise.then(function handleResolve(response){},
+              function handleReject (error){});
+          },
+          function handleReject(error){
+            console.log('Why is it rejected?');
+          }
+        );
+      })
+    }
+
+    $scope.passwordChangeModal = () => {
+    let promise = modalService.open(
+      'status', {}
+    )
+
+    modalService.resolve()
+    promise.then(function handleResolve(response) {
+      promise = modalService.open(
+        "password-change", {
+          message: 'Change your password'
+        }
+      )
+      promise.then(function handleResolve(response) {
+        promise = modalService.open(
+          'alert', {
+            message: 'Your password has been updated!'
+          }
+        )
+        promise.then(function handleResolve(response){}, function handleReject(error){})
+      }, function handleReject(error){})
+    }, function handleReject(error) {
+      console.log('Why is it rejected?')
+    })
+  }
 };
 
 profileCtrl.inject = ['$scope', 'commonService', 'customerService', 'modalService'];

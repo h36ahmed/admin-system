@@ -2,7 +2,7 @@ var app = angular.module('lunchSociety');
 
 var createMealCtrl = function($scope, $location, restaurantService, mealService, modalService, awsService, Upload, $timeout, _) {
 
-  $scope.createMealFormData = {};
+  $scope.createMealFormData = {price: 7};
 
   $scope.restaurants = [];
 
@@ -11,7 +11,6 @@ var createMealCtrl = function($scope, $location, restaurantService, mealService,
     .success(function(data, status, headers, config) {
       $scope.restaurants = data;
       $scope.createMealFormData.restaurant = $scope.restaurants[0];
-      $scope.createMealFormData.price = $scope.restaurants[0].payout_rate;
     })
     .error(function(data, status, headers, config) {
       // Handle login errors here
@@ -77,7 +76,11 @@ var createMealCtrl = function($scope, $location, restaurantService, mealService,
                   message: 'Meal Created'
                 }
               );
-              promise.then(function handleResolve(response) {}, function handleReject(error) {});
+              promise.then(function handleResolve(response) {
+                $scope.createMealFormData = {price: 7};
+
+                $scope.createMealForm.$setPristine()
+              }, function handleReject(error) {});
             },
             function handleReject(error) {
               console.log('Why is it rejected?');
@@ -101,7 +104,11 @@ var createMealCtrl = function($scope, $location, restaurantService, mealService,
             message: message
           }
         );
-        promise.then(function handleResolve(response) {},
+        promise.then(function handleResolve(response) {
+          $scope.createMealFormData = {price: 7};
+
+          $scope.createMealForm.$setPristine()
+        },
           function handleReject(error) {});
       },
       function handleReject(error) {

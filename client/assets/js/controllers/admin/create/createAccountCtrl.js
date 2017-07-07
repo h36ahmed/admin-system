@@ -21,8 +21,9 @@ var createAccountCtrl = function($scope, $window, $location, userService, modalS
           promise.then(
             function handleResolve(response) {
                 $scope.registerFormData = {};
+                $scope.registerForm.$setPristine()
                 promise = modalService.open(
-                  "alert", {
+                  "create-account", {
                     message: 'User Added & Email Sent!'
                   }
                 );

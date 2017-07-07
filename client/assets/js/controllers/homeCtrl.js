@@ -25,6 +25,8 @@ var homeCtrl = function ($scope, $location, commonService, modalService, $window
                                 if (data.needOrderFeedback) {
                                   commonService.setFeedbackID(data.needOrderFeedback)
                                   $location.path(`create-feedback/${data.needOrderFeedback}`)
+                                } else if (data.hasOrder) {
+                                  $location.path(`order/${data.hasOrder}`)
                                 } else if (utilService.isKitchenOpen()) {
                                   $location.path('browse')
                                 } else {
@@ -32,9 +34,18 @@ var homeCtrl = function ($scope, $location, commonService, modalService, $window
                                 }
                             }
                             if (data.type == "owner") {
-                                commonService.setOwnerID(data.owner_id);
-                                commonService.setRestaurantID(data.restaurant_id);
-                                $location.path('/restaurant/orders');
+                                if (data.status === 'active') {
+                                  commonService.setOwnerID(data.owner_id);
+                                  commonService.setRestaurantID(data.restaurant_id);
+                                  $location.path('/restaurant/orders');
+                                } else {
+                                  promise = modalService.open(
+                                    'alert', {
+                                      message: 'Error: Invalid user or password'
+                                    }
+                                  )
+                                  promise.then(function handleResolve(response){}, function handleReject(error){})
+                                }
                             }
                             if (data.type == "admin") {
                                 $location.path('/meal-offers');
@@ -71,6 +82,53 @@ var homeCtrl = function ($scope, $location, commonService, modalService, $window
         }
     };
 
+    // $scope.resetPassword = () => {
+    //   let promise = modalService.open(
+    //     'status', {}
+    //   )
+    //   modalService.resolve()
+    //   promise.then(function handleResolve(response) {
+    //     userService
+    //       .editUser({ password: passwordService.generatePassword(), user_reset: true, id: user})
+    //       .success((data, headers, status, config) => {
+    //         promise = modalService.open(
+    //           'alert', {
+    //             message: 'Your password has been reset. You will receive an email shortly with the new password'
+    //           }
+    //         )
+    //         promise.then(function handleResolve(response){}, function handleReject(error){})
+    //       })
+    //   }, function handleReject(error) {
+    //     console.log('Why is it rejected?')
+    //   })
+    // }
+
+    $scope.passwordChangeModal = () => {
+      delete $window.sessionStorage.loginPage;
+
+      let promise = modalService.open(
+        'status', {}
+      )
+
+      modalService.resolve()
+      promise.then(function handleResolve(response) {
+        promise = modalService.open(
+          "forgot-password", {
+            message: 'Forgot password'
+          }
+        )
+        promise.then(function handleResolve(response) {
+          promise = modalService.open(
+            'alert', {
+              message: 'Your password has been updated!'
+            }
+          )
+          promise.then(function handleResolve(response){}, function handleReject(error){})
+        }, function handleReject(error){})
+      }, function handleReject(error) {
+        console.log('Why is it rejected?')
+      })
+    }
 };
 
 homeCtrl.inject = ['$scope', '$location', 'commonService', 'modalService', '$window', 'utilService'];
