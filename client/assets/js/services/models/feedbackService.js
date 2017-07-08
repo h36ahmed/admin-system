@@ -1,7 +1,6 @@
 var app = angular.module('lunchSociety');
 
-var baseUrl = 'http://api.lunchsociety.ca/';
-// var baseUrl = 'localhost:3000'
+var baseUrl = 'http://api.lunchsociety.ca';
 
 var baseApi = '/api/v1/';
 
