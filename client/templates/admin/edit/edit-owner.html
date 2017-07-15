@@ -76,7 +76,7 @@ url: /owner/:id
                                     </div>
                                     <div class="ls-switch-container">
                                         <div class="large switch">
-                                            <input type="checkbox" id="ownerStatus" name="ownerStatus" ng-model="editOwnerFormData.status">
+                                            <input type="checkbox" id="ownerStatus" name="ownerStatus" ng-model="editOwnerFormData.status" ng-true-value="'active'" ng-false-value="'inactive'">
                                             <label for="ownerStatus"></label>
                                         </div>
                                         <p>Owner Status</p>

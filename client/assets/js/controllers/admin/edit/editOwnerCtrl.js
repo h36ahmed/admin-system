@@ -95,7 +95,7 @@ var editOwnerCtrl = function($scope, $state, $location,
     });
     $scope.editOwnerFormData.confirmed_email = $scope.owner.user.confirmed_email;
     $scope.editOwnerFormData.profile_image = $scope.owner.profile_image;
-    $scope.editOwnerFormData.status = $scope.owner.status == 'active';
+    $scope.editOwnerFormData.status = $scope.owner.status;
   }
 
   function editOwner(result) {
