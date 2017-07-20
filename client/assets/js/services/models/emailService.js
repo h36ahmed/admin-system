@@ -5,22 +5,22 @@ var baseUrl = 'https://api.lunchsociety.ca';
 var baseApi = '/api/v1/';
 
 app.service(
-    "paymentService",
+    "emailService",
     function( $http, $q ) {
+
         // Return public API.
         return({
-            createPayment: createPayment
+            sendOrders: sendOrders
         });
 
         // ---
         // PUBLIC METHODS.
         // ---
 
-        function createPayment(data) {
+        function sendOrders() {
             var request = $http({
                 method: "post",
-                url: baseUrl + baseApi + 'create-subscription',
-                data: data,
+                url: baseUrl + baseApi + "sendROEmail",
                 headers : {
                     'Content-Type': 'application/json'
                 }
