@@ -45,7 +45,6 @@ var manageMealOfferCtrl = function($scope, mealOfferService, modalService, utilS
     mealOfferService
       .editMealOffer({ status: offer, id: offer_id})
       .success((data, status, headers, config) => {
-        console.log('data', data)
         modalService.resolve()
         promise.then(function handleResolve(response) {
           promise = modalService.open(
