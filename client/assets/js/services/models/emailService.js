@@ -17,9 +17,10 @@ app.service(
         // PUBLIC METHODS.
         // ---
 
-        function sendOrders() {
+        function sendOrders(data) {
             var request = $http({
                 method: "post",
+                data: data,
                 url: baseUrl + baseApi + "sendROEmail",
                 headers : {
                     'Content-Type': 'application/json'

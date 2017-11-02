@@ -17,6 +17,7 @@ app.factory(
     };
 
     utilService.formatDate = function(date, type = null) {
+        console.log(date);
       var dd = date.getUTCDate();
       var mm = date.getUTCMonth() + 1; //January is 0!
       var yyyy = date.getUTCFullYear();

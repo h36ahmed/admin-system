@@ -73,13 +73,14 @@ var manageOrderCtrl = function($scope, mealOfferService, emailService, modalServ
     }
 
     $scope.emailAllRestuarants = function() {
-        options.order_date = utilService.formatDate(options.order_date);
+
         var promise = modalService.open(
           "status", {}
         );
         emailService
             .sendOrders(options)
             .success(function(data, status, headers, config) {
+        
               modalService.resolve();
               promise.then(
                 function handleResolve(response) {
